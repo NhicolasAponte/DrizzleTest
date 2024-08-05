@@ -23,6 +23,7 @@ npm run dev
 
 - install dotenv to manage environment variables 
 npm i dotenv
+- can optionally use loadEnvConfig from "@next/env": import { loadEnvConfig } from "@next/env";
 
 https://orm.drizzle.team/docs/get-started-postgresql#postgresjs
 - install drizzle and postgres.js driver: 

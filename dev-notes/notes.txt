@@ -1,11 +1,10 @@
-60 min tutorial 
-https://www.youtube.com/watch?v=7-NZ0MlPpJA&t=57s&ab_channel=WebDevSimplified
-
-
 DRIZZLE: 
 drizzle install - https://orm.drizzle.team/docs/get-started-postgresql#postgresjs 
-npm i drizzle-orm postgres
+npm i drizzle-orm postgres // to follow WebDevSimplified tutorial, i am using Postgres.JS driver 
 npm i -D drizzle-kit
+
+- drizzle kit overview docs 
+https://orm.drizzle.team/kit-docs/overview 
 
 drizzle config 
 https://orm.drizzle.team/kit-docs/config-reference 
@@ -28,6 +27,26 @@ export default defineConfig({
   verbose: true,//when running the migration, it will print out the SQL queries that are being executed
   strict: true,//
 });
+
+- drizzle STUDIO 
+Studio requires drizzle config file with schema and dbCredentials provided.
+
+commands: 
+drizzle-kit studio
+drizzle-kit studio --port 3000 ## custom port
+drizzle-kit studio --host 0.0.0.0 ## custom host for studio server
+drizzle-kit studio --verbose   ## log all sql statements
+
+
+- drizzle kit docs 
+migrations and schema configs 
+multi project schemas 
+SQL breakpoints 
+Push and Pull 
+https://orm.drizzle.team/kit-docs/conf
+
+60 min tutorial 
+https://www.youtube.com/watch?v=7-NZ0MlPpJA&t=57s&ab_channel=WebDevSimplified
 
 comprehensive drizzle tutorial 
 https://www.youtube.com/watch?v=fDjZOZ1Hgf8&list=PLhnVDNT5zYN8PLdYddaU3jiZXeOyehhoU&ab_channel=SakuraDev 
