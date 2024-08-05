@@ -2,24 +2,33 @@ simple typescript project to use as a testing ground for Drizzle ORM
 
 steps to build project 
 
-- initialize new node.js project 
+- initialize new node.js project: 
 npm init -y
-- install ts and the necessary type definitions 
+- install ts and the necessary type definitions: 
 npm install typescript @types/node --save-dev
-initialize ts config file 
+- initialize ts config file: 
 npx tsc --init
 
--install tsx to 'watch' the ts files 
+- install tsx to 'watch' the ts files: 
 npm install tsx --save-dev
-- update package.json file 
+- update package.json file:  
 {
   "scripts": {
     "dev": "tsx watch src/main.ts"
   }
 }
 
-- run with
+- run with: 
 npm run dev
+
+- install dotenv to manage environment variables 
+npm i dotenv
+
+https://orm.drizzle.team/docs/get-started-postgresql#postgresjs
+- install drizzle and postgres.js driver: 
+npm i drizzle-orm postgres
+npm i -D drizzle-kit
+
 
 instead of using tsx
 - optional 

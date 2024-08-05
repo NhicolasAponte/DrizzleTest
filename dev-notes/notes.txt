@@ -1,0 +1,33 @@
+60 min tutorial 
+https://www.youtube.com/watch?v=7-NZ0MlPpJA&t=57s&ab_channel=WebDevSimplified
+
+
+DRIZZLE: 
+drizzle install - https://orm.drizzle.team/docs/get-started-postgresql#postgresjs 
+npm i drizzle-orm postgres
+npm i -D drizzle-kit
+
+drizzle config 
+https://orm.drizzle.team/kit-docs/config-reference 
+https://orm.drizzle.team/kit-docs/upgrade-21#2-update-your-drizzleconfigts-file
+
+https://orm.drizzle.team/kit-docs/config-reference#configuration
+
+import { defineConfig } from "drizzle-kit";
+
+export default defineConfig({
+  dialect: "postgresql", //dialect is required 
+  schema: "./src/drizzle/schema.ts",
+  out: "./src/drizzle/migrations",
+  // driver: "" drive is not required because Drizzle has 
+  // native support for PostgreSQL with pg, postgres,
+  // vercel-postgres, and neon drivers 
+  dbCredentials: {
+    url: process.env.DATABASE_URL as string,
+  },
+  verbose: true,//when running the migration, it will print out the SQL queries that are being executed
+  strict: true,//
+});
+
+comprehensive drizzle tutorial 
+https://www.youtube.com/watch?v=fDjZOZ1Hgf8&list=PLhnVDNT5zYN8PLdYddaU3jiZXeOyehhoU&ab_channel=SakuraDev 
