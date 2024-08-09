@@ -50,3 +50,7 @@ https://www.youtube.com/watch?v=7-NZ0MlPpJA&t=57s&ab_channel=WebDevSimplified
 
 comprehensive drizzle tutorial 
 https://www.youtube.com/watch?v=fDjZOZ1Hgf8&list=PLhnVDNT5zYN8PLdYddaU3jiZXeOyehhoU&ab_channel=SakuraDev 
+
+
+- setting up postgresql in a docker container 
+https://www.youtube.com/watch?v=F8I3WYSAXYQ&t=5s&ab_channel=DenisMagda 
