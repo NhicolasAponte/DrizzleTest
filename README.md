@@ -1,5 +1,11 @@
 simple typescript project to use as a testing ground for Drizzle ORM 
 
+I needed a way to quickly modify and update my database tables without triggering new builds and having to jump to 
+Vercel and use their terrible database UI. I chose Drizzle because it feels somewhat like writing SQL and allows raw SQL. 
+However, working with typescript and strongly typed queries and server actions means that I would get errors when making 
+changes to type definitions. To avoid working with type errors throughout my project, I created this repo to be able to 
+draft my database schema without making any breaking changes. 
+
 steps to build project 
 
 - initialize new node.js project: 

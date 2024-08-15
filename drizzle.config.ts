@@ -8,7 +8,7 @@ export default defineConfig({
   // native support for PostgreSQL with pg, postgres,
   // vercel-postgres, and neon drivers 
   dbCredentials: {
-    url: process.env.DATABASE_URL as string,
+    url: process.env.DOCKER_POSTGRES_URL as string,
   },
   verbose: true,//when running the migration, it will print out the SQL queries that are being executed
   strict: true,//

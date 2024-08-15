@@ -260,3 +260,24 @@ docker commands to run in project's root directory
   - docker volume ls                                : list volumes 
   - docker volume inspect postgres-data             : inspect a volume 
   - docker volume rm postgres-data                  : remove a volume 
+
+
+Getting the database  URL 
+
+get container name from config file or: 
+docker compose ps
+
+inspect container to get IPAddress 
+docker inspect <container_name>
+
+host = IPAddress
+port = HostPort or found in config file 
+  URL: "postgresql://<username>:<password>@<host>:<port>/<database_name>."
+  URL: "postgresql://drizzle:dev@172.18.0.2:5432/drizzle-pg"
+
+https://www.youtube.com/watch?v=xHg0IJDl1RY
+in this tutorial, he puts localhost as the <host> and after the database name he specifies 
+the schema: <database name>?schema=public
+
+If container is running on my local machine, connect with localhost :  URL: "postgresql://drizzle:dev@localhost:5432/drizzle-pg"
+If it is running on a specific server, use your server IP. (For Windows docker-machine you probably need to use 192.168.99.100).
