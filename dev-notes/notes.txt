@@ -54,3 +54,169 @@ https://www.youtube.com/watch?v=fDjZOZ1Hgf8&list=PLhnVDNT5zYN8PLdYddaU3jiZXeOyeh
 
 - setting up postgresql in a docker container 
 https://www.youtube.com/watch?v=F8I3WYSAXYQ&t=5s&ab_channel=DenisMagda 
+
+
+
+node and npm installation 
+
+install git bash 
+
+run the following command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash 
+
+if you get an error for missing bashrc file, open git bash: 
+- create file: 
+touch ~/.bashrc
+- open the bashrc file 
+nano ~/.bashrc
+- add the following lines then save and exit nano 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm 
+- source the file to apply the changes 
+source ~/.bashrc
+- install nvm again 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash 
+- install node 
+nvm install node
+
+
+- need to install nvm, npm, and node on c drive 
+    -x first need to uninstall npm and node 
+    - delete nvm 
+      - rm -rf "$NVM_DIR"
+      - remove the following from bashrc 
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+- need to put bashrc and bash profile in c drive 
+    - delete bashrc and .bash_profile from hive drive 
+    rm ~/.bash_profile
+    rm ~/.bashrc
+    - create them on c drive 
+    touch /c/Users/nflores/.bashrc
+    nano /c/Users/nflores/.bashrc
+    
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+    source /c/Users/nflores/.bashrc
+    
+    touch /c/Users/nflores/.bash_profile
+    nano /c/Users/nflores/.bash_profile
+    source /c/Users/nflores/.bash_profile
+
+
+------------ docker ------------
+
+Pulling the PostgreSQL Image
+When you pull the PostgreSQL image and run it directly using Docker commands, you are manually managing the container. 
+This approach is straightforward but requires more manual steps to configure and manage the container.
+
+docker pull postgres
+docker run --name local-postgres -e POSTGRES_PASSWORD=example -p 5432:5432 -d postgres
+
+Pros
+Simplicity: Easy to understand and execute for simple use cases.
+Direct Control: You have direct control over the container's lifecycle.
+
+Cons
+Manual Configuration: Requires manual setup and configuration for each container.
+Limited Orchestration: Not suitable for managing multiple containers or complex setups.
+
+Using Docker Compose
+Docker Compose is a tool for defining and running multi-container Docker applications. It allows you to manage multiple 
+services (containers) using a single YAML file (docker-compose.yml). This approach is more automated and scalable, 
+making it easier to manage complex applications.
+
+- Create a docker-compose.yml File in the root of directory:
+
+    version: '3.8'
+
+    services:
+      postgres:
+        image: postgres:latest
+        container_name: postgres-db
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: example
+          POSTGRES_DB: mydatabase
+        ports:
+          - "5432:5432"
+        volumes:
+          - postgres-data:/var/lib/postgresql/data
+
+    volumes:
+      postgres-data:
+
+- run: docker-compose up -d
+
+Pros
+- Automation: Automates the setup and configuration of multiple containers.
+- Orchestration: Manages the lifecycle of multiple services, including dependencies.
+- Reusability: The docker-compose.yml file can be reused and shared across different environments.
+- Scalability: Easily scale services up or down.
+
+Cons
+- Complexity: Slightly more complex to set up initially compared to running a single container.
+- Learning Curve: Requires understanding of Docker Compose syntax and concepts.
+
+Summary
+- Pulling the PostgreSQL Image: Suitable for simple, single-container setups. Requires manual configuration and management.
+- Using Docker Compose: Ideal for complex, multi-container applications. Provides automation, orchestration, 
+  and scalability through a single configuration file.
+
+connecting to db:
+  Host: localhost
+  Port: 5432
+  Username: postgres
+  Password: <your_password>
+GUI tools: pgAdmin, DBeaver
+can use psql for command line interaction 
+  - Execute SQL Commands: Run SQL queries and commands to interact with the database.
+  - Database Management: Create, modify, and delete databases and database objects like tables, indexes, and views.
+  - Scripting: Write and execute scripts to automate database tasks.
+  - Interactive Mode: Provides an interactive shell for real-time database interaction.
+  - Batch Mode: Execute commands from a file or standard input.
+  - commands: 
+    connect: psql -h <host> -U <username> -d <database> 
+    once connected: you can run sql statement in terminal: SELECT * FROM mytable;  
+    exit: \q
+
+integrating db to node.js project: 
+1. Install pg Package: In your Node.js project, install the pg package to interact with PostgreSQL:
+  npm install pg
+2. Create a Database Connection: Create a file (e.g., db.js) to manage the database connection:
+  ----------
+  // db.js
+  const { Pool } = require('pg');
+
+  const pool = new Pool({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'mydatabase',
+    password: 'example',
+    port: 5432,
+  });
+
+  module.exports = pool;
+  ------------
+
+3. Use the Database Connection: Use the connection in your application:
+  -------------
+
+  // example.js
+  const pool = require('./db');
+
+  pool.query('SELECT NOW()', (err, res) => {
+    if (err) {
+      console.error('Error executing query', err.stack);
+    } else {
+      console.log('Current time:', res.rows[0]);
+    }
+    pool.end();
+  });
+
+  -------------
+
+
+docker commands to run in project's root directory 
+  - docker ps: check running containers 
+  - docker-compose ps 
