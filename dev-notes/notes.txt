@@ -45,6 +45,23 @@ SQL breakpoints
 Push and Pull 
 https://orm.drizzle.team/kit-docs/conf
 
+
+
+migrations 
+- add to package.json
+  "db:generate": "drizzle-kit generate:pg" 
+
+- can specify names for migrations 
+  drizzle-kit generate --name init_db
+
+New command: migrate
+You can now apply generated migrations to your database directly from drizzle-kit
+  drizzle-kit migrate 
+
+
+
+
+------------------- refs ----------------------
 60 min tutorial 
 https://www.youtube.com/watch?v=7-NZ0MlPpJA&t=57s&ab_channel=WebDevSimplified
 
@@ -56,52 +73,12 @@ https://www.youtube.com/watch?v=fDjZOZ1Hgf8&list=PLhnVDNT5zYN8PLdYddaU3jiZXeOyeh
 https://www.youtube.com/watch?v=F8I3WYSAXYQ&t=5s&ab_channel=DenisMagda 
 
 
+- another postgresql and pgAdmin tutorial for Docker 
+https://www.youtube.com/watch?v=bu6IURMFZwQ
 
-node and npm installation 
-
-install git bash 
-
-run the following command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash 
-
-if you get an error for missing bashrc file, open git bash: 
-- create file: 
-touch ~/.bashrc
-- open the bashrc file 
-nano ~/.bashrc
-- add the following lines then save and exit nano 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm 
-- source the file to apply the changes 
-source ~/.bashrc
-- install nvm again 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash 
-- install node 
-nvm install node
-
-
-- need to install nvm, npm, and node on c drive 
-    -x first need to uninstall npm and node 
-    - delete nvm 
-      - rm -rf "$NVM_DIR"
-      - remove the following from bashrc 
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-- need to put bashrc and bash profile in c drive 
-    - delete bashrc and .bash_profile from hive drive 
-    rm ~/.bash_profile
-    rm ~/.bashrc
-    - create them on c drive 
-    touch /c/Users/nflores/.bashrc
-    nano /c/Users/nflores/.bashrc
-    
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-    source /c/Users/nflores/.bashrc
-    
-    touch /c/Users/nflores/.bash_profile
-    nano /c/Users/nflores/.bash_profile
-    source /c/Users/nflores/.bash_profile
+- drizzle orm nextjs 14 overview - webdev cody 
+https://www.youtube.com/watch?v=yXNEqyvA0OY
+https://github.com/webdevcody/pantry-tracker 
 
 
 ------------ docker ------------
@@ -281,3 +258,113 @@ the schema: <database name>?schema=public
 
 If container is running on my local machine, connect with localhost :  URL: "postgresql://drizzle:dev@localhost:5432/drizzle-pg"
 If it is running on a specific server, use your server IP. (For Windows docker-machine you probably need to use 192.168.99.100).
+
+
+https://www.youtube.com/watch?v=LyElCkGbO1c 
+setting up postgresql and docker with an express server 
+- how to dockerize node.js app using a Dockerfile 
+
+https://www.youtube.com/watch?v=dtLpWR98HfE
+optimizing dockerized nextjs app 
+
+
+
+-----------------------------------------
+
+node and npm installation 
+
+install git bash 
+
+run the following command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash 
+
+if you get an error for missing bashrc file, open git bash: 
+- create file: 
+touch ~/.bashrc
+- open the bashrc file 
+nano ~/.bashrc
+- add the following lines then save and exit nano 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm 
+- source the file to apply the changes 
+source ~/.bashrc
+- install nvm again 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash 
+- install node 
+nvm install node
+
+
+- need to install nvm, npm, and node on c drive 
+    -x first need to uninstall npm and node 
+    - delete nvm 
+      - rm -rf "$NVM_DIR"
+      - remove the following from bashrc 
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+- need to put bashrc and bash profile in c drive 
+    - delete bashrc and .bash_profile from hive drive 
+    rm ~/.bash_profile
+    rm ~/.bashrc
+    - create them on c drive 
+    touch /c/Users/nflores/.bashrc
+    nano /c/Users/nflores/.bashrc
+    
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+    source /c/Users/nflores/.bashrc
+    
+    touch /c/Users/nflores/.bash_profile
+    nano /c/Users/nflores/.bash_profile
+    source /c/Users/nflores/.bash_profile
+
+- set up aliases for common paths 
+---- project aliases in bashrc ---- 
+alias orders='cd ~/Desktop/dev/NextJS-Proj/orders-ui'
+alias drizzle-pg='cd ~/Desktop/dev/Test/DrizzleTest'
+
+
+---------- trouble shooting --------
+
+- bash seems slow running npm commands
+
+------- nvm, npm, node --------- 
+The location where nvm installs Node.js and npm is determined by the configuration of npm itself, not by nvm. By default, npm installs global packages in a directory under the user's profile, which is typically AppData\Roaming on Windows.
+
+Explanation
+nvm Directory: nvm itself is installed in /c/Users/nflores/.nvm, and it manages different versions of Node.js.
+npm Global Packages Directory: When you install a global npm package, npm uses its own configuration to determine where to place these packages. By default, this is in the AppData\Roaming directory.
+Why npm Uses AppData\Roaming
+Default Configuration: npm's default configuration on Windows points to the AppData\Roaming directory for global installations. This is because the prefix configuration is set to a path under AppData\Roaming.
+User Profile Synchronization: The Roaming directory is designed to synchronize user-specific data across different machines in a network domain, which can be useful for maintaining consistent environments.
+
+--- bash commands while configuring npm installation --- 
+
+$HOME is an env variable 
+echo $HOME returns the value returned by $HOME 
+
+env and printenv can be used to see all env variables and their values such as $APPDATA and $LOCALAPPDATA 
+
+where can be used to find file paths 
+where node returns where node.exe is installed 
+
+echo $NVM_DIR: used to find where nvm is installed 
+
+ where npm: the first time i ran where npm, i got four file paths: C:\Users\nflores\.nvm\versions\node\v22.6.0\bin\npm
+C:\Users\nflores\.nvm\versions\node\v22.6.0\bin\npm.cmd
+C:\Users\nflores\AppData\Roaming\npm\npm
+C:\Users\nflores\AppData\Roaming\npm\npm.cmd 
+
+following commands used to remove npm from Roaming/
+rm -f "$APPDATA/npm/npm"
+rm -f "$APPDATA/npm/npm.cmd"
+
+check for hidden .nvm file 
+where npm 
+where node 
+echo  $NVM_DIR
+echo $HOME
+npm ls 
+ npm list -g --depth=0 : check for global dependencies 
+echo $PATH
+npm config get prefix
+npm config list -l
