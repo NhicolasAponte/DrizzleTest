@@ -59,7 +59,170 @@ You can now apply generated migrations to your database directly from drizzle-ki
   drizzle-kit migrate 
 
 
+------ Usage ------ 
 
+create schema: 
+  - define relations 
+  - define linker tables for many-to-many relations 
+generate migration 
+  - npm run db:generate 
+    - "db:migrate": "tsx src/drizzle/migrate.ts",
+
+
+--- Drizzle Troubleshooting --- 
+
+ran npm run db:generate successfully 
+
+    > drizzletest@1.0.0 db:generate
+    > drizzle-kit generate
+
+    No config path provided, using default 'drizzle.config.ts'
+    Reading config file 'C:\Users\nflores\Desktop\dev\Test\DrizzleTest\drizzle.config.ts'
+    object
+    ~ user_role › drizzle.user_role enum will be renamed/moved
+    --- all enum conflicts resolved ---
+
+    ~ category › drizzle.category table will be renamed/moved
+    + postCategory table will be created
+    + posts table will be created
+    + userPreferences table will be created
+    + user table will be created
+    --- all table conflicts resolved ---
+
+    5 tables
+    category 2 columns 0 indexes 0 fks
+    postCategory 2 columns 0 indexes 2 fks
+    posts 7 columns 0 indexes 1 fks
+    userPreferences 4 columns 0 indexes 1 fks
+    user 5 columns 1 indexes 0 fks
+
+    [✓] Your SQL migration file ➜ src\drizzle\migrations\0002_cool_la_nuit.sql 🚀
+
+ran npx drizzle-kit migrate 
+
+    No config path provided, using default 'drizzle.config.ts'
+    Reading config file 'C:\Users\nflores\Desktop\dev\Test\DrizzleTest\drizzle.config.ts'
+    Using 'postgres' driver for database querying
+    [⣷] applying migrations...{
+      severity_local: 'NOTICE',
+      severity: 'NOTICE',
+      code: '42P06',
+      message: 'schema "drizzle" already exists, skipping',
+      file: 'schemacmds.c',
+      line: '132',
+      routine: 'CreateSchemaCommand'
+    }
+    {
+      severity_local: 'NOTICE',
+      severity: 'NOTICE',
+      code: '42P07',
+      message: 'relation "__drizzle_migrations" already exists, skipping',
+      file: 'parse_utilcmd.c',
+      line: '207',
+      routine: 'transformCreateStmt'
+    }
+    [⣯] applying migrations...PostgresError: relation "public.posts" does not exist
+        at ErrorResponse (C:\Users\nflores\Desktop\dev\Test\DrizzleTest\node_modules\drizzle-kit\bin.cjs:77951:27)
+        at handle (C:\Users\nflores\Desktop\dev\Test\DrizzleTest\node_modules\drizzle-kit\bin.cjs:77728:7)
+        at Socket.data (C:\Users\nflores\Desktop\dev\Test\DrizzleTest\node_modules\drizzle-kit\bin.cjs:77551:9)
+        at Socket.emit (node:events:520:28)
+        at addChunk (node:internal/streams/readable:559:12)
+        at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+        at Readable.push (node:internal/streams/readable:390:5)
+        at TCP.onStreamRead (node:internal/stream_base_commons:191:23)
+        at TCP.callbackTrampoline (node:internal/async_hooks:130:17) {
+      severity_local: 'ERROR',
+      severity: 'ERROR',
+      code: '42P01',
+      where: 'SQL statement "ALTER TABLE "postCategory" ADD CONSTRAINT "postCategory_postId_posts_id_fk" FOREIGN KEY ("postId") REFERENCES "public"."posts"("id") ON DELETE no action ON UPDATE no action"\n' +
+        'PL/pgSQL function inline_code_block line 2 at SQL statement',
+      file: 'namespace.c',
+      line: '429',
+      routine: 'RangeVarGetRelidExtended'
+    }
+
+default schema used by Drizzle when using PostgreSQL is 'drizzle'
+for some reason, migration process is looking for the 'public' schema - "public.posts"
+
+creating a new 'nhic-dev' schema to create a dev environment
+    npm run db:generate 
+    > drizzletest@1.0.0 db:generate
+    > drizzle-kit generate
+
+    No config path provided, using default 'drizzle.config.ts'
+    Reading config file 'C:\Users\nflores\Desktop\dev\Test\DrizzleTest\drizzle.config.ts'
+    object
+    + nhic-dev schema will be created
+    --- all schemas conflicts resolved ---
+
+    + user_role enum will be created
+    --- all enum conflicts resolved ---
+
+    + category table will be created
+    + postCategory table will be created
+    + posts table will be created
+    + userPreferences table will be created
+    + user table will be created
+    --- all table conflicts resolved ---
+
+    5 tables
+    category 2 columns 0 indexes 0 fks
+    postCategory 2 columns 0 indexes 2 fks
+    posts 7 columns 0 indexes 1 fks
+    userPreferences 4 columns 0 indexes 1 fks
+    user 5 columns 1 indexes 0 fks
+
+    [✓] Your SQL migration file ➜ src\drizzle\migrations\0003_light_wraith.sql 🚀
+
+ran npx drizzle-kit migrate 
+
+    No config path provided, using default 'drizzle.config.ts'
+    Reading config file 'C:\Users\nflores\Desktop\dev\Test\DrizzleTest\drizzle.config.ts'
+    Using 'postgres' driver for database querying
+    [⣯] applying migrations...{
+      severity_local: 'NOTICE',
+      severity: 'NOTICE',
+      code: '42P06',
+      message: 'schema "drizzle" already exists, skipping',
+      file: 'schemacmds.c',
+      line: '132',
+      routine: 'CreateSchemaCommand'
+    }
+    {
+      severity_local: 'NOTICE',
+      severity: 'NOTICE',
+      code: '42P07',
+      message: 'relation "__drizzle_migrations" already exists, skipping',
+      file: 'parse_utilcmd.c',
+      line: '207',
+      routine: 'transformCreateStmt'
+    }
+    [⣟] applying migrations...PostgresError: relation "public.posts" does not exist
+        at ErrorResponse (C:\Users\nflores\Desktop\dev\Test\DrizzleTest\node_modules\drizzle-kit\bin.cjs:77951:27)
+        at handle (C:\Users\nflores\Desktop\dev\Test\DrizzleTest\node_modules\drizzle-kit\bin.cjs:77728:7)
+        at Socket.data (C:\Users\nflores\Desktop\dev\Test\DrizzleTest\node_modules\drizzle-kit\bin.cjs:77551:9)
+        at Socket.emit (node:events:520:28)
+        at addChunk (node:internal/streams/readable:559:12)
+        at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+        at Readable.push (node:internal/streams/readable:390:5)
+        at TCP.onStreamRead (node:internal/stream_base_commons:191:23)
+        at TCP.callbackTrampoline (node:internal/async_hooks:130:17) {
+      severity_local: 'ERROR',
+      severity: 'ERROR',
+      code: '42P01',
+      where: 'SQL statement "ALTER TABLE "postCategory" ADD CONSTRAINT "postCategory_postId_posts_id_fk" FOREIGN KEY ("postId") REFERENCES "public"."posts"("id") ON DELETE no action ON UPDATE no action"\n' +
+        'PL/pgSQL function inline_code_block line 2 at SQL statement',
+      file: 'namespace.c',
+      line: '429',
+      routine: 'RangeVarGetRelidExtended'
+    }
+
+it's still looking for tables in 'public' schema 
+deleted all migrations and generated new migration 
+new migration was applied and didn't cause any issues 
+- migrations depend on previous migrations. if something is 
+messed up or inconsistent then future migrations will continue 
+to break 
 
 ------------------- refs ----------------------
 60 min tutorial 

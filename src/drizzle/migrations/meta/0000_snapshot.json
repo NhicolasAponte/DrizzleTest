@@ -1,12 +1,213 @@
 {
-  "id": "aebe8730-2bfa-44a2-9409-35d116b7f88e",
+  "id": "097dd45d-2f0b-4807-bee6-d47546782cad",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.user": {
+    "nhic-dev.category": {
+      "name": "category",
+      "schema": "nhic-dev",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "nhic-dev.postCategory": {
+      "name": "postCategory",
+      "schema": "nhic-dev",
+      "columns": {
+        "postId": {
+          "name": "postId",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "categoryId": {
+          "name": "categoryId",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "postCategory_postId_posts_id_fk": {
+          "name": "postCategory_postId_posts_id_fk",
+          "tableFrom": "postCategory",
+          "tableTo": "posts",
+          "schemaTo": "nhic-dev",
+          "columnsFrom": [
+            "postId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "postCategory_categoryId_category_id_fk": {
+          "name": "postCategory_categoryId_category_id_fk",
+          "tableFrom": "postCategory",
+          "tableTo": "category",
+          "schemaTo": "nhic-dev",
+          "columnsFrom": [
+            "categoryId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "postCategory_postId_categoryId_pk": {
+          "name": "postCategory_postId_categoryId_pk",
+          "columns": [
+            "postId",
+            "categoryId"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "nhic-dev.posts": {
+      "name": "posts",
+      "schema": "nhic-dev",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "averageRating": {
+          "name": "averageRating",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "posts_userId_user_id_fk": {
+          "name": "posts_userId_user_id_fk",
+          "tableFrom": "posts",
+          "tableTo": "user",
+          "schemaTo": "nhic-dev",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "nhic-dev.userPreferences": {
+      "name": "userPreferences",
+      "schema": "nhic-dev",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "theme": {
+          "name": "theme",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "emailUpdates": {
+          "name": "emailUpdates",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "userPreferences_userId_user_id_fk": {
+          "name": "userPreferences_userId_user_id_fk",
+          "tableFrom": "userPreferences",
+          "tableTo": "user",
+          "schemaTo": "nhic-dev",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "nhic-dev.user": {
       "name": "user",
-      "schema": "",
+      "schema": "nhic-dev",
       "columns": {
         "id": {
           "name": "id",
@@ -20,16 +221,71 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
+        },
+        "age": {
+          "name": "age",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "userRole": {
+          "name": "userRole",
+          "type": "user_role",
+          "typeSchema": "nhic-dev",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'user'"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "emailIndex": {
+          "name": "emailIndex",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "user_email_unique": {
+          "name": "user_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
     }
   },
-  "enums": {},
-  "schemas": {},
+  "enums": {
+    "nhic-dev.user_role": {
+      "name": "user_role",
+      "schema": "nhic-dev",
+      "values": [
+        "admin",
+        "user"
+      ]
+    }
+  },
+  "schemas": {
+    "nhic-dev": "nhic-dev"
+  },
   "sequences": {},
   "_meta": {
     "columns": {},
