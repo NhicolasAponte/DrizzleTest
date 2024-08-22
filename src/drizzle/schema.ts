@@ -1,6 +1,9 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
+  date,
   integer,
+  jsonb,
   pgEnum,
   pgSchema,
   pgTable,
@@ -13,74 +16,94 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-export const drizzleSchema = pgSchema("nhic-dev");
+export const dbSchema = pgSchema("order-handling");
 
-export const UserRole = drizzleSchema.enum("user_role", ["admin", "user"]);
+export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
 
-export const UserTable = drizzleSchema.table(
-  "user",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    name: varchar("name", { length: 255 }).notNull(),
-    age: integer("age").notNull(),
-    email: varchar("email", { length: 255 }).notNull().unique(),
-    role: UserRole("userRole").default("user").notNull(), //can use .$default for dynamic default values
-  },
-  (table) => {
-    return {
-      emailIndex: uniqueIndex("emailIndex").on(table.email),
-    };
-  }
-);
+export const UserTable = dbSchema.table("users", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
+  // emailVerified: date('emailVerified'),
+  password: varchar("password", { length: 255 }).notNull(),
+  role: UserRole("role").default("USER"),
+});
 
-console.log(typeof UserTable.id);
-
-// NOTE: relations
-// one-to-one
-export const UserPreferencesTable = drizzleSchema.table("userPreferences", {
+export const UserProfileTable = dbSchema.table("user_profiles", {
   id: serial("id").primaryKey(),
   userId: uuid("userId")
     .notNull()
-    .references(() => UserTable.id),
-  theme: varchar("theme", { length: 255 }).notNull(),
-  emailUpdates: boolean("emailUpdates").notNull().default(false),
+    .references(() => UserTable.id, { onDelete: "cascade" }),
+  firstName: varchar("firstName", { length: 255 }).notNull(),
+  lastName: varchar("lastName", { length: 255 }).notNull(),
+  company: varchar("company", { length: 255 }),
+  accountNum: varchar("accountNum", { length: 255 }),
+  phoneNum: varchar("phoneNum", { length: 255 }),
 });
 
-// one-to-many
-export const PostsTable = drizzleSchema.table("posts", {
+export const ShippingInfoTable = dbSchema.table("shipping_info", {
   id: serial("id").primaryKey(),
   userId: uuid("userId")
     .notNull()
-    .references(() => UserTable.id),
-  title: varchar("title", { length: 255 }).notNull(),
-  content: varchar("content", { length: 255 }).notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
-  averageRating: real("averageRating").notNull().default(0),
+    .references(() => UserTable.id, { onDelete: "cascade" }),
+  address: varchar("address", { length: 255 }).notNull(),
+  city: varchar("city", { length: 255 }).notNull(),
+  state: varchar("state", { length: 255 }).notNull(),
+  zip: varchar("zip", { length: 255 }).notNull(),
+  isJobSite: boolean("isJobSite").notNull().default(false),
+  note: varchar("note", { length: 255 }),
 });
-
-// many-to-many
-export const CategoryTable = drizzleSchema.table("category", {
+// users can add and delete billing info at any time
+// relevant billing info will be serialized and stored in the order table
+export const BillingInfoTable = dbSchema.table("billing_info", {
   id: serial("id").primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(),
+  userId: uuid("userId")
+    .notNull()
+    .references(() => UserTable.id, { onDelete: "cascade" }),
+  address: varchar("address", { length: 255 }).notNull(),
+  city: varchar("city", { length: 255 }).notNull(),
+  state: varchar("state", { length: 255 }).notNull(),
+  zip: varchar("zip", { length: 255 }).notNull(),
+  paymentMethod: varchar("paymentMethod", { length: 255 }).notNull(),
+  purchaseOrder: varchar("purchaseOrder", { length: 255 }),
+  primaryContactName: varchar("primaryContactName", { length: 255 }),
+  primaryContactEmail: varchar("primaryContactEmail", { length: 255 }),
+  primaryContactPhone: varchar("primaryContactPhone", { length: 255 }),
+  faxNum: varchar("faxNum", { length: 255 }),
+  isPrimary: boolean("isPrimary").notNull().default(false),
+  isActive: boolean("isActive").notNull().default(true),
 });
 
-// to link the many-to-many relation, we need a junction table
-export const PostCategoryTable = drizzleSchema.table(
-  "postCategory",
-  {
-    postId: serial("postId")
-      .notNull()
-      .references(() => PostsTable.id),
-    // NOTE TODO: check what happens if you put a uuid here
-    categoryId: serial("categoryId")
-      .notNull()
-      .references(() => CategoryTable.id),
-  },
-  (table) => {
-    return {
-      // composite primary key: https://www.postgresql.org/docs/9.1/ddl-constraints.html
-      pk: primaryKey({ columns: [table.postId, table.categoryId] }),
-    };
-  }
-);
+export const OrderTable = dbSchema.table("orders", {
+  id: serial("id").primaryKey(),
+  userId: uuid("userId")
+    .notNull()
+    .references(() => UserTable.id, { onDelete: "cascade" }),
+  orderName: varchar("orderName", { length: 255 }).notNull(),
+  billingInfo: jsonb("billingInfo").notNull(),
+  shippingInfo: jsonb("shippingInfo").notNull(),
+  status: varchar("status", { length: 255 }).notNull(),
+  dateCreated: timestamp("dateCreated").notNull(),
+  dateUpdated: timestamp("dateUpdated").notNull(),
+  dateSubmitted: timestamp("dateSubmitted"),
+});
+
+export const OrderItemTable = dbSchema.table("order_items", {
+  id: serial("id").primaryKey(),
+  orderId: uuid("orderId")
+    .notNull()
+    .references(() => OrderTable.id, { onDelete: "cascade" }),
+  product: jsonb("product").notNull(),
+  note: varchar("note", { length: 255 }),
+  quantity: integer("quantity").notNull(),
+});
+
+// export const ProductTable = dbSchema.table(
+//   "products",
+//   {
+//     id: serial("id").primaryKey(),
+//     name: varchar("name", { length: 255 }).notNull(),
+//     description: varchar("description", { length: 255 }),
+//     price: real("price").notNull(),
+//     quantity: integer("quantity").notNull(),
+//   }
+// )

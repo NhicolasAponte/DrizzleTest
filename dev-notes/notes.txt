@@ -1,62 +1,65 @@
-DRIZZLE: 
-drizzle install - https://orm.drizzle.team/docs/get-started-postgresql#postgresjs 
-npm i drizzle-orm postgres // to follow WebDevSimplified tutorial, i am using Postgres.JS driver 
-npm i -D drizzle-kit
+- drizzle install
+  resource: 
+    https://orm.drizzle.team/docs/get-started-postgresql#postgresjs 
+  npm i drizzle-orm postgres // to follow WebDevSimplified tutorial, i am using Postgres.JS driver 
+  npm i -D drizzle-kit
 
 - drizzle kit overview docs 
-https://orm.drizzle.team/kit-docs/overview 
+  resources: 
+    https://orm.drizzle.team/kit-docs/overview 
 
-drizzle config 
-https://orm.drizzle.team/kit-docs/config-reference 
-https://orm.drizzle.team/kit-docs/upgrade-21#2-update-your-drizzleconfigts-file
+- drizzle config 
+  resources: 
+    https://orm.drizzle.team/kit-docs/config-reference 
+    https://orm.drizzle.team/kit-docs/upgrade-21#2-update-your-drizzleconfigts-file
 
-https://orm.drizzle.team/kit-docs/config-reference#configuration
+    https://orm.drizzle.team/kit-docs/config-reference#configuration
+  - drizzle.config.ts 
+    import { defineConfig } from "drizzle-kit";
 
-import { defineConfig } from "drizzle-kit";
-
-export default defineConfig({
-  dialect: "postgresql", //dialect is required 
-  schema: "./src/drizzle/schema.ts",
-  out: "./src/drizzle/migrations",
-  // driver: "" drive is not required because Drizzle has 
-  // native support for PostgreSQL with pg, postgres,
-  // vercel-postgres, and neon drivers 
-  dbCredentials: {
-    url: process.env.DATABASE_URL as string,
-  },
-  verbose: true,//when running the migration, it will print out the SQL queries that are being executed
-  strict: true,//
-});
+    export default defineConfig({
+      dialect: "postgresql", //dialect is required 
+      schema: "./src/drizzle/schema.ts",
+      out: "./src/drizzle/migrations",
+      // driver: "" drive is not required because Drizzle has 
+      // native support for PostgreSQL with pg, postgres,
+      // vercel-postgres, and neon drivers 
+      dbCredentials: {
+        url: process.env.DATABASE_URL as string,
+      },
+      verbose: true,//when running the migration, it will print out the SQL queries that are being executed
+      strict: true,//
+    });
 
 - drizzle STUDIO 
-Studio requires drizzle config file with schema and dbCredentials provided.
+  Studio requires drizzle config file with schema and dbCredentials provided.
 
-commands: 
-drizzle-kit studio
-drizzle-kit studio --port 3000 ## custom port
-drizzle-kit studio --host 0.0.0.0 ## custom host for studio server
-drizzle-kit studio --verbose   ## log all sql statements
-
-
-- drizzle kit docs 
-migrations and schema configs 
-multi project schemas 
-SQL breakpoints 
-Push and Pull 
-https://orm.drizzle.team/kit-docs/conf
+  - commands: 
+    drizzle-kit studio
+    drizzle-kit studio --port 3000 ## custom port
+    drizzle-kit studio --host 0.0.0.0 ## custom host for studio server
+    drizzle-kit studio --verbose   ## log all sql statements
 
 
+- drizzle kit docs concepts  
+  https://orm.drizzle.team/kit-docs/conf
+  migrations and schema configs 
+  multi project schemas 
+  SQL breakpoints 
+  Push and Pull 
 
-migrations 
-- add to package.json
-  "db:generate": "drizzle-kit generate:pg" 
 
-- can specify names for migrations 
-  drizzle-kit generate --name init_db
 
-New command: migrate
-You can now apply generated migrations to your database directly from drizzle-kit
-  drizzle-kit migrate 
+- migrations 
+  - add to package.json
+    "db:generate": "drizzle-kit generate:pg" 
+
+  - can specify names for migrations 
+    drizzle-kit generate --name init_db
+
+  - New command: migrate
+    You can now apply generated migrations to your database directly from drizzle-kit
+    drizzle-kit migrate 
 
 
 ------ Usage ------ 
@@ -67,6 +70,14 @@ create schema:
 generate migration 
   - npm run db:generate 
     - "db:migrate": "tsx src/drizzle/migrate.ts",
+
+- db connection file 
+- schema 
+  - tables, relations 
+- migrations 
+  - directory 
+  - set database config: default is 'drizzle' 
+  - add script shortcut to package.json 
 
 
 --- Drizzle Troubleshooting --- 
