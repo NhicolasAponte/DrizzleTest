@@ -27,6 +27,10 @@
       dbCredentials: {
         url: process.env.DATABASE_URL as string,
       },
+      migrations: { // optional section that allows specifying where to put migration history 
+        table: "drizzle_migrations",
+        schema: process.env.DEV_SCHEMA,
+      },
       verbose: true,//when running the migration, it will print out the SQL queries that are being executed
       strict: true,//
     });
@@ -44,7 +48,7 @@
 - drizzle kit docs concepts  
   https://orm.drizzle.team/kit-docs/conf
   migrations and schema configs 
-  multi project schemas 
+  multi project schemas - https://orm.drizzle.team/docs/goodies#multi-project-schema
   SQL breakpoints 
   Push and Pull 
 

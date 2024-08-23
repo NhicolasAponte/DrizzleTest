@@ -16,7 +16,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-export const dbSchema = pgSchema("order-handling");
+export const dbSchema = pgSchema(process.env.DEV_SCHEMA!);
 
 export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
 
@@ -74,7 +74,7 @@ export const BillingInfoTable = dbSchema.table("billing_info", {
 });
 
 export const OrderTable = dbSchema.table("orders", {
-  id: serial("id").primaryKey(),
+  id: uuid("id").primaryKey(),
   userId: uuid("userId")
     .notNull()
     .references(() => UserTable.id, { onDelete: "cascade" }),

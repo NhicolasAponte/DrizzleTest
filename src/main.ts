@@ -4,14 +4,14 @@ import {  } from "./drizzle/schema";
 import { eq, sql } from "drizzle-orm";
 
 async function main() {
-  console.log("Hello World, watch test");
-  // await db.execute(sql`DROP TABLE IF EXISTS "nhic-dev"."postCategory" CASCADE`);
-  // await db.execute(sql`DROP TABLE IF EXISTS "nhic-dev"."userPreferences" CASCADE`);
-  // await db.execute(sql`DROP TABLE IF EXISTS "nhic-dev"."posts" CASCADE`);
-  // await db.execute(sql`DROP TABLE IF EXISTS "nhic-dev"."category" CASCADE`);
-  // await db.execute(sql`DROP TABLE IF EXISTS "nhic-dev"."user" CASCADE`);
-  // await db.execute(sql`DROP TYPE IF EXISTS "nhic-dev"."user_role" CASCADE`);
-  // await db.execute(sql`DROP SCHEMA IF EXISTS "nhic-dev" CASCADE`);
+  // console.log("Hello World, watch test");
+  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."postCategory" CASCADE`);
+  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."userPreferences" CASCADE`);
+  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."posts" CASCADE`);
+  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."category" CASCADE`);
+  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."user" CASCADE`);
+  // await db.execute(sql`DROP TYPE IF EXISTS "order-handling"."user_role" CASCADE`);
+  // await db.execute(sql`DROP SCHEMA IF EXISTS "order-handling" CASCADE`);
 }
 
 main()

@@ -1,4 +1,9 @@
-CREATE SCHEMA "order-handling";
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_namespace WHERE nspname = 'order-handling') THEN
+        CREATE SCHEMA "order-handling";
+    END IF;
+END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  CREATE TYPE "order-handling"."user_role" AS ENUM('ADMIN', 'USER');
@@ -32,7 +37,7 @@ CREATE TABLE IF NOT EXISTS "order-handling"."order_items" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "order-handling"."orders" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY NOT NULL,
 	"userId" uuid NOT NULL,
 	"orderName" varchar(255) NOT NULL,
 	"billingInfo" jsonb NOT NULL,
