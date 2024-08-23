@@ -28,6 +28,7 @@ export const UserTable = dbSchema.table("users", {
   role: UserRole("role").default("USER"),
 });
 
+// one-to-one with user table 
 export const UserProfileTable = dbSchema.table("user_profiles", {
   id: serial("id").primaryKey(),
   userId: uuid("userId")
@@ -40,6 +41,7 @@ export const UserProfileTable = dbSchema.table("user_profiles", {
   phoneNum: varchar("phoneNum", { length: 255 }),
 });
 
+// one-to-many with user table
 export const ShippingInfoTable = dbSchema.table("shipping_info", {
   id: serial("id").primaryKey(),
   userId: uuid("userId")
@@ -54,6 +56,7 @@ export const ShippingInfoTable = dbSchema.table("shipping_info", {
 });
 // users can add and delete billing info at any time
 // relevant billing info will be serialized and stored in the order table
+// one-to-many with user table 
 export const BillingInfoTable = dbSchema.table("billing_info", {
   id: serial("id").primaryKey(),
   userId: uuid("userId")
@@ -73,6 +76,7 @@ export const BillingInfoTable = dbSchema.table("billing_info", {
   isActive: boolean("isActive").notNull().default(true),
 });
 
+// one-to-many with user table
 export const OrderTable = dbSchema.table("orders", {
   id: uuid("id").primaryKey(),
   userId: uuid("userId")
@@ -86,7 +90,7 @@ export const OrderTable = dbSchema.table("orders", {
   dateUpdated: timestamp("dateUpdated").notNull(),
   dateSubmitted: timestamp("dateSubmitted"),
 });
-
+// one-to-many with order table
 export const OrderItemTable = dbSchema.table("order_items", {
   id: serial("id").primaryKey(),
   orderId: uuid("orderId")

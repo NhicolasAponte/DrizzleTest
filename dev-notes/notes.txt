@@ -66,6 +66,15 @@
     drizzle-kit migrate 
 
 
+-- instructions overview -- 
+- install 
+- create drizzle folder 
+- create schema 
+- create config 
+- create script shortcuts in package.json 
+- create test query 
+
+
 ------ Usage ------ 
 
 create schema: 
@@ -456,23 +465,23 @@ docker commands to run in project's root directory
 
 Getting the database  URL 
 
-get container name from config file or: 
-docker compose ps
+  get container name from config file or: 
+  docker compose ps
 
-inspect container to get IPAddress 
-docker inspect <container_name>
+  inspect container to get IPAddress 
+  docker inspect <container_name>
 
-host = IPAddress
-port = HostPort or found in config file 
-  URL: "postgresql://<username>:<password>@<host>:<port>/<database_name>."
-  URL: "postgresql://drizzle:dev@172.18.0.2:5432/drizzle-pg"
+  host = IPAddress
+  port = HostPort or found in config file 
+    URL: "postgresql://<username>:<password>@<host>:<port>/<database_name>."
+    URL: "postgresql://drizzle:dev@172.18.0.2:5432/drizzle-pg"
 
-https://www.youtube.com/watch?v=xHg0IJDl1RY
-in this tutorial, he puts localhost as the <host> and after the database name he specifies 
-the schema: <database name>?schema=public
+  https://www.youtube.com/watch?v=xHg0IJDl1RY
+  in this tutorial, he puts localhost as the <host> and after the database name he specifies 
+  the schema: <database name>?schema=public
 
-If container is running on my local machine, connect with localhost :  URL: "postgresql://drizzle:dev@localhost:5432/drizzle-pg"
-If it is running on a specific server, use your server IP. (For Windows docker-machine you probably need to use 192.168.99.100).
+  If container is running on my local machine, connect with localhost :  URL: "postgresql://drizzle:dev@localhost:5432/drizzle-pg"
+  If it is running on a specific server, use your server IP. (For Windows docker-machine you probably need to use 192.168.99.100).
 
 
 https://www.youtube.com/watch?v=LyElCkGbO1c 
@@ -588,3 +597,11 @@ npm ls
 echo $PATH
 npm config get prefix
 npm config list -l
+
+
+----------- environment configuration ----------- 
+Here's the priority of the files for the development build and the production build (higher priority on the left):
+
+Dev.: (npm start): .env.development.local, .env.local, .env.development, .env
+
+Prod.: (npm run build): .env.production.local, .env.local, .env.production, .env
