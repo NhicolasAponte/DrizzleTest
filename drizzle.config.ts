@@ -14,6 +14,7 @@ export default defineConfig({
     table: "__drizzle_migrations",
     schema: process.env.DEV_SCHEMA,
   },
+  schemaFilter: ["new-schema-test_"],
   verbose: true, //when running the migration, it will print out the SQL queries that are being executed
   strict: true, //
 });

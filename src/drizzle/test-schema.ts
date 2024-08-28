@@ -7,7 +7,6 @@ import {
   pgEnum,
   pgSchema,
   pgTable,
-  pgTableCreator,
   primaryKey,
   real,
   serial,
@@ -17,15 +16,11 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-//export const dbSchema = pgSchema(process.env.DEV_SCHEMA!);
+export const dbSchema = pgSchema(process.env.DEV_SCHEMA!);
 
-// NOTE: this creates a prefix for all table names, then the table filter 
-// param in drizzle.config.ts will only include tables with this prefix 
-export const createTable = pgTableCreator((name) => `new-schema-test_${name}`);
+export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
 
-export const UserRole = pgEnum("user_role", ["ADMIN", "USER"]);
-
-export const UserTable = createTable("users", {
+export const UserTable = dbSchema.table("users", {
   id: uuid("id").defaultRandom().primaryKey(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   // emailVerified: date('emailVerified'),
@@ -33,8 +28,8 @@ export const UserTable = createTable("users", {
   role: UserRole("role").default("USER"),
 });
 
-// one-to-one with user table
-export const UserProfileTable = createTable("user_profiles", {
+// one-to-one with user table 
+export const UserProfileTable = dbSchema.table("user_profiles", {
   id: serial("id").primaryKey(),
   userId: uuid("userId")
     .notNull()
@@ -47,7 +42,7 @@ export const UserProfileTable = createTable("user_profiles", {
 });
 
 // one-to-many with user table
-export const ShippingInfoTable = createTable("shipping_info", {
+export const ShippingInfoTable = dbSchema.table("shipping_info", {
   id: serial("id").primaryKey(),
   userId: uuid("userId")
     .notNull()
@@ -61,8 +56,8 @@ export const ShippingInfoTable = createTable("shipping_info", {
 });
 // users can add and delete billing info at any time
 // relevant billing info will be serialized and stored in the order table
-// one-to-many with user table
-export const BillingInfoTable = createTable("billing_info", {
+// one-to-many with user table 
+export const BillingInfoTable = dbSchema.table("billing_info", {
   id: serial("id").primaryKey(),
   userId: uuid("userId")
     .notNull()
@@ -82,7 +77,7 @@ export const BillingInfoTable = createTable("billing_info", {
 });
 
 // one-to-many with user table
-export const OrderTable = createTable("orders", {
+export const OrderTable = dbSchema.table("orders", {
   id: uuid("id").primaryKey(),
   userId: uuid("userId")
     .notNull()
@@ -96,7 +91,7 @@ export const OrderTable = createTable("orders", {
   dateSubmitted: timestamp("dateSubmitted"),
 });
 // one-to-many with order table
-export const OrderItemTable = createTable("order_items", {
+export const OrderItemTable = dbSchema.table("order_items", {
   id: serial("id").primaryKey(),
   orderId: uuid("orderId")
     .notNull()
@@ -106,7 +101,7 @@ export const OrderItemTable = createTable("order_items", {
   quantity: integer("quantity").notNull(),
 });
 
-// export const ProductTable = createTable(
+// export const ProductTable = dbSchema.table(
 //   "products",
 //   {
 //     id: serial("id").primaryKey(),

@@ -4,7 +4,7 @@ import {  } from "./drizzle/schema";
 import { eq, sql } from "drizzle-orm";
 
 async function main() {
-  // console.log("Hello World, watch test");
+  console.log("Hello World, watch test");
   // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."postCategory" CASCADE`);
   // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."userPreferences" CASCADE`);
   // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."posts" CASCADE`);
@@ -12,6 +12,8 @@ async function main() {
   // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."user" CASCADE`);
   // await db.execute(sql`DROP TYPE IF EXISTS "order-handling"."user_role" CASCADE`);
   // await db.execute(sql`DROP SCHEMA IF EXISTS "order-handling" CASCADE`);
+  const environment = process.env.NODE_ENV;
+  console.log("Environment: ", process.env.NODE_ENV);
 }
 
 main()
@@ -20,5 +22,4 @@ main()
   })
   .catch((error) => {
     console.error(error);
-  });
-
+  }); 

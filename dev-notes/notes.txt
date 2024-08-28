@@ -65,6 +65,11 @@
     You can now apply generated migrations to your database directly from drizzle-kit
     drizzle-kit migrate 
 
+- how Drizzle-kit push command works: 
+  - It retrieves your schema from the database and converts it to the “drizzle-schema” format.
+  - The command reads all your schema files containing drizzle tables and converts them to the “drizzle-schema” format as well.
+  - Drizzle then compares the two schemas and generates a set of statements that need to be executed against your database. These statements ensure that the database is synchronized with the schemas defined in your code.
+
 
 -- instructions overview -- 
 - install 
