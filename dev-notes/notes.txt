@@ -53,9 +53,12 @@
   Push and Pull 
 
 
-
 - migrations 
-  - add to package.json
+  - use npx drizzle-kit generate to create migrations based on specifications 
+    in drizzle.config.ts 
+  - then you can use drizzle-kit migrate to run migrations based on drizzle.config.ts 
+    or use drizzle orm by creating a migrate.ts file and using the migrate function 
+  - add to package.json 
     "db:generate": "drizzle-kit generate:pg" 
 
   - can specify names for migrations 
@@ -97,6 +100,12 @@ generate migration
   - set database config: default is 'drizzle' 
   - add script shortcut to package.json 
 
+--- commands --- 
+https://orm.drizzle.team/kit-docs/commands 
+npx drizzle-kit push
+npx drizzle-kit generate 
+npx drizzle-kit migrate 
+npx drizzle-kit drop 
 
 --- Drizzle Troubleshooting --- 
 

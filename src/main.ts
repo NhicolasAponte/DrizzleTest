@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { db } from "./drizzle/db";
-import {  } from "./drizzle/schema";
+import {} from "./drizzle/schema";
 import { eq, sql } from "drizzle-orm";
 
 async function main() {
@@ -12,6 +12,9 @@ async function main() {
   // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."user" CASCADE`);
   // await db.execute(sql`DROP TYPE IF EXISTS "order-handling"."user_role" CASCADE`);
   // await db.execute(sql`DROP SCHEMA IF EXISTS "order-handling" CASCADE`);
+  await db.execute(
+    sql`DROP TABLE IF EXISTS "drizzle"."__drizzle_migrations" CASCADE`
+  );
   const environment = process.env.NODE_ENV;
   console.log("Environment: ", process.env.NODE_ENV);
 }
@@ -22,4 +25,4 @@ main()
   })
   .catch((error) => {
     console.error(error);
-  }); 
+  });
