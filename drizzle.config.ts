@@ -1,3 +1,4 @@
+// drizzle.config.ts is used by drizzle kit to configure the CLI 
 import { defineConfig } from "drizzle-kit";
 // https://orm.drizzle.team/kit-docs/config-reference
 export default defineConfig({

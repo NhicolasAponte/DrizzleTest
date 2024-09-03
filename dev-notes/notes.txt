@@ -8,8 +8,9 @@
   resources: 
     https://orm.drizzle.team/kit-docs/overview 
 
-- drizzle config 
-  resources: 
+- drizzle config
+  - used by drizzle-kit commands 
+  - resources: 
     https://orm.drizzle.team/kit-docs/config-reference 
     https://orm.drizzle.team/kit-docs/upgrade-21#2-update-your-drizzleconfigts-file
 
@@ -100,12 +101,29 @@ generate migration
   - set database config: default is 'drizzle' 
   - add script shortcut to package.json 
 
---- commands --- 
+--- drizzle kit commands --- 
 https://orm.drizzle.team/kit-docs/commands 
 npx drizzle-kit push
 npx drizzle-kit generate 
 npx drizzle-kit migrate 
 npx drizzle-kit drop 
+
+put short hand in package.json under "scripts" 
+- Local Binaries: When you install a package using npm (or yarn), the package's binaries are placed 
+in the node_modules/.bin directory. This directory is automatically added to the PATH environment 
+variable when you run npm scripts.
+
+- npm Scripts: When you run a script defined in the "scripts" section of your package.json, npm automatically 
+looks for executables in the node_modules/.bin directory. This means you can directly call the binaries of locally 
+installed packages without needing to prefix them with 'npx'.
+
+    "push": "npx drizzle-kit push", // including 'npx' is optional 
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate",
+    "drop": "drizzle-kit drop",
+    "studio": "drizzle-kit studio",
+    "manual:migrate": "tsx src/drizzle/migrate.ts" //NOTE TODO: how would this be implemented 
+    // in a deployed build?? 
 
 --- Drizzle Troubleshooting --- 
 
@@ -565,6 +583,11 @@ alias repos='cd ~/Desktop/dev/NextJS-Proj/repos'
 alias next-proj='cd ~/Desktop/dev/NextJS-Proj'
 alias curr-proj='cd ~/Desktop/dev/NextJS-Proj/orders-ui'
 
+--- npm commands --- 
+npm outdated : shows outdated packages, https://docs.npmjs.com/cli/v7/commands/npm-outdated  
+npm update --save : update packages and save to package.json 
+npm update --save-dev --save : update dev packages including dev dependencies and save to package.json 
+npm update -g : update global packages  
 
 ---------- trouble shooting --------
 

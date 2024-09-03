@@ -5,11 +5,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/main.ts",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate_old": "tsx src/drizzle/migrate.ts",
-    "db:migrate": "npx drizzle-kit migrate",
-    "db:drop": "drizzle-kit drop",
-    "studio": "npx drizzle-kit studio"
+    "prod-dev": "NODE_ENV=production tsx watch src/main.ts",
+    "push": "drizzle-kit push",
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate",
+    "drop": "drizzle-kit drop",
+    "studio": "drizzle-kit studio",
+    "manual:migrate": "tsx src/drizzle/migrate.ts"
   },
   "keywords": [],
   "author": "",
