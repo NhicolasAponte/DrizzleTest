@@ -11,12 +11,14 @@ async function main() {
   // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."category" CASCADE`);
   // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."user" CASCADE`);
   // await db.execute(sql`DROP TYPE IF EXISTS "order-handling"."user_role" CASCADE`);
-  // await db.execute(sql`DROP SCHEMA IF EXISTS "order-handling" CASCADE`);
-  await db.execute(
-    sql`DROP TABLE IF EXISTS "drizzle"."__drizzle_migrations" CASCADE`
-  );
+  // await db.execute(sql`DROP SCHEMA IF EXISTS "test-schema" CASCADE`);
+  // await db.execute(
+  //   sql`DROP TABLE IF EXISTS "drizzle"."__drizzle_migrations" CASCADE`
+  // );
   const environment = process.env.NODE_ENV;
   console.log("Environment: ", process.env.NODE_ENV);
+
+  // CREATE TABLE "order-handling"."user" (name text, lastname text, email text);
 }
 
 main()
