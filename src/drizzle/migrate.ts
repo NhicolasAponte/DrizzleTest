@@ -8,7 +8,7 @@ async function main() {
   let migrationsFolder = process.env.MIGRATIONS_OUT!;
   let schemaPath = process.env.SCHEMA_PATH!;
   let migrationsTable = process.env.MIGRATIONS_TABLE!;
-  let currSchema = process.env.NODE_ENV === 'development' ? process.env.DEV_SCHEMA! : process.env.PROD_SCHEMA!;
+  let currSchema = process.env.PROD_SCHEMA as string;
   console.log("xxxx Environment: ", process.env.NODE_ENV);
   console.log("xxxxxxxxxxx drizzle config xxxxxxxxxxx")
   console.log("xxxx schema.ts Path: ", schemaPath);
