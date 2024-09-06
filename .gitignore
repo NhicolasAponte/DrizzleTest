@@ -1,6 +1,20 @@
-#environment variables 
+# environment variable files
 .env
+.env.local
 .env.development
 .env.production
 .env.development.local
 .env.production.local
+
+# node_modules directory
+node_modules/
+
+# log files
+*.log
+
+# build output
+dist/
+build/
+
+# IDE specific files
+.vscode/
