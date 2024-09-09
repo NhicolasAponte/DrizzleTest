@@ -11,7 +11,7 @@ async function main() {
   // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."category" CASCADE`);
   // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."user" CASCADE`);
   // await db.execute(sql`DROP TYPE IF EXISTS "order-handling"."user_role" CASCADE`);
-  // await db.execute(sql`DROP SCHEMA IF EXISTS "test-schema" CASCADE`);
+  // await db.execute(sql`DROP SCHEMA IF EXISTS "prod-schema" CASCADE`);
   // await db.execute(
   //   sql`DROP TABLE IF EXISTS "drizzle"."__drizzle_migrations" CASCADE`
   // );
