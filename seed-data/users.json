@@ -1,0 +1,62 @@
+[
+  {
+    "id": "9850281f-a66d-4869-b50c-4737ac4fc6bf",
+    "email": "user_44q6g@example.com",
+    "password": "8b036h",
+    "role": "USER"
+  },
+  {
+    "id": "7d909331-b898-4efa-a20d-26619ef400ed",
+    "email": "user_3m3vsh@example.com",
+    "password": "xzy45k",
+    "role": "USER"
+  },
+  {
+    "id": "24100e6d-c38b-46b9-89b1-416bc1625f42",
+    "email": "user_bxou9t@example.com",
+    "password": "74vx5",
+    "role": "USER"
+  },
+  {
+    "id": "eef3e0c8-1d72-4c62-8a97-c06d4ef1c1ee",
+    "email": "user_x9xcbm@example.com",
+    "password": "l0v5xr",
+    "role": "USER"
+  },
+  {
+    "id": "dda4e751-50cf-429c-85c6-a2e818cddede",
+    "email": "user_yc3hn@example.com",
+    "password": "ndjl6f9",
+    "role": "USER"
+  },
+  {
+    "id": "1a27be63-83f8-4c9a-92f5-b1b777cfc9d4",
+    "email": "user_exj93@example.com",
+    "password": "d0k52",
+    "role": "USER"
+  },
+  {
+    "id": "ce755710-a856-437e-b79a-8b994f79f317",
+    "email": "user_t0gopq@example.com",
+    "password": "rb72k",
+    "role": "USER"
+  },
+  {
+    "id": "17492f4a-8e5c-4c09-b377-b3a00c4502d7",
+    "email": "user_4myhva@example.com",
+    "password": "dtxyge",
+    "role": "USER"
+  },
+  {
+    "id": "db55ddf8-c538-4ef7-8cd1-6b53853af95b",
+    "email": "user_r8a42dw4@example.com",
+    "password": "k3n7j",
+    "role": "USER"
+  },
+  {
+    "id": "2fba715d-4ace-47e3-a8bd-42ac93650cf8",
+    "email": "user_0ylfna@example.com",
+    "password": "7yyu2",
+    "role": "USER"
+  }
+]
