@@ -1,4 +1,6 @@
-[
+import { User } from '../src/seed-functions/generate-users';
+
+export const users: User[] = [
   {
     "id": "83cd5dd6-7be5-4ad9-bf67-8b19fe2a84d6",
     "email": "pay.dear@example.com",
@@ -71,4 +73,4 @@
     "password": "ltlqam",
     "role": "ADMIN"
   }
-]
+];

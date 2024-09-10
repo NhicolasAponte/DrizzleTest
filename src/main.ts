@@ -2,7 +2,7 @@ import "dotenv/config";
 import { db } from "./drizzle/db";
 import {} from "./drizzle/schema";
 import { eq, sql } from "drizzle-orm";
-import { generateUsers } from "./seed-functions/users";
+import { generateUsers } from "./seed-functions/generate-users";
 
 async function main() {
   console.log("Hello World, watch test");
@@ -20,7 +20,8 @@ async function main() {
   console.log("Environment: ", process.env.NODE_ENV);
 
   // CREATE TABLE "order-handling"."user" (name text, lastname text, email text);
-  generateUsers(10, './seed-data/users.json');
+  generateUsers(12);
+  // NOTE TODO: create profile seed function and let it use existing user ID's 
 }
 
 main()
