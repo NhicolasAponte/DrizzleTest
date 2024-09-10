@@ -3,6 +3,7 @@ import { db } from "./drizzle/db";
 import {} from "./drizzle/schema";
 import { eq, sql } from "drizzle-orm";
 import { generateUsers } from "./seed-functions/generate-users";
+import { generateUserProfiles } from "./seed-functions/generate-user-profiles";
 
 async function main() {
   console.log("Hello World, watch test");
@@ -20,8 +21,9 @@ async function main() {
   console.log("Environment: ", process.env.NODE_ENV);
 
   // CREATE TABLE "order-handling"."user" (name text, lastname text, email text);
-  generateUsers(12);
-  // NOTE TODO: create profile seed function and let it use existing user ID's 
+  // generateUsers(5);
+  generateUserProfiles();
+  // NOTE TODO: create profile seed function and let it use existing user ID's
 }
 
 main()

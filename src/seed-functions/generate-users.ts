@@ -19,7 +19,7 @@ function generateRandomUser(): User {
   const email = `${randWord[0]}.${randWord[1]}@example.com`;
   //const email = `user_${Math.random().toString(36).substring(7)}@example.com`;
   const password = Math.random().toString(36).substring(7);
-  const roleNum = Math.floor(Math.random()*10);
+  const roleNum = Math.floor(Math.random() * 10);
   // console.log("roleNum: ", roleNum);
   const role = roleNum % 2 === 0 ? "USER" : "ADMIN"; // Default role as per the schema
   return { id, email, password, role };
@@ -27,18 +27,18 @@ function generateRandomUser(): User {
 
 // Function to generate user objects and write to a JSON file
 export function generateUsers(numUsers: number, outputPath?: string) {
-  const fileName = "users";
-  const jsonOutputPath = outputPath
-    ? `${outputPath}${fileName}.json`
-    : `./seed-data/${fileName}.json`;
-  const tsOutputPath = outputPath
-    ? `${outputPath}${fileName}.ts`
-    : `./seed-data/${fileName}.ts`;
-
   const users: User[] = [];
   for (let i = 0; i < numUsers; i++) {
     users.push(generateRandomUser());
   }
+
+  const fileName = "users";
+  const jsonOutputPath = outputPath
+    ? `${outputPath}${fileName}.json`
+    : `./src/seed-data/${fileName}.json`;
+  const tsOutputPath = outputPath
+    ? `${outputPath}${fileName}.ts`
+    : `./src/seed-data/${fileName}.ts`;
 
   const outputDir = path.dirname(jsonOutputPath);
   if (!fs.existsSync(outputDir)) {
@@ -50,7 +50,7 @@ export function generateUsers(numUsers: number, outputPath?: string) {
 
   // Write to TypeScript file
   // create file content as string
-  const tsContent = `import { User } from '../src/seed-functions/generate-users';\n\nexport const users: User[] = ${JSON.stringify(
+  const tsContent = `import { User } from '../seed-functions/generate-users';\n\nexport const users: User[] = ${JSON.stringify(
     users,
     null,
     2
