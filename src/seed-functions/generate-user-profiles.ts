@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import { faker } from "@faker-js/faker";
 import { generate } from "random-words";
 import { users } from "../seed-data/users";
 
@@ -15,15 +16,18 @@ export type UserProfile = {
 
 function generateRandomUserProfile(userId: string): UserProfile {
   const id = Math.floor(Math.random() * 10000);
-  const firstName = generate(1)[0];
-  const lastName = generate(1)[0];
-  console.log("firstName: ", firstName);
-  console.log("lastName: ", lastName);
+  const firstName = faker.person.firstName();
+  const lastName = faker.person.lastName();
   const company = `${generate(1)[0]}_company`;
   const accountNum = Math.random().toString(36).substring(7);
   // const phoneNum = `+1(${Math.floor(Math.random() * 9000000000) + 1000000000})`;
-  const phoneNum = `+1(${Math.floor(Math.random() * 1000)})${Math.floor(Math.random() * 1000)}-${Math.floor(Math.random() * 10000)}`;
-
+  let areaCode = Math.floor(Math.random() * 1000); // 
+  areaCode = areaCode > 99 ? areaCode : areaCode + 100
+  let digits = Math.floor(Math.random() * 1000)
+  digits = digits > 99 ? digits : digits + 100;
+  let lastFour = Math.floor(Math.random() * 10000);
+  lastFour = lastFour > 999 ? lastFour : lastFour + 1000;
+  const phoneNum = `+1(${areaCode})${digits}-${lastFour}`;
   return { id, userId, firstName, lastName, company, accountNum, phoneNum };
 }
 
