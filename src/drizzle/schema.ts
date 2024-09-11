@@ -106,13 +106,20 @@ export const OrderItemTable = dbSchema.table("order_items", {
   quantity: integer("quantity").notNull(),
 });
 
-// export const ProductTable = dbSchema.table(
-//   "products",
-//   {
-//     id: serial("id").primaryKey(),
-//     name: varchar("name", { length: 255 }).notNull(),
-//     description: varchar("description", { length: 255 }),
-//     price: real("price").notNull(),
-//     quantity: integer("quantity").notNull(),
-//   }
-// )
+export const ProductTable = dbSchema.table(
+  "products",
+  {
+    id: serial("id").primaryKey(),
+    name: varchar("name", { length: 255 }).notNull(),
+    description: varchar("description", { length: 255 }),
+    category: varchar("category", { length: 255 }).notNull(),
+    subcategory: varchar("subcategory", { length: 255 }),
+    quantity_available: integer("quantity_available").notNull(),
+    config_options: jsonb("config_options"),
+    price: real("price").notNull(),
+    supplier_id: uuid("supplier_id").notNull(),
+    quantity_on_premise: integer("quantity"),
+    quantity_on_order: integer("quantity"),
+    quantity_incoming: integer("quantity"),
+  }
+)
