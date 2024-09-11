@@ -29,10 +29,8 @@ function generateRandomUserProfile(userId: string): UserProfile {
 
 export function generateUserProfiles() {
   const profiles: UserProfile[] = [];
-  let count = 0;
   for (let user of users) {
     profiles.push(generateRandomUserProfile(user.id));
-    count++;
   }
 
   const dir = "./src/seed-data/";
@@ -45,7 +43,7 @@ export function generateUserProfiles() {
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(profiles, null, 2), "utf-8");
-  console.log(`Generated ${count} profiles and saved to ${jsonPath}`);
+  console.log(`Generated ${profiles.length} profiles and saved to ${jsonPath}`);
 
   const tsContent = `import { UserProfile } from "../seed-functions/generate-user-profiles";\n\nexport const profiles: UserProfile[] = ${JSON.stringify(
     profiles,
@@ -53,5 +51,5 @@ export function generateUserProfiles() {
     2
   )};\n`;
   fs.writeFileSync(tsPath, tsContent, "utf-8");
-  console.log(`Generated ${count} profiles and saved to ${tsPath}`);
+  console.log(`Generated ${profiles.length} profiles and saved to ${tsPath}`);
 }
