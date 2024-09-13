@@ -45,8 +45,8 @@ function generateRandomOrder(
     status = "CANCELLED";
   }
 
-  const dateCreated = new Date().toISOString();
-  const dateUpdated = new Date().toISOString();
+  const dateCreated = new Date().toLocaleString();
+  const dateUpdated = new Date().toLocaleString();
 
   return {
     id,
@@ -58,7 +58,7 @@ function generateRandomOrder(
     dateCreated,
     dateUpdated,
     dateSubmitted:
-      status !== "DRAFT" ? new Date().toISOString() : undefined,
+      status !== "DRAFT" ? new Date().toLocaleString() : undefined,
   };
 }
 

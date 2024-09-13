@@ -106,6 +106,7 @@ export const OrderItemTable = dbSchema.table("order_items", {
   quantity: integer("quantity").notNull(),
 });
 
+// many-to-many with order item table 
 export const ProductTable = dbSchema.table(
   "products",
   {
@@ -123,3 +124,18 @@ export const ProductTable = dbSchema.table(
     quantity_incoming: integer("quantity"),
   }
 )
+// linking table  
+export const OrderItemProductTable = dbSchema.table("order_item_products", {
+  id: serial("id").primaryKey(),
+  orderItemId: integer("orderItemId").notNull().references(() => OrderItemTable.id, { onDelete: "cascade" }),
+  productId: integer("productId").notNull().references(() => ProductTable.id, { onDelete: "cascade" }),
+  //quantity: integer("quantity").notNull(),
+})
+
+// export const Tags = dbSchema.table("tags", {
+//   id: serial("id").primaryKey(),
+//   name: varchar("name", { length: 255 }).notNull(),
+//   description: varchar("description", { length: 255 }),
+//   userId: uuid("userId").notNull().references(() => UserTable.id, { onDelete: "cascade" }),
+//   category: varchar("category", { length: 255 }),
+// })
