@@ -1,4 +1,3 @@
-import { relations } from "drizzle-orm";
 import {
   boolean,
   date,
@@ -106,36 +105,46 @@ export const OrderItemTable = dbSchema.table("order_items", {
   quantity: integer("quantity").notNull(),
 });
 
-// many-to-many with order item table 
-export const ProductTable = dbSchema.table(
-  "products",
-  {
-    id: serial("id").primaryKey(),
-    name: varchar("name", { length: 255 }).notNull(),
-    description: varchar("description", { length: 255 }),
-    category: varchar("category", { length: 255 }).notNull(),
-    subcategory: varchar("subcategory", { length: 255 }),
-    quantity_available: integer("quantity_available").notNull(),
-    config_options: jsonb("config_options"),
-    price: real("price").notNull(),
-    supplier_id: uuid("supplier_id").notNull(),
-    quantity_on_premise: integer("quantity"),
-    quantity_on_order: integer("quantity"),
-    quantity_incoming: integer("quantity"),
-  }
-)
-// linking table  
-export const OrderItemProductTable = dbSchema.table("order_item_products", {
+// many-to-many with order item table
+export const ProductTable = dbSchema.table("products", {
   id: serial("id").primaryKey(),
-  orderItemId: integer("orderItemId").notNull().references(() => OrderItemTable.id, { onDelete: "cascade" }),
-  productId: integer("productId").notNull().references(() => ProductTable.id, { onDelete: "cascade" }),
-  //quantity: integer("quantity").notNull(),
-})
+  name: varchar("name", { length: 255 }).notNull(),
+  description: varchar("description", { length: 255 }),
+  category: varchar("category", { length: 255 }).notNull(),
+  subcategory: varchar("subcategory", { length: 255 }),
+  quantity_available: integer("quantity_available").notNull(),
+  config_options: jsonb("config_options"),
+  price: real("price").notNull(),
+  supplier_id: uuid("supplier_id").notNull(),
+  quantity_on_premise: integer("quantity"),
+  quantity_on_order: integer("quantity"),
+  quantity_incoming: integer("quantity"),
+  tags: jsonb("tags"),
+  date_created: timestamp("date_created").notNull(),
+  date_updated: timestamp("date_updated").notNull(),
+});
+// linking table
+// export const OrderItemProductTable = dbSchema.table("order_item_products", {
+//   id: serial("id").primaryKey(),
+//   orderItemId: integer("orderItemId")
+//     .notNull()
+//     .references(() => OrderItemTable.id, { onDelete: "cascade" }),
+//   productId: integer("productId")
+//     .notNull()
+//     .references(() => ProductTable.id, { onDelete: "cascade" }),
+//   //quantity: integer("quantity").notNull(),
+// });
 
+// tags need a userId, since each user creates tags that are only 
+// useful to them 
+// an id for the item that was tagged 
+// and a category so we know what table to search for the item 
 // export const Tags = dbSchema.table("tags", {
 //   id: serial("id").primaryKey(),
 //   name: varchar("name", { length: 255 }).notNull(),
 //   description: varchar("description", { length: 255 }),
-//   userId: uuid("userId").notNull().references(() => UserTable.id, { onDelete: "cascade" }),
 //   category: varchar("category", { length: 255 }),
+//   userId: uuid("userId").notNull().references(() => UserTable.id, { onDelete: "cascade" }),
+//   tagged_item_id: integer("tagged_item_id").notNull(),
 // })
+
