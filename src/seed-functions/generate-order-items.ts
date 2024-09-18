@@ -7,9 +7,10 @@ import { ordersArray } from "../seed-data/orders";
 export type OrderItem = {
     id: number;
     orderId: string;
-    product: any; // jsonb
-    note: string;
+    product_id: string; // uuid
+    product_config: any; // jsonb
     quantity: number;
+    note: string;
 }
 
   interface productConfig {
@@ -32,18 +33,20 @@ export type OrderItem = {
     fabrication_options: string;
     misc_options: string;
   }
-
+// need an array of products and configs 
 function generateRandomOrderItem(orderId: string){
     return {
         id: Math.floor(Math.random() * 1000),
         orderId,
-        product: {
+        product_id: uuidv4(), // get product id from generated products 
+        // use math.random to generate a number 1-5 and get the product[i] at that index
+        product_config: { // combination of product and glass config 
             name: generate(1)[0],
             price: Math.floor(Math.random() * 10000),
             description: "some description",
         },
-        note: "some note",
         quantity: Math.floor(Math.random() * 211),
+        note: "some note",
     };
 }
 
