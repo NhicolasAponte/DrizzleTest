@@ -1,55 +1,63 @@
-import glassImage from "@/public/images/glass-verre.jpg";
-import {
-  GlassType,
-  MiscOptions,
-  Shape,
-  Thickness,
-  Tint,
-} from "@/lib/definitions/order-definitions";
+// import glassImage from "@/public/images/glass-verre.jpg";
+// import {
+//   GlassType,
+//   MiscOptions,
+//   Shape,
+//   Thickness,
+//   Tint,
+// } from "@/lib/definitions/order-definitions";
+
+const glassImage = "path/to/image";
 
 export const productTypes = [
   {
     id: "1",
-    name: "Tempered Glass",
+    type: "Tempered Glass",
     description:
       "This product is used most often for shelves, some fireplaces and table tops. Tempered glass breaks into many small pieces when broken and usually never cracks.",
-    imageSrc: glassImage,
+    imageSrc: "path/to/image",
     alt: "Tempered Glass",
     shape_types: [],
     thickness_options: [],
     tint_types: [],
     misc_options: [],
+    config_options: {
+      shape: "",
+      dimensions: "",
+      thickness: "",
+      tint: "",
+      edgework: "",
+      misc: "",
+    },
   },
   {
     id: "2",
-    name: "Insulated Unit/Dual Pane",
+    type: "Insulated Unit/Dual Pane",
     description:
       "This product consists of two panes of tempered glass separated by a spacer. The space between the two panes of glass is filled with air. These are most often used in residential window applications.",
-    imageSrc: glassImage,
+    imageSrc: "path/to/image",
     alt: "Insulated Unit/Dual Pane",
     shape_types: [],
     thickness_options: [],
     tint_types: [],
     misc_options: [],
-  },
-  {
-    id: "3",
-    name: "Mirror",
-    description:
-      "This product is used to replace any mirror. Mirrors are not tempered and if broken will break into large shards.",
-    imageSrc: glassImage,
-    alt: "Mirror",
-    shape_types: [],
-    thickness_options: [],
-    tint_types: [],
-    misc_options: [],
+    config_options: {
+      //are both lites the same or can they be different?
+      shape: "",
+      dimensions: "",
+      thickness: "",
+      tint: "",
+      misc: "",
+      // lite2: {},
+      spacer: "", // spacer options: 1/4", 3/8", 1/2"
+    },
   },
   {
     id: "4",
-    name: "Laminate/Safety Glass",
+    type: "Laminate/Safety Glass",
     description:
       "This product is often used in doors and windows for security to resist burglar intrusion or if accidentally broken to keep a safeguard on the door and window until replaced. This as well makes a good sound barrier for single pane glass applications. This type of safety glass holds together when shattered.",
-    imageSrc: glassImage,
+    imageSrc: "path/to/image",
     alt: "Laminate/Safety Glass",
     shape_types: [],
     thickness_options: [],
@@ -58,10 +66,10 @@ export const productTypes = [
   },
   {
     id: "5",
-    name: "Tempered Laminate",
+    type: "Tempered Laminate",
     description:
       "This is a unique product that provides the surface strength and durability of tempered glass and the security of laminated glass. Tempered Laminated Glass, if broken, will break into small pieces yet be held together. This is often used in overhead and panel applications.",
-    imageSrc: glassImage,
+    imageSrc: "path/to/image",
     alt: "Tempered Laminate",
     shape_types: [],
     thickness_options: [],
@@ -69,35 +77,11 @@ export const productTypes = [
     misc_options: [],
   },
   {
-    id: "6",
-    name: "Ceramic Glass",
-    description:
-      "These products are made to withstand very high temperatures and are often used in woodstoves, gas stoves, ovens, halogen lamps, and laboratories. Ceramic glasses do not shatter. If broken, the piece will crack into large shards.",
-    imageSrc: glassImage,
-    alt: "Ceramic Glass",
-    shape_types: [],
-    thickness_options: [],
-    tint_types: [],
-    misc_options: [],
-  },
-  {
-    id: "7",
-    name: "Fire Rated Glass",
-    description:
-      "This product is used for applications ranging from openings such as windows, side lites, and transoms, to doors, storefronts and glass walls where fire protective glass and fire resistive glass is required by code.",
-    imageSrc: glassImage,
-    alt: "Fire Rated Glass",
-    shape_types: [],
-    thickness_options: [],
-    tint_types: [],
-    misc_options: [],
-  },
-  {
     id: "8",
-    name: "Shower Doors/Panels",
+    type: "Shower Doors/Panels",
     description:
       'These products are made with 3/8” or 1/2" Tempered Glass with a selection of hardware such as hinges and handles as well as options such as bright guard to keep your glass looking like new for years.',
-    imageSrc: glassImage,
+    imageSrc: "path/to/image",
     alt: "Shower Doors/Panels",
     shape_types: [],
     thickness_options: [],
@@ -106,10 +90,10 @@ export const productTypes = [
   },
   {
     id: "9",
-    name: "Annealed Glass",
+    type: "Annealed Glass",
     description:
       'Often used in small pieces. This product is not considered a safety glass. Annealed glass does not shatter into small pieces. If broken, the piece will crack into large shards. Maximum Annealed Glass Size: 29-15/16" x 47-15/16". For pieces larger than this please select Tempered Glass.',
-    imageSrc: glassImage,
+    imageSrc: "path/to/image",
     alt: "Annealed Glass",
     shape_types: [],
     thickness_options: [],
@@ -118,15 +102,60 @@ export const productTypes = [
   },
 ];
 
+export const GlassInventoryItems = [
+  {
+    name: "SNX-L 62/34" 
+  },
+  {
+    name: "SNE 50/25"
+  },
+  {
+    name: "SNR 35 HT"
+  },
+  {
+    name: "SatinDeco"
+  },
+  {
+    name: "AG 50 LE"
+  },
+  {
+    name: "AG 43"
+  },
+  {
+    name: "IS20 LE-T"
+  },
+  {
+    name: "Sunguard Spandrel HT"
+  },
+  {
+    name: "NU 40 LE"
+  },
+  {
+    name: "SN 68"
+  },
+  {
+    name: "MC 27 LE-A"
+  },
+  {
+    name: "MC 68 LE-T"
+  },
+  {
+    name: "MC 68 LE-A"
+  },
+  {
+    name: "SN 68 HT"
+  },
+];
+
 export const shapeOptions = [
   {
     id: "1",
     name: "Square/Rectangle",
-    imageSrc: glassImage,
+    imageSrc: "path/to/image",
     alt: "Square/Rectangle",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
-      { label: "Height", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
+      { label: "Height", wholeNumber: "", fraction: "" },
     ],
     thickness_options: [],
     tint_types: [],
@@ -151,9 +180,7 @@ export const shapeOptions = [
     name: "Circle",
     imageSrc: glassImage,
     alt: "Circle",
-    required_dimensions: [
-      { label: "Radius", wholeNumber: "", fraction: ""},
-    ],
+    required_dimensions: [{ label: "Radius", wholeNumber: "", fraction: "" }],
     thickness_options: [],
     tint_types: [],
     misc_options: [],
@@ -164,10 +191,10 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "House",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
-      { label: "Height", wholeNumber: "", fraction: ""},
-      { label: "Left Sub Height", wholeNumber: "", fraction: ""},
-      { label: "Right Sub Height", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
+      { label: "Height", wholeNumber: "", fraction: "" },
+      { label: "Left Sub Height", wholeNumber: "", fraction: "" },
+      { label: "Right Sub Height", wholeNumber: "", fraction: "" },
     ],
     thickness_options: [],
     tint_types: [],
@@ -179,9 +206,9 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Arch",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
-      { label: "Height", wholeNumber: "", fraction: ""},
-      { label: "Radius", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
+      { label: "Height", wholeNumber: "", fraction: "" },
+      { label: "Radius", wholeNumber: "", fraction: "" },
     ],
     thickness_options: [],
     tint_types: [],
@@ -193,7 +220,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Arch-Top",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Radius", wholeNumber: "", fraction: "" },
       { label: "Offset", wholeNumber: "", fraction: "" },
@@ -208,7 +235,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Arch Top & Bottom",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Radius", wholeNumber: "", fraction: "" },
       { label: "Offset", wholeNumber: "", fraction: "" },
@@ -223,9 +250,9 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Arch Side",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
-      { label: "Sub Height", wholeNumber: "", fraction: ""},
+      { label: "Sub Height", wholeNumber: "", fraction: "" },
       { label: "Radius", wholeNumber: "", fraction: "" },
       { label: "Offset", wholeNumber: "", fraction: "" },
     ],
@@ -239,7 +266,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Rounded Corner(s)",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Radius", wholeNumber: "", fraction: "" },
     ],
@@ -252,7 +279,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Clipped Corner(s)",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Left Projection", wholeNumber: "", fraction: "" },
       { label: "Right Projection", wholeNumber: "", fraction: "" },
@@ -267,7 +294,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Pentagon",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Edge Length", wholeNumber: "", fraction: "" },
     ],
@@ -281,7 +308,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Hexagon",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Edge Length", wholeNumber: "", fraction: "" },
     ],
@@ -295,7 +322,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Octagon",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Edge Length", wholeNumber: "", fraction: "" },
     ],
@@ -309,7 +336,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Ellipse",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Radius", wholeNumber: "", fraction: "" },
     ],
@@ -322,7 +349,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Racetrack Oval",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Radius", wholeNumber: "", fraction: "" },
     ],
@@ -335,7 +362,7 @@ export const shapeOptions = [
     imageSrc: glassImage,
     alt: "Quarter Round",
     required_dimensions: [
-      { label: "Base", wholeNumber: "", fraction: ""},
+      { label: "Base", wholeNumber: "", fraction: "" },
       { label: "Height", wholeNumber: "", fraction: "" },
       { label: "Radius", wholeNumber: "", fraction: "" },
     ],
@@ -445,14 +472,8 @@ export const fractionRange = [
   "15 / 16",
 ];
 
-// hard code vs formatting display string for fraction 
-export const smallFractionRange = [
-  "⅛",
-  "¼",
-  "½",
-  "⅝",
-  "¾",
-];
+// hard code vs formatting display string for fraction
+export const smallFractionRange = ["⅛", "¼", "½", "⅝", "¾"];
 
 export const thicknessOptions = [
   { id: "1", thickness: 1 / 8 },
@@ -465,9 +486,9 @@ export const thicknessOptions = [
 
 export const miscOptions = [
   { id: "1", add_tempered_logo: true },
-  { id: "2", add_tempered_logo: false},
-  { id: "3", add_tempered_logo: true},
-  { id: "4", add_tempered_logo: false},
+  { id: "2", add_tempered_logo: false },
+  { id: "3", add_tempered_logo: true },
+  { id: "4", add_tempered_logo: false },
 ];
 
 export const tintOptions = [
@@ -541,42 +562,64 @@ export const tintOptions = [
     imageSrc: glassImage,
     alt: "Frosted Blue Chip Glass",
   },
+  {
+    id: "11",
+    name: "Frosted Green Chip",
+    description: "Frosted Green Chip Glass",
+    imageSrc: glassImage,
+    alt: "Frosted Green Chip Glass",
+  },
+  {
+    id: "12",
+    name: "Midnight Gray",
+    description: "Midnight Gray Glass",
+    imageSrc: glassImage,
+    alt: "Midnight Gray Glass",
+  },
+  {
+    id: "13",
+    name: "Ultra Clear",
+    description: "Ultra Clear Glass",
+    imageSrc: glassImage,
+    alt: "Ultra Clear Glass",
+  }
 ];
 
 export const glassTypes = [
-    {
-        title: "Annealed Glass",
-        description: "Standard glass type used in various applications.",
-        imageSrc: glassImage,
-        alt: "Annealed Glass",
-        id: "12345324",
-    },
-    {
-        title: "Tempered Glass",
-        description: "Stronger and safer glass type, ideal for doors and windows.",
-        imageSrc: glassImage,
-        alt: "Tempered Glass",
-        id: "56345",
-    },
-    {
-        title: "Laminated Glass",
-        description: "Glass with a plastic layer for extra security and soundproofing.",
-        imageSrc: glassImage,
-        alt: "Laminated Glass",
-        id: "95678490",
-    },
-    {
-        title: "Annealed Glass",
-        description: "Standard glass type used in various applications.",
-        imageSrc: glassImage,
-        alt: "Annealed Glass",
-        id: "946134669",
-    },
-    {
-        title: "Tempered Glass",
-        description: "Stronger and safer glass type, ideal for doors and windows.",
-        imageSrc: glassImage,
-        alt: "Tempered Glass",
-        id: "97323784",
-    },
-]
+  {
+    title: "Annealed Glass",
+    description: "Standard glass type used in various applications.",
+    imageSrc: glassImage,
+    alt: "Annealed Glass",
+    id: "12345324",
+  },
+  {
+    title: "Tempered Glass",
+    description: "Stronger and safer glass type, ideal for doors and windows.",
+    imageSrc: glassImage,
+    alt: "Tempered Glass",
+    id: "56345",
+  },
+  {
+    title: "Laminated Glass",
+    description:
+      "Glass with a plastic layer for extra security and soundproofing.",
+    imageSrc: glassImage,
+    alt: "Laminated Glass",
+    id: "95678490",
+  },
+  {
+    title: "Annealed Glass",
+    description: "Standard glass type used in various applications.",
+    imageSrc: glassImage,
+    alt: "Annealed Glass",
+    id: "946134669",
+  },
+  {
+    title: "Tempered Glass",
+    description: "Stronger and safer glass type, ideal for doors and windows.",
+    imageSrc: glassImage,
+    alt: "Tempered Glass",
+    id: "97323784",
+  },
+];

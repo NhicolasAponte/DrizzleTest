@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
+import { productTypes } from "../seed-data/placeholder-data";
 
 export type Product = {
   id: string;
@@ -19,19 +20,15 @@ export type Product = {
 
 // get product arrays from orders ui and put them in product types file
 // use product array 
-function generateRandomProduct(): Product {
+function generateRandomProduct(type: string, config_options: any): Product {
   return {
     id: uuidv4(),
-    type: faker.commerce.productName(),// from array of product names 
+    type: type,// from array of product names 
     image_url: "https://via.placeholder.com/150",
     alt: "alt image description",
-    description: faker.commerce.productDescription(),
+    description: "description for " + type,
     // NOTE TODO: update config options
-    config_options: {
-      color: faker.color.human(),
-      size: faker.commerce.productAdjective(),
-      material: faker.commerce.productMaterial(),
-    },
+    config_options: config_options,
     date_created: new Date().toLocaleString(),
     date_updated: new Date().toLocaleString(),
   };
@@ -39,8 +36,8 @@ function generateRandomProduct(): Product {
 
 export function generateProducts() {
   const products: Product[] = [];
-  for (let i = 0; i < 50; i++) {
-    products.push(generateRandomProduct());
+  for (let product of productTypes) {
+    products.push(generateRandomProduct(product.type, product.config_options));
   }
 
   const dir = "./src/seed-data/";
