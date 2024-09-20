@@ -63,6 +63,15 @@ export const productTypes = [
     thickness_options: [],
     tint_types: [],
     misc_options: [],
+    config_options: {
+      shape: "",
+      dimensions: "",
+      thickness: "",
+      tint: "",
+      misc: "",
+      edgework: "", // edgework options: polished, flat, seamed, bevel  
+      lami_layer: "", // lami layer options: 0.030", 0.060"
+    },
   },
   {
     id: "5",
@@ -75,6 +84,14 @@ export const productTypes = [
     thickness_options: [],
     tint_types: [],
     misc_options: [],
+    config_options: {
+      shape: "",
+      dimensions: "",
+      thickness: "",
+      tint: "",
+      edgework: "", // edgework options: polished, flat, seamed, bevel
+      misc: "",
+    },
   },
   {
     id: "8",
@@ -87,6 +104,14 @@ export const productTypes = [
     thickness_options: [],
     tint_types: [],
     misc_options: [],
+    config_options: {
+      shape: "",
+      dimensions: "",
+      thickness: "",
+      tint: "",
+      fabrication: "",
+      misc: "",
+    },
   },
   {
     id: "9",
@@ -99,6 +124,14 @@ export const productTypes = [
     thickness_options: [],
     tint_types: [],
     misc_options: [],
+    config_options: {
+      shape: "",
+      dimensions: "",
+      thickness: "",
+      tint: "",
+      fabrication: "",
+      misc: "",
+    },
   },
 ];
 
