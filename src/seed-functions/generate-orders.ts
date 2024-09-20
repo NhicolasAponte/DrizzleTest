@@ -7,6 +7,8 @@ import { shippingInfoArray } from "../seed-data/shipping-info";
 import { ShippingInfo } from "./generate-shippingInfo";
 import { BillingInfo } from "./generate-billingInfo";
 import { billingInfoArray } from "../seed-data/billing-info";
+import { faker } from "@faker-js/faker";
+import { date } from "drizzle-orm/mysql-core";
 
 export type Order = {
   id: string;
@@ -45,8 +47,22 @@ function generateRandomOrder(
     status = "CANCELLED";
   }
 
-  const dateCreated = new Date().toLocaleString();
-  const dateUpdated = new Date().toLocaleString();
+  const dateCreated = faker.date.past({ years: 2 }).toLocaleString();
+  let dateUpdated = undefined;
+  let dateSubmitted = undefined;
+
+  if (status != "DRAFT") {
+    dateSubmitted = faker.date.recent({ days: 200 }).toLocaleString();
+    while (dateSubmitted < dateCreated) {
+      dateSubmitted = faker.date.recent({ days: 200 }).toLocaleString();
+    }
+    dateUpdated = dateSubmitted;
+  } else {
+    dateUpdated = faker.date.recent({ days: 200 }).toLocaleString();
+    while (dateUpdated < dateCreated) {
+      dateUpdated = faker.date.recent({ days: 100 }).toLocaleString();
+    }
+  }
 
   return {
     id,
@@ -57,8 +73,7 @@ function generateRandomOrder(
     status,
     dateCreated,
     dateUpdated,
-    dateSubmitted:
-      status !== "DRAFT" ? new Date().toLocaleString() : undefined,
+    dateSubmitted,
   };
 }
 
@@ -66,8 +81,12 @@ function generateRandomOrder(
 export function generateOrders() {
   const orders: Order[] = [];
   users.forEach((user) => {
-    const numOrders = Math.floor(Math.random() * 9) + 2;
-    const shippingInfo = shippingInfoArray.find((info) => info.userId === user.id);
+    // range for number of order: 2 - 26 
+    const numOrders = Math.floor(Math.random() * 25) + 2;
+    console.log(`Generating ${numOrders} orders for user ${user.id}`);
+    const shippingInfo = shippingInfoArray.find(
+      (info) => info.userId === user.id
+    );
     if (!shippingInfo) {
       console.error(`No shipping info found for user ${user.id}`);
       return;

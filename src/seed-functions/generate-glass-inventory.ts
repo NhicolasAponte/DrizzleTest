@@ -9,6 +9,7 @@ import {
   tintOptions,
 } from "../seed-data/placeholder-data";
 import { users } from "../seed-data/users";
+import { date } from "drizzle-orm/mysql-core";
 
 export type GlassInventoryItem = {
   id: string;
@@ -25,6 +26,11 @@ export type GlassInventoryItem = {
   date_updated: string;
   updated_by: string;
 };
+
+// NOTE TODO:
+// shape, stock sheets, and different processes may have different min and max values
+// for length and width so check each part of config, and offer user option based on
+// the largest min smallest max across all parts of configuration
 
 interface quantityIncoming {
   quantity_incoming: number;
@@ -50,6 +56,20 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
       tintOptions[Math.floor(Math.random() * tintOptions.length)].name
     );
   }
+  const compatibleProducts = [];
+  for (let i = 0; i < productTypes.length; i++) {
+    const coin = Math.floor(Math.random() * 2) + 1;
+    if (coin % 2 === 0) {
+      compatibleProducts.push(productTypes[i].id);
+    }
+  }
+
+  const dateCreated = faker.date.past({ years: 2 }).toLocaleString();
+  let dateUpdated = faker.date.recent({ days: 60 }).toLocaleString();
+  while (dateUpdated < dateCreated) {
+    dateUpdated = faker.date.recent({ days: 60 }).toLocaleString();
+  }
+
   return {
     id: uuidv4(),
     name,
@@ -71,13 +91,13 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     //   { length: Math.floor(Math.random() * 5) + 1 },
     //   () => uuidv4()
     // ),
-    compatible_products: productTypes.map((product, index) => {
-      const coin = Math.floor(Math.random() * 2) + 1;
-      if (coin === 1) {
-        return product.id;
-      }
-      return productTypes[0].id;
-    }),
+    compatible_products: compatibleProducts, // productTypes.map((product, index) => {
+    //   const coin = Math.floor(Math.random() * 2) + 1;// NOTE TODO: clean up compatible products logic
+    //   if (coin === 1) {
+    //     return product.id;
+    //   }
+    //   return productTypes[0].id;
+    // }),
     quantity_available: Math.floor(Math.random() * 1000),
     //supplier_id: uuidv4(),
     quantity_incoming: {
@@ -92,8 +112,8 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     // quantity_on_order: Math.floor(Math.random() * 1000),
     // will require manual entry of re-stock orders
     // the amount of material coming in from  a supplier
-    date_created: faker.date.past({ years: 2 }).toLocaleString(),
-    date_updated: faker.date.recent({ days: 60 }).toLocaleString(),
+    date_created: dateCreated,
+    date_updated: dateUpdated,
     updated_by: users[Math.floor(Math.random() * users.length)].id,
   };
 }

@@ -3,6 +3,7 @@ import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
 import { productTypes } from "../seed-data/placeholder-data";
+import { date } from "drizzle-orm/mysql-core";
 
 export type Product = {
   id: string;
@@ -19,18 +20,23 @@ export type Product = {
 };
 
 // get product arrays from orders ui and put them in product types file
-// use product array 
+// use product array
 function generateRandomProduct(type: string, config_options: any): Product {
+  const date_created = faker.date.past({ years: 2 }).toLocaleString();
+  let date_updated = faker.date.recent({ days: 30 }).toLocaleString();
+  while (date_updated < date_created) {
+    date_updated = faker.date.recent({ days: 30 }).toLocaleString();
+  }
   return {
     id: uuidv4(),
-    type: type,// from array of product names 
+    type: type, // from array of product names
     image_url: "https://via.placeholder.com/150",
     alt: "alt image description",
     description: "description for " + type,
     // NOTE TODO: update config options
     config_options: config_options,
-    date_created: new Date().toLocaleString(),
-    date_updated: new Date().toLocaleString(),
+    date_created,
+    date_updated,
   };
 }
 

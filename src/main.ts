@@ -7,7 +7,9 @@ import { generateOrders } from "./seed-functions/generate-orders";
 import { generateShippingInfo } from "./seed-functions/generate-shippingInfo";
 import { generateBillingInfo } from "./seed-functions/generate-billingInfo";
 import { generateProducts } from "./seed-functions/generate-products";
-import { DropSchema, getAllSchema } from "./lib/utils";
+import { DropSchema, getAllSchema, numOrders } from "./lib/utils";
+import { generateGlassInventory } from "./seed-functions/generate-glass-inventory";
+import { generateOrderItems } from "./seed-functions/generate-order-items";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -29,22 +31,27 @@ async function main() {
 
   // CREATE TABLE "order-handling"."user" (name text, lastname text, email text);
 
-  // generateUsers(5);
-  // generateUserProfiles();
+  // generateUsers(10);
+  // generateUserProfiles(); // 1 profile per user 
 
-  // generateShippingInfo();
-  // generateBillingInfo();
+  // generateShippingInfo(); // 1 per user 
+  // generateBillingInfo(); // 1 per user 
 
-  // generateOrders();
-  // generateProducts();
-
+  // generateOrders(); // rand between 1 - 26 orders per user 
+  // generateProducts(); // there's few products and they don't depend on other data 
+  // each item has a random amount of compatible products 
+  // each item has a random existing user id in the updated_by field 
+  // generateGlassInventory(); 
+  // random number of order items per existing order 
+  // generateOrderItems();
+  
   // consoleLogLoop();
   // getAllSchema();
-  DropSchema(
-    process.env.NODE_ENV === "production"
-      ? process.env.PROD_SCHEMA!
-      : process.env.DEV_SCHEMA!
-  );
+  // DropSchema(
+  //   process.env.NODE_ENV === "production"
+  //     ? process.env.PROD_SCHEMA!
+  //     : process.env.DEV_SCHEMA!
+  // );
 }
 
 main()
@@ -54,11 +61,3 @@ main()
   .catch((error) => {
     console.error(error);
   });
-
-function consoleLogLoop() {
-  for (let i = 0; i < 1000; i++) {
-    let num = Math.random() * 1000;
-    num = num > 99 ? num : num + 100;
-    console.log("num:", num);
-  }
-}
