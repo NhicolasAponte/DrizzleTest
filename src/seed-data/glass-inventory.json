@@ -1,6 +1,6 @@
 [
   {
-    "id": "39abf29d-def0-4da6-bd92-f79525812c55",
+    "id": "e62ff089-3e43-4bbe-8288-be4c8ec2ebb8",
     "name": "SNX-L 62/34",
     "description": "some description for SNX-L 62/34",
     "available_thickness": [
@@ -11,41 +11,47 @@
       "3/4"
     ],
     "shapes": [
-      "Arch Side",
-      "Square/Rectangle",
-      "Half-Circle",
-      "Quad Arch",
-      "Triangle",
-      "Right Triangle",
-      "Quad Arch",
       "Irregular/Any Other Shape",
+      "Half-Circle",
       "Square/Rectangle",
-      "Arch Side"
+      "Trapezoid",
+      "Trapezoid",
+      "Parallelogram",
+      "Trapezoid",
+      "Ellipse",
+      "Quad Arch",
+      "House",
+      "Circle",
+      "Half-Circle"
     ],
     "tint": [
-      "Clear",
-      "Dark Gray",
-      "Clear",
       "Light Gray",
-      "Midnight Gray"
+      "Midnight Gray",
+      "Bronze",
+      "Mistlite",
+      "P-516",
+      "Bronze",
+      "Satin Etch",
+      "Dark Gray"
     ],
     "compatible_products": [
-      "2",
-      "4"
+      "431e32eb-9960-4aaf-a4bf-ab144830d546",
+      "d142e971-d28b-4418-ae40-c698f5ac25a0",
+      "670e8f58-76f6-4ade-be60-9f0957456650"
     ],
-    "quantity_available": 100,
+    "quantity_available": 670,
     "quantity_incoming": {
-      "quantity_incoming": 940,
-      "order_id": "4ddf0630-d0fa-4fda-b8d9-1b9d754aa3ab",
-      "supplier_id": "4345d06d-62c1-40f8-8923-e7981c82f044",
-      "expected_arrival": "8/19/2025, 4:38:31 PM"
+      "quantity_incoming": 594,
+      "order_id": "f3e4e106-fd7d-44dc-9c76-e984bf105242",
+      "supplier_id": "7550bcda-6749-4d10-839b-b01f28cda68c",
+      "expected_arrival": "4/20/2025, 2:18:22 AM"
     },
-    "date_created": "4/16/2023, 10:00:59 PM",
-    "date_updated": "7/25/2024, 2:03:40 AM",
-    "updated_by": "4ebf0f4b-8c05-4933-a7a8-38fd61d8f3de"
+    "date_created": "4/21/2023, 3:38:24 AM",
+    "date_updated": "9/16/2024, 3:08:15 AM",
+    "updated_by": "78d7e951-bf38-4db6-be6f-d73be9a1013f"
   },
   {
-    "id": "3925f9a7-54cb-4d63-b744-be2935bf912a",
+    "id": "c5889467-fc12-40e1-8823-8d2d25bac281",
     "name": "SNE 50/25",
     "description": "some description for SNE 50/25",
     "available_thickness": [
@@ -56,60 +62,59 @@
       "3/4"
     ],
     "shapes": [
-      "Triangle",
+      "Octagon",
       "Rounded Corner(s)",
-      "Quad Arch",
-      "Rounded Corner(s)",
-      "Trapezoid",
-      "Single Slope Rectangle",
-      "Half-Circle with Notch",
+      "Square/Rectangle",
       "Arch-Top",
-      "Half-Circle with Notch",
+      "Hexagon",
+      "Parallelogram",
       "Racetrack Oval",
-      "Arch",
-      "Parallelogram",
-      "Hexagon",
-      "Arch Top & Bottom",
-      "Circle",
-      "Hexagon",
       "Irregular/Any Other Shape",
-      "Triangle",
-      "Quarter Round",
-      "Triangle",
-      "Trapezoid",
+      "Half-Circle",
+      "Half-Circle",
+      "Clipped Corner(s)",
+      "Clipped Corner(s)",
       "Rounded Corner(s)",
-      "Parallelogram",
-      "Arch-Top"
+      "Square/Rectangle",
+      "Racetrack Oval",
+      "Square/Rectangle",
+      "Pentagon",
+      "Half-Circle",
+      "Right Triangle",
+      "Half-Circle",
+      "Quarter Round",
+      "Arch-Top",
+      "Rounded Corner(s)"
     ],
     "tint": [
+      "Bronze",
+      "Light Gray",
       "Dark Gray",
-      "Midnight Gray",
-      "P-516",
+      "Clear",
       "Midnight Gray",
       "Solex",
-      "Frosted Blue Chip",
-      "Solex",
-      "Light Gray"
+      "Midnight Gray",
+      "Midnight Gray"
     ],
     "compatible_products": [
-      "1",
-      "2",
-      "4",
-      "5"
+      "431e32eb-9960-4aaf-a4bf-ab144830d546",
+      "362a0e00-a3b2-45f4-bebf-b06a850993b5",
+      "d142e971-d28b-4418-ae40-c698f5ac25a0",
+      "24a2d78f-642d-4937-ba68-b6f113e57a76"
     ],
-    "quantity_available": 428,
+    "quantity_available": 440,
     "quantity_incoming": {
-      "quantity_incoming": 762,
-      "order_id": "9fa04789-7685-4731-af45-213cad85e3ff",
-      "supplier_id": "fe94d6c0-5b65-47bf-bcd2-df354f911fb0",
-      "expected_arrival": "1/27/2025, 5:55:44 AM"
+      "quantity_incoming": 540,
+      "order_id": "7b0ed0f4-932f-4747-892d-bc6072474f92",
+      "supplier_id": "69e08197-f325-4665-aa0d-e867342ac312",
+      "expected_arrival": "10/26/2024, 1:29:39 PM"
     },
-    "date_created": "9/27/2022, 5:51:18 PM",
-    "date_updated": "9/5/2024, 12:45:32 AM",
-    "updated_by": "78d7e951-bf38-4db6-be6f-d73be9a1013f"
+    "date_created": "1/23/2024, 8:41:21 AM",
+    "date_updated": "9/2/2024, 1:33:18 PM",
+    "updated_by": "1e0add8d-7364-4e08-9660-945577ec784b"
   },
   {
-    "id": "6ab7e0a1-b14f-4ed2-9eb9-4f62b227b938",
+    "id": "4cc7adf8-3765-4e07-8b41-2d001e9bd527",
     "name": "SNR 35 HT",
     "description": "some description for SNR 35 HT",
     "available_thickness": [
@@ -120,48 +125,42 @@
       "3/4"
     ],
     "shapes": [
-      "Square/Rectangle",
-      "Pentagon",
-      "Square/Rectangle",
-      "Single Slope Rectangle",
-      "Irregular/Any Other Shape",
+      "Arch Top & Bottom",
+      "Arch Side",
       "Quad Arch",
-      "Racetrack Oval",
-      "Half-Circle with Notch",
-      "Quarter Round",
-      "Irregular/Any Other Shape",
-      "Right Triangle"
+      "Clipped Corner(s)",
+      "Clipped Corner(s)",
+      "Hexagon",
+      "Arch Side"
     ],
     "tint": [
-      "P-516",
-      "Mistlite",
       "Frosted Green Chip",
+      "Light Gray",
       "Satin Etch",
-      "Frosted Green Chip",
-      "Light Gray",
-      "Clear",
+      "Dark Gray",
+      "Low-E",
+      "Frosted Blue Chip",
       "Mistlite",
-      "Ultra Clear",
-      "Light Gray",
-      "Clear"
+      "Frosted Green Chip",
+      "Mistlite"
     ],
     "compatible_products": [
-      "5",
-      "9"
+      "634adcdf-a739-4eaf-a653-09f1d403f8da",
+      "670e8f58-76f6-4ade-be60-9f0957456650"
     ],
-    "quantity_available": 878,
+    "quantity_available": 356,
     "quantity_incoming": {
-      "quantity_incoming": 428,
-      "order_id": "d82da36c-8510-43eb-9e5c-665d88315e7b",
-      "supplier_id": "cb0f2379-e682-4b11-8167-8f9996d0edb4",
-      "expected_arrival": "2/15/2025, 2:15:58 AM"
+      "quantity_incoming": 408,
+      "order_id": "bc7dd5d9-1804-4550-a34c-63d0480d1760",
+      "supplier_id": "e9e6a096-ee38-43f8-a633-d602d68c0827",
+      "expected_arrival": "6/13/2025, 5:13:50 PM"
     },
-    "date_created": "5/27/2024, 5:58:40 AM",
-    "date_updated": "9/8/2024, 4:05:01 PM",
-    "updated_by": "4ebf0f4b-8c05-4933-a7a8-38fd61d8f3de"
+    "date_created": "11/28/2023, 1:04:34 AM",
+    "date_updated": "9/12/2024, 7:36:07 AM",
+    "updated_by": "1e0add8d-7364-4e08-9660-945577ec784b"
   },
   {
-    "id": "f1ce0e38-07b1-4454-88de-b30ae5f1e011",
+    "id": "0ca660d5-ef57-4e3f-be5e-c53d38ab3d0a",
     "name": "SatinDeco",
     "description": "some description for SatinDeco",
     "available_thickness": [
@@ -172,49 +171,57 @@
       "3/4"
     ],
     "shapes": [
-      "Quarter Round",
-      "Octagon",
-      "Hexagon",
-      "Clipped Corner(s)",
-      "Pentagon",
-      "Single Slope Rectangle",
-      "Arch Side",
-      "Rounded Corner(s)",
-      "Trapezoid",
-      "Quarter Round with Notch",
       "Arch-Top",
-      "Circle"
+      "Quarter Round with Notch",
+      "House",
+      "Racetrack Oval",
+      "Ellipse",
+      "Half-Circle",
+      "Arch Top & Bottom",
+      "Quad Arch",
+      "Single Slope Rectangle",
+      "Half-Circle with Notch",
+      "Ellipse",
+      "Arch-Top",
+      "Arch",
+      "Parallelogram",
+      "Half-Circle",
+      "Racetrack Oval",
+      "Arch",
+      "Half-Circle",
+      "House"
     ],
     "tint": [
-      "P-516",
-      "Solex",
       "Dark Gray",
+      "Ultra Clear",
+      "Frosted Green Chip",
+      "Satin Etch",
       "Solex",
-      "Clear",
-      "Dark Gray",
-      "Solex",
-      "Bronze",
-      "P-516",
-      "Solex"
+      "Satin Etch",
+      "Light Gray",
+      "Mistlite",
+      "Frosted Green Chip",
+      "Satin Etch",
+      "Dark Gray"
     ],
     "compatible_products": [
-      "4",
-      "5",
-      "9"
+      "431e32eb-9960-4aaf-a4bf-ab144830d546",
+      "634adcdf-a739-4eaf-a653-09f1d403f8da",
+      "670e8f58-76f6-4ade-be60-9f0957456650"
     ],
-    "quantity_available": 292,
+    "quantity_available": 685,
     "quantity_incoming": {
-      "quantity_incoming": 281,
-      "order_id": "923a5ae6-61b3-4151-9fc1-4f8fd239a49a",
-      "supplier_id": "958001fe-5d9f-41e0-a08c-3642669e6bd9",
-      "expected_arrival": "4/9/2025, 6:11:01 PM"
+      "quantity_incoming": 486,
+      "order_id": "8d129efb-b70d-4499-93bf-7244b6a34d20",
+      "supplier_id": "bf7b5a9f-cf29-44d8-866e-f83aa18b99b0",
+      "expected_arrival": "3/26/2025, 7:56:23 AM"
     },
-    "date_created": "10/7/2022, 7:35:41 AM",
-    "date_updated": "8/22/2024, 1:30:07 PM",
-    "updated_by": "5f9bae9f-2971-452c-8553-8fa4ac3e03fe"
+    "date_created": "5/22/2024, 7:26:50 PM",
+    "date_updated": "9/16/2024, 2:07:25 PM",
+    "updated_by": "3fc8dd1c-cb9e-4c1a-a8fe-441834446cc7"
   },
   {
-    "id": "19e3f737-1bd1-418c-9527-5e8848da55fd",
+    "id": "35bc48a5-ab54-4bdc-8fbb-3ee5b4863977",
     "name": "AG 50 LE",
     "description": "some description for AG 50 LE",
     "available_thickness": [
@@ -225,56 +232,58 @@
       "3/4"
     ],
     "shapes": [
-      "House",
-      "Hexagon",
-      "Parallelogram",
+      "Square/Rectangle",
+      "Quarter Round with Notch",
+      "Quarter Round",
+      "Ellipse",
       "Circle",
-      "Half-Circle",
-      "Single Slope Rectangle",
-      "Hexagon",
-      "Single Slope Rectangle",
-      "Half-Circle",
-      "Quad Arch",
+      "Triangle",
       "Arch Side",
-      "Quad Arch",
-      "Irregular/Any Other Shape",
-      "Right Triangle",
-      "Single Slope Rectangle",
-      "Parallelogram",
-      "Half-Circle with Notch",
-      "Single Slope Rectangle",
       "Circle",
+      "Ellipse",
+      "Half-Circle with Notch",
+      "Arch",
+      "Irregular/Any Other Shape",
+      "Pentagon",
       "Racetrack Oval",
       "Single Slope Rectangle",
+      "Quarter Round with Notch",
+      "Parallelogram",
       "Right Triangle",
-      "Racetrack Oval",
-      "Octagon"
+      "Arch Side",
+      "Parallelogram",
+      "Racetrack Oval"
     ],
     "tint": [
-      "Light Gray",
-      "Bronze",
       "Midnight Gray",
+      "Bronze",
+      "Dark Gray",
+      "Ultra Clear",
+      "Light Gray",
+      "Satin Etch",
+      "Solex",
+      "Satin Etch",
+      "Low-E",
       "Ultra Clear"
     ],
     "compatible_products": [
-      "1",
-      "4",
-      "8",
-      "9"
+      "431e32eb-9960-4aaf-a4bf-ab144830d546",
+      "362a0e00-a3b2-45f4-bebf-b06a850993b5",
+      "d142e971-d28b-4418-ae40-c698f5ac25a0"
     ],
-    "quantity_available": 545,
+    "quantity_available": 18,
     "quantity_incoming": {
-      "quantity_incoming": 509,
-      "order_id": "dd5d2ecb-50a9-4d20-98f0-21868beb8d16",
-      "supplier_id": "50d65a38-a83b-4a39-b08b-29a0b1161970",
-      "expected_arrival": "3/31/2025, 11:18:34 PM"
+      "quantity_incoming": 714,
+      "order_id": "6691de2a-d95e-414f-b144-30b3d08656ba",
+      "supplier_id": "ea362ba9-2ba7-4ea2-8d63-9e5a5344ff78",
+      "expected_arrival": "10/22/2024, 8:19:10 PM"
     },
-    "date_created": "5/7/2024, 6:49:11 PM",
-    "date_updated": "8/21/2024, 2:17:47 AM",
-    "updated_by": "4ebf0f4b-8c05-4933-a7a8-38fd61d8f3de"
+    "date_created": "5/30/2024, 3:32:03 AM",
+    "date_updated": "9/2/2024, 4:08:36 PM",
+    "updated_by": "eadcf4cf-fb46-417a-a091-cd041b69fcdd"
   },
   {
-    "id": "047fb8f2-05d1-4030-818d-66ffeb796a4c",
+    "id": "783f6b75-cc25-497d-8594-69bddf635453",
     "name": "AG 43",
     "description": "some description for AG 43",
     "available_thickness": [
@@ -285,48 +294,38 @@
       "3/4"
     ],
     "shapes": [
-      "Single Slope Rectangle",
+      "Arch",
+      "Quarter Round with Notch",
       "Quad Arch",
-      "Pentagon",
-      "Arch Side",
-      "Quarter Round",
-      "Quad Arch",
-      "Quarter Round",
-      "Single Slope Rectangle",
-      "Half-Circle with Notch",
-      "Single Slope Rectangle",
-      "Clipped Corner(s)",
-      "Rounded Corner(s)",
-      "Quarter Round",
-      "Right Triangle",
-      "Rounded Corner(s)"
+      "Half-Circle",
+      "Single Slope Rectangle"
     ],
     "tint": [
-      "Low-E",
+      "Bronze",
       "Solex",
-      "Mistlite",
-      "Frosted Blue Chip",
+      "Dark Gray",
+      "Satin Etch",
+      "Midnight Gray",
+      "Dark Gray",
       "Midnight Gray"
     ],
     "compatible_products": [
-      "1",
-      "2",
-      "5",
-      "8"
+      "362a0e00-a3b2-45f4-bebf-b06a850993b5",
+      "634adcdf-a739-4eaf-a653-09f1d403f8da"
     ],
-    "quantity_available": 81,
+    "quantity_available": 602,
     "quantity_incoming": {
-      "quantity_incoming": 204,
-      "order_id": "de76ecd9-6ecb-48c3-97fe-d9833cab91d9",
-      "supplier_id": "1ed8b62c-4bf9-4ddc-9a9e-b5ad4e16b433",
-      "expected_arrival": "10/15/2024, 7:27:49 AM"
+      "quantity_incoming": 654,
+      "order_id": "ee8ca451-138a-4c36-95a2-3b90245a7140",
+      "supplier_id": "46cf429b-4fce-41ee-ba98-2c1fe2fd0d34",
+      "expected_arrival": "12/3/2024, 3:38:31 PM"
     },
-    "date_created": "6/3/2023, 3:57:09 PM",
-    "date_updated": "9/19/2024, 10:23:15 AM",
-    "updated_by": "c31ec476-0eb7-4041-99ad-336af3ef3921"
+    "date_created": "12/25/2023, 5:55:35 AM",
+    "date_updated": "8/11/2024, 2:40:03 AM",
+    "updated_by": "9e8a4104-8d5c-4d67-a42b-99befc885ec0"
   },
   {
-    "id": "c90b3ffa-aa91-45f1-8bd2-3731a2d22cb0",
+    "id": "7865cfdc-03f3-4727-8a10-7f101f047a62",
     "name": "IS20 LE-T",
     "description": "some description for IS20 LE-T",
     "available_thickness": [
@@ -337,42 +336,40 @@
       "3/4"
     ],
     "shapes": [
-      "Clipped Corner(s)",
-      "Right Triangle",
-      "Square/Rectangle",
-      "Single Slope Rectangle",
-      "Trapezoid",
-      "Trapezoid",
-      "House",
-      "Octagon",
-      "Single Slope Rectangle",
-      "House",
+      "Half-Circle with Notch",
+      "Arch Side",
+      "Triangle",
       "Arch Top & Bottom",
-      "Arch"
+      "Parallelogram",
+      "Single Slope Rectangle",
+      "Clipped Corner(s)",
+      "Racetrack Oval"
     ],
     "tint": [
+      "Satin Etch",
       "Low-E",
-      "Dark Gray",
+      "Low-E",
       "Light Gray",
-      "Frosted Green Chip"
+      "Frosted Blue Chip"
     ],
     "compatible_products": [
-      "8",
-      "9"
+      "431e32eb-9960-4aaf-a4bf-ab144830d546",
+      "362a0e00-a3b2-45f4-bebf-b06a850993b5",
+      "634adcdf-a739-4eaf-a653-09f1d403f8da"
     ],
-    "quantity_available": 745,
+    "quantity_available": 482,
     "quantity_incoming": {
-      "quantity_incoming": 152,
-      "order_id": "3ad02fb9-9abe-4ea5-b8b9-d055851b546e",
-      "supplier_id": "7af48d50-0d9a-40b7-9e9b-d63b7db9e060",
-      "expected_arrival": "1/23/2025, 2:42:11 PM"
+      "quantity_incoming": 344,
+      "order_id": "3435cdcc-332b-44ae-bcd8-eaf806a9483b",
+      "supplier_id": "1b15b76b-62c4-491a-8b8d-425990100dc9",
+      "expected_arrival": "4/23/2025, 4:29:42 PM"
     },
-    "date_created": "12/11/2023, 1:38:13 PM",
-    "date_updated": "8/31/2024, 5:08:50 PM",
-    "updated_by": "4ebf0f4b-8c05-4933-a7a8-38fd61d8f3de"
+    "date_created": "8/18/2024, 5:17:13 AM",
+    "date_updated": "8/2/2024, 1:36:38 AM",
+    "updated_by": "dbfb57db-dda6-4278-8039-ebe2db8198f9"
   },
   {
-    "id": "7daea2e9-1906-46e4-903d-829ee9c6cc24",
+    "id": "560a398f-c0c0-4edb-a0c5-55497a58ea32",
     "name": "Sunguard Spandrel HT",
     "description": "some description for Sunguard Spandrel HT",
     "available_thickness": [
@@ -383,39 +380,51 @@
       "3/4"
     ],
     "shapes": [
-      "Arch Side",
-      "Quarter Round",
-      "Square/Rectangle",
-      "Arch-Top",
-      "Hexagon",
-      "Right Triangle",
+      "Pentagon",
+      "Rounded Corner(s)",
+      "Ellipse",
+      "Parallelogram",
+      "Half-Circle",
+      "Triangle",
+      "Quad Arch",
       "House",
-      "Hexagon"
+      "Quarter Round",
+      "Quarter Round with Notch",
+      "Circle",
+      "Trapezoid",
+      "Irregular/Any Other Shape",
+      "Irregular/Any Other Shape",
+      "House"
     ],
     "tint": [
-      "Light Gray",
+      "Solex",
+      "Mistlite",
       "Dark Gray",
-      "Light Gray",
-      "Satin Etch"
+      "Solex",
+      "Solex",
+      "Solex",
+      "Satin Etch",
+      "Satin Etch",
+      "Solex"
     ],
     "compatible_products": [
-      "1",
-      "5",
-      "9"
+      "362a0e00-a3b2-45f4-bebf-b06a850993b5",
+      "634adcdf-a739-4eaf-a653-09f1d403f8da",
+      "24a2d78f-642d-4937-ba68-b6f113e57a76"
     ],
-    "quantity_available": 78,
+    "quantity_available": 486,
     "quantity_incoming": {
-      "quantity_incoming": 628,
-      "order_id": "104dd059-22a8-4dce-b17d-0ef69beb5735",
-      "supplier_id": "f6cd3ee5-dc6b-4748-b29d-8e1598a11332",
-      "expected_arrival": "11/20/2024, 9:47:01 AM"
+      "quantity_incoming": 24,
+      "order_id": "6fb715c1-6384-4200-b3f2-85ef32c21c89",
+      "supplier_id": "abea0a98-bf06-448c-922b-008e1d21e862",
+      "expected_arrival": "6/15/2025, 7:41:10 PM"
     },
-    "date_created": "10/5/2022, 7:55:05 PM",
-    "date_updated": "8/2/2024, 12:25:48 PM",
-    "updated_by": "eadcf4cf-fb46-417a-a091-cd041b69fcdd"
+    "date_created": "1/3/2023, 11:42:11 PM",
+    "date_updated": "9/5/2024, 5:06:46 AM",
+    "updated_by": "c31ec476-0eb7-4041-99ad-336af3ef3921"
   },
   {
-    "id": "a0d8151e-093e-4ca3-868a-c5be90b13506",
+    "id": "e07c7257-1968-4892-b8e0-d8bbd57991c8",
     "name": "NU 40 LE",
     "description": "some description for NU 40 LE",
     "available_thickness": [
@@ -426,58 +435,55 @@
       "3/4"
     ],
     "shapes": [
-      "Trapezoid",
-      "Circle",
-      "Quarter Round",
-      "Trapezoid",
-      "Quarter Round",
-      "Quarter Round",
+      "Racetrack Oval",
       "Parallelogram",
-      "Arch Top & Bottom",
-      "Octagon",
-      "Parallelogram",
-      "Ellipse",
-      "Single Slope Rectangle",
-      "Hexagon",
       "Square/Rectangle",
+      "Rounded Corner(s)",
+      "Arch",
+      "Circle",
+      "Quarter Round with Notch",
+      "Quarter Round",
+      "Quarter Round",
       "Arch Top & Bottom",
-      "Arch Top & Bottom",
-      "House",
-      "Right Triangle",
-      "Triangle",
+      "Hexagon",
+      "Clipped Corner(s)",
+      "Pentagon",
+      "Clipped Corner(s)",
+      "Square/Rectangle",
       "Arch-Top",
       "Half-Circle",
-      "Square/Rectangle"
+      "Ellipse",
+      "Parallelogram",
+      "Half-Circle",
+      "Half-Circle with Notch",
+      "Clipped Corner(s)",
+      "Quarter Round with Notch"
     ],
     "tint": [
-      "Bronze",
-      "Solex",
-      "Clear",
-      "Frosted Blue Chip",
-      "Low-E",
-      "Light Gray",
-      "Bronze",
+      "Satin Etch",
       "P-516",
-      "P-516"
+      "Midnight Gray",
+      "Low-E",
+      "Midnight Gray"
     ],
     "compatible_products": [
-      "1",
-      "2",
-      "4"
+      "431e32eb-9960-4aaf-a4bf-ab144830d546",
+      "362a0e00-a3b2-45f4-bebf-b06a850993b5",
+      "670e8f58-76f6-4ade-be60-9f0957456650"
     ],
-    "quantity_available": 520,
+    "quantity_available": 292,
     "quantity_incoming": {
-      "quantity_incoming": 597,
-      "order_id": "a84343bd-352b-4c4c-b468-fa4a1645c066",
-      "supplier_id": "ce4e71cd-f569-4bfe-a0da-89aeee905138",
-      "expected_arrival": "12/4/2024, 1:09:03 PM"
+      "quantity_incoming": 998,
+      "order_id": "6f81a04e-a464-4a68-92ad-f30fe92477d3",
+      "supplier_id": "1ced8a60-5468-44bb-a211-390f0bcd3cb5",
+      "expected_arrival": "11/1/2024, 5:17:36 PM"
     },
-    "date_created": "3/12/2024, 1:07:36 AM",
-    "date_updated": "9/3/2024, 7:34:43 PM",
-    "updated_by": "4ebf0f4b-8c05-4933-a7a8-38fd61d8f3de"
+    "date_created": "7/7/2023, 3:28:22 PM",
+    "date_updated": "8/16/2024, 7:44:01 AM",
+    "updated_by": "3fc8dd1c-cb9e-4c1a-a8fe-441834446cc7"
   },
   {
-    "id": "42e89f8b-6d5a-4379-a920-5f7768139d24",
+    "id": "b1c485e3-24d6-4146-a65a-734116aa9be3",
     "name": "SN 68",
     "description": "some description for SN 68",
     "available_thickness": [
@@ -488,45 +494,43 @@
       "3/4"
     ],
     "shapes": [
-      "Quad Arch",
-      "Clipped Corner(s)",
-      "Quarter Round",
-      "Pentagon",
-      "Quad Arch",
-      "Trapezoid",
-      "Quarter Round with Notch",
-      "House",
-      "Triangle",
-      "Hexagon",
-      "Triangle",
+      "Rounded Corner(s)",
+      "Ellipse",
+      "Right Triangle",
       "Half-Circle with Notch",
-      "Racetrack Oval"
+      "Arch-Top",
+      "Half-Circle with Notch",
+      "Quarter Round",
+      "Trapezoid",
+      "Arch-Top",
+      "Arch Side",
+      "Rounded Corner(s)"
     ],
     "tint": [
-      "Solex",
-      "Mistlite",
-      "Solex",
-      "Bronze",
-      "Ultra Clear",
-      "Clear"
+      "Low-E",
+      "Low-E",
+      "Satin Etch",
+      "Satin Etch",
+      "Midnight Gray",
+      "Dark Gray"
     ],
     "compatible_products": [
-      "4",
-      "9"
+      "431e32eb-9960-4aaf-a4bf-ab144830d546",
+      "24a2d78f-642d-4937-ba68-b6f113e57a76"
     ],
-    "quantity_available": 840,
+    "quantity_available": 872,
     "quantity_incoming": {
-      "quantity_incoming": 276,
-      "order_id": "1632c32f-f012-4959-b760-2d0a8d6155df",
-      "supplier_id": "f7081278-4e63-4f38-b723-af636eca6ac1",
-      "expected_arrival": "5/15/2025, 3:38:43 PM"
+      "quantity_incoming": 442,
+      "order_id": "b9831587-0181-4dcb-aa59-40bb45b4c2ad",
+      "supplier_id": "6b2ce81e-b570-4e8e-abdb-5fb7a0e8d4b4",
+      "expected_arrival": "12/12/2024, 2:00:24 PM"
     },
-    "date_created": "5/7/2024, 11:54:28 PM",
-    "date_updated": "8/24/2024, 7:42:44 PM",
-    "updated_by": "9e8a4104-8d5c-4d67-a42b-99befc885ec0"
+    "date_created": "4/11/2023, 11:21:27 AM",
+    "date_updated": "9/6/2024, 4:28:15 AM",
+    "updated_by": "78d7e951-bf38-4db6-be6f-d73be9a1013f"
   },
   {
-    "id": "17b0d015-9a13-4c44-9054-fb5062a1a9d1",
+    "id": "4c8adbdb-11ce-46cb-b32b-b3194d122405",
     "name": "MC 27 LE-A",
     "description": "some description for MC 27 LE-A",
     "available_thickness": [
@@ -537,41 +541,53 @@
       "3/4"
     ],
     "shapes": [
-      "Right Triangle",
-      "Trapezoid",
-      "Quarter Round",
-      "Half-Circle",
+      "Square/Rectangle",
+      "Circle",
+      "Parallelogram",
+      "House",
+      "Pentagon",
       "Half-Circle with Notch",
-      "Racetrack Oval",
-      "Single Slope Rectangle",
+      "Arch",
+      "Quarter Round",
+      "Arch",
+      "Pentagon",
       "Triangle",
-      "Triangle",
-      "Single Slope Rectangle",
-      "Half-Circle"
+      "Trapezoid",
+      "Arch Top & Bottom",
+      "Rounded Corner(s)",
+      "Octagon"
     ],
     "tint": [
+      "Ultra Clear",
+      "P-516",
+      "Clear",
+      "Midnight Gray",
+      "Clear",
+      "Midnight Gray",
       "Mistlite",
+      "Low-E",
       "Frosted Green Chip",
-      "Satin Etch",
-      "Satin Etch"
+      "P-516",
+      "Frosted Green Chip"
     ],
     "compatible_products": [
-      "2",
-      "9"
+      "d142e971-d28b-4418-ae40-c698f5ac25a0",
+      "24a2d78f-642d-4937-ba68-b6f113e57a76",
+      "670e8f58-76f6-4ade-be60-9f0957456650"
     ],
-    "quantity_available": 378,
+    "quantity_available": 610,
     "quantity_incoming": {
-      "quantity_incoming": 930,
-      "order_id": "664df8da-eb70-4e24-ab46-40ee0af4b9f7",
-      "supplier_id": "d29af489-9316-480e-9ca5-26a1cf3d18ab",
-      "expected_arrival": "11/22/2024, 10:05:27 PM"
+      "quantity_incoming": 879,
+      "order_id": "b8922948-d343-492a-8ecc-8268efaea2ee",
+      "supplier_id": "83d19dfc-0efb-4a7d-b978-ac8afccf1d1d",
+      "expected_arrival": "5/3/2025, 2:39:07 AM"
     },
-    "date_created": "5/23/2023, 2:20:45 AM",
-    "date_updated": "9/15/2024, 12:53:24 PM",
-    "updated_by": "1e0add8d-7364-4e08-9660-945577ec784b"
+    "date_created": "1/28/2023, 12:51:16 AM",
+    "date_updated": "9/18/2024, 10:27:21 AM",
+    "updated_by": "78d7e951-bf38-4db6-be6f-d73be9a1013f"
   },
   {
-    "id": "91279391-8af3-4316-b155-1210a21ffa2e",
+    "id": "0b8827f4-e734-47be-adad-43279e3ea93b",
     "name": "MC 68 LE-T",
     "description": "some description for MC 68 LE-T",
     "available_thickness": [
@@ -582,55 +598,53 @@
       "3/4"
     ],
     "shapes": [
-      "Ellipse",
+      "Right Triangle",
       "Arch Top & Bottom",
-      "Triangle",
-      "Half-Circle with Notch",
+      "Ellipse",
+      "Hexagon",
+      "Octagon",
+      "Arch Top & Bottom",
       "Clipped Corner(s)",
+      "Quad Arch",
+      "Triangle",
+      "Circle",
       "Trapezoid",
       "Quad Arch",
-      "Octagon",
-      "House",
       "Half-Circle with Notch",
-      "Trapezoid",
-      "Single Slope Rectangle",
-      "Square/Rectangle",
-      "Racetrack Oval",
-      "Trapezoid",
-      "Ellipse",
-      "Parallelogram",
-      "Racetrack Oval",
       "Arch Side",
-      "Half-Circle with Notch",
       "Quarter Round",
+      "Single Slope Rectangle",
+      "Arch Top & Bottom",
+      "Octagon",
+      "Half-Circle with Notch",
+      "Square/Rectangle",
       "Half-Circle",
-      "Quarter Round"
+      "Triangle"
     ],
     "tint": [
-      "Solex",
-      "Frosted Blue Chip",
-      "Frosted Green Chip",
+      "Mistlite",
+      "Mistlite",
       "P-516",
-      "Dark Gray",
+      "Frosted Green Chip",
+      "Solex",
       "Mistlite"
     ],
     "compatible_products": [
-      "1",
-      "8"
+      "d142e971-d28b-4418-ae40-c698f5ac25a0"
     ],
-    "quantity_available": 576,
+    "quantity_available": 613,
     "quantity_incoming": {
-      "quantity_incoming": 10,
-      "order_id": "38aa989c-129a-4ae7-8ac8-93926af2bb27",
-      "supplier_id": "09d87828-6571-4e89-aaeb-2e3c3edf2f02",
-      "expected_arrival": "9/12/2025, 5:23:30 PM"
+      "quantity_incoming": 127,
+      "order_id": "a79a5dd7-a4bb-4029-9c4c-7c0b12d08d89",
+      "supplier_id": "4cb15e7d-dcbe-46ed-9966-1b571dc531b4",
+      "expected_arrival": "8/7/2025, 9:57:43 AM"
     },
-    "date_created": "1/6/2024, 4:06:17 PM",
-    "date_updated": "8/19/2024, 4:20:45 PM",
-    "updated_by": "78d7e951-bf38-4db6-be6f-d73be9a1013f"
+    "date_created": "1/30/2023, 4:37:32 PM",
+    "date_updated": "9/15/2024, 4:23:20 PM",
+    "updated_by": "eadcf4cf-fb46-417a-a091-cd041b69fcdd"
   },
   {
-    "id": "1516aad8-5651-43f2-94aa-96c7c49787e6",
+    "id": "d669530a-2bba-4c00-bae4-f42828b96996",
     "name": "MC 68 LE-A",
     "description": "some description for MC 68 LE-A",
     "available_thickness": [
@@ -641,54 +655,52 @@
       "3/4"
     ],
     "shapes": [
-      "Single Slope Rectangle",
-      "Ellipse",
-      "Quarter Round",
-      "Quarter Round",
-      "Triangle",
-      "Parallelogram",
-      "Trapezoid",
-      "Arch-Top",
-      "Pentagon",
-      "Square/Rectangle",
       "Circle",
-      "Trapezoid",
-      "Quad Arch",
-      "Hexagon",
-      "Hexagon",
+      "Racetrack Oval",
+      "Half-Circle with Notch",
+      "Arch Top & Bottom",
+      "Quarter Round",
+      "Circle",
+      "Square/Rectangle",
+      "Arch Top & Bottom",
+      "Quarter Round with Notch",
+      "Arch",
+      "Quarter Round with Notch",
       "Pentagon",
-      "Racetrack Oval"
+      "Arch",
+      "Ellipse",
+      "House",
+      "Arch Top & Bottom",
+      "Irregular/Any Other Shape",
+      "Quarter Round"
     ],
     "tint": [
-      "Frosted Blue Chip",
-      "Frosted Blue Chip",
-      "Bronze",
-      "Mistlite",
-      "Midnight Gray",
+      "Ultra Clear",
       "Mistlite",
       "P-516",
-      "P-516",
-      "Midnight Gray",
-      "Mistlite"
+      "Frosted Blue Chip",
+      "Dark Gray",
+      "Frosted Blue Chip"
     ],
     "compatible_products": [
-      "1",
-      "2",
-      "4"
+      "431e32eb-9960-4aaf-a4bf-ab144830d546",
+      "362a0e00-a3b2-45f4-bebf-b06a850993b5",
+      "634adcdf-a739-4eaf-a653-09f1d403f8da",
+      "d142e971-d28b-4418-ae40-c698f5ac25a0"
     ],
-    "quantity_available": 747,
+    "quantity_available": 745,
     "quantity_incoming": {
-      "quantity_incoming": 415,
-      "order_id": "4cc858b2-7b68-4f5c-86dd-334d76ec216f",
-      "supplier_id": "be3f2e75-98c9-41c1-9051-30a7a7125d5f",
-      "expected_arrival": "4/11/2025, 12:09:33 PM"
+      "quantity_incoming": 285,
+      "order_id": "db3a01ba-67c0-49b0-acbc-ff2b1a3e3de2",
+      "supplier_id": "de058e3e-80d0-4ec1-8961-5abe107a2ce6",
+      "expected_arrival": "9/17/2025, 2:26:47 AM"
     },
-    "date_created": "11/3/2022, 9:06:02 PM",
-    "date_updated": "9/15/2024, 12:55:55 AM",
-    "updated_by": "1e0add8d-7364-4e08-9660-945577ec784b"
+    "date_created": "6/7/2023, 11:31:11 AM",
+    "date_updated": "8/13/2024, 7:21:48 AM",
+    "updated_by": "78d7e951-bf38-4db6-be6f-d73be9a1013f"
   },
   {
-    "id": "d8d2ba09-00c2-4936-a950-c0d9705541e1",
+    "id": "9a6488c7-f45e-458d-b04c-3bc7a882dadf",
     "name": "SN 68 HT",
     "description": "some description for SN 68 HT",
     "available_thickness": [
@@ -699,46 +711,48 @@
       "3/4"
     ],
     "shapes": [
-      "Pentagon",
-      "Half-Circle",
-      "Circle",
-      "House",
-      "Circle",
+      "Arch",
+      "Right Triangle",
+      "Irregular/Any Other Shape",
       "Quarter Round with Notch",
       "Clipped Corner(s)",
-      "Single Slope Rectangle",
-      "Quarter Round",
+      "Irregular/Any Other Shape",
+      "Rounded Corner(s)",
+      "Arch-Top",
+      "Half-Circle",
+      "Half-Circle",
+      "Quarter Round with Notch",
+      "Arch Top & Bottom",
+      "Pentagon",
       "Trapezoid",
-      "Half-Circle",
-      "Irregular/Any Other Shape",
-      "Half-Circle",
-      "Arch",
-      "Irregular/Any Other Shape",
-      "Clipped Corner(s)",
-      "Hexagon",
-      "House",
-      "Octagon"
+      "Pentagon",
+      "Quad Arch",
+      "Arch Top & Bottom",
+      "Half-Circle with Notch"
     ],
     "tint": [
-      "Ultra Clear",
+      "Frosted Green Chip",
+      "Bronze",
+      "Dark Gray",
+      "Clear",
       "Low-E",
-      "Mistlite",
-      "Frosted Blue Chip",
       "Mistlite"
     ],
     "compatible_products": [
-      "2",
-      "9"
+      "634adcdf-a739-4eaf-a653-09f1d403f8da",
+      "d142e971-d28b-4418-ae40-c698f5ac25a0",
+      "24a2d78f-642d-4937-ba68-b6f113e57a76",
+      "670e8f58-76f6-4ade-be60-9f0957456650"
     ],
-    "quantity_available": 418,
+    "quantity_available": 127,
     "quantity_incoming": {
-      "quantity_incoming": 148,
-      "order_id": "4eb30ca7-ce2e-447b-b74f-50e985826cd7",
-      "supplier_id": "1f1e3138-4f1a-477c-ab1f-7905ff5d64c0",
-      "expected_arrival": "1/13/2025, 12:42:20 PM"
+      "quantity_incoming": 443,
+      "order_id": "cb6a1938-abe0-45a9-ab11-27922223d271",
+      "supplier_id": "8036a96d-09b2-4065-a91c-bdaacaefbca3",
+      "expected_arrival": "8/9/2025, 1:18:40 PM"
     },
-    "date_created": "7/16/2024, 10:21:34 PM",
-    "date_updated": "8/21/2024, 11:16:58 AM",
-    "updated_by": "1e0add8d-7364-4e08-9660-945577ec784b"
+    "date_created": "4/15/2024, 12:30:19 AM",
+    "date_updated": "9/17/2024, 6:45:09 PM",
+    "updated_by": "eadcf4cf-fb46-417a-a091-cd041b69fcdd"
   }
 ]

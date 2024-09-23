@@ -10,6 +10,9 @@ import { generateProducts } from "./seed-functions/generate-products";
 import { DropSchema, getAllSchema, numOrders } from "./lib/utils";
 import { generateGlassInventory } from "./seed-functions/generate-glass-inventory";
 import { generateOrderItems } from "./seed-functions/generate-order-items";
+import { SeedUserProfiles, seedUsers } from "./seeding-queries/seed-users";
+import { SeedBillingInfo, seedShippingInfo } from "./seeding-queries/seed-shipping-billing";
+import { SeedProducts } from "./seeding-queries/seed-product-inventory";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -31,6 +34,7 @@ async function main() {
 
   // CREATE TABLE "order-handling"."user" (name text, lastname text, email text);
 
+  // -------- GENERATE ORDER -------- 
   // generateUsers(10);
   // generateUserProfiles(); // 1 profile per user 
 
@@ -43,8 +47,16 @@ async function main() {
   // each item has a random existing user id in the updated_by field 
   // generateGlassInventory(); 
   // random number of order items per existing order 
-  // generateOrderItems();
-  
+   // generateOrderItems();
+
+  // -------- SEED ORDER --------
+  // seedUsers();
+  // SeedUserProfiles();
+  // seedShippingInfo();
+  // SeedBillingInfo();
+
+  // SeedProducts();
+
   // consoleLogLoop();
   // getAllSchema();
   // DropSchema(

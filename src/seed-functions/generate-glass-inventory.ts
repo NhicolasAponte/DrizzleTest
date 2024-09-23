@@ -9,7 +9,7 @@ import {
   tintOptions,
 } from "../seed-data/placeholder-data";
 import { users } from "../seed-data/users";
-import { date } from "drizzle-orm/mysql-core";
+import { productsArray } from "../seed-data/products";
 
 export type GlassInventoryItem = {
   id: string;
@@ -57,10 +57,10 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     );
   }
   const compatibleProducts = [];
-  for (let i = 0; i < productTypes.length; i++) {
+  for (let i = 0; i < productsArray.length; i++) {
     const coin = Math.floor(Math.random() * 2) + 1;
     if (coin % 2 === 0) {
-      compatibleProducts.push(productTypes[i].id);
+      compatibleProducts.push(productsArray[i].id);
     }
   }
 
