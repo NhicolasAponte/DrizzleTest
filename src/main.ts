@@ -49,7 +49,7 @@ async function main() {
   // each item has a random existing user id in the updated_by field 
   // generateGlassInventory(); 
   // random number of order items per existing order 
-  generateOrderItems(); 
+  // generateOrderItems(); 
 
   // -------- SEED ORDER --------
   // seedUsers();

@@ -81,10 +81,10 @@ function notSoRandomDistribution() {
   const num = Math.floor(Math.random() * 3) + 1;
 
   return num === 1
-    ? Math.floor(Math.random() * 10)
+    ? Math.floor(Math.random() * 10) + 1
     : num === 2
-    ? Math.floor(Math.random() * 60)
-    : Math.floor(Math.random() * 211);
+    ? Math.floor(Math.random() * 60) + 1
+    : Math.floor(Math.random() * 211) + 1;
 }
 
 //function that generates id's

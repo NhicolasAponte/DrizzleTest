@@ -34,36 +34,37 @@ export const UserTable = dbSchema.table("users", {
 // one-to-one with user table
 export const UserProfileTable = dbSchema.table("user_profiles", {
   id: serial("id").primaryKey(),
-  userId: uuid("userId")
+  user_id: uuid("user_id")
     .notNull()
     .references(() => UserTable.id, { onDelete: "cascade" }),
-  firstName: varchar("firstName", { length: 255 }).notNull(),
-  lastName: varchar("lastName", { length: 255 }).notNull(),
+  first_name: varchar("first_name", { length: 255 }).notNull(),
+  last_name: varchar("last_name", { length: 255 }).notNull(),
   company: varchar("company", { length: 255 }),
-  accountNum: varchar("accountNum", { length: 255 }),
-  phoneNum: varchar("phoneNum", { length: 255 }),
+  account_num: varchar("account_num", { length: 255 }),
+  phone_num: varchar("phone_num", { length: 255 }),
 });
 
 // one-to-many with user table
 export const ShippingInfoTable = dbSchema.table("shipping_info", {
   id: serial("id").primaryKey(),
-  userId: uuid("userId")
+  user_id: uuid("user_id")
     .notNull()
     .references(() => UserTable.id, { onDelete: "cascade" }),
   address: varchar("address", { length: 255 }).notNull(),
   city: varchar("city", { length: 255 }).notNull(),
   state: varchar("state", { length: 255 }).notNull(),
   zip: varchar("zip", { length: 255 }).notNull(),
-  isJobSite: boolean("isJobSite").notNull().default(false),
+  is_job_site: boolean("is_job_site").notNull().default(false),
   note: varchar("note", { length: 255 }),
 });
 
 // users can add and delete billing info at any time
 // relevant billing info will be serialized and stored in the order table
 // one-to-many with user table
+// NOTE TODO: change field names and change definitions in generating functions to match 
 export const BillingInfoTable = dbSchema.table("billing_info", {
   id: serial("id").primaryKey(),
-  userId: uuid("userId")
+  user_id: uuid("user_id")
     .notNull()
     .references(() => UserTable.id, { onDelete: "cascade" }),
   address: varchar("address", { length: 255 }).notNull(),
@@ -83,7 +84,7 @@ export const BillingInfoTable = dbSchema.table("billing_info", {
 // one-to-many with user table
 export const OrderTable = dbSchema.table("orders", {
   id: uuid("id").primaryKey(),
-  userId: uuid("userId")
+  user_id: uuid("user_id")
     .notNull()
     .references(() => UserTable.id, { onDelete: "cascade" }),
   orderName: varchar("orderName", { length: 255 }).notNull(),
@@ -142,7 +143,7 @@ export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
     .references(() => UserTable.id),
 });
 
-// tags need a userId, since each user creates tags that are only
+// tags need a user_id, since each user creates tags that are only
 // useful to them
 // an id for the item that was tagged
 // and a category so we know what table to search for the item
@@ -151,6 +152,6 @@ export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
 //   name: varchar("name", { length: 255 }).notNull(),
 //   description: varchar("description", { length: 255 }),
 //   category: varchar("category", { length: 255 }),
-//   userId: uuid("userId").notNull().references(() => UserTable.id, { onDelete: "cascade" }),
+//   user_id: uuid("user_id").notNull().references(() => UserTable.id, { onDelete: "cascade" }),
 //   tagged_item_id: integer("tagged_item_id").notNull(),
 // })
