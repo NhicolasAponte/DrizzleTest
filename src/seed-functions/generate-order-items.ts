@@ -35,12 +35,13 @@ interface glassConfig {
   fabrication_options: string;
   misc_options: string;
 }
+
 // need an array of products and configs
-function generateRandomOrderItem(orderId: string) {
+function generateRandomOrderItem(itemId: number, orderId: string) {
   const randomGlass =
     glassInventoryArray[Math.floor(Math.random() * glassInventoryArray.length)];
   return {
-    id: Math.floor(Math.random() * 1000),
+    id: itemId,
     orderId,
     product_type_id:
       productsArray[Math.floor(Math.random() * productsArray.length)].id, // get product id from generated products
@@ -50,8 +51,8 @@ function generateRandomOrderItem(orderId: string) {
       glassId: randomGlass.id,
       name: randomGlass.name,
       thickness:
-        randomGlass.available_thickness[
-          Math.floor(Math.random() * randomGlass.available_thickness.length)
+        randomGlass.thickness[
+          Math.floor(Math.random() * randomGlass.thickness.length)
         ],
       shape:
         randomGlass.shapes[
@@ -86,12 +87,23 @@ function notSoRandomDistribution() {
     : Math.floor(Math.random() * 211);
 }
 
+//function that generates id's
+
 export function generateOrderItems() {
   const orderItemsData: OrderItem[] = [];
+  const item_ids: number[] = [];
   for (let order of ordersArray) {
     const numItems = Math.floor(Math.random() * 9) + 1;
     for (let i = 0; i < numItems; i++) {
-      orderItemsData.push(generateRandomOrderItem(order.id));
+      let itemId = Math.floor(Math.random() * 1000);
+
+      while (item_ids.includes(itemId)) {
+        itemId = Math.floor(Math.random() * 1000);
+      }
+      item_ids.push(itemId);
+      const orderItem = generateRandomOrderItem(itemId, order.id);
+
+      orderItemsData.push(orderItem);
     }
   }
 

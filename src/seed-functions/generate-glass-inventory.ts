@@ -15,7 +15,7 @@ export type GlassInventoryItem = {
   id: string;
   name: string;
   description: string;
-  available_thickness: string[];
+  thickness: string[];
   shapes: string[];
   tint: string[];
   compatible_products: string[];
@@ -74,7 +74,7 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     id: uuidv4(),
     name,
     description: "some description for " + name,
-    // available_thickness: Array.from(
+    // thickness: Array.from(
     //   { length: Math.floor(Math.random() * 5) + 1 },
     //   () => `${Math.floor(Math.random() * 10) + 1}mm`
     // ),
@@ -84,7 +84,7 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     // tint: Array.from({ length: Math.floor(Math.random() * 5) + 1 }, () =>
     //   faker.color.human()
     // ),
-    available_thickness: ["1/8", "1/4", "3/8", "1/2", "3/4"],
+    thickness: ["1/8", "1/4", "3/8", "1/2", "3/4"],
     shapes: compatibleShapes,
     tint: compatibleTints,
     // compatible_products: Array.from(

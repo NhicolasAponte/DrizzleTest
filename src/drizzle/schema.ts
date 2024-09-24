@@ -100,7 +100,7 @@ export const OrderItemTable = dbSchema.table("order_items", {
   orderId: uuid("orderId")
     .notNull()
     .references(() => OrderTable.id, { onDelete: "cascade" }),
-  product_id: uuid("product_id")
+  product_type_id: uuid("product_type_id")
     .notNull()
     .references(() => ProductTable.id, { onDelete: "cascade" }),
   product_config: jsonb("product_config").notNull(),
@@ -125,7 +125,7 @@ export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
   name: varchar("name", { length: 255 }).notNull(),
   // list of product for which this glass can be used
   description: varchar("description", { length: 255 }),
-  available_thickness: jsonb("available_thickness").notNull(), // List of thicknesses
+  thickness: jsonb("thickness").notNull(), // List of thicknesses
   shapes: jsonb("shapes").notNull(), // list of shape IDs
   tint: jsonb("tint").notNull(), // list of available tints
   // list of products this glass can be used for
@@ -133,11 +133,13 @@ export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
   quantity_available: integer("quantity_available").notNull(),
   // quantity_on_premise: integer("quantity"),
   // quantity_on_order: integer("quantity"),
-  // supplier_id: uuid("supplier_id").notNull(), // not necessary as a standalone field since it'll be part of supply orders 
-  quantity_incoming: jsonb("quantity"),
+  // supplier_id: uuid("supplier_id").notNull(), // not necessary as a standalone field since it'll be part of supply orders
+  quantity_incoming: jsonb("quantity_incoming"),
   date_created: timestamp("date_created").notNull(),
   date_updated: timestamp("date_updated").notNull(),
-  updated_by: uuid("updated_by").notNull().references(() => UserTable.id),
+  updated_by: uuid("updated_by")
+    .notNull()
+    .references(() => UserTable.id),
 });
 
 // tags need a userId, since each user creates tags that are only

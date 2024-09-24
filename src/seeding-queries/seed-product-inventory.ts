@@ -35,8 +35,8 @@ export async function SeedGlassInventory() {
   try {
     await db.transaction(async (trx) => {
       for (const item of glassInventoryArray) {
-        const serializedAvailableThickness = JSON.stringify(
-          item.available_thickness
+        const serializedThickness = JSON.stringify(
+          item.thickness
         );
         const serializedShapes = JSON.stringify(item.shapes);
         const serializedTint = JSON.stringify(item.tint);
@@ -47,18 +47,31 @@ export async function SeedGlassInventory() {
           item.quantity_incoming
         );
         await trx.execute(
-          sql`INSERT INTO "dev-schema".glass_inventory_item (id, name, description, available_thickness, shapes, tint, compatible_products, quantity_available, quantity_incoming, date_created, date_updated)
+          sql`INSERT INTO "dev-schema".glass_inventory_item 
+                    (id, 
+                     name, 
+                     description, 
+                     thickness, 
+                     shapes, 
+                     tint, 
+                     compatible_products, 
+                     quantity_available, 
+                     quantity_incoming, 
+                     date_created, 
+                     date_updated, 
+                     updated_by)
             VALUES (${item.id},
                     ${item.name},
                     ${item.description},
-                    ${serializedAvailableThickness},
+                    ${serializedThickness},
                     ${serializedShapes},
                     ${serializedTint},
                     ${serializedCompatibleProducts},
                     ${item.quantity_available},
                     ${serializedQuantityIncoming},
                     ${item.date_created},
-                    ${item.date_updated})`
+                    ${item.date_updated},
+                    ${item.updated_by})`
         );
       }
       console.log("Glass inventory seeded successfully");
