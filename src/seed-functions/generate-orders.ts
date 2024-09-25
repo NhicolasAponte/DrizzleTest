@@ -8,18 +8,17 @@ import { ShippingInfo } from "./generate-shippingInfo";
 import { BillingInfo } from "./generate-billingInfo";
 import { billingInfoArray } from "../seed-data/billing-info";
 import { faker } from "@faker-js/faker";
-import { date } from "drizzle-orm/mysql-core";
 
 export type Order = {
   id: string;
-  userId: string;
-  orderName: string;
-  billingInfo: BillingInfo;
-  shippingInfo: ShippingInfo;
+  user_id: string;
+  order_name: string;
+  billing_info: BillingInfo;
+  shipping_info: ShippingInfo;
   status: string;
-  dateCreated: string;
-  dateUpdated: string;
-  dateSubmitted?: string;
+  date_created: string;
+  date_updated: string;
+  date_submitted?: string;
 };
 
 function generateRandomOrder(
@@ -66,14 +65,14 @@ function generateRandomOrder(
 
   return {
     id,
-    userId,
-    orderName,
-    billingInfo,
-    shippingInfo,
+    user_id: userId,
+    order_name: orderName,
+    billing_info: billingInfo,
+    shipping_info: shippingInfo,
     status,
-    dateCreated,
-    dateUpdated,
-    dateSubmitted,
+    date_created: dateCreated,
+    date_updated: dateUpdated,
+    date_submitted: dateSubmitted,
   };
 }
 
@@ -81,18 +80,18 @@ function generateRandomOrder(
 export function generateOrders() {
   const orders: Order[] = [];
   users.forEach((user) => {
-    // range for number of order: 2 - 26 
+    // range for number of order: 2 - 26
     const numOrders = Math.floor(Math.random() * 25) + 2;
     console.log(`Generating ${numOrders} orders for user ${user.id}`);
     const shippingInfo = shippingInfoArray.find(
-      (info) => info.userId === user.id
+      (info) => info.user_id === user.id
     );
     if (!shippingInfo) {
       console.error(`No shipping info found for user ${user.id}`);
       return;
     }
     const billingInfo = billingInfoArray.find(
-      (info) => user.id === info.userId
+      (info) => user.id === info.user_id
     );
     if (!billingInfo) {
       console.error(`No billing info found for user ${user.id}`);

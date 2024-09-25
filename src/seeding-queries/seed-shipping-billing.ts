@@ -11,14 +11,22 @@ export const seedShippingInfo = async () => {
     await db.transaction(async (trx) => {
       for (const shippingInfo of shippingInfoArray) {
         await trx.execute(
-          sql`INSERT INTO "dev-schema".shipping_info (id, "userId", address, city, state, zip, "isJobSite", note) 
+          sql`INSERT INTO "dev-schema".shipping_info 
+                  (id, 
+                  user_id, 
+                  address, 
+                  city, 
+                  state, 
+                  zip, 
+                  is_job_site, 
+                  note) 
           VALUES (${shippingInfo.id},
-                  ${shippingInfo.userId},
+                  ${shippingInfo.user_id},
                   ${shippingInfo.address},
                   ${shippingInfo.city},
                   ${shippingInfo.state},
                   ${shippingInfo.zip},
-                  ${shippingInfo.isJobSite},
+                  ${shippingInfo.is_job_site},
                   ${shippingInfo.note})`
         );
       }
@@ -36,21 +44,35 @@ export async function SeedBillingInfo() {
         await db.transaction(async (trx) => {
         for (const billingInfo of billingInfoArray) {
           await trx.execute(
-            sql`INSERT INTO "dev-schema".billing_info (id, "userId", address, city, state, zip, "paymentMethod", "purchaseOrder", "primaryContactName", "primaryContactEmail", "primaryContactPhone", "faxNum", "isPrimary", "isActive") 
+            sql`INSERT INTO "dev-schema".billing_info 
+                    (id, 
+                    user_id, 
+                    address, 
+                    city, 
+                    state, 
+                    zip, 
+                    payment_method, 
+                    purchase_order, 
+                    primary_contact_name, 
+                    primary_contact_email, 
+                    primary_contact_phone, 
+                    fax_num, 
+                    is_primary, 
+                    is_active) 
             VALUES (${billingInfo.id},
-                    ${billingInfo.userId},
+                    ${billingInfo.user_id},
                     ${billingInfo.address},
                     ${billingInfo.city},
                     ${billingInfo.state},
                     ${billingInfo.zip},
-                    ${billingInfo.paymentMethod},
-                    ${billingInfo.purchaseOrder},
-                    ${billingInfo.primaryContactName},
-                    ${billingInfo.primaryContactEmail},
-                    ${billingInfo.primaryContactPhone},
-                    ${billingInfo.faxNum},
-                    ${billingInfo.isPrimary},
-                    ${billingInfo.isActive})`
+                    ${billingInfo.payment_method},
+                    ${billingInfo.purchase_order},
+                    ${billingInfo.primary_contact_name},
+                    ${billingInfo.primary_contact_email},
+                    ${billingInfo.primary_contact_phone},
+                    ${billingInfo.fax_num},
+                    ${billingInfo.is_primary},
+                    ${billingInfo.is_active})`
           );
         }
         console.log("Billing info seeded successfully");

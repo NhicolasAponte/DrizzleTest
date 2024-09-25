@@ -11,9 +11,18 @@ import { DropSchema, getAllSchema, numOrders } from "./lib/utils";
 import { generateGlassInventory } from "./seed-functions/generate-glass-inventory";
 import { generateOrderItems } from "./seed-functions/generate-order-items";
 import { SeedUserProfiles, seedUsers } from "./seeding-queries/seed-users";
-import { SeedBillingInfo, seedShippingInfo } from "./seeding-queries/seed-shipping-billing";
-import { SeedGlassInventory, SeedProducts } from "./seeding-queries/seed-product-inventory";
-import { SeedOrderItems, SeedOrders } from "./seeding-queries/seed-orders-items";
+import {
+  SeedBillingInfo,
+  seedShippingInfo,
+} from "./seeding-queries/seed-shipping-billing";
+import {
+  SeedGlassInventory,
+  SeedProducts,
+} from "./seeding-queries/seed-product-inventory";
+import {
+  SeedOrderItems,
+  SeedOrders,
+} from "./seeding-queries/seed-orders-items";
 import { ordersArray } from "./seed-data/orders";
 
 async function main() {
@@ -36,20 +45,20 @@ async function main() {
 
   // CREATE TABLE "order-handling"."user" (name text, lastname text, email text);
 
-  // -------- GENERATE ORDER -------- 
+  // -------- GENERATE ORDER --------
   // generateUsers(10);
-  // generateUserProfiles(); // 1 profile per user 
+  // generateUserProfiles(); // 1 profile per user
 
-  // generateShippingInfo(); // 1 per user 
-  // generateBillingInfo(); // 1 per user 
+  // generateShippingInfo(); // 1 per user
+  // generateBillingInfo(); // 1 per user
 
-  // generateOrders(); // rand between 1 - 26 orders per user 
-  // generateProducts(); // there's few products and they don't depend on other data 
-  // each item has a random amount of compatible products 
-  // each item has a random existing user id in the updated_by field 
-  // generateGlassInventory(); 
-  // random number of order items per existing order 
-  // generateOrderItems(); 
+  // generateOrders(); // rand between 1 - 26 orders per user
+  // generateProducts(); // there's few products and they don't depend on other data
+  // each item has a random amount of compatible products
+  // each item has a random existing user id in the updated_by field
+  // generateGlassInventory();
+  // random number of order items per existing order
+  // generateOrderItems();
 
   // -------- SEED ORDER --------
   // seedUsers();
@@ -65,7 +74,7 @@ async function main() {
 
   // const items: number[] = [1, 2, 3, 4, 5, 6];
   // let item = 7 //Math.floor(Math.random() * 1000);
-  // // // in operator checks if a property is part of some object 
+  // // // in operator checks if a property is part of some object
   // // // for an array, it checks if the item you are looking for exists among the indexes of the array instead of the values
   // // console.log(item in items);
   // console.log(items.includes(item));
@@ -76,7 +85,6 @@ async function main() {
 
   //   items.push(item);
   // }
-
 
   // consoleLogLoop();
   // getAllSchema();

@@ -7,24 +7,24 @@ import { users } from "../seed-data/users";
 
 export type ShippingInfo = {
   id: number;
-  userId: string;
+  user_id: string;
   address: string;
   city: string;
   state: string;
   zip: string;
-  isJobSite: boolean;
+  is_job_site: boolean;
   note: string;
 };
 
 function generateRandomAddress(userId: string): ShippingInfo {
   return {
     id: Math.floor(Math.random() * 1000),
-    userId: userId,
+    user_id: userId,
     address: faker.location.streetAddress(),
     city: faker.location.city(),
     state: faker.location.state(),
     zip: faker.location.zipCode(),
-    isJobSite: faker.datatype.boolean(),
+    is_job_site: faker.datatype.boolean(),
     note: faker.lorem.sentence(),
   };
 }
@@ -53,7 +53,7 @@ export function generateShippingInfo() {
     `Generated ${shippingInfoData.length} shipping info and saved to ${jsonPath}`
   );
 
-  const tsContent = `import { ShippingInfo } from "../seed-functions/address-faker";\n\nexport const shippingInfoArray: ShippingInfo[] = ${JSON.stringify(
+  const tsContent = `import { ShippingInfo } from "../seed-functions/generate-shippingInfo";\n\nexport const shippingInfoArray: ShippingInfo[] = ${JSON.stringify(
     shippingInfoData,
     null,
     2

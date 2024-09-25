@@ -1,5 +1,5 @@
 {
-  "id": "86328065-3fd0-4f5b-b319-fbaafe2c8ce7",
+  "id": "ff4fd7de-22bd-42a9-b217-da24f23d31a6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -14,8 +14,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -44,51 +44,51 @@
           "primaryKey": false,
           "notNull": true
         },
-        "paymentMethod": {
-          "name": "paymentMethod",
+        "payment_method": {
+          "name": "payment_method",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
-        "purchaseOrder": {
-          "name": "purchaseOrder",
+        "purchase_order": {
+          "name": "purchase_order",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
         },
-        "primaryContactName": {
-          "name": "primaryContactName",
+        "primary_contact_name": {
+          "name": "primary_contact_name",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
         },
-        "primaryContactEmail": {
-          "name": "primaryContactEmail",
+        "primary_contact_email": {
+          "name": "primary_contact_email",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
         },
-        "primaryContactPhone": {
-          "name": "primaryContactPhone",
+        "primary_contact_phone": {
+          "name": "primary_contact_phone",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
         },
-        "faxNum": {
-          "name": "faxNum",
+        "fax_num": {
+          "name": "fax_num",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
         },
-        "isPrimary": {
-          "name": "isPrimary",
+        "is_primary": {
+          "name": "is_primary",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
           "default": false
         },
-        "isActive": {
-          "name": "isActive",
+        "is_active": {
+          "name": "is_active",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
@@ -97,13 +97,13 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "billing_info_userId_users_id_fk": {
-          "name": "billing_info_userId_users_id_fk",
+        "billing_info_user_id_users_id_fk": {
+          "name": "billing_info_user_id_users_id_fk",
           "tableFrom": "billing_info",
           "tableTo": "users",
           "schemaTo": "dev-schema",
           "columnsFrom": [
-            "userId"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -222,14 +222,14 @@
           "primaryKey": true,
           "notNull": true
         },
-        "orderId": {
-          "name": "orderId",
+        "order_id": {
+          "name": "order_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "product_id": {
-          "name": "product_id",
+        "product_type_id": {
+          "name": "product_type_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -255,13 +255,13 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "order_items_orderId_orders_id_fk": {
-          "name": "order_items_orderId_orders_id_fk",
+        "order_items_order_id_orders_id_fk": {
+          "name": "order_items_order_id_orders_id_fk",
           "tableFrom": "order_items",
           "tableTo": "orders",
           "schemaTo": "dev-schema",
           "columnsFrom": [
-            "orderId"
+            "order_id"
           ],
           "columnsTo": [
             "id"
@@ -269,13 +269,13 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "order_items_product_id_products_id_fk": {
-          "name": "order_items_product_id_products_id_fk",
+        "order_items_product_type_id_products_id_fk": {
+          "name": "order_items_product_type_id_products_id_fk",
           "tableFrom": "order_items",
           "tableTo": "products",
           "schemaTo": "dev-schema",
           "columnsFrom": [
-            "product_id"
+            "product_type_id"
           ],
           "columnsTo": [
             "id"
@@ -297,26 +297,26 @@
           "primaryKey": true,
           "notNull": true
         },
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "orderName": {
-          "name": "orderName",
+        "order_name": {
+          "name": "order_name",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
-        "billingInfo": {
-          "name": "billingInfo",
+        "billing_info": {
+          "name": "billing_info",
           "type": "jsonb",
           "primaryKey": false,
           "notNull": true
         },
-        "shippingInfo": {
-          "name": "shippingInfo",
+        "shipping_info": {
+          "name": "shipping_info",
           "type": "jsonb",
           "primaryKey": false,
           "notNull": true
@@ -327,20 +327,20 @@
           "primaryKey": false,
           "notNull": true
         },
-        "dateCreated": {
-          "name": "dateCreated",
+        "date_created": {
+          "name": "date_created",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true
         },
-        "dateUpdated": {
-          "name": "dateUpdated",
+        "date_updated": {
+          "name": "date_updated",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true
         },
-        "dateSubmitted": {
-          "name": "dateSubmitted",
+        "date_submitted": {
+          "name": "date_submitted",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
@@ -348,13 +348,13 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "orders_userId_users_id_fk": {
-          "name": "orders_userId_users_id_fk",
+        "orders_user_id_users_id_fk": {
+          "name": "orders_user_id_users_id_fk",
           "tableFrom": "orders",
           "tableTo": "users",
           "schemaTo": "dev-schema",
           "columnsFrom": [
-            "userId"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -434,8 +434,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -464,8 +464,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "isJobSite": {
-          "name": "isJobSite",
+        "is_job_site": {
+          "name": "is_job_site",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
@@ -480,13 +480,13 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "shipping_info_userId_users_id_fk": {
-          "name": "shipping_info_userId_users_id_fk",
+        "shipping_info_user_id_users_id_fk": {
+          "name": "shipping_info_user_id_users_id_fk",
           "tableFrom": "shipping_info",
           "tableTo": "users",
           "schemaTo": "dev-schema",
           "columnsFrom": [
-            "userId"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -508,20 +508,20 @@
           "primaryKey": true,
           "notNull": true
         },
-        "userId": {
-          "name": "userId",
+        "user_id": {
+          "name": "user_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "firstName": {
-          "name": "firstName",
+        "first_name": {
+          "name": "first_name",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
-        "lastName": {
-          "name": "lastName",
+        "last_name": {
+          "name": "last_name",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
@@ -532,14 +532,14 @@
           "primaryKey": false,
           "notNull": false
         },
-        "accountNum": {
-          "name": "accountNum",
+        "account_num": {
+          "name": "account_num",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
         },
-        "phoneNum": {
-          "name": "phoneNum",
+        "phone_num": {
+          "name": "phone_num",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
@@ -547,13 +547,13 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "user_profiles_userId_users_id_fk": {
-          "name": "user_profiles_userId_users_id_fk",
+        "user_profiles_user_id_users_id_fk": {
+          "name": "user_profiles_user_id_users_id_fk",
           "tableFrom": "user_profiles",
           "tableTo": "users",
           "schemaTo": "dev-schema",
           "columnsFrom": [
-            "userId"
+            "user_id"
           ],
           "columnsTo": [
             "id"

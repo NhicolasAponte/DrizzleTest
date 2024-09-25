@@ -9,28 +9,28 @@ export async function SeedOrders() {
   try {
     await db.transaction(async (trx) => {
       for (const order of ordersArray) {
-        const serializedBillingInfo = JSON.stringify(order.billingInfo);
-        const serializedShippingInfo = JSON.stringify(order.shippingInfo);
+        const serializedBillingInfo = JSON.stringify(order.billing_info);
+        const serializedShippingInfo = JSON.stringify(order.shipping_info);
         await trx.execute(
           sql`INSERT INTO "dev-schema".orders 
                       (id,
-                      "userId",
-                      "orderName",
-                      "billingInfo",
-                      "shippingInfo",
+                      "user_id",
+                      "order_name",
+                      "billing_info",
+                      "shipping_info",
                       status,
-                      "dateCreated",
-                      "dateUpdated",
-                      "dateSubmitted")
+                      "date_created",
+                      "date_updated",
+                      "date_submitted")
             VALUES (${order.id},
-                    ${order.userId},
-                    ${order.orderName},
+                    ${order.user_id},
+                    ${order.order_name},
                     ${serializedBillingInfo},
                     ${serializedShippingInfo},
                     ${order.status},
-                    ${order.dateCreated},
-                    ${order.dateUpdated},
-                    ${order.dateSubmitted ? order.dateSubmitted : null})`
+                    ${order.date_created},
+                    ${order.date_updated},
+                    ${order.date_submitted ? order.date_submitted : null})`
         );
       }
       console.log("Orders seeded successfully");
@@ -50,13 +50,13 @@ export async function SeedOrderItems() {
                 await trx.execute(
                     sql`INSERT INTO "dev-schema".order_items
                         (id,
-                        "orderId",
+                        "order_id",
                         "product_type_id",
                         product_config,
                         quantity,
                         note) 
                         VALUES (${item.id},
-                                ${item.orderId},
+                                ${item.order_id},
                                 ${item.product_type_id},
                                 ${serializedProductConfig},
                                 ${item.quantity},

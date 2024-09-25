@@ -7,44 +7,44 @@ import { UserProfile } from "./generate-user-profiles";
 
 export type BillingInfo = {
   id: number;
-  userId: string;
+  user_id: string;
   address: string;
   city: string;
   state: string;
   zip: string;
-  paymentMethod: string;
-  purchaseOrder: string;
-  primaryContactName: string;
-  primaryContactEmail: string;
-  primaryContactPhone: string;
-  faxNum: string;
-  isPrimary: boolean;
-  isActive: boolean;
+  payment_method: string;
+  purchase_order: string;
+  primary_contact_name: string;
+  primary_contact_email: string;
+  primary_contact_phone: string;
+  fax_num: string;
+  is_primary: boolean;
+  is_active: boolean;
 };
 
 function generateRandomBillingInfo(profile: UserProfile, email: string): BillingInfo {
     return {
         id: Math.floor(Math.random() * 1000),
-        userId: profile.userId ,
+        user_id: profile.user_id ,
         address: faker.location.streetAddress(),
         city: faker.location.city(),
         state: faker.location.state(),
         zip: faker.location.zipCode(),
-        paymentMethod: faker.finance.transactionType(),
-        purchaseOrder: faker.finance.accountNumber(),
-        primaryContactName: profile.firstName + " " + profile.lastName,
-        primaryContactEmail: email,
-        primaryContactPhone: profile.phoneNum!,
-        faxNum: profile.phoneNum!,
-        isPrimary: faker.datatype.boolean(),
-        isActive: faker.datatype.boolean(),
+        payment_method: faker.finance.transactionType(),
+        purchase_order: faker.finance.accountNumber(),
+        primary_contact_name: profile.first_name + " " + profile.last_name,
+        primary_contact_email: email,
+        primary_contact_phone: profile.phone_num!,
+        fax_num: profile.phone_num!,
+        is_primary: faker.datatype.boolean(),
+        is_active: faker.datatype.boolean(),
     };
 }
 
 export function generateBillingInfo() {
   const billingInfoData: BillingInfo[] = [];
   for (let user of users) {
-    const userProfile = profiles.find((profile) => user.id === profile.userId); 
+    const userProfile = profiles.find((profile) => user.id === profile.user_id); 
     userProfile ? billingInfoData.push(generateRandomBillingInfo(userProfile, user.email)) 
     : console.error(`No user profile found for user ${user.id}`); 
   }

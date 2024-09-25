@@ -6,29 +6,37 @@ import { users } from "../seed-data/users";
 
 export type UserProfile = {
   id: number;
-  userId: string;
-  firstName: string;
-  lastName: string;
+  user_id: string;
+  first_name: string;
+  last_name: string;
   company?: string;
-  accountNum?: string;
-  phoneNum?: string;
+  account_num?: string;
+  phone_num?: string;
 };
 
-function generateRandomUserProfile(userId: string): UserProfile {
+function generateRandomUserProfile(user_id: string): UserProfile {
   const id = Math.floor(Math.random() * 10000);
-  const firstName = faker.person.firstName();
+  const first_name = faker.person.firstName();
   const lastName = faker.person.lastName();
   const company = `${generate(1)[0]}_company`;
   const accountNum = Math.random().toString(36).substring(7);
   // const phoneNum = `+1(${Math.floor(Math.random() * 9000000000) + 1000000000})`;
-  let areaCode = Math.floor(Math.random() * 1000); // 
-  areaCode = areaCode > 99 ? areaCode : areaCode + 100
-  let digits = Math.floor(Math.random() * 1000)
+  let areaCode = Math.floor(Math.random() * 1000); //
+  areaCode = areaCode > 99 ? areaCode : areaCode + 100;
+  let digits = Math.floor(Math.random() * 1000);
   digits = digits > 99 ? digits : digits + 100;
   let lastFour = Math.floor(Math.random() * 10000);
   lastFour = lastFour > 999 ? lastFour : lastFour + 1000;
   const phoneNum = `+1(${areaCode})${digits}-${lastFour}`;
-  return { id, userId, firstName, lastName, company, accountNum, phoneNum };
+  return {
+    id,
+    user_id,
+    first_name,
+    last_name: lastName,
+    company,
+    account_num: accountNum,
+    phone_num: phoneNum,
+  };
 }
 
 export function generateUserProfiles() {

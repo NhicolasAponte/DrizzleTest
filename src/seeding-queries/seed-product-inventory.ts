@@ -11,7 +11,15 @@ export async function SeedProducts() {
       for (const product of productsArray) {
         const serializedConfigOptions = JSON.stringify(product.config_options);
         await trx.execute(
-          sql`INSERT INTO "dev-schema".products (id, type, "image_url", alt, description, "config_options", "date_created", "date_updated")
+          sql`INSERT INTO "dev-schema".products 
+                    (id, 
+                    type, 
+                    "image_url", 
+                    alt, 
+                    description, 
+                    "config_options", 
+                    "date_created", 
+                    "date_updated")
             VALUES (${product.id},
                     ${product.type},
                     ${product.image_url},
@@ -35,9 +43,7 @@ export async function SeedGlassInventory() {
   try {
     await db.transaction(async (trx) => {
       for (const item of glassInventoryArray) {
-        const serializedThickness = JSON.stringify(
-          item.thickness
-        );
+        const serializedThickness = JSON.stringify(item.thickness);
         const serializedShapes = JSON.stringify(item.shapes);
         const serializedTint = JSON.stringify(item.tint);
         const serializedCompatibleProducts = JSON.stringify(

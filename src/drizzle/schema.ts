@@ -61,7 +61,7 @@ export const ShippingInfoTable = dbSchema.table("shipping_info", {
 // users can add and delete billing info at any time
 // relevant billing info will be serialized and stored in the order table
 // one-to-many with user table
-// NOTE TODO: change field names and change definitions in generating functions to match 
+// NOTE TODO: change field names and change definitions in generating functions to match
 export const BillingInfoTable = dbSchema.table("billing_info", {
   id: serial("id").primaryKey(),
   user_id: uuid("user_id")
@@ -71,14 +71,14 @@ export const BillingInfoTable = dbSchema.table("billing_info", {
   city: varchar("city", { length: 255 }).notNull(),
   state: varchar("state", { length: 255 }).notNull(),
   zip: varchar("zip", { length: 255 }).notNull(),
-  paymentMethod: varchar("paymentMethod", { length: 255 }).notNull(),
-  purchaseOrder: varchar("purchaseOrder", { length: 255 }),
-  primaryContactName: varchar("primaryContactName", { length: 255 }),
-  primaryContactEmail: varchar("primaryContactEmail", { length: 255 }),
-  primaryContactPhone: varchar("primaryContactPhone", { length: 255 }),
-  faxNum: varchar("faxNum", { length: 255 }),
-  isPrimary: boolean("isPrimary").notNull().default(false),
-  isActive: boolean("isActive").notNull().default(true),
+  payment_method: varchar("payment_method", { length: 255 }).notNull(),
+  purchase_order: varchar("purchase_order", { length: 255 }),
+  primary_contact_name: varchar("primary_contact_name", { length: 255 }),
+  primary_contact_email: varchar("primary_contact_email", { length: 255 }),
+  primary_contact_phone: varchar("primary_contact_phone", { length: 255 }),
+  fax_num: varchar("fax_num", { length: 255 }),
+  is_primary: boolean("is_primary").notNull().default(false),
+  is_active: boolean("is_active").notNull().default(true),
 });
 
 // one-to-many with user table
@@ -87,18 +87,18 @@ export const OrderTable = dbSchema.table("orders", {
   user_id: uuid("user_id")
     .notNull()
     .references(() => UserTable.id, { onDelete: "cascade" }),
-  orderName: varchar("orderName", { length: 255 }).notNull(),
-  billingInfo: jsonb("billingInfo").notNull(),
-  shippingInfo: jsonb("shippingInfo").notNull(),
+  order_name: varchar("order_name", { length: 255 }).notNull(),
+  billing_info: jsonb("billing_info").notNull(),
+  shipping_info: jsonb("shipping_info").notNull(),
   status: varchar("status", { length: 255 }).notNull(),
-  dateCreated: timestamp("dateCreated").notNull(),
-  dateUpdated: timestamp("dateUpdated").notNull(),
-  dateSubmitted: timestamp("dateSubmitted"),
+  date_created: timestamp("date_created").notNull(),
+  date_updated: timestamp("date_updated").notNull(),
+  date_submitted: timestamp("date_submitted"),
 });
 // one-to-many with order table
 export const OrderItemTable = dbSchema.table("order_items", {
   id: serial("id").primaryKey(),
-  orderId: uuid("orderId")
+  order_id: uuid("order_id")
     .notNull()
     .references(() => OrderTable.id, { onDelete: "cascade" }),
   product_type_id: uuid("product_type_id")

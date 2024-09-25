@@ -1,14 +1,12 @@
 import * as fs from "fs";
 import * as path from "path";
-import { v4 as uuidv4 } from "uuid";
-import { generate } from "random-words";
 import { ordersArray } from "../seed-data/orders";
 import { glassInventoryArray } from "../seed-data/glass-inventory";
 import { productsArray } from "../seed-data/products";
 
 export type OrderItem = {
   id: number;
-  orderId: string;
+  order_id: string;
   product_type_id: string; // uuid
   product_config: any; // jsonb
   quantity: number;
@@ -42,13 +40,13 @@ function generateRandomOrderItem(itemId: number, orderId: string) {
     glassInventoryArray[Math.floor(Math.random() * glassInventoryArray.length)];
   return {
     id: itemId,
-    orderId,
+    order_id: orderId,
     product_type_id:
       productsArray[Math.floor(Math.random() * productsArray.length)].id, // get product id from generated products
     // use math.random to generate a number 1-5 and get the product[i] at that index
     product_config: {
       // combination of product and glass config
-      glassId: randomGlass.id,
+      glass_id: randomGlass.id,
       name: randomGlass.name,
       thickness:
         randomGlass.thickness[

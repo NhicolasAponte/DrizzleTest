@@ -15,10 +15,19 @@ export async function seedUsers() {
 
       for (const user of users) {
         await trx.execute(
-          sql`INSERT INTO "dev-schema".users (id, email, password, role) VALUES (${user.id},${user.email},${user.password},${user.role})`
+          sql`INSERT INTO "dev-schema".users 
+                      (id, 
+                      email, 
+                      password, 
+                      role) 
+          VALUES (${user.id},
+                  ${user.email},
+                  ${user.password},
+                  ${user.role})`
           //[user.id, user.email, user.password, user.role]
         );
       }
+      console.log("Users seeded successfully");
     });
   } catch (error) {
     console.error(error);
@@ -32,9 +41,24 @@ export async function SeedUserProfiles() {
     await db.transaction(async (trx) => {
       for (const profile of profiles) {
         await trx.execute(
-          sql`INSERT INTO "dev-schema".user_profiles (id, "userId", "firstName", "lastName", company, "accountNum", "phoneNum") VALUES (${profile.id},${profile.userId},${profile.firstName},${profile.lastName},${profile.company},${profile.accountNum},${profile.phoneNum})`
+          sql`INSERT INTO "dev-schema".user_profiles 
+              (id, 
+              "user_id", 
+              "first_name", 
+              "last_name", 
+              company, 
+              "account_num", 
+              "phone_num") 
+            VALUES (${profile.id},
+                    ${profile.user_id},
+                    ${profile.first_name},
+                    ${profile.last_name},
+                    ${profile.company},
+                    ${profile.account_num},
+                    ${profile.phone_num})`
         );
       }
+      console.log("User profiles seeded successfully");
     });
   } catch (error) {
     console.error(error);
