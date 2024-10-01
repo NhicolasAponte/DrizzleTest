@@ -1,0 +1,890 @@
+[
+  {
+    "id": "685c5086-132b-4ead-82fa-5234c825eb9f",
+    "user_id": "0a2b0d17-7fc6-46b2-9a95-3b1e77cd3a94",
+    "order_id": "b5af9610-4e77-4eca-b2c2-abc8028483b4",
+    "date_created": "5/1/2024, 1:04:31 PM",
+    "status": "PAID",
+    "amount": 125.24902102397894
+  },
+  {
+    "id": "6b925f34-b51b-43ee-b95c-da6c0651380c",
+    "user_id": "0a2b0d17-7fc6-46b2-9a95-3b1e77cd3a94",
+    "order_id": "3bc90847-fc40-47fa-a251-a081eb4a7665",
+    "date_created": "9/21/2024, 3:18:24 PM",
+    "status": "PAID",
+    "amount": 391.6877689862497
+  },
+  {
+    "id": "40ef78cf-45ee-4b22-bc7e-1db7d664bbac",
+    "user_id": "0a2b0d17-7fc6-46b2-9a95-3b1e77cd3a94",
+    "order_id": "4e916469-0053-49b6-984a-e187967f8f3e",
+    "date_created": "7/15/2024, 11:49:01 AM",
+    "status": "PAID",
+    "amount": 857.6448649484356
+  },
+  {
+    "id": "1269c342-8496-48b6-afe0-05e0e2d1d8e4",
+    "user_id": "0a2b0d17-7fc6-46b2-9a95-3b1e77cd3a94",
+    "order_id": "abd3e7db-1473-47ed-9063-3e3a264f04ea",
+    "date_created": "9/21/2024, 1:12:48 AM",
+    "status": "PENDING",
+    "amount": 553.9017723509969
+  },
+  {
+    "id": "155a006f-8893-48ae-b28a-cf322e3e0dff",
+    "user_id": "0a2b0d17-7fc6-46b2-9a95-3b1e77cd3a94",
+    "order_id": "bf325022-9706-453c-a67a-902e521f583e",
+    "date_created": "9/28/2024, 8:32:20 PM",
+    "status": "PAID",
+    "amount": 22.883393558578824
+  },
+  {
+    "id": "05f1c5c9-5526-4663-aaa7-93ea6678a9fe",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "c404400a-df70-4b21-900a-ed0958dee47d",
+    "date_created": "7/24/2024, 12:15:36 AM",
+    "status": "PENDING",
+    "amount": 732.3070048408691
+  },
+  {
+    "id": "3c5da340-e68d-4b72-9770-02eea0f8220b",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "1e4630c1-35d6-4a9f-8644-bce8cf40951e",
+    "date_created": "6/17/2024, 4:06:36 PM",
+    "status": "PAID",
+    "amount": 160.40750218178567
+  },
+  {
+    "id": "77e0ca25-09dc-4ccb-8be3-b87c5e371d54",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "f1a4e1e7-7601-4226-b53c-9392957dc288",
+    "date_created": "9/6/2024, 6:44:58 PM",
+    "status": "PAID",
+    "amount": 29.231004503476488
+  },
+  {
+    "id": "ddd26c3a-30f8-48ae-9b67-89d6c86a4d77",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "4767e537-b51f-4ea0-a96c-cd0f841aad3d",
+    "date_created": "9/20/2024, 10:21:17 AM",
+    "status": "PAID",
+    "amount": 86.22580398269552
+  },
+  {
+    "id": "9d57e3b5-887b-4ceb-b3c2-f3ec6a35ff66",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "d95eac4a-925f-4197-8ce9-09718aa57c60",
+    "date_created": "9/30/2024, 7:25:02 AM",
+    "status": "PAID",
+    "amount": 336.82852110455894
+  },
+  {
+    "id": "1ad28724-fa5d-4584-accb-e5327be66e90",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "aa302c32-d4a5-4ecd-9a54-ad78bc5e2406",
+    "date_created": "8/29/2024, 9:33:55 PM",
+    "status": "PENDING",
+    "amount": 96.18288386715702
+  },
+  {
+    "id": "aaecaf24-85bb-4321-82bb-baf5c7ad296a",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "9574433f-fc51-4a46-ab49-f5fe17eb5946",
+    "date_created": "9/5/2024, 6:48:39 AM",
+    "status": "PAID",
+    "amount": 678.1930642565808
+  },
+  {
+    "id": "8ba9241d-d07d-417c-aa62-bedcf595fd63",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "1939ec6c-187e-4f6a-a030-a7a51bfc5148",
+    "date_created": "8/7/2024, 9:43:59 PM",
+    "status": "PAID",
+    "amount": 607.979580334274
+  },
+  {
+    "id": "11a1efb2-c25d-4eb1-9750-c2924ba41e54",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "9d14f3de-5069-41d2-93f1-288eb95e44b3",
+    "date_created": "8/18/2024, 10:37:23 PM",
+    "status": "PAID",
+    "amount": 324.5620177214741
+  },
+  {
+    "id": "0423e7f8-d421-475f-9751-de551917a2df",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "30f81591-f7a7-4f75-8337-798e75d53641",
+    "date_created": "8/23/2024, 6:04:40 AM",
+    "status": "PAID",
+    "amount": 114.11791388771219
+  },
+  {
+    "id": "d9c34d3d-16e7-41cc-92ae-66cc3d2fbc15",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "1af32835-6e8a-4ec2-bc42-3f9dd11e2e25",
+    "date_created": "9/26/2024, 8:40:53 PM",
+    "status": "PAID",
+    "amount": 351.2781247867638
+  },
+  {
+    "id": "8ed23e7c-d313-4a14-8211-f982b56ba747",
+    "user_id": "13e8d7fe-72c9-401e-8ce9-6180caea19ba",
+    "order_id": "287ca2f7-398e-4e11-9c42-c324c9f554cd",
+    "date_created": "7/8/2024, 9:28:19 PM",
+    "status": "PAID",
+    "amount": 618.468032316539
+  },
+  {
+    "id": "36b425dd-c457-4b75-a098-ffedcca7c329",
+    "user_id": "a11ef67d-13ef-40b1-997b-5a4b3244d27d",
+    "order_id": "16ab3c05-0b0e-48d7-a729-fd6bc73595e9",
+    "date_created": "7/13/2024, 7:28:30 AM",
+    "status": "PAID",
+    "amount": 786.3241950753929
+  },
+  {
+    "id": "b3a2c7e3-d0cc-4879-ae94-d7be6368f04e",
+    "user_id": "a11ef67d-13ef-40b1-997b-5a4b3244d27d",
+    "order_id": "65cfae28-ffcb-4231-9237-efef45dd9a2b",
+    "date_created": "9/16/2024, 2:28:52 AM",
+    "status": "PENDING",
+    "amount": 586.6928734838743
+  },
+  {
+    "id": "c35561d6-f1cd-4188-9ec1-795fa0909649",
+    "user_id": "a11ef67d-13ef-40b1-997b-5a4b3244d27d",
+    "order_id": "95c8e340-879d-487b-ab5c-804b9237d683",
+    "date_created": "7/17/2024, 9:44:20 PM",
+    "status": "PENDING",
+    "amount": 886.5207047771742
+  },
+  {
+    "id": "68e392fb-f4a7-4d3b-b92f-30a71f9db9bc",
+    "user_id": "a11ef67d-13ef-40b1-997b-5a4b3244d27d",
+    "order_id": "4de69988-c891-45b8-b672-fd1cca424a61",
+    "date_created": "9/29/2024, 9:40:08 AM",
+    "status": "PAID",
+    "amount": 204.11871912692004
+  },
+  {
+    "id": "bcbd51aa-4399-41df-865b-4b0473edd7ec",
+    "user_id": "a11ef67d-13ef-40b1-997b-5a4b3244d27d",
+    "order_id": "c4273b30-4ce0-4ff0-9d5e-814419bc78ea",
+    "date_created": "9/25/2024, 9:50:33 PM",
+    "status": "PENDING",
+    "amount": 798.3911248581605
+  },
+  {
+    "id": "e021a4a0-2b8b-49af-8175-f2ae46417e61",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "b3fb6908-451b-4ef4-92d7-3cac4e74f154",
+    "date_created": "9/3/2024, 6:39:26 PM",
+    "status": "PAID",
+    "amount": 911.1347378419041
+  },
+  {
+    "id": "297d430a-6850-484e-b173-476daacb1be3",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "a96aa7bf-fe5c-499c-9058-0cf5910e9ea4",
+    "date_created": "9/25/2024, 5:41:41 PM",
+    "status": "PAID",
+    "amount": 352.9493659003018
+  },
+  {
+    "id": "0cfd1ac4-6cd4-4ec4-842d-10b2b564472c",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "334ab650-b9c4-46e8-8d53-845d6c93f240",
+    "date_created": "5/22/2024, 2:21:16 PM",
+    "status": "PAID",
+    "amount": 62.22301282963216
+  },
+  {
+    "id": "0ca5b0cb-1736-43a1-af96-32ce547d8c05",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "dad788af-47f3-4f46-8ed8-8fc451f7bfa2",
+    "date_created": "9/4/2024, 9:59:17 PM",
+    "status": "PENDING",
+    "amount": 794.5313916956216
+  },
+  {
+    "id": "8673fb18-3225-4979-bce3-3872197bcd05",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "8c2d2cd2-4d23-49c2-b6c7-0cea09146258",
+    "date_created": "9/1/2024, 11:31:21 AM",
+    "status": "PAID",
+    "amount": 458.9178112906329
+  },
+  {
+    "id": "6019813e-38c5-4f70-baf1-a0ec6606f9e4",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "096822de-1267-4443-928a-8cb2e7179c8d",
+    "date_created": "8/18/2024, 12:13:32 AM",
+    "status": "PAID",
+    "amount": 409.4987191927997
+  },
+  {
+    "id": "fe90cb9d-7a3d-4b8e-b6b5-5d08de75bec3",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "0e1d969d-362e-47d5-82b4-1d181931061b",
+    "date_created": "7/30/2024, 6:58:21 AM",
+    "status": "PAID",
+    "amount": 652.1448779653185
+  },
+  {
+    "id": "7f6c3a50-c156-4f78-877d-d3e3a8c232ef",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "5b838085-6fa5-4160-9537-895f5523bef1",
+    "date_created": "9/16/2024, 5:19:09 AM",
+    "status": "PAID",
+    "amount": 537.3170959282529
+  },
+  {
+    "id": "c3e814a7-1352-45c6-a005-6ed5c8eeed15",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "e8d551cf-e978-4646-b64b-d317c8cac977",
+    "date_created": "7/17/2024, 8:22:18 PM",
+    "status": "PENDING",
+    "amount": 352.89159489255064
+  },
+  {
+    "id": "c378da20-ab06-480a-9773-721460f6abab",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "6297107d-d85f-464f-9c0d-feac5127222d",
+    "date_created": "9/16/2024, 4:04:39 PM",
+    "status": "PENDING",
+    "amount": 477.6843394739645
+  },
+  {
+    "id": "20362e62-67bd-4173-8b82-6067d208ff9f",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "82e3031d-8590-4f10-a03f-88d9c410284a",
+    "date_created": "9/8/2024, 6:20:24 AM",
+    "status": "PENDING",
+    "amount": 923.6130047852238
+  },
+  {
+    "id": "83f8303a-e9c9-437b-92f3-713d19b4a08c",
+    "user_id": "de2c0105-104b-4f40-8fbb-305c3f83e3cb",
+    "order_id": "7ab3b387-315d-4f8a-8509-4577d6a57021",
+    "date_created": "8/22/2024, 8:42:04 PM",
+    "status": "PAID",
+    "amount": 545.6425050844824
+  },
+  {
+    "id": "37baa2bc-b2e9-4432-a4d3-3f351e27fbb1",
+    "user_id": "d468fc49-2807-4ffe-ad10-7309602eafb6",
+    "order_id": "d19fa468-126e-49d4-8348-1a78df59a366",
+    "date_created": "9/25/2024, 2:26:15 AM",
+    "status": "PAID",
+    "amount": 839.0394460889845
+  },
+  {
+    "id": "5b47c308-6250-4d66-87c1-f593033e42d4",
+    "user_id": "d468fc49-2807-4ffe-ad10-7309602eafb6",
+    "order_id": "5f64cbbf-b02b-4345-9730-2ef79f229f83",
+    "date_created": "6/12/2024, 8:01:53 AM",
+    "status": "PENDING",
+    "amount": 735.2984950787283
+  },
+  {
+    "id": "12966721-3206-4da9-95a7-337729238689",
+    "user_id": "d468fc49-2807-4ffe-ad10-7309602eafb6",
+    "order_id": "ebed2228-3bbd-4183-ab36-8ed107fcadd9",
+    "date_created": "9/21/2024, 11:38:48 AM",
+    "status": "PENDING",
+    "amount": 358.6644121120035
+  },
+  {
+    "id": "4f3ac263-dd5f-4985-81b1-8a68eedb3e4d",
+    "user_id": "d468fc49-2807-4ffe-ad10-7309602eafb6",
+    "order_id": "fbb2be2d-07a2-4ae4-8567-8a0ffbd52193",
+    "date_created": "9/17/2024, 11:12:37 AM",
+    "status": "PENDING",
+    "amount": 547.5037528646769
+  },
+  {
+    "id": "2e6c2b43-7bba-4eb1-9643-8a31d22cb2c3",
+    "user_id": "d468fc49-2807-4ffe-ad10-7309602eafb6",
+    "order_id": "b6eee227-e8a5-4411-a733-5c689f1ec05c",
+    "date_created": "4/30/2024, 7:35:46 AM",
+    "status": "PAID",
+    "amount": 24.921954292183692
+  },
+  {
+    "id": "51fa6e8e-9711-46b9-8eef-5d2ec75bb546",
+    "user_id": "d468fc49-2807-4ffe-ad10-7309602eafb6",
+    "order_id": "2be3422d-d844-4b5f-891f-bac94622ef22",
+    "date_created": "9/26/2024, 7:54:05 AM",
+    "status": "PAID",
+    "amount": 943.6433114888437
+  },
+  {
+    "id": "d5a54b3c-764f-46a5-ac90-c4404f8162b0",
+    "user_id": "d468fc49-2807-4ffe-ad10-7309602eafb6",
+    "order_id": "8768f350-4eb1-4c52-be58-db8703982a0b",
+    "date_created": "9/23/2024, 8:23:47 AM",
+    "status": "PENDING",
+    "amount": 171.20366449734448
+  },
+  {
+    "id": "9398c945-5662-4f6e-af2e-234d27b07fd5",
+    "user_id": "d468fc49-2807-4ffe-ad10-7309602eafb6",
+    "order_id": "0e19feea-61fa-44dd-bf4c-ba6eee60955f",
+    "date_created": "7/4/2024, 8:15:38 AM",
+    "status": "PAID",
+    "amount": 977.3969289628894
+  },
+  {
+    "id": "54829a61-cd83-4ea9-84c8-58d2ab5f1533",
+    "user_id": "d468fc49-2807-4ffe-ad10-7309602eafb6",
+    "order_id": "06459709-0376-4073-9905-4e29b4ad545b",
+    "date_created": "8/7/2024, 4:19:16 AM",
+    "status": "PENDING",
+    "amount": 119.0485107318402
+  },
+  {
+    "id": "324c7818-f3a0-4dd1-9a10-0d2f1b3ddfe2",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "829699fd-7f73-43f5-81ba-9d2096d180de",
+    "date_created": "9/22/2024, 7:40:41 AM",
+    "status": "PAID",
+    "amount": 117.97861707763602
+  },
+  {
+    "id": "54b0ee9e-3ba9-4e73-8b88-23014268c3fb",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "a2bd2ab8-e7c2-430c-bd8f-91717ab980f2",
+    "date_created": "9/15/2024, 3:32:22 PM",
+    "status": "PENDING",
+    "amount": 585.0059028130286
+  },
+  {
+    "id": "00e6cbec-e116-407f-8538-24468fe7a986",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "bf280781-7024-44a7-9b0f-44b71cf9a693",
+    "date_created": "8/5/2024, 7:42:40 PM",
+    "status": "PENDING",
+    "amount": 939.7508564316453
+  },
+  {
+    "id": "69ae3106-0ef9-451c-bbd3-1277e7cb264a",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "4c357ef2-1ffe-4aa0-862f-6281b66f363e",
+    "date_created": "9/29/2024, 10:27:55 PM",
+    "status": "PENDING",
+    "amount": 625.8525725004878
+  },
+  {
+    "id": "9ea423a5-fecd-4aed-986d-cde9a74e881c",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "661b128e-1ebb-4d6f-804b-6960694e7c95",
+    "date_created": "8/26/2024, 5:43:37 AM",
+    "status": "PENDING",
+    "amount": 615.3906081220091
+  },
+  {
+    "id": "cd0c232c-2bcf-4ccc-9182-40be20ac1892",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "5bac9873-d973-4295-b024-22dbf211dcab",
+    "date_created": "8/17/2024, 6:54:47 AM",
+    "status": "PAID",
+    "amount": 810.425053346568
+  },
+  {
+    "id": "db87f04b-9d7a-4e8b-89ec-fd8b04ebfe15",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "63732981-3237-4049-8720-3ad871297892",
+    "date_created": "9/2/2024, 11:10:11 PM",
+    "status": "PAID",
+    "amount": 21.243786068293467
+  },
+  {
+    "id": "01a87a50-f99b-4432-ae17-10fdaaefc318",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "07b7b884-90a0-4c69-b3d2-9802ea150eae",
+    "date_created": "9/24/2024, 3:30:18 PM",
+    "status": "PENDING",
+    "amount": 419.0831021963408
+  },
+  {
+    "id": "bad00f67-e3a3-4227-86bf-66312bfc5d6b",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "7788c695-e8bf-45ca-a6bf-0ede5ec25e20",
+    "date_created": "8/8/2024, 10:16:13 AM",
+    "status": "PAID",
+    "amount": 32.80417131968449
+  },
+  {
+    "id": "b0bf5397-9ae1-48d4-8475-f91a84c3e24f",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "92728c36-2bbb-4c22-92d8-b6e30cf67879",
+    "date_created": "9/7/2024, 7:54:58 AM",
+    "status": "PENDING",
+    "amount": 419.4960111321089
+  },
+  {
+    "id": "c3610587-df12-401d-a383-63f235cece5f",
+    "user_id": "56025216-aaf6-4b6c-bcc1-4844f059610a",
+    "order_id": "bb05b012-dd9a-45a9-b2a4-1c477b359a74",
+    "date_created": "8/14/2024, 8:01:01 PM",
+    "status": "PAID",
+    "amount": 193.54288989926215
+  },
+  {
+    "id": "357f0798-91c5-4c80-9f9d-a7ffe81f11c8",
+    "user_id": "6394057c-c6d2-400c-a460-c70a224f3664",
+    "order_id": "97a6a9ea-8573-4523-9ad8-741b8cbf4f6b",
+    "date_created": "9/23/2024, 10:06:51 AM",
+    "status": "PAID",
+    "amount": 593.7855906270546
+  },
+  {
+    "id": "3fdd93eb-ec0f-41f5-8f34-b2c762269847",
+    "user_id": "6394057c-c6d2-400c-a460-c70a224f3664",
+    "order_id": "fad321fb-2eb7-4eea-a50b-ffb881bd9c90",
+    "date_created": "9/15/2024, 2:29:55 AM",
+    "status": "PENDING",
+    "amount": 663.3449714199409
+  },
+  {
+    "id": "f7311bed-f5b1-4055-9125-70de2ea076fa",
+    "user_id": "6394057c-c6d2-400c-a460-c70a224f3664",
+    "order_id": "fdf45ff4-ecd8-41d6-9042-8b4da815ba92",
+    "date_created": "9/23/2024, 11:56:28 PM",
+    "status": "PAID",
+    "amount": 632.1531983247572
+  },
+  {
+    "id": "5e981fcc-dad7-4413-af76-28b07f29e456",
+    "user_id": "6394057c-c6d2-400c-a460-c70a224f3664",
+    "order_id": "10cdd07f-ddca-4558-b56e-86ecf7b78b6f",
+    "date_created": "9/30/2024, 4:57:49 AM",
+    "status": "PENDING",
+    "amount": 397.40684446130234
+  },
+  {
+    "id": "87fa2b1e-cb22-43c8-9203-cf07c6f4cf6d",
+    "user_id": "6394057c-c6d2-400c-a460-c70a224f3664",
+    "order_id": "902f481a-5055-4539-bed5-3f045c95118a",
+    "date_created": "9/24/2024, 6:29:30 AM",
+    "status": "PENDING",
+    "amount": 859.8180387317542
+  },
+  {
+    "id": "43925808-306a-4b84-ad80-59ea495c1088",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "5477ff8d-c51d-4ed6-b9da-f853c9bf1e0f",
+    "date_created": "8/27/2024, 2:10:42 AM",
+    "status": "PAID",
+    "amount": 994.7332256532901
+  },
+  {
+    "id": "deb976be-5e89-40c6-b27e-9d32717ac887",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "895cd8b4-b1dc-46f3-a8e0-38f6a7f8043e",
+    "date_created": "8/25/2024, 4:55:27 PM",
+    "status": "PENDING",
+    "amount": 109.67618140457525
+  },
+  {
+    "id": "d99829b9-73c7-41c7-88e2-93992bff2d47",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "b4d2e991-b50f-49a5-a19f-7b8020e1dbc1",
+    "date_created": "9/2/2024, 2:31:32 AM",
+    "status": "PENDING",
+    "amount": 898.6787238348903
+  },
+  {
+    "id": "1386ae79-b4ea-4b6f-9e54-c8f20943bb2f",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "645c7da2-3984-49ee-b991-c7d5ab0e7777",
+    "date_created": "6/21/2024, 5:42:35 PM",
+    "status": "PENDING",
+    "amount": 415.95153832123066
+  },
+  {
+    "id": "05eb1690-085d-4d39-8ded-4f43523be086",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "894815d6-976f-425d-9420-6445b08fe389",
+    "date_created": "8/14/2024, 9:17:57 AM",
+    "status": "PENDING",
+    "amount": 516.303187948658
+  },
+  {
+    "id": "fca94ff5-e0b7-4e87-9017-e1c3daaf031e",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "b779772c-de54-45f6-9613-078262006c07",
+    "date_created": "10/1/2024, 1:03:56 AM",
+    "status": "PAID",
+    "amount": 357.4486616461119
+  },
+  {
+    "id": "9d981466-853d-428d-b501-3098f4364059",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "0923c1a1-d50c-436c-9fd1-82643bf74d11",
+    "date_created": "7/1/2024, 6:07:56 PM",
+    "status": "PAID",
+    "amount": 425.0134616909842
+  },
+  {
+    "id": "4e836e09-fc40-4499-93d9-582876f685d2",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "0ca36678-7c20-42d7-b153-5946a9fe47dd",
+    "date_created": "9/4/2024, 3:23:24 PM",
+    "status": "PAID",
+    "amount": 94.35762980606776
+  },
+  {
+    "id": "aaabbcb9-fc69-492e-ae6c-da5879354708",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "0a73ae59-be94-4b92-af20-3d1650e3f37a",
+    "date_created": "7/27/2024, 9:03:07 AM",
+    "status": "PAID",
+    "amount": 42.859584435758656
+  },
+  {
+    "id": "1d7cabfc-3dad-403d-8507-e4982283ba34",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "da00b91a-e386-43fa-a022-e5db8529b5ab",
+    "date_created": "10/1/2024, 3:58:13 PM",
+    "status": "PAID",
+    "amount": 416.1275729629821
+  },
+  {
+    "id": "84e95d85-9552-4a5c-8d42-264381be25a9",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "192ca3f2-3a8c-45b8-9ab5-7d5005953d1e",
+    "date_created": "6/24/2024, 4:47:00 PM",
+    "status": "PAID",
+    "amount": 994.2521681582475
+  },
+  {
+    "id": "11c607ab-85ca-476d-b3df-1ce5d6d36629",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "efdba018-98c2-4050-a9f0-c3610302d7f5",
+    "date_created": "8/15/2024, 9:19:17 AM",
+    "status": "PAID",
+    "amount": 633.1562167130924
+  },
+  {
+    "id": "913d457e-601d-4015-adc7-14842f432c8f",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "dea7ce6c-b59a-406f-a721-57669c66b8b0",
+    "date_created": "9/9/2024, 4:40:18 AM",
+    "status": "PAID",
+    "amount": 209.63222005642245
+  },
+  {
+    "id": "7c8cc772-93d7-42c9-a990-bdd287b14fda",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "dc10b1a5-97a6-4215-90f5-616c048ca188",
+    "date_created": "9/12/2024, 8:26:20 AM",
+    "status": "PAID",
+    "amount": 83.59423706614577
+  },
+  {
+    "id": "e32220cc-d972-4f99-a1cc-afcda3d8b034",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "6f5369ae-583d-4e8a-9e03-5244fd16febd",
+    "date_created": "9/7/2024, 8:25:13 AM",
+    "status": "PENDING",
+    "amount": 574.0409274079947
+  },
+  {
+    "id": "deb7f9b2-5648-424e-a43e-b97b45aca929",
+    "user_id": "4151a4aa-becc-432a-a422-76c74cc5dda4",
+    "order_id": "e38708c1-a63d-4289-95ac-383b203398f7",
+    "date_created": "7/16/2024, 8:17:07 PM",
+    "status": "PENDING",
+    "amount": 739.2079498915836
+  },
+  {
+    "id": "5f7025cb-eb2d-4bc6-bcd1-3fb81e4a6924",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "aa61815e-2ee8-46ba-9aac-29cbb588a150",
+    "date_created": "8/3/2024, 8:53:13 AM",
+    "status": "PENDING",
+    "amount": 712.5936183262072
+  },
+  {
+    "id": "1fdd9f0f-8e9b-48bf-bf3f-9969a8ce4a6d",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "08e46169-1a50-46bf-895d-5b0a1589261d",
+    "date_created": "9/21/2024, 12:46:28 AM",
+    "status": "PENDING",
+    "amount": 35.33356456502634
+  },
+  {
+    "id": "acc140e7-5d25-49aa-8c48-32ffe6439e31",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "26708953-f7ad-449f-90e9-b0e80373e7d5",
+    "date_created": "9/25/2024, 2:12:49 AM",
+    "status": "PENDING",
+    "amount": 409.7078450178144
+  },
+  {
+    "id": "95c95f1b-303b-47ce-be49-04a28217a738",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "5d7c1ac7-0f7c-48d3-8585-48a5a115f029",
+    "date_created": "9/18/2024, 2:29:35 AM",
+    "status": "PAID",
+    "amount": 546.3113356891265
+  },
+  {
+    "id": "b4cbfbe7-6f07-49e3-97bd-67d33ff43af7",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "67d1a7cc-a5db-4281-aa5f-f18ce6a57794",
+    "date_created": "7/10/2024, 4:49:42 PM",
+    "status": "PAID",
+    "amount": 907.6257994097821
+  },
+  {
+    "id": "dbe80aef-d661-401b-88ed-307474a0b5a8",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "3c7a4987-4ba2-4f7a-8671-3402671a2a7d",
+    "date_created": "9/20/2024, 4:24:42 PM",
+    "status": "PAID",
+    "amount": 279.1589281844389
+  },
+  {
+    "id": "74db8e12-5ee1-4cef-a01e-7ae6d7bee38b",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "97b466f7-016e-4873-9307-c7dec8ccdd21",
+    "date_created": "6/4/2024, 12:31:15 PM",
+    "status": "PAID",
+    "amount": 313.5929306707832
+  },
+  {
+    "id": "1101b84e-796b-491a-aa0a-5fb43961082c",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "a66d960a-1b8e-406c-af44-3e7246a49441",
+    "date_created": "9/17/2024, 12:45:09 AM",
+    "status": "PENDING",
+    "amount": 36.74373293262412
+  },
+  {
+    "id": "e7f32aff-4f16-45ef-9a2d-a0c7ff0a395a",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "21749af7-2458-4cba-b44c-b9a57ae0976d",
+    "date_created": "9/30/2024, 5:26:00 PM",
+    "status": "PENDING",
+    "amount": 548.8005187372356
+  },
+  {
+    "id": "c4fe8509-52f7-4325-a5b5-6058cf422f84",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "719e3288-1495-4716-a378-2adb6ac8e1c0",
+    "date_created": "9/17/2024, 3:08:00 PM",
+    "status": "PAID",
+    "amount": 80.50175001915628
+  },
+  {
+    "id": "430888b9-8c80-4b1f-8b60-e3de48b25fa6",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "0a31a6f5-b54d-46e8-94f6-ae6bda21c374",
+    "date_created": "9/29/2024, 3:27:55 AM",
+    "status": "PENDING",
+    "amount": 341.46797607204917
+  },
+  {
+    "id": "b6969f75-4ea6-4371-9bd2-f3d40d46f65b",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "7afee5be-bb9b-4837-81d0-f0da2f56b945",
+    "date_created": "8/13/2024, 5:58:57 AM",
+    "status": "PENDING",
+    "amount": 176.3777413328127
+  },
+  {
+    "id": "b98320a0-77d4-485f-a115-c3e70268d6c6",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "e3212cbb-b08d-452a-b1df-c62d18310193",
+    "date_created": "9/24/2024, 6:39:02 AM",
+    "status": "PENDING",
+    "amount": 459.87281148820756
+  },
+  {
+    "id": "b8682af4-a348-42dc-a194-7f316395c40a",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "b26d17d4-eef7-49ce-ba55-2c298a481ade",
+    "date_created": "9/29/2024, 11:44:45 PM",
+    "status": "PENDING",
+    "amount": 227.6555197284238
+  },
+  {
+    "id": "be35a440-b1c2-42f2-bca3-c8d1175117b1",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "4f7a8f1c-aa1c-48ea-b6b4-221042a3f535",
+    "date_created": "7/25/2024, 5:22:50 AM",
+    "status": "PAID",
+    "amount": 199.08323829202513
+  },
+  {
+    "id": "d10e7638-e3c5-47a0-9308-3a05ad9194f7",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "0f0afdda-8d66-460f-bc37-1ac793eb4fff",
+    "date_created": "7/7/2024, 2:39:32 PM",
+    "status": "PENDING",
+    "amount": 993.6544230342037
+  },
+  {
+    "id": "a4546393-2fa6-4fbf-b181-84c9758e42d2",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "cbcd986b-16ef-4751-9bee-6ea60ec889d9",
+    "date_created": "9/20/2024, 9:50:49 AM",
+    "status": "PAID",
+    "amount": 664.0818163280313
+  },
+  {
+    "id": "97a6ba68-340e-444b-ac35-869bd62ddf4e",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "e7793f95-9d2d-4af5-b106-93c293b7ac92",
+    "date_created": "9/27/2024, 4:47:04 AM",
+    "status": "PENDING",
+    "amount": 537.9243613795077
+  },
+  {
+    "id": "b23bc8fb-cf74-46c9-aa82-f7bcd3817e80",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "3675c62a-37ff-4a4a-b237-af7c05b4b08f",
+    "date_created": "10/1/2024, 6:16:55 AM",
+    "status": "PENDING",
+    "amount": 560.057835523514
+  },
+  {
+    "id": "2d8cf6cc-703c-4a48-8e24-7dcadb9963f4",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "d2bee5d0-7bfb-47f5-bd20-3f2ceefe86df",
+    "date_created": "8/28/2024, 6:09:32 AM",
+    "status": "PAID",
+    "amount": 932.96541069202
+  },
+  {
+    "id": "2fd1abe0-3f02-4525-91a4-0502d1ed69dd",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "0c5423d9-cb0d-4f34-8ac1-d2adacf8d6c7",
+    "date_created": "9/5/2024, 8:17:15 PM",
+    "status": "PAID",
+    "amount": 987.0210984555852
+  },
+  {
+    "id": "7ca64ddd-23a6-42ff-914d-c57bc36fb307",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "07c63b80-9b84-4f40-9a99-6feaab3286e0",
+    "date_created": "8/31/2024, 4:32:51 PM",
+    "status": "PENDING",
+    "amount": 84.79238355188889
+  },
+  {
+    "id": "58a067b0-a1bc-40e3-a1cf-b848cb9511ba",
+    "user_id": "804e379e-e9b0-4a42-843e-4c08cf5a0bed",
+    "order_id": "59158cc5-8d1a-4728-b788-93cd05e2304a",
+    "date_created": "9/21/2024, 12:59:27 PM",
+    "status": "PAID",
+    "amount": 929.4653874456495
+  },
+  {
+    "id": "530e4a44-c253-4aec-84f6-30a53212144b",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "92cb99f1-9286-4612-a91e-3cc701c58d49",
+    "date_created": "8/10/2024, 6:25:16 PM",
+    "status": "PENDING",
+    "amount": 875.1393071630813
+  },
+  {
+    "id": "86b3017e-bb20-4a16-971e-1ae2062b815a",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "77a6fbec-2896-4c46-99d0-5a17dc4f25ea",
+    "date_created": "9/16/2024, 5:31:53 AM",
+    "status": "PAID",
+    "amount": 792.7824783366524
+  },
+  {
+    "id": "b69d2965-9a57-44f6-8c78-591d1ed50c67",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "a0091eaf-3adb-4032-aad8-16af0175fbac",
+    "date_created": "8/28/2024, 2:10:20 AM",
+    "status": "PENDING",
+    "amount": 157.73487846210844
+  },
+  {
+    "id": "0d9cc010-3910-4ede-b5ed-93e331736ba4",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "2e2d0bb9-1ce6-40f1-87e8-bed091e64822",
+    "date_created": "9/18/2024, 11:23:44 AM",
+    "status": "PENDING",
+    "amount": 837.0316519114009
+  },
+  {
+    "id": "e8791039-8cca-493e-805b-2bdc7159a222",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "2bc88570-dfcc-4270-9d54-ba90e1f88e95",
+    "date_created": "8/22/2024, 4:32:31 AM",
+    "status": "PENDING",
+    "amount": 298.13772313204237
+  },
+  {
+    "id": "bc615982-55fe-4fba-9a55-ae6522928a56",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "92554a25-e5b9-498d-8662-fbaa6aefc2f7",
+    "date_created": "9/4/2024, 4:40:06 AM",
+    "status": "PAID",
+    "amount": 182.61388578304815
+  },
+  {
+    "id": "67084391-add8-4c02-a3c0-457a7e7c2778",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "b36fc438-b2fb-4916-af3d-5f1f163b84cd",
+    "date_created": "9/17/2024, 3:07:24 PM",
+    "status": "PAID",
+    "amount": 553.8368843351216
+  },
+  {
+    "id": "281eb87e-1c12-45c9-b805-d0dee899a496",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "52a6bc9c-a96c-4e67-ae1e-3ea30a803b71",
+    "date_created": "9/1/2024, 8:09:45 AM",
+    "status": "PENDING",
+    "amount": 491.4932410449955
+  },
+  {
+    "id": "a87fa7af-4524-4bb5-bad7-7c9d9230bceb",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "ed0c26e0-fd20-4a57-acdf-89af59596379",
+    "date_created": "10/1/2024, 5:17:41 AM",
+    "status": "PAID",
+    "amount": 602.6122016327618
+  },
+  {
+    "id": "5342cb73-f1de-4d16-9531-a7deb28065b0",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "06a4adab-6e59-4017-9ef1-0d2cf3005869",
+    "date_created": "9/25/2024, 4:15:40 AM",
+    "status": "PAID",
+    "amount": 918.0204975407731
+  },
+  {
+    "id": "c5f6f12c-32ba-41ba-ab5e-2100def25a3d",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "f15f905e-4331-4507-b45a-a3fbe04c7882",
+    "date_created": "7/24/2024, 11:39:13 AM",
+    "status": "PAID",
+    "amount": 409.33131986496306
+  },
+  {
+    "id": "347fcdc8-ef5d-4dde-a94d-f6d80d772b60",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "8bcbafa7-9252-406c-8594-5b69e25a096f",
+    "date_created": "9/27/2024, 4:35:19 AM",
+    "status": "PENDING",
+    "amount": 693.9891991683289
+  },
+  {
+    "id": "3eadbd6a-e577-4aaf-907f-604d31dd3117",
+    "user_id": "2e421058-ee40-4e41-a8fb-3a24cd842e18",
+    "order_id": "63dae547-22f0-49c7-b682-b8bb12845d1e",
+    "date_created": "9/26/2024, 5:10:42 AM",
+    "status": "PENDING",
+    "amount": 413.8392641811341
+  }
+]

@@ -26,6 +26,7 @@ import {
 import { ordersArray } from "./seed-data/orders";
 import { GetUsers, GetUsersByState } from "./fetch-queries/get-users";
 import { GetOrdersByUser } from "./fetch-queries/get-orders";
+import { generateInvoices } from "./seed-functions/generate-invoices";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -61,6 +62,7 @@ async function main() {
   // generateGlassInventory();
   // random number of order items per existing order
   // generateOrderItems();
+  generateInvoices();
 
   // -------- SEED ORDER --------
   // seedUsers();
