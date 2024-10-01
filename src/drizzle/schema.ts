@@ -14,7 +14,7 @@ import {
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
-//NOTE TODO: debug: process.env.NODE_ENV === 'development' ? process.env.DEV_SCHEMA! : process.env.PROD_SCHEMA!
+
 export const dbSchema = pgSchema(
   process.env.NODE_ENV === "production"
     ? process.env.PROD_SCHEMA!
@@ -61,7 +61,6 @@ export const ShippingInfoTable = dbSchema.table("shipping_info", {
 // users can add and delete billing info at any time
 // relevant billing info will be serialized and stored in the order table
 // one-to-many with user table
-// NOTE TODO: change field names and change definitions in generating functions to match
 export const BillingInfoTable = dbSchema.table("billing_info", {
   id: serial("id").primaryKey(),
   user_id: uuid("user_id")
@@ -91,7 +90,8 @@ export const OrderTable = dbSchema.table("orders", {
   billing_info: jsonb("billing_info").notNull(),
   shipping_info: jsonb("shipping_info").notNull(),
   status: varchar("status", { length: 255 }).notNull(),
-  date_created: timestamp("date_created").notNull(),
+  // NOTE TODO: determine if mode: string is needed 
+  date_created: timestamp("date_created").notNull(), 
   date_updated: timestamp("date_updated").notNull(),
   date_submitted: timestamp("date_submitted"),
 });
@@ -142,6 +142,15 @@ export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
     .notNull()
     .references(() => UserTable.id),
 });
+
+export const InvoiceTable = dbSchema.table("invoices", {
+  id: uuid("id").primaryKey(),
+  user_id: uuid("user_id").notNull().references(() => UserTable.id, { onDelete: "cascade" }),
+  order_id: uuid("order_id").notNull().references(() => OrderTable.id, { onDelete: "cascade" }),
+  date_created: timestamp("date_created").notNull(),
+  status: varchar("status", { length: 255 }).notNull(),
+  amount: real("total").notNull(),
+})
 
 // tags need a user_id, since each user creates tags that are only
 // useful to them

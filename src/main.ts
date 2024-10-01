@@ -24,6 +24,8 @@ import {
   SeedOrders,
 } from "./seeding-queries/seed-orders-items";
 import { ordersArray } from "./seed-data/orders";
+import { GetUsers, GetUsersByState } from "./fetch-queries/get-users";
+import { GetOrdersByUser } from "./fetch-queries/get-orders";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -93,6 +95,11 @@ async function main() {
   //     ? process.env.PROD_SCHEMA!
   //     : process.env.DEV_SCHEMA!
   // );
+
+  // FETCH QUERIES 
+  // GetUsers();
+  // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
+  // GetUsersByState("Minnesota");
 }
 
 main()
