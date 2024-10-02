@@ -2,6 +2,7 @@ import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { ordersArray } from "../seed-data/orders";
 import { orderItemsArray } from "../seed-data/order-items";
+import { invoicesArray } from "../seed-data/invoices";
 
 export async function SeedOrders() {
   console.log("seeding orders ...");
@@ -68,4 +69,34 @@ export async function SeedOrderItems() {
     } catch (error) {
         console.error(error);
     }
+}
+
+export async function SeedInvoices() {
+  console.log("seeding invoices ...");
+
+  try {
+    await db.transaction(async (trx) => {
+      for ( const invoice of invoicesArray) {
+        await trx.execute(
+          sql`INSERT INTO ${process.env.DEV_SCHEMA}.invoices
+                        (id,
+                        user_id,
+                        order_id,
+                        date_created,
+                        status,
+                        amount)
+              VALUES (${invoice.id},
+                      ${invoice.user_id},
+                      ${invoice.order_id},
+                      ${invoice.date_created},
+                      ${invoice.status},
+                      ${invoice.amount})`
+        );
+      }
+      console.log("Invoices seeded successfully");
+    })
+  }
+  catch (error) {
+    console.error(error);
+  }
 }

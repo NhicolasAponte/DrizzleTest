@@ -21,7 +21,11 @@ function generateRandomInvoice(
   const id = uuidv4();
   const statusRand = Math.floor(Math.random() * 2) + 1;
   const status = statusRand % 2 === 0 ? "PENDING" : "PAID";
-  const amount = Math.random() * 1000; // NOTE TODO: round to two decimal places
+  const amountRandomizer = Math.floor(Math.random() * 2) + 1;
+  const amount =
+    amountRandomizer % 2 === 0
+      ? parseFloat((Math.random() * 1000 + 120).toFixed(2))
+      : parseFloat((Math.random() * 1000000 + 5000).toFixed(2)); 
   const dateCreated = faker.date
     .between({ from: dateSubmitted, to: new Date() })
     .toLocaleString();

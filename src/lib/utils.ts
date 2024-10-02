@@ -27,12 +27,33 @@ export async function getPGSchema() {
 // FROM pg_catalog.pg_namespace;
 
 export function consoleLogLoop() {
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 100; i++) {
+    console.log("--------------------");
+
     let num = Math.random() * 1000;
-    num = num > 99 ? num : num + 100;
+    // num = num > 99 ? num : num + 100;
     console.log("num:", num);
+
+    const amount = parseFloat(num.toFixed(2));
+    console.log("amount:", amount);
+    console.log("type", typeof amount);
+    console.log("amount in dollars:", dollarStringFormat(amount));
   }
+  console.log("13589.6:", dollarStringFormat(13589.6));
+  console.log("13589.6:", formatCurrency(13589.6));
+  console.log("-------------------- LOOP END --------------------");
 }
+
+export function dollarStringFormat(amount: number): string {
+  return `$${amount.toFixed(2)}`;
+}
+
+export const formatCurrency = (amount: number) => {
+  return (amount).toLocaleString("en-US", { // NOTE: use amount / 100 if storing everything in cents
+    style: "currency",
+    currency: "USD",
+  });
+};
 
 // function for testing date functions
 export function compareDateToStringFunctions() {

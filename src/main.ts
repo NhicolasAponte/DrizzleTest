@@ -7,7 +7,12 @@ import { generateOrders } from "./seed-functions/generate-orders";
 import { generateShippingInfo } from "./seed-functions/generate-shippingInfo";
 import { generateBillingInfo } from "./seed-functions/generate-billingInfo";
 import { generateProducts } from "./seed-functions/generate-products";
-import { DropSchema, getAllSchema, numOrders } from "./lib/utils";
+import {
+  consoleLogLoop,
+  DropSchema,
+  getAllSchema,
+  numOrders,
+} from "./lib/utils";
 import { generateGlassInventory } from "./seed-functions/generate-glass-inventory";
 import { generateOrderItems } from "./seed-functions/generate-order-items";
 import { SeedUserProfiles, seedUsers } from "./seeding-queries/seed-users";
@@ -20,6 +25,7 @@ import {
   SeedProducts,
 } from "./seeding-queries/seed-product-inventory";
 import {
+  SeedInvoices,
   SeedOrderItems,
   SeedOrders,
 } from "./seeding-queries/seed-orders-items";
@@ -62,7 +68,7 @@ async function main() {
   // generateGlassInventory();
   // random number of order items per existing order
   // generateOrderItems();
-  generateInvoices();
+  // generateInvoices();
 
   // -------- SEED ORDER --------
   // seedUsers();
@@ -75,6 +81,12 @@ async function main() {
 
   // SeedOrders();
   // SeedOrderItems();
+  SeedInvoices();
+
+  // -------------- FETCH QUERIES --------------
+  // GetUsers();
+  // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
+  // GetUsersByState("Minnesota");
 
   // const items: number[] = [1, 2, 3, 4, 5, 6];
   // let item = 7 //Math.floor(Math.random() * 1000);
@@ -97,11 +109,7 @@ async function main() {
   //     ? process.env.PROD_SCHEMA!
   //     : process.env.DEV_SCHEMA!
   // );
-
-  // FETCH QUERIES 
-  // GetUsers();
-  // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
-  // GetUsersByState("Minnesota");
+  // consoleLogLoop();
 }
 
 main()
