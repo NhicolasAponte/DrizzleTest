@@ -6,7 +6,7 @@ import { profiles } from "../seed-data/user-profiles";
 
 export async function seedUsers() {
   console.log("seeding users ...");
-
+  const schema = process.env.NODE_ENV === "production" ? process.env.PROD_SCHEMA! : process.env.DEV_SCHEMA!;
   try {
     await db.transaction(async (trx) => {
       //await trx.execute(sql`TRUNCATE TABLE users`);
@@ -15,7 +15,7 @@ export async function seedUsers() {
 
       for (const user of users) {
         await trx.execute(
-          sql`INSERT INTO "dev-schema".users 
+          sql`INSERT INTO "${sql.raw(schema)}".users 
                       (id, 
                       email, 
                       password, 

@@ -10,6 +10,7 @@ import { generateProducts } from "./seed-functions/generate-products";
 import {
   consoleLogLoop,
   DropSchema,
+  FlipCoin,
   getAllSchema,
   numOrders,
 } from "./lib/utils";
@@ -33,6 +34,8 @@ import { ordersArray } from "./seed-data/orders";
 import { GetUsers, GetUsersByState } from "./fetch-queries/get-users";
 import { GetOrdersByUser } from "./fetch-queries/get-orders";
 import { generateInvoices } from "./seed-functions/generate-invoices";
+import { dbSchema } from "./drizzle/schema";
+import { pgSchema } from "drizzle-orm/pg-core";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -54,7 +57,7 @@ async function main() {
 
   // CREATE TABLE "order-handling"."user" (name text, lastname text, email text);
 
-  // -------- GENERATE ORDER --------
+  // -------- GENERATE SEQUENCE --------
   // generateUsers(10);
   // generateUserProfiles(); // 1 profile per user
 
@@ -70,7 +73,7 @@ async function main() {
   // generateOrderItems();
   // generateInvoices();
 
-  // -------- SEED ORDER --------
+  // -------- SEED SEQUENCE --------
   // seedUsers();
   // SeedUserProfiles();
   // seedShippingInfo();
@@ -81,13 +84,31 @@ async function main() {
 
   // SeedOrders();
   // SeedOrderItems();
-  SeedInvoices();
+  // SeedInvoices();
 
   // -------------- FETCH QUERIES --------------
   // GetUsers();
   // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
   // GetUsersByState("Minnesota");
 
+  // -------------------------------------------
+  for (let i = 0; i < 100; i++){
+    console.log("------------------------------------------------");
+    const schema_name = FlipCoin() ? "test-name" : undefined;
+    console.log(schema_name);
+    const newSchema = pgSchema(schema_name);
+    console.log(newSchema);
+    
+    if(!newSchema.schemaName){
+      console.log("newSchema name exists");
+      throw new Error("newSchema name does not exist");
+    }
+    else {
+      console.log("newSchema name does not exist");
+    }
+  }
+
+  // console.log(dbSchema);
   // const items: number[] = [1, 2, 3, 4, 5, 6];
   // let item = 7 //Math.floor(Math.random() * 1000);
   // // // in operator checks if a property is part of some object

@@ -17,12 +17,17 @@ import {
 } from "drizzle-orm/pg-core";
 
 // NOTE TODO: optimize date types 
+// NOTE TOD: use CHECK constraints instead of enums 
 
 export const dbSchema = pgSchema(
   process.env.NODE_ENV === "production"
     ? process.env.PROD_SCHEMA!
     : process.env.DEV_SCHEMA!
 );
+// NOTE TODO: is this the best place to throw this error 
+if (!dbSchema.schemaName) {
+  throw new Error("Schema not found");
+}
 
 export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
 

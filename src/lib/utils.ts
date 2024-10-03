@@ -137,3 +137,7 @@ export function numOrders() {
 
   return numOrders;
 }
+
+export const FlipCoin = () => {
+  return Math.random() > 0.5;
+}
