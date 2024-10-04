@@ -1,5 +1,6 @@
 import { db } from "../drizzle/db";
 import {
+  InvoiceTable,
   OrderTable,
   ShippingInfoTable,
   UserProfileTable,
@@ -53,3 +54,5 @@ export async function GetUsersByState(state: string) {
     console.error(error);
   }
 }
+
+

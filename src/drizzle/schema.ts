@@ -38,7 +38,9 @@ export const UserTable = dbSchema.table("users", {
   password: varchar("password", { length: 255 }).notNull(),
   role: UserRole("role").default("USER"),
 });
-
+// user profile and and user tables could be one table, but the profile is 
+// more likely to change, so if i keep them separate, the user 
+// table, which has credentials, is less likely to need modification  
 // one-to-one with user table
 export const UserProfileTable = dbSchema.table("user_profiles", {
   id: serial("id").primaryKey(),

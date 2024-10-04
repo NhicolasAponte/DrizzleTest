@@ -89,7 +89,7 @@ async function main() {
   // -------------- FETCH QUERIES --------------
   // GetUsers();
   // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
-  // GetUsersByState("Minnesota");
+  GetUsersByState("Minnesota");
 
   // -------------------------------------------
 
