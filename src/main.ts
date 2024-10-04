@@ -59,7 +59,7 @@ async function main() {
 
   // -------- GENERATE SEQUENCE --------
   // generateUsers(10);
-  // generateUserProfiles(); // 1 profile per user
+// generateUserProfiles(); // 1 profile per user
 
   // generateShippingInfo(); // 1 per user
   // generateBillingInfo(); // 1 per user
@@ -92,21 +92,7 @@ async function main() {
   // GetUsersByState("Minnesota");
 
   // -------------------------------------------
-  for (let i = 0; i < 100; i++){
-    console.log("------------------------------------------------");
-    const schema_name = FlipCoin() ? "test-name" : undefined;
-    console.log(schema_name);
-    const newSchema = pgSchema(schema_name);
-    console.log(newSchema);
-    
-    if(!newSchema.schemaName){
-      console.log("newSchema name exists");
-      throw new Error("newSchema name does not exist");
-    }
-    else {
-      console.log("newSchema name does not exist");
-    }
-  }
+
 
   // console.log(dbSchema);
   // const items: number[] = [1, 2, 3, 4, 5, 6];

@@ -2,6 +2,7 @@ import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { shippingInfoArray } from "../seed-data/shipping-info";
 import { billingInfoArray } from "../seed-data/billing-info";
+import { SchemaName } from "../lib/utils";
 
 
 export const seedShippingInfo = async () => {
@@ -11,7 +12,7 @@ export const seedShippingInfo = async () => {
     await db.transaction(async (trx) => {
       for (const shippingInfo of shippingInfoArray) {
         await trx.execute(
-          sql`INSERT INTO "dev-schema".shipping_info 
+          sql`INSERT INTO "${sql.raw(SchemaName())}".shipping_info 
                   (id, 
                   user_id, 
                   address, 
@@ -44,7 +45,7 @@ export async function SeedBillingInfo() {
         await db.transaction(async (trx) => {
         for (const billingInfo of billingInfoArray) {
           await trx.execute(
-            sql`INSERT INTO "dev-schema".billing_info 
+            sql`INSERT INTO "${sql.raw(SchemaName())}".billing_info 
                     (id, 
                     user_id, 
                     address, 

@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
+import { pgSchema } from "drizzle-orm/pg-core";
 
 export async function DropSchema(schema_name: string) {
   await db.execute(sql`DROP SCHEMA IF EXISTS "${schema_name}" CASCADE`);
@@ -25,6 +26,12 @@ export async function getPGSchema() {
 // sql query to get all schema
 // SELECT nspname
 // FROM pg_catalog.pg_namespace;
+
+export function SchemaName(){
+  return process.env.NODE_ENV === "production"
+    ? process.env.PROD_SCHEMA!
+    : process.env.DEV_SCHEMA!;
+};
 
 export function consoleLogLoop() {
   for (let i = 0; i < 100; i++) {
@@ -140,4 +147,24 @@ export function numOrders() {
 
 export const FlipCoin = () => {
   return Math.random() > 0.5;
+}
+
+export const TestUndefinedSchemaName = () => {
+  for (let i = 0; i < 10; i++){
+    console.log("------------------------------------------------");
+    
+    const schema_name = "" // FlipCoin() ? "test-name" : undefined;
+    console.log("SCHEMA NAME: ", schema_name);
+    
+    const newSchema = pgSchema(schema_name); 
+    console.log(newSchema);
+    
+    if(!newSchema.schemaName){
+      console.log("newSchema name does not exist");
+      throw new Error("newSchema name does not exist");
+    }
+    else {
+      console.log("newSchema name exists");
+    }
+  }
 }

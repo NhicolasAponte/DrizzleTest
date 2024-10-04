@@ -3,6 +3,7 @@ import { db } from "../drizzle/db";
 import { ordersArray } from "../seed-data/orders";
 import { orderItemsArray } from "../seed-data/order-items";
 import { invoicesArray } from "../seed-data/invoices";
+import { SchemaName } from "../lib/utils";
 
 export async function SeedOrders() {
   console.log("seeding orders ...");
@@ -13,7 +14,7 @@ export async function SeedOrders() {
         const serializedBillingInfo = JSON.stringify(order.billing_info);
         const serializedShippingInfo = JSON.stringify(order.shipping_info);
         await trx.execute(
-          sql`INSERT INTO "dev-schema".orders 
+          sql`INSERT INTO "${sql.raw(SchemaName())}".orders 
                       (id,
                       "user_id",
                       "order_name",
@@ -49,7 +50,7 @@ export async function SeedOrderItems() {
             for (const item of orderItemsArray) {
                 const serializedProductConfig = JSON.stringify(item.product_config);
                 await trx.execute(
-                    sql`INSERT INTO "dev-schema".order_items
+                    sql`INSERT INTO "${sql.raw(SchemaName())}".order_items
                         (id,
                         "order_id",
                         "product_type_id",
@@ -78,7 +79,7 @@ export async function SeedInvoices() {
     await db.transaction(async (trx) => {
       for ( const invoice of invoicesArray) {
         await trx.execute(
-          sql`INSERT INTO ${process.env.DEV_SCHEMA}.invoices
+          sql`INSERT INTO "${sql.raw(SchemaName())}"."invoices"
                         (id,
                         user_id,
                         order_id,

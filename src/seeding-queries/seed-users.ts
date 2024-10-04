@@ -3,10 +3,11 @@ import { db } from "../drizzle/db";
 import { users } from "../seed-data/users";
 import { UserTable } from "../drizzle/schema";
 import { profiles } from "../seed-data/user-profiles";
+import { SchemaName } from "../lib/utils";
 
 export async function seedUsers() {
   console.log("seeding users ...");
-  const schema = process.env.NODE_ENV === "production" ? process.env.PROD_SCHEMA! : process.env.DEV_SCHEMA!;
+
   try {
     await db.transaction(async (trx) => {
       //await trx.execute(sql`TRUNCATE TABLE users`);
@@ -15,7 +16,7 @@ export async function seedUsers() {
 
       for (const user of users) {
         await trx.execute(
-          sql`INSERT INTO "${sql.raw(schema)}".users 
+          sql`INSERT INTO "${sql.raw(SchemaName())}".users 
                       (id, 
                       email, 
                       password, 
@@ -41,7 +42,7 @@ export async function SeedUserProfiles() {
     await db.transaction(async (trx) => {
       for (const profile of profiles) {
         await trx.execute(
-          sql`INSERT INTO "dev-schema".user_profiles 
+          sql`INSERT INTO "${sql.raw(SchemaName())}".user_profiles 
               (id, 
               "user_id", 
               "first_name", 

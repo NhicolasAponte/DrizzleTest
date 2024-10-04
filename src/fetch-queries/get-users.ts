@@ -13,11 +13,15 @@ export async function GetUsers() {
 
   try {
     const users = await db.select({ id: UserTable.id }).from(UserTable);
-    console.log(users);
-    const user = users[0] as User;
-    console.log("USER:", user);
-    console.log(typeof user);
-
+    // console.log(users);
+    // const user = users[0] as User;
+    // console.log("USER:", user);
+    // console.log(typeof user);
+    console.log("COUNT: ", users.length);
+    for ( const user of users){
+      console.log("----")
+      console.log(user);
+    }
     console.log("Users fetched successfully");
   } catch (error) {
     console.error(error);
