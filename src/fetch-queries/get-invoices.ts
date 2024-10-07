@@ -1,6 +1,6 @@
 import { db } from "../drizzle/db";
 import { InvoiceTable, UserProfileTable, UserTable } from "../drizzle/schema";
-import { eq } from "drizzle-orm";
+import { asc, desc, eq } from "drizzle-orm";
 
 export async function GetInvoiceByAmountWithUser() {
   console.log("fetching invoices by amount with user");
@@ -15,13 +15,17 @@ export async function GetInvoiceByAmountWithUser() {
         status: InvoiceTable.status,
         amount: InvoiceTable.amount,
         userName: UserProfileTable.first_name,
+        lastName: UserProfileTable.last_name,
+        company: UserProfileTable.company,
       })
       .from(InvoiceTable)
       .innerJoin(
         UserProfileTable,
-        eq(InvoiceTable.user_id, UserProfileTable.id)
+        eq(InvoiceTable.user_id, UserProfileTable.user_id)
       )
-      .orderBy(InvoiceTable.amount);
+    //   .orderBy(desc(InvoiceTable.amount), asc(InvoiceTable.date_created))
+      .orderBy(asc(InvoiceTable.date_created), desc(InvoiceTable.amount) )
+      .limit(100);
 
     console.log(invoices);
     return invoices;
@@ -31,8 +35,8 @@ export async function GetInvoiceByAmountWithUser() {
 }
 
 // Update the services object to include the new function
-export const services = {
-  GetInvoiceByAmount: {
-    WithUser: GetInvoiceByAmountWithUser,
-  },
-};
+// export const services = {
+//   GetInvoiceByAmount: {
+//     WithUser: GetInvoiceByAmountWithUser,
+//   },
+// }; 

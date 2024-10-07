@@ -524,6 +524,13 @@ https://www.youtube.com/watch?v=dtLpWR98HfE
 optimizing dockerized nextjs app 
 
 
+xxx
+--------------- SQL ---------------
+
+ORDERBY: Multiple parameters 
+Primary Sorting: The primary sorting by date_created ensures that the invoices are listed from the oldest to the newest.
+Secondary Sorting: The secondary sorting by amount ensures that within each date, invoices are listed from the highest amount to the lowest amount.
+Combined Effect: The combined effect is that you get a list of invoices ordered by date, and within each date, the invoices are ordered by amount in descending order.
 
 -----------------------------------------
 

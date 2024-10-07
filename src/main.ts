@@ -36,6 +36,7 @@ import { GetOrdersByUser } from "./fetch-queries/get-orders";
 import { generateInvoices } from "./seed-functions/generate-invoices";
 import { dbSchema } from "./drizzle/schema";
 import { pgSchema } from "drizzle-orm/pg-core";
+import { GetInvoiceByAmountWithUser } from "./fetch-queries/get-invoices";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -89,8 +90,8 @@ async function main() {
   // -------------- FETCH QUERIES --------------
   // GetUsers();
   // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
-  GetUsersByState("Minnesota");
-
+  // GetUsersByState("Minnesota");
+  GetInvoiceByAmountWithUser();
   // -------------------------------------------
 
 
