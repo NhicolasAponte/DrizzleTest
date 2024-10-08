@@ -8,7 +8,8 @@ export type Invoice = {
   id: string;
   user_id: string;
   order_id: string;
-  date_created: string;
+  date_created: Date;
+  date_created_tz: Date;
   status: string;
   amount: number;
 };
@@ -28,12 +29,13 @@ function generateRandomInvoice(
       : parseFloat((Math.random() * 1000000 + 5000).toFixed(2)); 
   const dateCreated = faker.date
     .between({ from: dateSubmitted, to: new Date() })
-    .toLocaleString();
+    //.toLocaleString();
   return {
     id,
     user_id: userId,
     order_id: orderId,
     date_created: dateCreated,
+    date_created_tz: dateCreated,
     status,
     amount,
   };

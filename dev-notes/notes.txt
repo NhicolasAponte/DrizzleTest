@@ -523,14 +523,38 @@ setting up postgresql and docker with an express server
 https://www.youtube.com/watch?v=dtLpWR98HfE
 optimizing dockerized nextjs app 
 
+xxx 
+--------------- QUERIES ---------------
+
+PERFORMANCE: https://orm.drizzle.team/docs/perf-queries 
+you can reduce overhead by using drizzle's prepared query API: 
+
+operations that occur when you run a query on the database: 
+all the configurations of the query builder got concatenated to the SQL string
+that string and params are sent to the database driver
+driver compiles SQL query to the binary SQL executable format and sends it to the database
+With prepared statements you do SQL concatenation once on the Drizzle ORM side and then database driver is able to reuse precompiled binary SQL instead of parsing query all the time. It has extreme performance benefits on large SQL queries.
+
+const db = drizzle(...);
+
+const prepared = db.select().from(customers).prepare("statement_name");
+
+const res1 = await prepared.execute();
+const res2 = await prepared.execute();
+const res3 = await prepared.execute();
 
 xxx
 --------------- SQL ---------------
 
-ORDERBY: Multiple parameters 
+ORDERBY: sorts the result set
+- Multiple parameters 
 Primary Sorting: The primary sorting by date_created ensures that the invoices are listed from the oldest to the newest.
 Secondary Sorting: The secondary sorting by amount ensures that within each date, invoices are listed from the highest amount to the lowest amount.
 Combined Effect: The combined effect is that you get a list of invoices ordered by date, and within each date, the invoices are ordered by amount in descending order.
+
+
+GROUPBY: groups rows that have the same value in the specified columns into summary rows: ex: group by city => the result is rows by city 
+- GROUPBY is typically combine with aggregate function to perform queries such as : number of customers per city 
 
 -----------------------------------------
 

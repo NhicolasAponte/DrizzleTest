@@ -1,3 +1,4 @@
+import { tr } from "@faker-js/faker";
 import {
   boolean,
   date,
@@ -16,7 +17,8 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-// NOTE TODO: optimize date types 
+// NOTE TODO: optimize date types - use timestamptz instead of timestamp 
+// SET TIMEZONE in db connection 
 // NOTE TOD: use CHECK constraints instead of enums 
 
 export const dbSchema = pgSchema(
@@ -52,6 +54,7 @@ export const UserProfileTable = dbSchema.table("user_profiles", {
   company: varchar("company", { length: 255 }),
   account_num: varchar("account_num", { length: 255 }),
   phone_num: varchar("phone_num", { length: 255 }),
+  // last login? we need a way to determine inactive users 
 });
 
 // one-to-many with user table
@@ -101,9 +104,10 @@ export const OrderTable = dbSchema.table("orders", {
   shipping_info: jsonb("shipping_info").notNull(),
   status: varchar("status", { length: 255 }).notNull(),
   // NOTE TODO: determine if mode: string is needed
-  date_created: timestamp("date_created").notNull(),
-  date_updated: timestamp("date_updated").notNull(),
-  date_submitted: timestamp("date_submitted"),
+  date_created: timestamp("date_created", { withTimezone: true }).notNull(),
+  date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
+  date_submitted: timestamp("date_submitted", { withTimezone: true }),
+  date_shipped: timestamp("date_shipped", { withTimezone: true }),
 });
 // one-to-many with order table
 export const OrderItemTable = dbSchema.table("order_items", {
@@ -127,8 +131,8 @@ export const ProductTable = dbSchema.table("products", {
   alt: varchar("alt", { length: 255 }),
   description: varchar("description", { length: 255 }),
   config_options: jsonb("config_options"),
-  date_created: timestamp("date_created").notNull(),
-  date_updated: timestamp("date_updated").notNull(),
+  date_created: timestamp("date_created", { withTimezone: true }).notNull(),
+  date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
 });
 
 export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
@@ -146,8 +150,8 @@ export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
   // quantity_on_order: integer("quantity"),
   // supplier_id: uuid("supplier_id").notNull(), // not necessary as a standalone field since it'll be part of supply orders
   quantity_incoming: jsonb("quantity_incoming"),
-  date_created: timestamp("date_created").notNull(),
-  date_updated: timestamp("date_updated").notNull(),
+  date_created: timestamp("date_created", { withTimezone: true }).notNull(),
+  date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
   updated_by: uuid("updated_by")
     .notNull()
     .references(() => UserTable.id),
@@ -161,10 +165,16 @@ export const InvoiceTable = dbSchema.table("invoices", {
   order_id: uuid("order_id")
     .notNull()
     .references(() => OrderTable.id, { onDelete: "cascade" }),
-  date_created: timestamp("date_created").notNull(),
+  date_created: timestamp("date_created", { withTimezone: true}).notNull(),
   status: varchar("status", { length: 255 }).notNull(),
   amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
 });
+
+// export const DateTable = dbSchema.table("dates", {
+//   id: serial("id").primaryKey(),
+//   date_tz: timestamp("date_tz", { withTimezone: true }).notNull(),
+//   date_no_tz: timestamp("date_no_tz").notNull(),
+// });
 
 // tags need a user_id, since each user creates tags that are only
 // useful to them

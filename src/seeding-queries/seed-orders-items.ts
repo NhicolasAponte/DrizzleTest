@@ -84,12 +84,14 @@ export async function SeedInvoices() {
                         user_id,
                         order_id,
                         date_created,
+                        date_created_tz,
                         status,
                         amount)
               VALUES (${invoice.id},
                       ${invoice.user_id},
                       ${invoice.order_id},
                       ${invoice.date_created},
+                      ${invoice.date_created_tz},
                       ${invoice.status},
                       ${invoice.amount})`
         );
