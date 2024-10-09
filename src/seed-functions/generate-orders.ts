@@ -19,6 +19,8 @@ export type Order = {
   date_created: string;
   date_updated: string;
   date_submitted?: string;
+  date_shipped?: string; 
+  date_delivered?: string; 
 };
 
 function generateRandomOrder(
@@ -49,6 +51,8 @@ function generateRandomOrder(
   const dateCreated = faker.date.past({ years: 2 }).toLocaleString();
   let dateUpdated = undefined;
   let dateSubmitted = undefined;
+  let dateShipped = undefined;
+  let dateDelivered = undefined;
 
   if (status != "DRAFT") {
     dateSubmitted = faker.date.recent({ days: 200 }).toLocaleString();
@@ -60,6 +64,13 @@ function generateRandomOrder(
     dateUpdated = faker.date.recent({ days: 200 }).toLocaleString();
     while (dateUpdated < dateCreated) {
       dateUpdated = faker.date.recent({ days: 100 }).toLocaleString();
+    }
+  }
+
+  if (status === "SHIPPED" && dateSubmitted) {
+    dateShipped = faker.date.recent({ days: 200 }).toLocaleString();
+    while (dateShipped < dateSubmitted) {
+      dateShipped = faker.date.recent({ days: 200 }).toLocaleString();
     }
   }
 

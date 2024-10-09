@@ -108,6 +108,7 @@ export const OrderTable = dbSchema.table("orders", {
   date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
   date_submitted: timestamp("date_submitted", { withTimezone: true }),
   date_shipped: timestamp("date_shipped", { withTimezone: true }),
+  date_delivered: timestamp("date_delivered", { withTimezone: true }),
 });
 // one-to-many with order table
 export const OrderItemTable = dbSchema.table("order_items", {
