@@ -31,7 +31,7 @@ export const seedShippingInfo = async () => {
                   ${shippingInfo.note})`
         );
       }
-      console.log("Shipping info seeded successfully");
+      console.log(`${shippingInfoArray.length} Shipping info seeded successfully`);
     });
   } catch (error) {
     console.error(error);
@@ -76,7 +76,7 @@ export async function SeedBillingInfo() {
                     ${billingInfo.is_active})`
           );
         }
-        console.log("Billing info seeded successfully");
+        console.log(`${billingInfoArray.length} Billing info seeded successfully`);
         });
     } catch (error) {
         console.error(error);

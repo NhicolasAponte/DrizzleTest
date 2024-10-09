@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS "prod-schema"."glass_inventory_item" (
 	"compatible_products" jsonb NOT NULL,
 	"quantity_available" integer NOT NULL,
 	"quantity_incoming" jsonb,
-	"date_created" timestamp NOT NULL,
-	"date_updated" timestamp NOT NULL,
+	"date_created" timestamp with time zone NOT NULL,
+	"date_updated" timestamp with time zone NOT NULL,
 	"updated_by" uuid NOT NULL
 );
 --> statement-breakpoint
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS "prod-schema"."invoices" (
 	"id" uuid PRIMARY KEY NOT NULL,
 	"user_id" uuid NOT NULL,
 	"order_id" uuid NOT NULL,
-	"date_created" timestamp NOT NULL,
+	"date_created" timestamp with time zone NOT NULL,
 	"status" varchar(255) NOT NULL,
 	"amount" numeric(10, 2) NOT NULL
 );
@@ -63,9 +63,10 @@ CREATE TABLE IF NOT EXISTS "prod-schema"."orders" (
 	"billing_info" jsonb NOT NULL,
 	"shipping_info" jsonb NOT NULL,
 	"status" varchar(255) NOT NULL,
-	"date_created" timestamp NOT NULL,
-	"date_updated" timestamp NOT NULL,
-	"date_submitted" timestamp
+	"date_created" timestamp with time zone NOT NULL,
+	"date_updated" timestamp with time zone NOT NULL,
+	"date_submitted" timestamp with time zone,
+	"date_shipped" timestamp with time zone
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "prod-schema"."products" (
@@ -75,8 +76,8 @@ CREATE TABLE IF NOT EXISTS "prod-schema"."products" (
 	"alt" varchar(255),
 	"description" varchar(255),
 	"config_options" jsonb,
-	"date_created" timestamp NOT NULL,
-	"date_updated" timestamp NOT NULL
+	"date_created" timestamp with time zone NOT NULL,
+	"date_updated" timestamp with time zone NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "prod-schema"."shipping_info" (

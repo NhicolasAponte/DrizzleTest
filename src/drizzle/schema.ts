@@ -1,4 +1,4 @@
-import { tr } from "@faker-js/faker";
+
 import {
   boolean,
   date,

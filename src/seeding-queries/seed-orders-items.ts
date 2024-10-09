@@ -35,7 +35,7 @@ export async function SeedOrders() {
                     ${order.date_submitted ? order.date_submitted : null})`
         );
       }
-      console.log("Orders seeded successfully");
+      console.log(`${ordersArray.length} Orders seeded successfully`);
     });
   } catch (error) {
     console.error(error);
@@ -43,14 +43,13 @@ export async function SeedOrders() {
 }
 
 export async function SeedOrderItems() {
-    console.log("seeding order items ..."); 
-
-    try {
-        await db.transaction(async (trx) =>{
-            for (const item of orderItemsArray) {
-                const serializedProductConfig = JSON.stringify(item.product_config);
-                await trx.execute(
-                    sql`INSERT INTO "${sql.raw(SchemaName())}".order_items
+  console.log("seeding order items ...");
+  try {
+    await db.transaction(async (trx) => {
+      for (const item of orderItemsArray) {
+        const serializedProductConfig = JSON.stringify(item.product_config);
+        await trx.execute(
+          sql`INSERT INTO "${sql.raw(SchemaName())}".order_items
                         (id,
                         "order_id",
                         "product_type_id",
@@ -63,13 +62,13 @@ export async function SeedOrderItems() {
                                 ${serializedProductConfig},
                                 ${item.quantity},
                                 ${item.note})`
-                )
-            }
-            console.log("Order items seeded successfully");
-        })
-    } catch (error) {
-        console.error(error);
-    }
+        );
+      }
+      console.log(`${orderItemsArray.length} Order items seeded successfully`);
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export async function SeedInvoices() {
@@ -77,29 +76,26 @@ export async function SeedInvoices() {
 
   try {
     await db.transaction(async (trx) => {
-      for ( const invoice of invoicesArray) {
+      for (const invoice of invoicesArray) {
         await trx.execute(
           sql`INSERT INTO "${sql.raw(SchemaName())}"."invoices"
                         (id,
                         user_id,
                         order_id,
                         date_created,
-                        date_created_tz,
                         status,
                         amount)
               VALUES (${invoice.id},
                       ${invoice.user_id},
                       ${invoice.order_id},
                       ${invoice.date_created},
-                      ${invoice.date_created_tz},
                       ${invoice.status},
                       ${invoice.amount})`
         );
       }
-      console.log("Invoices seeded successfully");
-    })
-  }
-  catch (error) {
+      console.log(`${invoicesArray.length} Invoices seeded successfully`);
+    });
+  } catch (error) {
     console.error(error);
   }
 }

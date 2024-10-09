@@ -83,21 +83,32 @@ export function generateOrders() {
     // range for number of order: 2 - 26
     const numOrders = Math.floor(Math.random() * 25) + 2;
     console.log(`Generating ${numOrders} orders for user ${user.id}`);
-    const shippingInfo = shippingInfoArray.find(
-      (info) => info.user_id === user.id
-    );
-    if (!shippingInfo) {
-      console.error(`No shipping info found for user ${user.id}`);
-      return;
-    }
-    const billingInfo = billingInfoArray.find(
-      (info) => user.id === info.user_id
-    );
-    if (!billingInfo) {
-      console.error(`No billing info found for user ${user.id}`);
-      return;
-    }
+    const usersShippingInfo: ShippingInfo[] = shippingInfoArray.filter((info) => (user.id === info.user_id))
+    const usersBillingInfo: BillingInfo[] = billingInfoArray.filter((info) => (user.id === info.user_id))
+    // for (const shippingInfo of shippingInfoArray){
+    //   if (user.id === shippingInfo.user_id){
+    //     usersShippingInfo.push(shippingInfo)
+    //   }
+    // }
+    // const shippingInfo = shippingInfoArray.find(
+    //   (info) => info.user_id === user.id
+    // );
+    // if (!shippingInfo) {
+    //   console.error(`No shipping info found for user ${user.id}`);
+    //   return;
+    // }
+    // const billingInfo = billingInfoArray.find(
+    //   (info) => user.id === info.user_id
+    // );
+    // if (!billingInfo) {
+    //   console.error(`No billing info found for user ${user.id}`);
+    //   return;
+    // }
+    console.log("usersShippingInfo", usersShippingInfo)
+    console.log("usersBillingInfo", usersBillingInfo)
     for (let i = 0; i < numOrders; i++) {
+      const billingInfo = usersBillingInfo[Math.floor(Math.random() * usersBillingInfo.length)];
+      const shippingInfo = usersShippingInfo[Math.floor(Math.random() * usersShippingInfo.length)];
       orders.push(generateRandomOrder(user.id, billingInfo, shippingInfo));
     }
   });

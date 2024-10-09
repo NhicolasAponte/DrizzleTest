@@ -31,7 +31,7 @@ export async function SeedProducts() {
                     ${product.date_updated})`
         );
       }
-      console.log("Products seeded successfully");
+      console.log(`${productsArray.length} Products seeded successfully`);
     });
   } catch (error) {
     console.error(error);
@@ -81,7 +81,7 @@ export async function SeedGlassInventory() {
                     ${item.updated_by})`
         );
       }
-      console.log("Glass inventory seeded successfully");
+      console.log(`${glassInventoryArray.length} Glass Inventory seeded successfully`);
     });
   } catch (error) {
     console.error(error);

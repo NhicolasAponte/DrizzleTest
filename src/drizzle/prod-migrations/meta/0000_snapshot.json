@@ -1,5 +1,5 @@
 {
-  "id": "8ea40ac9-2d84-445a-b1bd-e0d0a71888f2",
+  "id": "764ba00c-69e9-4aaa-b067-ec0d0d7f5387",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -175,13 +175,13 @@
         },
         "date_created": {
           "name": "date_created",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
         },
         "date_updated": {
           "name": "date_updated",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
         },
@@ -236,7 +236,7 @@
         },
         "date_created": {
           "name": "date_created",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
         },
@@ -404,19 +404,25 @@
         },
         "date_created": {
           "name": "date_created",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
         },
         "date_updated": {
           "name": "date_updated",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
         },
         "date_submitted": {
           "name": "date_submitted",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date_shipped": {
+          "name": "date_shipped",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
         }
@@ -483,13 +489,13 @@
         },
         "date_created": {
           "name": "date_created",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
         },
         "date_updated": {
           "name": "date_updated",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
         }

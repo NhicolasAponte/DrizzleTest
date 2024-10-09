@@ -22,31 +22,42 @@ export type BillingInfo = {
   is_active: boolean;
 };
 
-function generateRandomBillingInfo(profile: UserProfile, email: string): BillingInfo {
-    return {
-        id: Math.floor(Math.random() * 1000),
-        user_id: profile.user_id ,
-        address: faker.location.streetAddress(),
-        city: faker.location.city(),
-        state: faker.location.state(),
-        zip: faker.location.zipCode(),
-        payment_method: faker.finance.transactionType(),
-        purchase_order: faker.finance.accountNumber(),
-        primary_contact_name: profile.first_name + " " + profile.last_name,
-        primary_contact_email: email,
-        primary_contact_phone: profile.phone_num!,
-        fax_num: profile.phone_num!,
-        is_primary: faker.datatype.boolean(),
-        is_active: faker.datatype.boolean(),
-    };
+function generateRandomBillingInfo(
+  profile: UserProfile,
+  email: string
+): BillingInfo {
+  return {
+    id: Math.floor(Math.random() * 1000),
+    user_id: profile.user_id,
+    address: faker.location.streetAddress(),
+    city: faker.location.city(),
+    state: faker.location.state(),
+    zip: faker.location.zipCode(),
+    payment_method: faker.finance.transactionType(),
+    purchase_order: faker.finance.accountNumber(),
+    primary_contact_name: profile.first_name + " " + profile.last_name,
+    primary_contact_email: email,
+    primary_contact_phone: profile.phone_num!,
+    fax_num: profile.phone_num!,
+    is_primary: faker.datatype.boolean(),
+    is_active: faker.datatype.boolean(),
+  };
 }
 
 export function generateBillingInfo() {
   const billingInfoData: BillingInfo[] = [];
   for (let user of users) {
-    const userProfile = profiles.find((profile) => user.id === profile.user_id); 
-    userProfile ? billingInfoData.push(generateRandomBillingInfo(userProfile, user.email)) 
-    : console.error(`No user profile found for user ${user.id}`); 
+    const numBillingInfo = Math.floor(Math.random() * 3) + 1;
+    for (let i = 0; i < numBillingInfo; i++) {
+      const userProfile = profiles.find(
+        (profile) => user.id === profile.user_id
+      );
+      userProfile
+        ? billingInfoData.push(
+            generateRandomBillingInfo(userProfile, user.email)
+          )
+        : console.error(`No user profile found for user ${user.id}`);
+    }
   }
 
   const dir = "./src/seed-data/";
@@ -58,11 +69,7 @@ export function generateBillingInfo() {
     fs.mkdirSync(outputDir, { recursive: true });
   }
 
-  fs.writeFileSync(
-    jsonPath,
-    JSON.stringify(billingInfoData, null, 2),
-    "utf-8"
-  );
+  fs.writeFileSync(jsonPath, JSON.stringify(billingInfoData, null, 2), "utf-8");
   console.log(
     `Generated ${billingInfoData.length} billing info and saved to ${jsonPath}`
   );

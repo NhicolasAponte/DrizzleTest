@@ -38,6 +38,7 @@ interface glassConfig {
 function generateRandomOrderItem(itemId: number, orderId: string) {
   const randomGlass =
     glassInventoryArray[Math.floor(Math.random() * glassInventoryArray.length)];
+  const dimensions = getRandomDimensions();
   return {
     id: itemId,
     order_id: orderId,
@@ -59,7 +60,8 @@ function generateRandomOrderItem(itemId: number, orderId: string) {
       tint: randomGlass.tint[
         Math.floor(Math.random() * randomGlass.tint.length)
       ],
-      dimensions: getRandomDimensions(),
+      length: dimensions.length,
+      width: dimensions.width,
     },
     quantity: notSoRandomDistribution(),
     note: "some note",
@@ -68,11 +70,11 @@ function generateRandomOrderItem(itemId: number, orderId: string) {
 
 function getRandomDimensions() {
   const width = Math.floor(Math.random() * 48) + 1;
-  let height = Math.floor(Math.random() * 96) + 1;
-  while (height < width) {
-    height = Math.floor(Math.random() * 96) + 1;
+  let length = Math.floor(Math.random() * 96) + 1;
+  while (length < width) {
+    length = Math.floor(Math.random() * 96) + 1;
   }
-  return `${width}x${height}`;
+  return { width, length };
 }
 
 function notSoRandomDistribution() {
@@ -90,6 +92,7 @@ function notSoRandomDistribution() {
 export function generateOrderItems() {
   const orderItemsData: OrderItem[] = [];
   const item_ids: number[] = [];
+  console.log("Generating order items...");
   for (let order of ordersArray) {
     const numItems = Math.floor(Math.random() * 9) + 1;
     for (let i = 0; i < numItems; i++) {

@@ -28,7 +28,7 @@ export async function seedUsers() {
           //[user.id, user.email, user.password, user.role]
         );
       }
-      console.log("Users seeded successfully");
+      console.log(`${users.length} Users seeded successfully`);
     });
   } catch (error) {
     console.error(error);
@@ -59,7 +59,7 @@ export async function SeedUserProfiles() {
                     ${profile.phone_num})`
         );
       }
-      console.log("User profiles seeded successfully");
+      console.log(`${profiles.length} User Profiles seeded successfully`);
     });
   } catch (error) {
     console.error(error);

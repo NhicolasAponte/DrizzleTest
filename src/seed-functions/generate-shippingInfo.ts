@@ -32,7 +32,10 @@ function generateRandomAddress(userId: string): ShippingInfo {
 export function generateShippingInfo() {
   const shippingInfoData: ShippingInfo[] = [];
   for (let user of users) {
-    shippingInfoData.push(generateRandomAddress(user.id));
+    const numShippingInfo = Math.floor(Math.random() * 3) + 1;
+    for (let i = 0; i < numShippingInfo; i++) {
+      shippingInfoData.push(generateRandomAddress(user.id));
+    }
   }
 
   const dir = "./src/seed-data/";

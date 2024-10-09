@@ -37,6 +37,7 @@ import { generateInvoices } from "./seed-functions/generate-invoices";
 import { dbSchema } from "./drizzle/schema";
 import { pgSchema } from "drizzle-orm/pg-core";
 import { GetInvoiceByAmountWithUser } from "./fetch-queries/get-invoices";
+import { invoicesArray } from "./seed-data/invoices";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -59,13 +60,13 @@ async function main() {
   // CREATE TABLE "order-handling"."user" (name text, lastname text, email text);
 
   // -------- GENERATE SEQUENCE --------
-  // generateUsers(10);
+  // generateUsers(15);
 // generateUserProfiles(); // 1 profile per user
 
-  // generateShippingInfo(); // 1 per user
-  // generateBillingInfo(); // 1 per user
+  // generateShippingInfo(); // 1-3 per user
+  // generateBillingInfo(); // 1-3 per user
 
-  // generateOrders(); // rand between 1 - 26 orders per user
+  // generateOrders(); // rand between 1 - 26 orders per user 
   // generateProducts(); // there's few products and they don't depend on other data
   // each item has a random amount of compatible products
   // each item has a random existing user id in the updated_by field
@@ -91,7 +92,7 @@ async function main() {
   // GetUsers();
   // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
   // GetUsersByState("Minnesota");
-  GetInvoiceByAmountWithUser();
+  // GetInvoiceByAmountWithUser();
   // -------------------------------------------
 
 
