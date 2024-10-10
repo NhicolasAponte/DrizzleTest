@@ -9,7 +9,7 @@ export type Invoice = {
   user_id: string;
   order_id: string;
   date_created: Date;
-  // date_created_tz: Date;
+  //date_created_tz: Date;
   status: string;
   amount: number;
 };
@@ -35,7 +35,7 @@ function generateRandomInvoice(
     user_id: userId,
     order_id: orderId,
     date_created: dateCreated,
-    // date_created_tz: dateCreated,
+    //date_created_tz: dateCreated,
     status,
     amount,
   };

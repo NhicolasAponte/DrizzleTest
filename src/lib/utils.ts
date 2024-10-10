@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { pgSchema } from "drizzle-orm/pg-core";
+import { faker } from "@faker-js/faker";
 
 export async function DropSchema(schema_name: string) {
   await db.execute(sql`DROP SCHEMA IF EXISTS "${schema_name}" CASCADE`);
@@ -37,17 +38,19 @@ export function consoleLogLoop() {
   for (let i = 0; i < 100; i++) {
     console.log("--------------------");
 
-    let num = Math.random() * 1000;
-    // num = num > 99 ? num : num + 100;
-    console.log("num:", num);
+    // let num = Math.random() * 1000;
+    // // num = num > 99 ? num : num + 100;
+    // console.log("num:", num);
 
-    const amount = parseFloat(num.toFixed(2));
-    console.log("amount:", amount);
-    console.log("type", typeof amount);
-    console.log("amount in dollars:", dollarStringFormat(amount));
+    // const amount = parseFloat(num.toFixed(2));
+    // console.log("amount:", amount);
+    // console.log("type", typeof amount);
+    // console.log("amount in dollars:", dollarStringFormat(amount));
+    
+
   }
-  console.log("13589.6:", dollarStringFormat(13589.6));
-  console.log("13589.6:", formatCurrency(13589.6));
+  // console.log("13589.6:", dollarStringFormat(13589.6));
+  // console.log("13589.6:", formatCurrency(13589.6));
   console.log("-------------------- LOOP END --------------------");
 }
 

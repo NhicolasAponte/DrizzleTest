@@ -16,11 +16,11 @@ export type Order = {
   billing_info: BillingInfo;
   shipping_info: ShippingInfo;
   status: string;
-  date_created: string;
-  date_updated: string;
-  date_submitted?: string;
-  date_shipped?: string; 
-  date_delivered?: string; 
+  date_created: Date;
+  date_updated: Date;
+  date_submitted?: Date;
+  date_shipped?: Date; 
+  date_delivered?: Date; 
 };
 
 function generateRandomOrder(
@@ -48,30 +48,35 @@ function generateRandomOrder(
     status = "CANCELLED";
   }
 
-  const dateCreated = faker.date.past({ years: 2 }).toLocaleString();
+  const dateCreated = faker.date.past({ years: 2 })//.toLocaleString();
   let dateUpdated = undefined;
   let dateSubmitted = undefined;
   let dateShipped = undefined;
   let dateDelivered = undefined;
 
   if (status != "DRAFT") {
-    dateSubmitted = faker.date.recent({ days: 200 }).toLocaleString();
-    while (dateSubmitted < dateCreated) {
-      dateSubmitted = faker.date.recent({ days: 200 }).toLocaleString();
-    }
+    dateSubmitted = faker.date.soon({ days: 65, refDate: dateCreated })//.toLocaleString();
+    // while (dateSubmitted < dateCreated) {
+    //   dateSubmitted = faker.date.recent({ days: 200 })//.toLocaleString();
+    // }
     dateUpdated = dateSubmitted;
   } else {
-    dateUpdated = faker.date.recent({ days: 200 }).toLocaleString();
+    dateUpdated = faker.date.recent({ days: 200 })//.toLocaleString();
     while (dateUpdated < dateCreated) {
-      dateUpdated = faker.date.recent({ days: 100 }).toLocaleString();
+      dateUpdated = faker.date.recent({ days: 100 })//.toLocaleString();
     }
   }
 
   if (status === "SHIPPED" && dateSubmitted) {
-    dateShipped = faker.date.recent({ days: 200 }).toLocaleString();
+    dateShipped = faker.date.soon({ days: 120, refDate: dateSubmitted})//.toLocaleString();
     while (dateShipped < dateSubmitted) {
-      dateShipped = faker.date.recent({ days: 200 }).toLocaleString();
+      //dateShipped = faker.date.recent({ days: 200 }).toLocaleString();
+      dateShipped = faker.date.soon({ days: 120, refDate: dateSubmitted})
     }
+  }
+
+  if (status === "DELIVERED" && dateShipped) {
+    dateDelivered = faker.date.soon({ days: 12, refDate: dateShipped});
   }
 
   return {
@@ -84,6 +89,8 @@ function generateRandomOrder(
     date_created: dateCreated,
     date_updated: dateUpdated,
     date_submitted: dateSubmitted,
+    date_shipped: dateShipped,
+    date_delivered: dateDelivered
   };
 }
 
