@@ -28,11 +28,15 @@ export async function getPGSchema() {
 // SELECT nspname
 // FROM pg_catalog.pg_namespace;
 
-export function SchemaName(){
+export function SchemaName() {
   return process.env.NODE_ENV === "production"
     ? process.env.PROD_SCHEMA!
     : process.env.DEV_SCHEMA!;
-};
+}
+
+export function getSystemTimeZone(): string {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
 
 export function consoleLogLoop() {
   for (let i = 0; i < 100; i++) {
@@ -46,8 +50,6 @@ export function consoleLogLoop() {
     // console.log("amount:", amount);
     // console.log("type", typeof amount);
     // console.log("amount in dollars:", dollarStringFormat(amount));
-    
-
   }
   // console.log("13589.6:", dollarStringFormat(13589.6));
   // console.log("13589.6:", formatCurrency(13589.6));
@@ -59,7 +61,8 @@ export function dollarStringFormat(amount: number): string {
 }
 
 export const formatCurrency = (amount: number) => {
-  return (amount).toLocaleString("en-US", { // NOTE: use amount / 100 if storing everything in cents
+  return amount.toLocaleString("en-US", {
+    // NOTE: use amount / 100 if storing everything in cents
     style: "currency",
     currency: "USD",
   });
@@ -150,24 +153,219 @@ export function numOrders() {
 
 export const FlipCoin = () => {
   return Math.random() > 0.5;
-}
+};
 
 export const TestUndefinedSchemaName = () => {
-  for (let i = 0; i < 10; i++){
+  for (let i = 0; i < 10; i++) {
     console.log("------------------------------------------------");
-    
-    const schema_name = "" // FlipCoin() ? "test-name" : undefined;
+
+    const schema_name = ""; // FlipCoin() ? "test-name" : undefined;
     console.log("SCHEMA NAME: ", schema_name);
-    
-    const newSchema = pgSchema(schema_name); 
+
+    const newSchema = pgSchema(schema_name);
     console.log(newSchema);
-    
-    if(!newSchema.schemaName){
+
+    if (!newSchema.schemaName) {
       console.log("newSchema name does not exist");
       throw new Error("newSchema name does not exist");
-    }
-    else {
+    } else {
       console.log("newSchema name exists");
     }
   }
+};
+
+export function GetDateArithmetic(date: Date, x: number) {
+  const myDate = new Date(date);
+  console.log("myDate:", myDate);
+
+  const datePlusX = myDate.getDate() + x;
+  console.log("myDate.getDate() + 1 =>", datePlusX);
+
+  const newDateSet = myDate.setDate(datePlusX);
+  console.log("newDateSet: myDate.setDate() => ", newDateSet);
+
+  console.log("newDateSet - date.getTime() => ", newDateSet - date.getTime());
+  console.log("new date: ", new Date(newDateSet));
 }
+
+export function OneLineDateArithmetic(date: Date, x: number) {
+  const myDate = new Date(date);
+  console.log("myDate:", myDate);
+
+  const newDateSet = myDate.setDate(myDate.getDate() + x);
+  console.log("newDateSet: myDate.setDate() => ", newDateSet);
+
+  console.log("newDateSet - date.getTime() => ", newDateSet - date.getTime());
+  console.log("new date: ", new Date(newDateSet));
+}
+
+export function getTimeArithmetic(date: Date, x: number) {
+  const myDate = new Date(date);
+  console.log("myDate:", myDate);
+
+  const newDateSet = myDate.setTime(myDate.getTime() + x);
+  console.log("newDateSet: myDate.setTime() => ", newDateSet);
+
+  console.log("newDateSet - date.getTime() => ", newDateSet - date.getTime());
+  console.log("new date: ", new Date(newDateSet));
+}
+
+export function getMidpointBetweenDates(newestDate: Date, oldestDate: Date) {
+  const newDate = new Date(newestDate);
+  const oldDate = new Date(oldestDate);
+  console.log("newest date:", newDate);
+  console.log("oldest date:", oldDate);
+  // console.log("----")
+
+  const diff = newDate.getTime() - oldDate.getTime();
+  console.log("difference in milliseconds:", diff);
+  const midpoint = newDate.getTime() - (diff / 2);
+  console.log("        midpoint:", midpoint);
+  
+  const midDate = new Date(midpoint);
+  console.log("        mid date:", midDate);
+
+  // const diffReverse = oldDate.getTime() - newDate.getTime();
+  // console.log("difference in milliseconds reverse:", diffReverse);
+  // const midpointReverse = oldDate.getTime() - (diffReverse / 2);
+  // console.log("midpoint reverse:", midpointReverse);
+  
+  // const midDateReverse = new Date(midpointReverse);
+  // console.log("mid date reverse:", midDateReverse);
+
+  return midDate;
+}
+// pass the dates in reverse to make sure data arithmetic is consistent 
+export function getMidpointBetweenDatesReverse(newestDate: Date, oldestDate: Date) {
+  console.log("----")
+  console.log("reverse ")
+  const newDate = new Date(newestDate);
+  const oldDate = new Date(oldestDate);
+  console.log("newest date:", newDate);
+  console.log("oldest date:", oldDate);
+  // console.log("----")
+
+  const diff = newDate.getTime() - oldDate.getTime();
+  console.log("difference in milliseconds:", diff);
+  const midpoint = newDate.getTime() - (diff / 2);
+  console.log("        midpoint:", midpoint);
+  
+  const midDate = new Date(midpoint);
+  console.log("        mid date:", midDate);
+
+  // const diffReverse = oldDate.getTime() - newDate.getTime();
+  // console.log("difference in milliseconds reverse:", diffReverse);
+  // const midpointReverse = oldDate.getTime() - (diffReverse / 2);
+  // console.log("midpoint reverse:", midpointReverse);
+  
+  // const midDateReverse = new Date(midpointReverse);
+  // console.log("mid date reverse:", midDateReverse);
+
+  return midDate;
+}
+
+export function dateArithmetic(dateNow: Date, fakerDate: Date, x: number) {
+  // let dateCreated = faker.date.past({ years: 2 }); //.toLocaleString();
+  const today = new Date(dateNow);
+  let startDate = new Date(fakerDate)
+  const maxShippedDate = new Date(startDate.setDate(startDate.getDate() + 205));
+  // console.log("maxDate type:", typeof maxDate);
+  while (maxShippedDate > today) {
+    console.log("today:", today);
+    console.log("startDate", startDate);
+    console.log("maxShippedDate:", maxShippedDate);
+    startDate = faker.date.past({ years: 2 });
+  }
+
+  let dateUpdated = undefined;
+  let dateSubmitted = undefined;
+  let dateShipped = undefined;
+  let dateDelivered = undefined;
+  let count = 0;
+
+  for (let i = 0; i < 100; i++) {
+    dateUpdated = faker.date.soon({ days: 65, refDate: startDate });
+    dateSubmitted = dateUpdated;
+    dateShipped = faker.date.soon({ days: 120, refDate: dateSubmitted });
+    // date delivered should be date.between dateShipped and today 
+    dateDelivered = faker.date.soon({ days: 20, refDate: dateShipped });
+
+    if (
+      dateUpdated > dateNow ||
+      dateSubmitted > dateNow ||
+      dateShipped > dateNow ||
+      dateDelivered > dateNow
+    ) {
+      console.log("--------------------------------------------");
+      console.log("date is in the future");
+      console.log("fakerDate:", fakerDate);
+      console.log("dateUpdated:", dateUpdated);
+      console.log("dateSubmitted:", dateSubmitted);
+      console.log("dateShipped:", dateShipped);
+      console.log("dateDelivered:", dateDelivered);
+      count++;
+      console.log("--------------------------------------------");
+    }
+  }
+  console.log("dates in future:", count);
+}
+
+
+// const dateNow = new Date();
+// console.log("dateNow:", dateNow);
+// console.log("dateNow type:", typeof dateNow);
+// console.log("dateNow.getTime() =>", dateNow.getTime());
+// // console.log("date timezone", dateNow.getTimezoneOffset());
+// // console.log("dateNow as num", dateNow as Number)
+// console.log("----");
+
+// let copyDate = dateCreated;
+// // let dateCreated = faker.date.past({ years: 2 }); //.toLocaleString();
+// // console.log("value of", dateCreated.valueOf());
+// console.log("dateCreated:", dateCreated);
+// console.log("   copyDate:", copyDate);
+// // console.log("dateCreated type:", typeof dateCreated);
+// console.log("----");
+
+// console.log("dateCreate.getDate() =>", dateCreated.getDate());
+// console.log("dateCreated.getTime() =>", dateCreated.getTime());
+// console.log("----");
+
+// const x= 1;
+// console.log("x:", x);
+// console.log("----");
+
+// // const datePlusX = dateCreated.getDate() + x
+// // console.log(datePlusX);
+// // const tempDate = dateCreated.setDate(datePlusX);
+// // console.log("tempDate:", tempDate);
+// // const tempDateAsDate = new Date(tempDate);
+// // console.log("tempDateAsDate:", tempDateAsDate);
+
+// // console.log("----");
+
+// // let dateCreatedPlusX = dateCreated.setDate(dateCreated.getDate() + x);
+// // console.log("dateCreatedPlusX: getDate() =>:", dateCreatedPlusX);
+
+// // let dateCreatedPlusXAsDate = new Date(dateCreatedPlusX);
+// // console.log("dateCreatedPlusXAsDate:", dateCreatedPlusXAsDate);
+
+// console.log("----");
+
+// console.log(copyDate.getTime() + x);
+// let datePlusXSetTIme = copyDate.setTime(copyDate.getTime() + x);
+
+// console.log("datePlusXSetTIme: getTime() =>:", datePlusXSetTIme);
+// let datePlusXSetTImeAsDate = new Date(datePlusXSetTIme);
+// console.log("datePlusXSetTImeAsDate:", datePlusXSetTImeAsDate);
+
+// console.log("----");
+// // console.log("get date method difference: ", dateCreatedPlusXAsDate.getTime() - dateCreated.getTime());
+// console.log("get time method difference: ", datePlusXSetTImeAsDate.getTime() - dateCreated.getTime());
+// console.log("")
+// console.log("----");
+// console.log(getSystemTimeZone());
+// console.log(dateCreated.getTimezoneOffset());
+// const dateNow = new Date();
+// console.log(dateNow.getTimezoneOffset());
+// console.log("dateCreatedPlusXAsDate type:", typeof dateCreatedPlusXAsDate);

@@ -9,10 +9,17 @@ import { generateBillingInfo } from "./seed-functions/generate-billingInfo";
 import { generateProducts } from "./seed-functions/generate-products";
 import {
   consoleLogLoop,
+  dateArithmetic,
   DropSchema,
   FlipCoin,
   getAllSchema,
+  GetDateArithmetic,
+  getMidpointBetweenDates,
+  getMidpointBetweenDatesReverse,
+  getSystemTimeZone,
+  getTimeArithmetic,
   numOrders,
+  OneLineDateArithmetic,
 } from "./lib/utils";
 import { generateGlassInventory } from "./seed-functions/generate-glass-inventory";
 import { generateOrderItems } from "./seed-functions/generate-order-items";
@@ -38,7 +45,7 @@ import { dbSchema } from "./drizzle/schema";
 import { pgSchema } from "drizzle-orm/pg-core";
 import { GetInvoiceByAmountWithUser } from "./fetch-queries/get-invoices";
 import { invoicesArray } from "./seed-data/invoices";
-import { faker } from "@faker-js/faker";
+import { da, faker } from "@faker-js/faker";
 import { date } from "drizzle-orm/mysql-core";
 
 async function main() {
@@ -112,42 +119,36 @@ async function main() {
 
   //   items.push(item);
   // }
-  // dateArithmetic();
 
-  // const dateNow = new Date();
-  // console.log("dateNow:", dateNow);
-  // console.log("dateNow type:", typeof dateNow);
-  // console.log("dateNow.getTime() =>", dateNow.getTime());
-  // // console.log("date timezone", dateNow.getTimezoneOffset());
-  // // console.log("dateNow as num", dateNow as Number)
-  // console.log("----");
+  const dateNow = new Date();
+  // const dateCreated = faker.date.past({ years: 2 });
+  const dateCreated = faker.date.recent({ days: 30 })
+  const x = 30;
 
-  let dateCreated = faker.date.past({ years: 2 }); //.toLocaleString();
-  console.log("dateCreated:", dateCreated);
-  // console.log("dateCreated type:", typeof dateCreated);
-  console.log("dateCreated.getTime() =>", dateCreated.getTime());
-  console.log("dateCreate.getDate() =>", dateCreated.getDate());
-  console.log("----");
-
-  const x= 45;
-  console.log("x:", x);
-  console.log("----");
-
-  let dateCreatedPlusX = dateCreated.setDate(dateCreated.getDate() + x);
-  console.log("dateCreatedPlusX: getDate() =>:", dateCreatedPlusX);
-  // console.log("dateCreatedPlusX type:", typeof dateCreatedPlusX);
-  // console.log("----"); 
-
+  // console.log("    dateNow: ", dateNow);
+  // console.log("dateCreated: ", dateCreated);
+  // console.log("    dateNow milliseconds: ", dateNow.getTime())
+  // console.log("dateCreated milliseconds: ", dateCreated.getTime())
+  // // console.log(": ", dateNow - dateCreated);
+  // const diff = dateNow.getTime() - dateCreated.getTime();
+  // console.log("milliseconds: now - created = ", diff);
+  // console.log("milliseconds to days: ", diff/86400000)
+  // const midPoint = dateNow.getTime() - (diff/2);
+  // console.log("midPoint: ", midPoint);
+  // const midDate = new Date(midPoint);
+  // console.log("midDate: ", midDate);
+  // console.log("        days: now - created = ", dateNow.getDate() - dateCreated.getDate());
   
-  let dateCreatedPlusXAsDate = new Date(dateCreatedPlusX);
-  console.log("dateCreatedPlusXAsDate:", dateCreatedPlusXAsDate);
+  getMidpointBetweenDates(dateNow, dateCreated);
+  getMidpointBetweenDatesReverse(dateCreated, dateNow);
 
-  console.log("----"); 
-  let datePlusXSetTIme = dateCreated.setTime(dateCreated.getTime() + x);
-  console.log("datePlusXSetTIme: getTime() =>:", datePlusXSetTIme);
-  let datePlusXSetTImeAsDate = new Date(datePlusXSetTIme);
-  console.log("datePlusXSetTImeAsDate:", datePlusXSetTImeAsDate);
-  // console.log("dateCreatedPlusXAsDate type:", typeof dateCreatedPlusXAsDate);
+  // dateArithmetic();
+  
+  // GetDateArithmetic(dateCreated, x);
+  // console.log("----");
+  // OneLineDateArithmetic(dateCreated, x);
+  // console.log("----");
+  // getTimeArithmetic(dateCreated, x);
   // consoleLogLoop();
   // getAllSchema();
   // DropSchema(
@@ -168,43 +169,3 @@ main()
     console.error(error);
   });
 
-function dateArithmetic() {
-  let dateCreated = faker.date.past({ years: 2 }); //.toLocaleString();
-  const dateNow = new Date();
-  const maxDate = new Date(dateCreated.setDate(dateCreated.getDate() + 205));
-  console.log("maxDate type:", typeof maxDate);
-  while (maxDate > dateNow) {
-    console.log("dateCreated", dateCreated);
-    dateCreated = faker.date.past({ years: 2 });
-  }
-
-  let dateUpdated = undefined;
-  let dateSubmitted = undefined;
-  let dateShipped = undefined;
-  let dateDelivered = undefined;
-  let count = 0;
-  for (let i = 0; i < 100; i++) {
-    dateUpdated = faker.date.soon({ days: 65, refDate: dateCreated });
-    dateSubmitted = dateUpdated;
-    dateShipped = faker.date.soon({ days: 120, refDate: dateSubmitted });
-    dateDelivered = faker.date.soon({ days: 20, refDate: dateShipped });
-
-    if (
-      dateUpdated > dateNow ||
-      dateSubmitted > dateNow ||
-      dateShipped > dateNow ||
-      dateDelivered > dateNow
-    ) {
-      console.log("--------------------------------------------");
-      console.log("date is in the future");
-      console.log("dateCreated:", dateCreated);
-      console.log("dateUpdated:", dateUpdated);
-      console.log("dateSubmitted:", dateSubmitted);
-      console.log("dateShipped:", dateShipped);
-      console.log("dateDelivered:", dateDelivered);
-      count++;
-      console.log("--------------------------------------------");
-    }
-  }
-  console.log("dates in future:", count);
-}
