@@ -210,20 +210,22 @@ export function getTimeArithmetic(date: Date, x: number) {
   console.log("new date: ", new Date(newDateSet));
 }
 
-export function getMidpointBetweenDates(newestDate: Date, oldestDate: Date) {
+export function getMidpointBetweenDates(newestDate: Date, oldestDate: Date, functionName: string) {
+  // console.log("----")
+  // console.log("called from ->", functionName)
   const newDate = new Date(newestDate);
   const oldDate = new Date(oldestDate);
-  console.log("newest date:", newDate);
-  console.log("oldest date:", oldDate);
+  // console.log("newest date:", newDate);
+  // console.log("oldest date:", oldDate);
   // console.log("----")
 
   const diff = newDate.getTime() - oldDate.getTime();
-  console.log("difference in milliseconds:", diff);
+  // console.log("difference in milliseconds:", diff);
   const midpoint = newDate.getTime() - (diff / 2);
-  console.log("        midpoint:", midpoint);
+  // console.log("        midpoint:", midpoint);
   
   const midDate = new Date(midpoint);
-  console.log("        mid date:", midDate);
+  // console.log("        mid date:", midDate);
 
   // const diffReverse = oldDate.getTime() - newDate.getTime();
   // console.log("difference in milliseconds reverse:", diffReverse);

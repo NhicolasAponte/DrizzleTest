@@ -1,0 +1,1 @@
+ALTER TABLE "dev-schema"."orders" ADD COLUMN "date_delivered" timestamp with time zone;

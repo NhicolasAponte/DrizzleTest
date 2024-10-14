@@ -1,94 +1,94 @@
-import { User } from "../seed-functions/generate-users";
+import { User } from '../seed-functions/generate-users';
 
 export const users: User[] = [
   {
-    id: "2890f869-635c-4e88-a88d-040e71fc6c6e",
-    email: "due.freedom@example.com",
-    password: "i23xkn",
-    role: "ADMIN",
+    "id": "e9d60896-b259-405b-bf1a-408702be3b4e",
+    "email": "uncle.lose@example.com",
+    "password": "y09hq",
+    "role": "USER"
   },
   {
-    id: "b03375d5-7130-46ab-884a-5323a81262d5",
-    email: "wrapped.settle@example.com",
-    password: "z888xs",
-    role: "ADMIN",
+    "id": "37ca04ff-0cb4-4632-877a-41c4094e93ed",
+    "email": "fighting.away@example.com",
+    "password": "dqg2to",
+    "role": "ADMIN"
   },
   {
-    id: "cc7d11d3-85fd-4ad3-b062-087c6849313b",
-    email: "explore.screen@example.com",
-    password: "3bgmo",
-    role: "USER",
+    "id": "d04353cd-4445-4a0c-95c1-540e2dc103ed",
+    "email": "upper.inside@example.com",
+    "password": "onji2a",
+    "role": "USER"
   },
   {
-    id: "109d10a0-8bd7-41bc-944f-80aa45ed15a6",
-    email: "handsome.sheet@example.com",
-    password: "8bq4nx",
-    role: "USER",
+    "id": "5d894504-3e60-4654-a471-d5872edf9860",
+    "email": "pole.train@example.com",
+    "password": "2203m3",
+    "role": "USER"
   },
   {
-    id: "b927c1d2-9ca3-48af-a5c4-ecf820f8372a",
-    email: "moment.prepare@example.com",
-    password: "vyrs8f",
-    role: "ADMIN",
+    "id": "a501be20-f761-4bba-ad5e-acbf9548d256",
+    "email": "round.birth@example.com",
+    "password": "cn4q4m",
+    "role": "USER"
   },
   {
-    id: "6e2176a8-8d96-4694-9dac-0ffacd4a15e4",
-    email: "bag.spoken@example.com",
-    password: "kaml7s",
-    role: "USER",
+    "id": "83c9155b-fedc-4d4a-aeb0-c79a66663413",
+    "email": "page.lunch@example.com",
+    "password": "ialp8s",
+    "role": "USER"
   },
   {
-    id: "54fa27d5-ce7a-42ff-8d9b-62412a9809d8",
-    email: "remove.strike@example.com",
-    password: "3j2dzu",
-    role: "USER",
+    "id": "84c49841-1161-45fe-889f-d3ec05fb6624",
+    "email": "everything.lady@example.com",
+    "password": "pr4zdd",
+    "role": "USER"
   },
   {
-    id: "15e01e7f-adc7-4c02-8ea2-489010ced9d5",
-    email: "symbol.problem@example.com",
-    password: "k7u0sm",
-    role: "ADMIN",
+    "id": "8be43f83-74be-4e26-90ba-95fd99e01444",
+    "email": "fort.satellites@example.com",
+    "password": "25ki4",
+    "role": "ADMIN"
   },
   {
-    id: "67fef17b-7e9e-4f8e-b5ec-437c6000265e",
-    email: "somehow.truck@example.com",
-    password: "25jkhj",
-    role: "USER",
+    "id": "c514b52f-fafd-48e0-bb4f-2ad43a43ca5f",
+    "email": "faster.torn@example.com",
+    "password": "obzqxi",
+    "role": "ADMIN"
   },
   {
-    id: "42820166-5bd9-496a-a0ab-a79fbc2f6740",
-    email: "sister.consider@example.com",
-    password: "e60id1",
-    role: "ADMIN",
+    "id": "fa19c8da-41fe-496e-abc2-24dc1ffe6ea5",
+    "email": "zulu.dawn@example.com",
+    "password": "g07jy4",
+    "role": "USER"
   },
   {
-    id: "08d9faea-a270-45f7-872f-4339dbcad2f4",
-    email: "season.blanket@example.com",
-    password: "m7vk3k",
-    role: "ADMIN",
+    "id": "b2bfb942-18fb-4192-9c53-ce5eeaa4c010",
+    "email": "with.putting@example.com",
+    "password": "gdm4og",
+    "role": "ADMIN"
   },
   {
-    id: "06a8ba17-3fef-4c17-b971-0d31924d33ef",
-    email: "represent.smell@example.com",
-    password: "7xr5kg",
-    role: "USER",
+    "id": "5df3e4b2-26c6-4d3d-bcb4-e37b7be89e75",
+    "email": "major.opposite@example.com",
+    "password": "6mfdnb",
+    "role": "USER"
   },
   {
-    id: "b445a776-94ae-42d6-84e1-7d7e5d423e11",
-    email: "ask.although@example.com",
-    password: "k07xc",
-    role: "ADMIN",
+    "id": "13e3b7bf-e4f1-4860-8ffa-280bd3df416b",
+    "email": "section.flew@example.com",
+    "password": "fjdepw",
+    "role": "USER"
   },
   {
-    id: "db5cd298-f2b8-4412-b557-1128ba2c663f",
-    email: "donkey.every@example.com",
-    password: "ep67oc",
-    role: "USER",
+    "id": "0fe2ef99-918f-4e2c-9657-9b9b7d99dc4a",
+    "email": "feet.tears@example.com",
+    "password": "h2r347",
+    "role": "ADMIN"
   },
   {
-    id: "67d1345a-3d65-4ab9-ab32-bc0851192e27",
-    email: "zero.themselves@example.com",
-    password: "qj21is",
-    role: "ADMIN",
-  },
+    "id": "4f33b41b-6d07-4e14-b505-4982a65c6b9c",
+    "email": "political.stood@example.com",
+    "password": "0y4924",
+    "role": "USER"
+  }
 ];

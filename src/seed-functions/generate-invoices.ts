@@ -17,7 +17,7 @@ export type Invoice = {
 function generateRandomInvoice(
   userId: string,
   orderId: string,
-  dateSubmitted: string
+  dateSubmitted: Date
 ): Invoice {
   const id = uuidv4();
   const statusRand = Math.floor(Math.random() * 2) + 1;

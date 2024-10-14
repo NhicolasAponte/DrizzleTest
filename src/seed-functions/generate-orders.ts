@@ -39,18 +39,26 @@ function generateRandomOrder(
   let dateSubmitted: Date | undefined = undefined;
   let dateShipped: Date | undefined = undefined;
   let dateDelivered: Date | undefined = undefined;
+  let midPoint: Date | undefined = undefined;
 
   switch (status) {
     case "DRAFT":
+      // console.log("Generating draft order");
       dateCreated = faker.date.recent({ days: 75 });
       dateUpdated = faker.date.between({ from: dateCreated, to: new Date() });
       break;
     case "PENDING":
     case "QUOTE":
     case "PROCESSING":
+      // console.log("Generating pending/quote/processing order");
       // date created, submitted, and updated should be recent
       dateCreated = faker.date.recent({ days: 150 });
-      const midPoint = getMidpointBetweenDates(new Date(), dateCreated);
+      midPoint = getMidpointBetweenDates(
+        new Date(),
+        dateCreated,
+        `pending/quote/processing case; STATUS: ${status}`
+      );
+      // console.log("midPoint", midPoint);
       dateSubmitted = faker.date.between({ from: midPoint, to: new Date() });
       dateUpdated = faker.date.between({
         from: dateCreated,
@@ -58,9 +66,15 @@ function generateRandomOrder(
       });
       break;
     case "SHIPPED":
+      // console.log("Generating shipped order");
       // date created, submitted, updated, and shipped should be recent
       dateCreated = faker.date.recent({ days: 150 });
-      const midPoint = getMidpointBetweenDates(new Date(), dateCreated);
+      midPoint = getMidpointBetweenDates(
+        new Date(),
+        dateCreated,
+        `shipped case; STATUS: ${status}`
+      );
+      // console.log("midPoint", midPoint);
       dateSubmitted = faker.date.between({ from: midPoint, to: new Date() });
       dateUpdated = faker.date.between({
         from: dateCreated,
@@ -68,38 +82,69 @@ function generateRandomOrder(
       });
       break;
     case "DELIVERED":
-      // date created, submitted, updated, shipped, and delivered should be recent
+      // console.log("Generating delivered order");
+      dateCreated = faker.date.recent({ days: 150 });
+      midPoint = getMidpointBetweenDates(
+        new Date(),
+        dateCreated,
+        `delivered case; STATUS: ${status}`
+      );
+      // console.log("midPoint", midPoint);
+      dateSubmitted = faker.date.between({ from: midPoint, to: new Date() });
+
+      dateUpdated = faker.date.between({
+        from: dateCreated,
+        to: dateSubmitted,
+      });
+
+      dateShipped = faker.date.between({
+        from: dateSubmitted!,
+        to: new Date(),
+      });
+
+      dateDelivered = faker.date.between({
+        from: dateShipped!,
+        to: new Date(),
+      });
+
       break;
     case "CANCELLED":
+      dateCreated = faker.date.past({ years: 2 });
+      dateSubmitted = faker.date.between({ from: dateCreated, to: new Date() });
+      dateUpdated = faker.date.between({
+        from: dateCreated,
+        to: dateSubmitted,
+      });
       break;
     default:
+      dateCreated = faker.date.past({ years: 2 });
       break;
   }
 
-  if (status != "DRAFT") {
-    dateSubmitted = faker.date.soon({ days: 65, refDate: dateCreated }); //.toLocaleString();
-    // while (dateSubmitted < dateCreated) {
-    //   dateSubmitted = faker.date.recent({ days: 200 })//.toLocaleString();
-    // }
-    dateUpdated = dateSubmitted;
-  } else {
-    dateUpdated = faker.date.recent({ days: 200 }); //.toLocaleString();
-    while (dateUpdated < dateCreated) {
-      dateUpdated = faker.date.recent({ days: 100 }); //.toLocaleString();
-    }
-  }
+  // if (status != "DRAFT") {
+  //   dateSubmitted = faker.date.soon({ days: 65, refDate: dateCreated }); //.toLocaleString();
+  //   // while (dateSubmitted < dateCreated) {
+  //   //   dateSubmitted = faker.date.recent({ days: 200 })//.toLocaleString();
+  //   // }
+  //   dateUpdated = dateSubmitted;
+  // } else {
+  //   dateUpdated = faker.date.recent({ days: 200 }); //.toLocaleString();
+  //   while (dateUpdated < dateCreated) {
+  //     dateUpdated = faker.date.recent({ days: 100 }); //.toLocaleString();
+  //   }
+  // }
 
-  if (status === "SHIPPED" && dateSubmitted) {
-    dateShipped = faker.date.soon({ days: 120, refDate: dateSubmitted }); //.toLocaleString();
-    while (dateShipped < dateSubmitted) {
-      //dateShipped = faker.date.recent({ days: 200 }).toLocaleString();
-      dateShipped = faker.date.soon({ days: 120, refDate: dateSubmitted });
-    }
-  }
+  // if (status === "SHIPPED" && dateSubmitted) {
+  //   dateShipped = faker.date.soon({ days: 120, refDate: dateSubmitted }); //.toLocaleString();
+  //   while (dateShipped < dateSubmitted) {
+  //     //dateShipped = faker.date.recent({ days: 200 }).toLocaleString();
+  //     dateShipped = faker.date.soon({ days: 120, refDate: dateSubmitted });
+  //   }
+  // }
 
-  if (status === "DELIVERED" && dateShipped) {
-    dateDelivered = faker.date.soon({ days: 12, refDate: dateShipped });
-  }
+  // if (status === "DELIVERED" && dateShipped) {
+  //   dateDelivered = faker.date.soon({ days: 12, refDate: dateShipped });
+  // }
 
   return {
     id,
@@ -108,8 +153,8 @@ function generateRandomOrder(
     billing_info: billingInfo,
     shipping_info: shippingInfo,
     status,
-    date_created: dateCreated,
-    date_updated: dateUpdated,
+    date_created: dateCreated!,
+    date_updated: dateUpdated!,
     date_submitted: dateSubmitted,
     date_shipped: dateShipped,
     date_delivered: dateDelivered,
@@ -171,8 +216,8 @@ export function generateOrders() {
     //   console.error(`No billing info found for user ${user.id}`);
     //   return;
     // }
-    console.log("usersShippingInfo", usersShippingInfo);
-    console.log("usersBillingInfo", usersBillingInfo);
+    // console.log("usersShippingInfo", usersShippingInfo);
+    // console.log("usersBillingInfo", usersBillingInfo);
     for (let i = 0; i < numOrders; i++) {
       const billingInfo =
         usersBillingInfo[Math.floor(Math.random() * usersBillingInfo.length)];

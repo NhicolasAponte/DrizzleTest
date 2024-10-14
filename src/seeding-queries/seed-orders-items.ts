@@ -4,11 +4,13 @@ import { ordersArray } from "../seed-data/orders";
 import { orderItemsArray } from "../seed-data/order-items";
 import { invoicesArray } from "../seed-data/invoices";
 import { SchemaName } from "../lib/utils";
+import { OrderTable } from "../drizzle/schema";
 
 export async function SeedOrders() {
   console.log("seeding orders ...");
 
   try {
+    await db.delete(OrderTable);
     await db.transaction(async (trx) => {
       for (const order of ordersArray) {
         const serializedBillingInfo = JSON.stringify(order.billing_info);
@@ -23,7 +25,9 @@ export async function SeedOrders() {
                       status,
                       "date_created",
                       "date_updated",
-                      "date_submitted")
+                      "date_submitted",
+                      "date_shipped",
+                      "date_delivered")
             VALUES (${order.id},
                     ${order.user_id},
                     ${order.order_name},
@@ -32,7 +36,9 @@ export async function SeedOrders() {
                     ${order.status},
                     ${order.date_created},
                     ${order.date_updated},
-                    ${order.date_submitted ? order.date_submitted : null})`
+                    ${order.date_submitted ? order.date_submitted : null},
+                    ${order.date_shipped ? order.date_shipped : null},
+                    ${order.date_delivered ? order.date_delivered : null})`
         );
       }
       console.log(`${ordersArray.length} Orders seeded successfully`);

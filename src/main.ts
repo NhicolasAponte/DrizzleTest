@@ -41,7 +41,7 @@ import { ordersArray } from "./seed-data/orders";
 import { GetUsers, GetUsersByState } from "./fetch-queries/get-users";
 import { GetOrdersByUser } from "./fetch-queries/get-orders";
 import { generateInvoices } from "./seed-functions/generate-invoices";
-import { dbSchema } from "./drizzle/schema";
+import { dbSchema, GlassInventoryTable, ProductTable, UserTable } from "./drizzle/schema";
 import { pgSchema } from "drizzle-orm/pg-core";
 import { GetInvoiceByAmountWithUser } from "./fetch-queries/get-invoices";
 import { invoicesArray } from "./seed-data/invoices";
@@ -119,11 +119,14 @@ async function main() {
 
   //   items.push(item);
   // }
+  await db.delete(GlassInventoryTable);
+  await db.delete(UserTable);
+  await db.delete(ProductTable);
 
-  const dateNow = new Date();
-  // const dateCreated = faker.date.past({ years: 2 });
-  const dateCreated = faker.date.recent({ days: 30 })
-  const x = 30;
+  // const dateNow = new Date();
+  // // const dateCreated = faker.date.past({ years: 2 });
+  // const dateCreated = faker.date.recent({ days: 30 })
+  // const x = 30;
 
   // console.log("    dateNow: ", dateNow);
   // console.log("dateCreated: ", dateCreated);
@@ -139,8 +142,8 @@ async function main() {
   // console.log("midDate: ", midDate);
   // console.log("        days: now - created = ", dateNow.getDate() - dateCreated.getDate());
   
-  getMidpointBetweenDates(dateNow, dateCreated);
-  getMidpointBetweenDatesReverse(dateCreated, dateNow);
+  // getMidpointBetweenDates(dateNow, dateCreated);
+  // getMidpointBetweenDatesReverse(dateCreated, dateNow);
 
   // dateArithmetic();
   

@@ -93,13 +93,17 @@ export function generateOrderItems() {
   const orderItemsData: OrderItem[] = [];
   const item_ids: number[] = [];
   console.log("Generating order items...");
+
   for (let order of ordersArray) {
     const numItems = Math.floor(Math.random() * 9) + 1;
+    console.log(`Generating ${numItems} order items for order ${order.id}`);
     for (let i = 0; i < numItems; i++) {
-      let itemId = Math.floor(Math.random() * 1000);
+      let itemId = Math.floor(Math.random() * 10000);
 
       while (item_ids.includes(itemId)) {
-        itemId = Math.floor(Math.random() * 1000);
+        
+        console.log("itemId already exists: ", itemId);
+        itemId = Math.floor(Math.random() * 10000);
       }
       item_ids.push(itemId);
       const orderItem = generateRandomOrderItem(itemId, order.id);
