@@ -29,7 +29,7 @@ function generateRandomAddress(userId: string): ShippingInfo {
   };
 }
 
-export function generateShippingInfo() {
+export function generateShippingInfo(outputDir?: string) {
   const shippingInfoData: ShippingInfo[] = [];
   for (let user of users) {
     const numShippingInfo = Math.floor(Math.random() * 3) + 1;
@@ -38,13 +38,13 @@ export function generateShippingInfo() {
     }
   }
 
-  const dir = "./src/seed-data/";
-  const jsonPath = `${dir}shipping-info.json`;
-  const tsPath = `${dir}shipping-info.ts`;
+  const dir = outputDir ? outputDir : "./src/seed-data";
+  const jsonPath = `/${dir}shipping-info.json`;
+  const tsPath = `/${dir}shipping-info.ts`;
 
-  const outputDir = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  const outputDirectory = path.dirname(jsonPath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
   fs.writeFileSync(

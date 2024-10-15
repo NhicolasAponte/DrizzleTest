@@ -26,10 +26,12 @@ function generateRandomInvoice(
   const amount =
     amountRandomizer % 2 === 0
       ? parseFloat((Math.random() * 1000 + 120).toFixed(2))
-      : parseFloat((Math.random() * 1000000 + 5000).toFixed(2)); 
-  const dateCreated = faker.date
-    .between({ from: dateSubmitted, to: new Date() })
-    //.toLocaleString();
+      : parseFloat((Math.random() * 1000000 + 5000).toFixed(2));
+  const dateCreated = faker.date.between({
+    from: dateSubmitted,
+    to: new Date(),
+  });
+  //.toLocaleString();
   return {
     id,
     user_id: userId,
@@ -41,7 +43,7 @@ function generateRandomInvoice(
   };
 }
 
-export function generateInvoices() {
+export function generateInvoices(outputDir?: string) {
   const invoices: Invoice[] = [];
 
   for (let order of ordersArray) {
@@ -52,13 +54,13 @@ export function generateInvoices() {
     }
   }
 
-  const dir = "./src/seed-data/";
-  const jsonPath = `${dir}invoices.json`;
-  const tsPath = `${dir}invoices.ts`;
+  const dir = outputDir ? outputDir : "./src/seed-data";
+  const jsonPath = `/${dir}invoices.json`;
+  const tsPath = `/${dir}invoices.ts`;
 
-  const outputDir = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  const outputDirectory = path.dirname(jsonPath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(invoices, null, 2), "utf-8");

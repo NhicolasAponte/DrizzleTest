@@ -84,6 +84,7 @@ export const BillingInfoTable = dbSchema.table("billing_info", {
   state: varchar("state", { length: 255 }).notNull(),
   zip: varchar("zip", { length: 255 }).notNull(),
   payment_method: varchar("payment_method", { length: 255 }).notNull(),
+  // payment_info: jsonb("payment_info"),
   purchase_order: varchar("purchase_order", { length: 255 }),
   primary_contact_name: varchar("primary_contact_name", { length: 255 }),
   primary_contact_email: varchar("primary_contact_email", { length: 255 }),

@@ -22,6 +22,12 @@ export type BillingInfo = {
   is_active: boolean;
 };
 
+const payment_method_codes = ["CREDIT", "DEBIT", "PURCHASE ORDER", "CASH", "CHECK"];
+
+export type PaymentMethod = {
+  type: string;
+}
+
 function generateRandomBillingInfo(
   profile: UserProfile,
   email: string
@@ -33,7 +39,7 @@ function generateRandomBillingInfo(
     city: faker.location.city(),
     state: faker.location.state(),
     zip: faker.location.zipCode(),
-    payment_method: faker.finance.transactionType(),
+    payment_method: payment_method_codes[Math.floor(Math.random() * payment_method_codes.length)],
     purchase_order: faker.finance.accountNumber(),
     primary_contact_name: profile.first_name + " " + profile.last_name,
     primary_contact_email: email,
@@ -44,7 +50,7 @@ function generateRandomBillingInfo(
   };
 }
 
-export function generateBillingInfo() {
+export function generateBillingInfo(outputDir?: string) {
   const billingInfoData: BillingInfo[] = [];
   for (let user of users) {
     const numBillingInfo = Math.floor(Math.random() * 3) + 1;
@@ -60,13 +66,13 @@ export function generateBillingInfo() {
     }
   }
 
-  const dir = "./src/seed-data/";
-  const jsonPath = `${dir}billing-info.json`;
-  const tsPath = `${dir}billing-info.ts`;
+  const dir = outputDir ? outputDir : "./src/seed-data";
+  const jsonPath = `/${dir}billing-info.json`;
+  const tsPath = `/${dir}billing-info.ts`;
 
-  const outputDir = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  const outputDirectory = path.dirname(jsonPath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(billingInfoData, null, 2), "utf-8");

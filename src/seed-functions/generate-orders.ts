@@ -185,7 +185,7 @@ function generateRandomStatus() {
 }
 
 // generate a random amount of orders for each user; anywhere between 2 and 10 orders
-export function generateOrders() {
+export function generateOrders(outputDir?: string) {
   const orders: Order[] = [];
   users.forEach((user) => {
     // range for number of order: 2 - 26
@@ -227,13 +227,13 @@ export function generateOrders() {
     }
   });
 
-  const dir = "./src/seed-data/";
-  const jsonPath = `${dir}orders.json`;
-  const tsPath = `${dir}orders.ts`;
+  const dir = outputDir ? outputDir : "./src/seed-data";
+  const jsonPath = `/${dir}orders.json`;
+  const tsPath = `/${dir}orders.ts`;
 
-  const outputDir = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  const outputDirectory = path.dirname(jsonPath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(orders, null, 2), "utf-8");

@@ -15,7 +15,7 @@ export type User = {
 function generateRandomUser(): User {
   const id = uuidv4();
   const randWord = generate(2);
-  console.log("randWord: ", randWord);
+  // console.log("randWord: ", randWord);
   const email = `${randWord[0]}.${randWord[1]}@example.com`;
   //const email = `user_${Math.random().toString(36).substring(7)}@example.com`;
   const password = Math.random().toString(36).substring(7);
@@ -26,27 +26,27 @@ function generateRandomUser(): User {
 }
 
 // Function to generate user objects and write to a JSON file
-export function generateUsers(numUsers: number, outputPath?: string) {
+export function generateUsers(numUsers: number, outputDir?: string) {
   const users: User[] = [];
   for (let i = 0; i < numUsers; i++) {
     users.push(generateRandomUser());
   }
 
   const fileName = "users";
-  const jsonOutputPath = outputPath
-    ? `${outputPath}${fileName}.json`
+  const jsonFilePath = outputDir
+    ? `${outputDir}/${fileName}.json`
     : `./src/seed-data/${fileName}.json`;
-  const tsOutputPath = outputPath
-    ? `${outputPath}${fileName}.ts`
+  const tsFilePath = outputDir
+    ? `${outputDir}/${fileName}.ts`
     : `./src/seed-data/${fileName}.ts`;
 
-  const outputDir = path.dirname(jsonOutputPath);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  const outputDirectory = path.dirname(jsonFilePath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
-  fs.writeFileSync(jsonOutputPath, JSON.stringify(users, null, 2), "utf-8");
-  console.log(`Generated ${numUsers} users and saved to ${jsonOutputPath}`);
+  fs.writeFileSync(jsonFilePath, JSON.stringify(users, null, 2), "utf-8");
+  console.log(`Generated ${numUsers} users and saved to ${jsonFilePath}`);
 
   // Write to TypeScript file
   // create file content as string
@@ -55,8 +55,8 @@ export function generateUsers(numUsers: number, outputPath?: string) {
     null,
     2
   )};\n`;
-  fs.writeFileSync(tsOutputPath, tsContent, "utf-8");
-  console.log(`Generated ${numUsers} users and saved to ${tsOutputPath}`);
+  fs.writeFileSync(tsFilePath, tsContent, "utf-8");
+  console.log(`Generated ${numUsers} users and saved to ${tsFilePath}`);
 }
 
 // Example usage

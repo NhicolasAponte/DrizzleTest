@@ -41,62 +41,60 @@ import { ordersArray } from "./seed-data/orders";
 import { GetUsers, GetUsersByState } from "./fetch-queries/get-users";
 import { GetOrdersByUser } from "./fetch-queries/get-orders";
 import { generateInvoices } from "./seed-functions/generate-invoices";
-import { dbSchema, GlassInventoryTable, ProductTable, UserTable } from "./drizzle/schema";
+import {
+  dbSchema,
+  GlassInventoryTable,
+  ProductTable,
+  UserTable,
+} from "./drizzle/schema";
 import { pgSchema } from "drizzle-orm/pg-core";
 import { GetInvoiceByAmountWithUser } from "./fetch-queries/get-invoices";
 import { invoicesArray } from "./seed-data/invoices";
 import { da, faker } from "@faker-js/faker";
 import { date } from "drizzle-orm/mysql-core";
+import {
+  generateData,
+  getUserInput,
+  testInput,
+} from "./seed-functions/seed-db";
 
 async function main() {
   console.log("------------- Hello World ----");
   console.log("");
   console.log("");
-  // const environment = process.env.NODE_ENV;
-  // console.log("Environment: ", process.env.NODE_ENV);
 
-  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."postCategory" CASCADE`);
-  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."userPreferences" CASCADE`);
-  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."posts" CASCADE`);
-  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."category" CASCADE`);
-  // await db.execute(sql`DROP TABLE IF EXISTS "order-handling"."user" CASCADE`);
-  // await db.execute(sql`DROP TYPE IF EXISTS "order-handling"."user_role" CASCADE`);
-  // await db.execute(sql`DROP SCHEMA IF EXISTS "dev-schema" CASCADE`);
-  // await db.execute(sql`DROP SCHEMA IF EXISTS "prod-schema" CASCADE`);
-  // await db.execute(
-  //   sql`DROP TABLE IF EXISTS "drizzle"."__drizzle_migrations" CASCADE`
-  // );
+  const outputDir = process.env.LOCAL_OUTPUT_DIR;
+  console.log("STARTING SEEDING PROCESS :");
+  // generateData(outputDir);
 
-  // CREATE TABLE "order-handling"."user" (name text, lastname text, email text);
+  //   // -------- GENERATE SEQUENCE --------
+  // generateUsers(15, outputDir);
+  generateUserProfiles(outputDir); // 1 profile per user
 
-  // -------- GENERATE SEQUENCE --------
-  // generateUsers(15);
-  // generateUserProfiles(); // 1 profile per user
+  // generateShippingInfo(outputDir); // 1-3 per user
+  //   generateBillingInfo(outputDir); // 1-3 per user
 
-  // generateShippingInfo(); // 1-3 per user
-  // generateBillingInfo(); // 1-3 per user
+  //   generateOrders(outputDir); // rand between 1 - 26 orders per user
+  //   generateProducts(outputDir); // there's few products and they don't depend on other data
+  //   // each item has a random amount of compatible products
+  //   // each item has a random existing user id in the updated_by field
+  //   generateGlassInventory(outputDir);
+  //   // random number of order items per existing order
+  //   generateOrderItems(outputDir);
+  //   generateInvoices(outputDir);
 
-  // generateOrders(); // rand between 1 - 26 orders per user
-  // generateProducts(); // there's few products and they don't depend on other data
-  // each item has a random amount of compatible products
-  // each item has a random existing user id in the updated_by field
-  // generateGlassInventory();
-  // random number of order items per existing order
-  // generateOrderItems();
-  // generateInvoices();
+  //   // -------- SEED SEQUENCE --------
+  //   seedUsers();
+  //   SeedUserProfiles();
+  //   seedShippingInfo();
+  //   SeedBillingInfo();
 
-  // -------- SEED SEQUENCE --------
-  // seedUsers();
-  // SeedUserProfiles();
-  // seedShippingInfo();
-  // SeedBillingInfo();
+  //   SeedProducts();
+  //   SeedGlassInventory();
 
-  // SeedProducts();
-  // SeedGlassInventory();
-
-  // SeedOrders();
-  // SeedOrderItems();
-  // SeedInvoices();
+  //   SeedOrders();
+  //   SeedOrderItems();
+  //   SeedInvoices();
 
   // -------------- FETCH QUERIES --------------
   // GetUsers();
@@ -119,9 +117,6 @@ async function main() {
 
   //   items.push(item);
   // }
-  await db.delete(GlassInventoryTable);
-  await db.delete(UserTable);
-  await db.delete(ProductTable);
 
   // const dateNow = new Date();
   // // const dateCreated = faker.date.past({ years: 2 });
@@ -141,12 +136,7 @@ async function main() {
   // const midDate = new Date(midPoint);
   // console.log("midDate: ", midDate);
   // console.log("        days: now - created = ", dateNow.getDate() - dateCreated.getDate());
-  
-  // getMidpointBetweenDates(dateNow, dateCreated);
-  // getMidpointBetweenDatesReverse(dateCreated, dateNow);
 
-  // dateArithmetic();
-  
   // GetDateArithmetic(dateCreated, x);
   // console.log("----");
   // OneLineDateArithmetic(dateCreated, x);
@@ -171,4 +161,6 @@ main()
   .catch((error) => {
     console.error(error);
   });
-
+// function generateData() {
+//   throw new Error("Function not implemented.");
+// }

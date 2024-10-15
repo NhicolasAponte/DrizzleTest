@@ -89,7 +89,7 @@ function notSoRandomDistribution() {
 
 //function that generates id's
 
-export function generateOrderItems() {
+export function generateOrderItems(outputDir?: string) {
   const orderItemsData: OrderItem[] = [];
   const item_ids: number[] = [];
   console.log("Generating order items...");
@@ -112,13 +112,13 @@ export function generateOrderItems() {
     }
   }
 
-  const dir = "./src/seed-data/";
-  const jsonPath = `${dir}order-items.json`;
-  const tsPath = `${dir}order-items.ts`;
+  const dir = outputDir ? outputDir : "./src/seed-data";
+  const jsonPath = `/${dir}order-items.json`;
+  const tsPath = `/${dir}order-items.ts`;
 
-  const outputDir = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  const outputDirectory = path.dirname(jsonPath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(orderItemsData, null, 2), "utf-8");

@@ -118,19 +118,19 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
   };
 }
 
-export function generateGlassInventory() {
+export function generateGlassInventory(outputDir?: string) {
   const glassInventory: GlassInventoryItem[] = [];
   for (let item of GlassInventoryItems) {
     glassInventory.push(generateRandomGlassInventoryItem(item.name));
   }
 
-  const dir = "./src/seed-data/";
-  const jsonPath = `${dir}glass-inventory.json`;
-  const tsPath = `${dir}glass-inventory.ts`;
+  const dir = outputDir ? outputDir : "./src/seed-data";
+  const jsonPath = `/${dir}glass-inventory.json`;
+  const tsPath = `/${dir}glass-inventory.ts`;
 
-  const outputDir = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  const outputDirectory = path.dirname(jsonPath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(glassInventory, null, 2), "utf-8");

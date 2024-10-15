@@ -39,19 +39,19 @@ function generateRandomUserProfile(user_id: string): UserProfile {
   };
 }
 
-export function generateUserProfiles() {
+export function generateUserProfiles(outputDir?: string) {
   const profiles: UserProfile[] = [];
   for (let user of users) {
     profiles.push(generateRandomUserProfile(user.id));
   }
 
-  const dir = "./src/seed-data/";
+  const dir = outputDir ? outputDir : "./src/seed-data/";
   const jsonPath = `${dir}user-profiles.json`;
   const tsPath = `${dir}user-profiles.ts`;
 
-  const outputDir = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  const outputDirectory = path.dirname(jsonPath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(profiles, null, 2), "utf-8");

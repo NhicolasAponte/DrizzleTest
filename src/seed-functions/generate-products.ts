@@ -40,19 +40,19 @@ function generateRandomProduct(type: string, config_options: any): Product {
   };
 }
 
-export function generateProducts() {
+export function generateProducts(outputDir?: string) {
   const products: Product[] = [];
   for (let product of productTypes) {
     products.push(generateRandomProduct(product.type, product.config_options));
   }
 
-  const dir = "./src/seed-data/";
-  const jsonPath = `${dir}products.json`;
-  const tsPath = `${dir}products.ts`;
+  const dir = outputDir ? outputDir : "./src/seed-data";
+  const jsonPath = `/${dir}products.json`;
+  const tsPath = `/${dir}products.ts`;
 
-  const outputDir = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  const outputDirectory = path.dirname(jsonPath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(products, null, 2), "utf-8");
