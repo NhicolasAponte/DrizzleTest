@@ -1,4 +1,3 @@
-
 import {
   boolean,
   date,
@@ -17,16 +16,16 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-// NOTE TODO: optimize date types - use timestamptz instead of timestamp 
-// SET TIMEZONE in db connection 
-// NOTE TOD: use CHECK constraints instead of enums 
+// NOTE TODO: optimize date types - use timestamptz instead of timestamp
+// SET TIMEZONE in db connection
+// NOTE TOD: use CHECK constraints instead of enums
 
 export const dbSchema = pgSchema(
   process.env.NODE_ENV === "production"
     ? process.env.PROD_SCHEMA!
     : process.env.DEV_SCHEMA!
 );
-// NOTE TODO: is this the best place to throw this error 
+// NOTE TODO: is this the best place to throw this error
 if (!dbSchema.schemaName) {
   throw new Error("Schema not found");
 }
@@ -40,9 +39,9 @@ export const UserTable = dbSchema.table("users", {
   password: varchar("password", { length: 255 }).notNull(),
   role: UserRole("role").default("USER"),
 });
-// user profile and and user tables could be one table, but the profile is 
-// more likely to change, so if i keep them separate, the user 
-// table, which has credentials, is less likely to need modification  
+// user profile and and user tables could be one table, but the profile is
+// more likely to change, so if i keep them separate, the user
+// table, which has credentials, is less likely to need modification
 // one-to-one with user table
 export const UserProfileTable = dbSchema.table("user_profiles", {
   id: serial("id").primaryKey(),
@@ -54,7 +53,7 @@ export const UserProfileTable = dbSchema.table("user_profiles", {
   company: varchar("company", { length: 255 }),
   account_num: varchar("account_num", { length: 255 }),
   phone_num: varchar("phone_num", { length: 255 }),
-  // last login? we need a way to determine inactive users 
+  // last login? we need a way to determine inactive users
 });
 
 // one-to-many with user table
@@ -94,40 +93,9 @@ export const BillingInfoTable = dbSchema.table("billing_info", {
   is_active: boolean("is_active").notNull().default(true),
 });
 
-// one-to-many with user table
-export const OrderTable = dbSchema.table("orders", {
-  id: uuid("id").primaryKey(),
-  user_id: uuid("user_id")
-    .notNull()
-    .references(() => UserTable.id, { onDelete: "cascade" }),
-  order_name: varchar("order_name", { length: 255 }).notNull(),
-  billing_info: jsonb("billing_info").notNull(),
-  shipping_info: jsonb("shipping_info").notNull(),
-  status: varchar("status", { length: 255 }).notNull(),
-  // NOTE TODO: determine if mode: string is needed
-  date_created: timestamp("date_created", { withTimezone: true }).notNull(),
-  date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
-  date_submitted: timestamp("date_submitted", { withTimezone: true }),
-  date_shipped: timestamp("date_shipped", { withTimezone: true }),
-  date_delivered: timestamp("date_delivered", { withTimezone: true }),
-});
-// one-to-many with order table
-export const OrderItemTable = dbSchema.table("order_items", {
-  id: serial("id").primaryKey(),
-  order_id: uuid("order_id")
-    .notNull()
-    .references(() => OrderTable.id, { onDelete: "cascade" }),
-  product_type_id: uuid("product_type_id")
-    .notNull()
-    .references(() => ProductTable.id, { onDelete: "cascade" }),
-  product_config: jsonb("product_config").notNull(),
-  quantity: integer("quantity").notNull(),
-  note: varchar("note", { length: 255 }),
-});
-
 export const ProductTable = dbSchema.table("products", {
   id: uuid("id").primaryKey(),
-  // name: "Tempered Glass", "Laminated Glass", "Insulated Glass", "Mirror", "Shower Door"
+  // type: "Tempered Glass", "Laminated Glass", "Insulated Glass", "Mirror", "Shower Door"
   type: varchar("type", { length: 255 }).notNull(),
   image_url: varchar("image_url", { length: 255 }),
   alt: varchar("alt", { length: 255 }),
@@ -159,6 +127,37 @@ export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
     .references(() => UserTable.id),
 });
 
+// one-to-many with user table
+export const OrderTable = dbSchema.table("orders", {
+  id: uuid("id").primaryKey(),
+  user_id: uuid("user_id")
+    .notNull()
+    .references(() => UserTable.id, { onDelete: "cascade" }),
+  order_name: varchar("order_name", { length: 255 }).notNull(),
+  billing_info: jsonb("billing_info").notNull(),
+  shipping_info: jsonb("shipping_info").notNull(),
+  status: varchar("status", { length: 255 }).notNull(),
+  // NOTE TODO: determine if mode: string is needed
+  date_created: timestamp("date_created", { withTimezone: true }).notNull(),
+  date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
+  date_submitted: timestamp("date_submitted", { withTimezone: true }),
+  date_shipped: timestamp("date_shipped", { withTimezone: true }),
+  date_delivered: timestamp("date_delivered", { withTimezone: true }),
+});
+// one-to-many with order table
+export const OrderItemTable = dbSchema.table("order_items", {
+  id: serial("id").primaryKey(),
+  order_id: uuid("order_id")
+    .notNull()
+    .references(() => OrderTable.id, { onDelete: "cascade" }),
+  product_type_id: uuid("product_type_id")
+    .notNull()
+    .references(() => ProductTable.id, { onDelete: "cascade" }),
+  product_config: jsonb("product_config").notNull(),
+  quantity: integer("quantity").notNull(),
+  note: varchar("note", { length: 255 }),
+});
+
 export const InvoiceTable = dbSchema.table("invoices", {
   id: uuid("id").primaryKey(),
   user_id: uuid("user_id")
@@ -167,16 +166,10 @@ export const InvoiceTable = dbSchema.table("invoices", {
   order_id: uuid("order_id")
     .notNull()
     .references(() => OrderTable.id, { onDelete: "cascade" }),
-  date_created: timestamp("date_created", { withTimezone: true}).notNull(),
+  date_created: timestamp("date_created", { withTimezone: true }).notNull(),
   status: varchar("status", { length: 255 }).notNull(),
   amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
 });
-
-// export const DateTable = dbSchema.table("dates", {
-//   id: serial("id").primaryKey(),
-//   date_tz: timestamp("date_tz", { withTimezone: true }).notNull(),
-//   date_no_tz: timestamp("date_no_tz").notNull(),
-// });
 
 // tags need a user_id, since each user creates tags that are only
 // useful to them
