@@ -1,5 +1,5 @@
 {
-  "id": "764ba00c-69e9-4aaa-b067-ec0d0d7f5387",
+  "id": "fed00fa6-dfd3-492e-a57d-911cff2f7f65",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -422,6 +422,12 @@
         },
         "date_shipped": {
           "name": "date_shipped",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date_delivered": {
+          "name": "date_delivered",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false

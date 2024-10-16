@@ -66,7 +66,8 @@ CREATE TABLE IF NOT EXISTS "prod-schema"."orders" (
 	"date_created" timestamp with time zone NOT NULL,
 	"date_updated" timestamp with time zone NOT NULL,
 	"date_submitted" timestamp with time zone,
-	"date_shipped" timestamp with time zone
+	"date_shipped" timestamp with time zone,
+	"date_delivered" timestamp with time zone
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "prod-schema"."products" (

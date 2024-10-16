@@ -57,13 +57,15 @@ import {
   getUserInput,
   testInput,
 } from "./data-generating-functions/seed-db";
+import { seedUserInfo } from "./native_id_seeding/user-info-seeding";
+import { resetDatabase } from "./native_id_seeding/reset-db";
 
 async function main() {
   console.log("------------- Hello World ----");
   console.log("");
   console.log("");
 
-  const outputDir = undefined; //process.env.LOCAL_OUTPUT_DIR;
+  // const outputDir = undefined; //process.env.LOCAL_OUTPUT_DIR;
   // console.log("STARTING SEEDING PROCESS :");
   // const result = await generateData(outputDir);
   // const result = await testInput();
@@ -77,23 +79,38 @@ async function main() {
   // generateUserProfiles(outputDir); // 1 profile per user
 
   // generateShippingInfo(outputDir); // 1-3 per user
-  //   generateBillingInfo(outputDir); // 1-3 per user
+  // generateBillingInfo(outputDir); // 1-3 per user
+  // generateProducts(outputDir); // there's few products and they don't depend on other data
 
-  //   generateOrders(outputDir); // rand between 1 - 26 orders per user
-  //   generateProducts(outputDir); // there's few products and they don't depend on other data
   //   // each item has a random amount of compatible products
   //   // each item has a random existing user id in the updated_by field
-  //   generateGlassInventory(outputDir);
+  // generateGlassInventory(outputDir);
+
+  // generateOrders(outputDir); // rand between 1 - 26 orders per user
   //   // random number of order items per existing order
-  //   generateOrderItems(outputDir);
+  // generateOrderItems(outputDir);
   // generateInvoices(outputDir);
 
   //   // -------- SEED SEQUENCE --------
   // await db.delete(GlassInventoryTable);
   // await db.delete(UserTable);
   // await db.delete(ProductTable);
-  //   seedUsers();
-  //   SeedUserProfiles();
+  // query to reset the primary key sequence
+  // await db.execute(sql`
+  //   SET session_replication_role = 'replica';
+  //   TRUNCATE TABLE "dev-schema".users RESTART IDENTITY CASCADE;
+  //   TRUNCATE TABLE "dev-schema".user_profiles RESTART IDENTITY CASCADE;
+  //   TRUNCATE TABLE "dev-schema".shipping_info RESTART IDENTITY CASCADE;
+  //   TRUNCATE TABLE "dev-schema".billing_info RESTART IDENTITY CASCADE;
+  //   TRUNCATE TABLE "dev-schema".products RESTART IDENTITY CASCADE;
+  //   TRUNCATE TABLE "dev-schema".glass_inventory_item RESTART IDENTITY CASCADE;
+  //   TRUNCATE TABLE "dev-schema".orders RESTART IDENTITY CASCADE;
+  //   TRUNCATE TABLE "dev-schema".order_items RESTART IDENTITY CASCADE;
+  //   TRUNCATE TABLE "dev-schema".invoices RESTART IDENTITY CASCADE;
+  //   SET session_replication_role = 'origin';
+  //   `);
+  // seedUsers();
+  // SeedUserProfiles();
   //   seedShippingInfo();
   //   SeedBillingInfo();
 
@@ -104,6 +121,9 @@ async function main() {
   //   SeedOrderItems();
   //   SeedInvoices();
 
+  // ------------ CASCADING SEEDING ------------
+  // resetDatabase();
+  // await seedUserInfo();
   // -------------- FETCH QUERIES --------------
   // GetUsers();
   // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");

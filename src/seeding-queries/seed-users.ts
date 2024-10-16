@@ -25,7 +25,6 @@ export async function seedUsers() {
                   ${user.email},
                   ${user.password},
                   ${user.role})`
-          //[user.id, user.email, user.password, user.role]
         );
       }
       console.log(`${users.length} Users seeded successfully`);
@@ -37,10 +36,13 @@ export async function seedUsers() {
 
 export async function SeedUserProfiles() {
   console.log("seeding user profiles ...");
-
+  // let count = 0;
   try {
     await db.transaction(async (trx) => {
       for (const profile of profiles) {
+        // console.log("profile: ", profile);
+        // count++;
+        // console.log(" count ", count);
         await trx.execute(
           sql`INSERT INTO "${sql.raw(SchemaName())}".user_profiles 
               (id, 
