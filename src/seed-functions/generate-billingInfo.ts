@@ -67,8 +67,8 @@ export function generateBillingInfo(outputDir?: string) {
   }
 
   const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `/${dir}billing-info.json`;
-  const tsPath = `/${dir}billing-info.ts`;
+  const jsonPath = `${dir}/billing-info.json`;
+  const tsPath = `${dir}/billing-info.ts`;
 
   const outputDirectory = path.dirname(jsonPath);
   if (!fs.existsSync(outputDirectory)) {

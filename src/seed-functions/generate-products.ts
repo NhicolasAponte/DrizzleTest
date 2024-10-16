@@ -47,8 +47,8 @@ export function generateProducts(outputDir?: string) {
   }
 
   const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `/${dir}products.json`;
-  const tsPath = `/${dir}products.ts`;
+  const jsonPath = `${dir}/products.json`;
+  const tsPath = `${dir}/products.ts`;
 
   const outputDirectory = path.dirname(jsonPath);
   if (!fs.existsSync(outputDirectory)) {

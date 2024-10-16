@@ -101,7 +101,6 @@ export function generateOrderItems(outputDir?: string) {
       let itemId = Math.floor(Math.random() * 10000);
 
       while (item_ids.includes(itemId)) {
-        
         console.log("itemId already exists: ", itemId);
         itemId = Math.floor(Math.random() * 10000);
       }
@@ -113,8 +112,8 @@ export function generateOrderItems(outputDir?: string) {
   }
 
   const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `/${dir}order-items.json`;
-  const tsPath = `/${dir}order-items.ts`;
+  const jsonPath = `${dir}/order-items.json`;
+  const tsPath = `${dir}/order-items.ts`;
 
   const outputDirectory = path.dirname(jsonPath);
   if (!fs.existsSync(outputDirectory)) {

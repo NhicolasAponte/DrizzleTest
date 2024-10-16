@@ -55,8 +55,8 @@ export function generateInvoices(outputDir?: string) {
   }
 
   const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `/${dir}invoices.json`;
-  const tsPath = `/${dir}invoices.ts`;
+  const jsonPath = `${dir}/invoices.json`;
+  const tsPath = `${dir}/invoices.ts`;
 
   const outputDirectory = path.dirname(jsonPath);
   if (!fs.existsSync(outputDirectory)) {

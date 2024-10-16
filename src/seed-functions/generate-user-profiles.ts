@@ -45,9 +45,9 @@ export function generateUserProfiles(outputDir?: string) {
     profiles.push(generateRandomUserProfile(user.id));
   }
 
-  const dir = outputDir ? outputDir : "./src/seed-data/";
-  const jsonPath = `${dir}user-profiles.json`;
-  const tsPath = `${dir}user-profiles.ts`;
+  const dir = outputDir ? outputDir : "./src/seed-data";
+  const jsonPath = `${dir}/user-profiles.json`;
+  const tsPath = `${dir}/user-profiles.ts`;
 
   const outputDirectory = path.dirname(jsonPath);
   if (!fs.existsSync(outputDirectory)) {

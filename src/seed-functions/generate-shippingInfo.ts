@@ -39,8 +39,8 @@ export function generateShippingInfo(outputDir?: string) {
   }
 
   const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `/${dir}shipping-info.json`;
-  const tsPath = `/${dir}shipping-info.ts`;
+  const jsonPath = `${dir}/shipping-info.json`;
+  const tsPath = `${dir}/shipping-info.ts`;
 
   const outputDirectory = path.dirname(jsonPath);
   if (!fs.existsSync(outputDirectory)) {

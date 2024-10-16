@@ -228,8 +228,8 @@ export function generateOrders(outputDir?: string) {
   });
 
   const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `/${dir}orders.json`;
-  const tsPath = `/${dir}orders.ts`;
+  const jsonPath = `${dir}/orders.json`;
+  const tsPath = `${dir}/orders.ts`;
 
   const outputDirectory = path.dirname(jsonPath);
   if (!fs.existsSync(outputDirectory)) {

@@ -125,8 +125,8 @@ export function generateGlassInventory(outputDir?: string) {
   }
 
   const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `/${dir}glass-inventory.json`;
-  const tsPath = `/${dir}glass-inventory.ts`;
+  const jsonPath = `${dir}/glass-inventory.json`;
+  const tsPath = `${dir}/glass-inventory.ts`;
 
   const outputDirectory = path.dirname(jsonPath);
   if (!fs.existsSync(outputDirectory)) {
