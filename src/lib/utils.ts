@@ -371,3 +371,14 @@ export function dateArithmetic(dateNow: Date, fakerDate: Date, x: number) {
 // const dateNow = new Date();
 // console.log(dateNow.getTimezoneOffset());
 // console.log("dateCreatedPlusXAsDate type:", typeof dateCreatedPlusXAsDate);
+
+// couldn't get this to work 
+export async function userInputMethod() {
+  process.stdin.on("readable", () => {
+    let chunk;
+
+    while ((chunk = process.stdin.read()) !== null) {
+      process.stdout.write("input: ", chunk);
+    }
+  })
+}
