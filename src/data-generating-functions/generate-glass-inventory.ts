@@ -10,34 +10,7 @@ import {
 } from "../seed-data/placeholder-data";
 import { users } from "../seed-data/users";
 import { productsArray } from "../seed-data/products";
-
-export type GlassInventoryItem = {
-  id: string;
-  name: string;
-  description: string;
-  thickness: string[];
-  shapes: string[];
-  tint: string[];
-  compatible_products: string[];
-  quantity_available: number;
-  // supplier_id: string;
-  quantity_incoming: quantityIncoming; // jsonb
-  date_created: string;
-  date_updated: string;
-  updated_by: string;
-};
-
-// NOTE TODO:
-// shape, stock sheets, and different processes may have different min and max values
-// for length and width so check each part of config, and offer user option based on
-// the largest min smallest max across all parts of configuration
-
-interface quantityIncoming {
-  quantity_incoming: number;
-  order_id: string;
-  supplier_id: string;
-  expected_arrival: string;
-}
+import { GlassInventoryItem } from "./type-definitions";
 
 function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
   const randomName =
@@ -64,10 +37,10 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     }
   }
 
-  const dateCreated = faker.date.past({ years: 2 }).toLocaleString();
-  let dateUpdated = faker.date.recent({ days: 60 }).toLocaleString();
+  const dateCreated = faker.date.past({ years: 2 })
+  let dateUpdated = faker.date.recent({ days: 60 })
   while (dateUpdated < dateCreated) {
-    dateUpdated = faker.date.recent({ days: 60 }).toLocaleString();
+    dateUpdated = faker.date.recent({ days: 60 })
   }
 
   return {
@@ -102,9 +75,9 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     //supplier_id: uuidv4(),
     quantity_incoming: {
       quantity_incoming: Math.floor(Math.random() * 1000),
-      order_id: uuidv4(),
+      restock_order_id: uuidv4(),
       supplier_id: uuidv4(),
-      expected_arrival: faker.date.future().toLocaleString(),
+      expected_arrival_date: faker.date.future(),
     },
     // material on floor, whether it's in processing or stock
     // quantity_on_premise: Math.floor(Math.random() * 1000),
@@ -138,7 +111,7 @@ export function generateGlassInventory(outputDir?: string) {
     `Generated ${glassInventory.length} glass inventory items and saved to ${jsonPath}`
   );
 
-  const tsContent = `import { GlassInventoryItem } from "../seed-functions/generate-glass-inventory";\n\nexport const glassInventoryArray: GlassInventoryItem[] = ${JSON.stringify(
+  const tsContent = `import { GlassInventoryItem } from "../data-generating-functions/type-definitions";\n\nexport const glassInventoryArray: GlassInventoryItem[] = ${JSON.stringify(
     glassInventory,
     null,
     2

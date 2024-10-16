@@ -4,25 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 import { generate } from "random-words";
 import { users } from "../seed-data/users";
 import { shippingInfoArray } from "../seed-data/shipping-info";
-import { ShippingInfo } from "./generate-shippingInfo";
-import { BillingInfo } from "./generate-billingInfo";
 import { billingInfoArray } from "../seed-data/billing-info";
 import { faker } from "@faker-js/faker";
 import { getMidpointBetweenDates } from "../lib/utils";
+import { BillingInfo, Order, ShippingInfo } from "./type-definitions";
 
-export type Order = {
-  id: string;
-  user_id: string;
-  order_name: string;
-  billing_info: BillingInfo;
-  shipping_info: ShippingInfo;
-  status: string;
-  date_created: Date;
-  date_updated: Date;
-  date_submitted?: Date;
-  date_shipped?: Date;
-  date_delivered?: Date;
-};
+
 
 function generateRandomOrder(
   userId: string,
@@ -239,7 +226,7 @@ export function generateOrders(outputDir?: string) {
   fs.writeFileSync(jsonPath, JSON.stringify(orders, null, 2), "utf-8");
   console.log(`Generated ${orders.length} orders and saved to ${jsonPath}`);
 
-  const tsContent = `import { Order } from "../seed-functions/generate-orders";\n\nexport const ordersArray: Order[] = ${JSON.stringify(
+  const tsContent = `import { Order } from "../data-generating-functions/type-definitions";\n\nexport const ordersArray: Order[] = ${JSON.stringify(
     orders,
     null,
     2

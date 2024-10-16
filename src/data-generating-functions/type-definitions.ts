@@ -68,8 +68,8 @@ export type Product = {
   // unit price, eventually need to work in unit of measure
   // price: number;
   // unit:
-  date_created: string;
-  date_updated: string;
+  date_created: Date;
+  date_updated: Date;
 };
 
 export type GlassInventoryItem = {
@@ -83,8 +83,8 @@ export type GlassInventoryItem = {
   quantity_available: number;
   // supplier_id: string;
   quantity_incoming: quantityIncoming; // jsonb
-  date_created: string;
-  date_updated: string;
+  date_created: Date;
+  date_updated: Date;
   updated_by: string;
 };
 
@@ -97,7 +97,7 @@ interface quantityIncoming {
   quantity_incoming: number;
   restock_order_id: string;
   supplier_id: string;
-  expected_arrival: string;
+  expected_arrival_date: Date;
 }
 
 export type Order = {

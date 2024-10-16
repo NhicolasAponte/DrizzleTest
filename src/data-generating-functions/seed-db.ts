@@ -30,13 +30,15 @@ import {
 } from "../drizzle/schema";
 import { setTimeout } from "timers/promises";
 
+// NOTE TODO: get user input to work for interactive data generation and db seeding 
 export function getUserInput(question: string): Promise<void> {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
-  console.log("---- read input ---- ");
+
   return new Promise((resolve) => {
+    console.log("getUserInput: ---- reading input ---- ");
     rl.question(question, () => {
       rl.close();
       resolve();
@@ -45,7 +47,7 @@ export function getUserInput(question: string): Promise<void> {
 }
 
 export async function testInput() {
-  console.log("Testing input");
+  console.log("testInput: Testing input");
   console.log("");
   const userInput = await getUserInput("Press enter to continue");
   console.log("User input: ", userInput);
@@ -54,56 +56,56 @@ export async function testInput() {
 }
 
 export async function generateData(outputDir?: string) {
-    
-    try {
-    console.log("Starting data generation...");
-
-    generateUsers(15, outputDir);
-    // await getUserInput("Press Enter to continue to the next step...");
-    await setTimeout(10000);
-    console.log("---- 10 sec passed ---- ");
-    // generateUserProfiles();
-    // try {
-    //   generateUserProfiles(); // 1 profile per user
-    // //   await getUserInput("Press Enter to continue to the next step...");
-    // } catch (error) {
-    //   console.error("Error generating user profiles:", error);
-    //   return;
-    // }
-
-    // try {
-    //   generateShippingInfo(); // 1-3 per user
-    //   generateBillingInfo(); // 1-3 per user
-    // //   await getUserInput("Press Enter to continue to the next step...");
-    // } catch (error) {
-    //   console.error("Error generating shipping or billing info:", error);
-    //   return;
-    // }
-
-    // try {
-    //   generateOrders(); // rand between 1 - 26 orders per user
-    //   generateProducts(); // there's few products and they don't depend on other data
-    // //   await getUserInput("Press Enter to continue to the next step...");
-    // } catch (error) {
-    //   console.error("Error generating orders or products:", error);
-    //   return;
-    // }
-
-    // try {
-    //   generateGlassInventory();
-    //   generateOrderItems();
-    //   generateInvoices();
-    // //   await getUserInput("Press Enter to continue to the next step...");
-    // } catch (error) {
-    //   console.error(
-    //     "Error generating glass inventory, order items, or invoices:",
-    //     error
-    //   );
-    //   return;
-    // }
-  } catch (error) {
-    console.error("Error during data generation:", error);
-  }
+  //   try {
+  //     console.log("Starting data generation...");
+  //     generateUsers(15, outputDir);
+  //     // await getUserInput("Press Enter to continue to the next step...");
+  //     generateUserProfiles();
+  //     await setTimeout(5000);
+  //     console.log("---- 5 sec passed ---- ");
+  //     try {
+  //       generateUserProfiles(); // 1 profile per user
+  //     //   await getUserInput("Press Enter to continue to the next step...");
+  //     } catch (error) {
+  //       console.error("Error generating user profiles:", error);
+  //       return;
+  //     }
+  //     try {
+  //         generateShippingInfo(); // 1-3 per user
+  //         generateBillingInfo(); // 1-3 per user
+  //         await setTimeout(5000);
+  //     console.log("---- 5 sec passed ---- ");
+  //     //   await getUserInput("Press Enter to continue to the next step...");
+  //     } catch (error) {
+  //       console.error("Error generating shipping or billing info:", error);
+  //       return;
+  //     }
+  //     try {
+  //       generateOrders(); // rand between 1 - 26 orders per user
+  //       generateProducts(); // there's few products and they don't depend on other data
+  //       await setTimeout(5000);
+  //       console.log("---- 5 sec passed ---- ");
+  //       //   await getUserInput("Press Enter to continue to the next step...");
+  //     } catch (error) {
+  //       console.error("Error generating orders or products:", error);
+  //       return;
+  //     }
+  //     try {
+  //       generateGlassInventory();
+  //       generateOrderItems();
+  //   generateInvoices();
+  //     //   await getUserInput("Press Enter to continue to the next step...");
+  //     } catch (error) {
+  //       console.error(
+  //         "Error generating glass inventory, order items, or invoices:",
+  //         error
+  //       );
+  //       return;
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during data generation:", error);
+  //   }
+  //   return "Data generation completed.";
 }
 
 // export async function seedDatabase() {

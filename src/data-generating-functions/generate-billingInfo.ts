@@ -3,30 +3,11 @@ import * as path from "path";
 import { faker } from "@faker-js/faker";
 import { users } from "../seed-data/users";
 import { profiles } from "../seed-data/user-profiles";
-import { UserProfile } from "./generate-user-profiles";
-
-export type BillingInfo = {
-  id: number;
-  user_id: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  payment_method: string;
-  purchase_order: string;
-  primary_contact_name: string;
-  primary_contact_email: string;
-  primary_contact_phone: string;
-  fax_num: string;
-  is_primary: boolean;
-  is_active: boolean;
-};
-
-const payment_method_codes = ["CREDIT", "DEBIT", "PURCHASE ORDER", "CASH", "CHECK"];
-
-export type PaymentMethod = {
-  type: string;
-}
+import {
+  BillingInfo,
+  payment_method_codes,
+  UserProfile,
+} from "./type-definitions";
 
 function generateRandomBillingInfo(
   profile: UserProfile,
@@ -39,7 +20,10 @@ function generateRandomBillingInfo(
     city: faker.location.city(),
     state: faker.location.state(),
     zip: faker.location.zipCode(),
-    payment_method: payment_method_codes[Math.floor(Math.random() * payment_method_codes.length)],
+    payment_method:
+      payment_method_codes[
+        Math.floor(Math.random() * payment_method_codes.length)
+      ],
     purchase_order: faker.finance.accountNumber(),
     primary_contact_name: profile.first_name + " " + profile.last_name,
     primary_contact_email: email,
@@ -80,7 +64,7 @@ export function generateBillingInfo(outputDir?: string) {
     `Generated ${billingInfoData.length} billing info and saved to ${jsonPath}`
   );
 
-  const tsContent = `import { BillingInfo } from "../seed-functions/generate-billingInfo";\n\nexport const billingInfoArray: BillingInfo[] = ${JSON.stringify(
+  const tsContent = `import { BillingInfo } from "../data-generating-functions/type-definitions";\n\nexport const billingInfoArray: BillingInfo[] = ${JSON.stringify(
     billingInfoData,
     null,
     2

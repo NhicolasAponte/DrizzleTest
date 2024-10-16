@@ -1,12 +1,12 @@
 import "dotenv/config";
 import { db } from "./drizzle/db";
 import { eq, sql } from "drizzle-orm";
-import { generateUsers } from "./seed-functions/generate-users";
-import { generateUserProfiles } from "./seed-functions/generate-user-profiles";
-import { generateOrders } from "./seed-functions/generate-orders";
-import { generateShippingInfo } from "./seed-functions/generate-shippingInfo";
-import { generateBillingInfo } from "./seed-functions/generate-billingInfo";
-import { generateProducts } from "./seed-functions/generate-products";
+import { generateUsers } from "./data-generating-functions/generate-users";
+import { generateUserProfiles } from "./data-generating-functions/generate-user-profiles";
+import { generateOrders } from "./data-generating-functions/generate-orders";
+import { generateShippingInfo } from "./data-generating-functions/generate-shippingInfo";
+import { generateBillingInfo } from "./data-generating-functions/generate-billingInfo";
+import { generateProducts } from "./data-generating-functions/generate-products";
 import {
   consoleLogLoop,
   dateArithmetic,
@@ -21,8 +21,8 @@ import {
   numOrders,
   OneLineDateArithmetic,
 } from "./lib/utils";
-import { generateGlassInventory } from "./seed-functions/generate-glass-inventory";
-import { generateOrderItems } from "./seed-functions/generate-order-items";
+import { generateGlassInventory } from "./data-generating-functions/generate-glass-inventory";
+import { generateOrderItems } from "./data-generating-functions/generate-order-items";
 import { SeedUserProfiles, seedUsers } from "./seeding-queries/seed-users";
 import {
   SeedBillingInfo,
@@ -40,7 +40,7 @@ import {
 import { ordersArray } from "./seed-data/orders";
 import { GetUsers, GetUsersByState } from "./fetch-queries/get-users";
 import { GetOrdersByUser } from "./fetch-queries/get-orders";
-import { generateInvoices } from "./seed-functions/generate-invoices";
+import { generateInvoices } from "./data-generating-functions/generate-invoices";
 import {
   dbSchema,
   GlassInventoryTable,
@@ -56,20 +56,25 @@ import {
   generateData,
   getUserInput,
   testInput,
-} from "./seed-functions/seed-db";
+} from "./data-generating-functions/seed-db";
 
 async function main() {
   console.log("------------- Hello World ----");
   console.log("");
   console.log("");
 
-  const outputDir = process.env.LOCAL_OUTPUT_DIR;
-  console.log("STARTING SEEDING PROCESS :");
-  // generateData(outputDir);
+  const outputDir = undefined; //process.env.LOCAL_OUTPUT_DIR;
+  // console.log("STARTING SEEDING PROCESS :");
+  // const result = await generateData(outputDir);
+  // const result = await testInput();
+  // console.log("result: ", result);
 
+  // console.log("main: testing user input");
+  // await testInput();
+  // testInput();
   //   // -------- GENERATE SEQUENCE --------
   // generateUsers(15, outputDir);
-  generateUserProfiles(outputDir); // 1 profile per user
+  // generateUserProfiles(outputDir); // 1 profile per user
 
   // generateShippingInfo(outputDir); // 1-3 per user
   //   generateBillingInfo(outputDir); // 1-3 per user
@@ -81,9 +86,12 @@ async function main() {
   //   generateGlassInventory(outputDir);
   //   // random number of order items per existing order
   //   generateOrderItems(outputDir);
-  //   generateInvoices(outputDir);
+  // generateInvoices(outputDir);
 
   //   // -------- SEED SEQUENCE --------
+  // await db.delete(GlassInventoryTable);
+  // await db.delete(UserTable);
+  // await db.delete(ProductTable);
   //   seedUsers();
   //   SeedUserProfiles();
   //   seedShippingInfo();

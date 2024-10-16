@@ -3,34 +3,18 @@ import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
 import { productTypes } from "../seed-data/placeholder-data";
-import { date } from "drizzle-orm/mysql-core";
+import { Product } from "./type-definitions";
 
-export type Product = {
-  id: string;
-  type: string;
-  image_url: string;
-  alt: string;
-  description: string;
-  config_options: any;
-  // unit price, eventually need to work in unit of measure
-  // price: number;
-  // unit:
-  date_created: string;
-  date_updated: string;
-};
-
-// get product arrays from orders ui and put them in product types file
-// use product array
 function generateRandomProduct(type: string, config_options: any): Product {
-  const date_created = faker.date.past({ years: 2 }).toLocaleString();
-  let date_updated = faker.date.recent({ days: 30 }).toLocaleString();
+  const date_created = faker.date.past({ years: 2 });
+  let date_updated = faker.date.recent({ days: 30 });
   while (date_updated < date_created) {
-    date_updated = faker.date.recent({ days: 30 }).toLocaleString();
+    date_updated = faker.date.recent({ days: 30 });
   }
   return {
     id: uuidv4(),
     type: type, // from array of product names
-    image_url: "https://via.placeholder.com/150",
+    image_url: "https://some/image/url",
     alt: "alt image description",
     description: "description for " + type,
     // NOTE TODO: update config options
@@ -58,7 +42,7 @@ export function generateProducts(outputDir?: string) {
   fs.writeFileSync(jsonPath, JSON.stringify(products, null, 2), "utf-8");
   console.log(`Generated ${products.length} products and saved to ${jsonPath}`);
 
-  const tsContent = `import { Product } from "../seed-functions/generate-products";\n\nexport const productsArray: Product[] = ${JSON.stringify(
+  const tsContent = `import { Product } from "../data-generating-functions/type-definitions";\n\nexport const productsArray: Product[] = ${JSON.stringify(
     products,
     null,
     2

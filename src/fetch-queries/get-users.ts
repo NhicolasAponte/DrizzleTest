@@ -6,7 +6,6 @@ import {
   UserProfileTable,
   UserTable,
 } from "../drizzle/schema";
-import { User } from "../seed-functions/generate-users";
 import { eq } from "drizzle-orm";
 
 export async function GetUsers() {
@@ -19,8 +18,8 @@ export async function GetUsers() {
     // console.log("USER:", user);
     // console.log(typeof user);
     console.log("COUNT: ", users.length);
-    for ( const user of users){
-      console.log("----")
+    for (const user of users) {
+      console.log("----");
       console.log(user);
     }
     console.log("Users fetched successfully");
@@ -54,5 +53,3 @@ export async function GetUsersByState(state: string) {
     console.error(error);
   }
 }
-
-

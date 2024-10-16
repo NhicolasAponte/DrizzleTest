@@ -673,3 +673,9 @@ Here's the priority of the files for the development build and the production bu
 Dev.: (npm start): .env.development.local, .env.local, .env.development, .env
 
 Prod.: (npm run build): .env.production.local, .env.local, .env.production, .env
+
+----------- POTENTIAL BUGS AND ERRORS -----------
+sometimes, when the output file is written over while generating data, 
+it can leave trailing brackets, fields, semicolons, etc which then cause 
+compile errors 
+- potential fix: delete the file before writing to it  

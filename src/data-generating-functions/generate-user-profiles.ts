@@ -3,16 +3,7 @@ import * as path from "path";
 import { faker } from "@faker-js/faker";
 import { generate } from "random-words";
 import { users } from "../seed-data/users";
-
-export type UserProfile = {
-  id: number;
-  user_id: string;
-  first_name: string;
-  last_name: string;
-  company?: string;
-  account_num?: string;
-  phone_num?: string;
-};
+import { UserProfile } from "./type-definitions";
 
 function generateRandomUserProfile(user_id: string): UserProfile {
   const id = Math.floor(Math.random() * 10000);
@@ -57,7 +48,7 @@ export function generateUserProfiles(outputDir?: string) {
   fs.writeFileSync(jsonPath, JSON.stringify(profiles, null, 2), "utf-8");
   console.log(`Generated ${profiles.length} profiles and saved to ${jsonPath}`);
 
-  const tsContent = `import { UserProfile } from "../seed-functions/generate-user-profiles";\n\nexport const profiles: UserProfile[] = ${JSON.stringify(
+  const tsContent = `import { UserProfile } from "../data-generating-functions/type-definitions";\n\nexport const profiles: UserProfile[] = ${JSON.stringify(
     profiles,
     null,
     2

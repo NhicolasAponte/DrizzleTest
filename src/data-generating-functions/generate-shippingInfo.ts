@@ -4,17 +4,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { faker } from "@faker-js/faker";
 import { users } from "../seed-data/users";
-
-export type ShippingInfo = {
-  id: number;
-  user_id: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  is_job_site: boolean;
-  note: string;
-};
+import { ShippingInfo } from "./type-definitions";
 
 function generateRandomAddress(userId: string): ShippingInfo {
   return {
@@ -56,7 +46,7 @@ export function generateShippingInfo(outputDir?: string) {
     `Generated ${shippingInfoData.length} shipping info and saved to ${jsonPath}`
   );
 
-  const tsContent = `import { ShippingInfo } from "../seed-functions/generate-shippingInfo";\n\nexport const shippingInfoArray: ShippingInfo[] = ${JSON.stringify(
+  const tsContent = `import { ShippingInfo } from "../data-generating-functions/type-definitions";\n\nexport const shippingInfoArray: ShippingInfo[] = ${JSON.stringify(
     shippingInfoData,
     null,
     2

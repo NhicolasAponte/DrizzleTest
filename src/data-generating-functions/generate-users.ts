@@ -2,14 +2,9 @@ import { v4 as uuidv4 } from "uuid";
 import * as fs from "fs";
 import * as path from "path";
 import { generate } from "random-words";
+import { User } from "./type-definitions";
 
 // Define the User type based on the UserTable schema
-export type User = {
-  id: string;
-  email: string;
-  password: string;
-  role: string;
-};
 
 // Function to generate random user data
 function generateRandomUser(): User {
@@ -50,7 +45,7 @@ export function generateUsers(numUsers: number, outputDir?: string) {
 
   // Write to TypeScript file
   // create file content as string
-  const tsContent = `import { User } from '../seed-functions/generate-users';\n\nexport const users: User[] = ${JSON.stringify(
+  const tsContent = `import { User } from '../data-generating-functions/type-definitions';\n\nexport const users: User[] = ${JSON.stringify(
     users,
     null,
     2

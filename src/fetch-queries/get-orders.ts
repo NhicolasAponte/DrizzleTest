@@ -1,6 +1,5 @@
 import { db } from "../drizzle/db";
 import { OrderTable, UserTable } from "../drizzle/schema";
-import { User } from "../seed-functions/generate-users";
 import { eq } from "drizzle-orm";
 
 export async function GetOrdersByUser(userId: string) {

@@ -3,16 +3,7 @@ import { ordersArray } from "../seed-data/orders";
 import { v4 as uuidv4 } from "uuid";
 import * as fs from "fs";
 import * as path from "path";
-
-export type Invoice = {
-  id: string;
-  user_id: string;
-  order_id: string;
-  date_created: Date;
-  //date_created_tz: Date;
-  status: string;
-  amount: number;
-};
+import { Invoice } from "./type-definitions";
 
 function generateRandomInvoice(
   userId: string,
@@ -66,7 +57,7 @@ export function generateInvoices(outputDir?: string) {
   fs.writeFileSync(jsonPath, JSON.stringify(invoices, null, 2), "utf-8");
   console.log(`Generated ${invoices.length} invoices and saved to ${jsonPath}`);
 
-  const tsContent = `import { Invoice } from "../seed-functions/generate-invoices";\n\nexport const invoicesArray: Invoice[] = ${JSON.stringify(
+  const tsContent = `import { Invoice } from "../data-generating-functions/type-definitions";\n\nexport const invoicesArray: Invoice[] = ${JSON.stringify(
     invoices,
     null,
     2

@@ -3,36 +3,28 @@ import * as path from "path";
 import { ordersArray } from "../seed-data/orders";
 import { glassInventoryArray } from "../seed-data/glass-inventory";
 import { productsArray } from "../seed-data/products";
+import { OrderItem } from "./type-definitions";
 
-export type OrderItem = {
-  id: number;
-  order_id: string;
-  product_type_id: string; // uuid
-  product_config: any; // jsonb
-  quantity: number;
-  note: string;
-};
+// interface productConfig {
+//   productId: string;
+//   productType: string;
+//   shape: string;
+//   tint: string;
+//   thickness: string;
+//   dimensions: string;
+//   fabrication_options: string;
+//   misc_options: string;
+// }
 
-interface productConfig {
-  productId: string;
-  productType: string;
-  shape: string;
-  tint: string;
-  thickness: string;
-  dimensions: string;
-  fabrication_options: string;
-  misc_options: string;
-}
-
-interface glassConfig {
-  glassType: string;
-  shape: string;
-  tint: string;
-  thickness: string;
-  dimensions: string;
-  fabrication_options: string;
-  misc_options: string;
-}
+// interface glassConfig {
+//   glassType: string;
+//   shape: string;
+//   tint: string;
+//   thickness: string;
+//   dimensions: string;
+//   fabrication_options: string;
+//   misc_options: string;
+// }
 
 // need an array of products and configs
 function generateRandomOrderItem(itemId: number, orderId: string) {
@@ -125,7 +117,7 @@ export function generateOrderItems(outputDir?: string) {
     `Generated ${orderItemsData.length} order items and saved to ${jsonPath}`
   );
 
-  const tsContent = `import { OrderItem } from "../seed-functions/generate-order-items";\n\nexport const orderItemsArray: OrderItem[] = ${JSON.stringify(
+  const tsContent = `import { OrderItem } from "../data-generating-functions/type-definitions";\n\nexport const orderItemsArray: OrderItem[] = ${JSON.stringify(
     orderItemsData,
     null,
     2
