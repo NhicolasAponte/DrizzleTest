@@ -2,10 +2,13 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import * as schema from "./schema";
 import postgres from "postgres";
 
+console.log("----");
+console.log("CREATING DB CLIENT");
+console.log("----");
 const client = postgres(process.env.DOCKER_POSTGRES_URL as string);
-export const db = drizzle(client, { schema, logger: true});
+export const db = drizzle(client, { schema, logger: true });
 
-// https://www.thisdot.co/blog/configure-your-project-with-drizzle-for-local-and-deployed-databases 
+// https://www.thisdot.co/blog/configure-your-project-with-drizzle-for-local-and-deployed-databases
 // import { sql } from "@vercel/postgres";
 // import postgres from "postgres";
 // import {

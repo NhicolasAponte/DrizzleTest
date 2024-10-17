@@ -1,8 +1,8 @@
 [
   {
-    "id": "7fecbbdd-7583-4fba-9330-fa8482e23edc",
+    "id": "012d254e-cb01-40c0-864e-c6d751e2c1d2",
     "type": "Tempered Glass",
-    "image_url": "https://via.placeholder.com/150",
+    "image_url": "https://some/image/url",
     "alt": "alt image description",
     "description": "description for Tempered Glass",
     "config_options": {
@@ -13,13 +13,13 @@
       "edgework": "",
       "misc": ""
     },
-    "date_created": "2/25/2023, 1:45:22 PM",
-    "date_updated": "9/26/2024, 5:20:18 PM"
+    "date_created": "2024-07-09T12:51:57.139Z",
+    "date_updated": "2024-09-26T23:57:52.892Z"
   },
   {
-    "id": "3659565d-a67a-469b-b42d-5db2979b23a3",
+    "id": "b143e532-6cbd-4643-8e42-e0e56e336197",
     "type": "Insulated Unit/Dual Pane",
-    "image_url": "https://via.placeholder.com/150",
+    "image_url": "https://some/image/url",
     "alt": "alt image description",
     "description": "description for Insulated Unit/Dual Pane",
     "config_options": {
@@ -30,13 +30,13 @@
       "misc": "",
       "spacer": ""
     },
-    "date_created": "6/19/2023, 2:01:22 PM",
-    "date_updated": "9/22/2024, 2:02:51 AM"
+    "date_created": "2023-01-05T12:01:54.593Z",
+    "date_updated": "2024-10-16T13:44:22.927Z"
   },
   {
-    "id": "b9f49aff-d35c-41d9-b298-c35a9347f478",
+    "id": "eb7e4e80-8b98-41f2-9153-295735adb373",
     "type": "Laminate/Safety Glass",
-    "image_url": "https://via.placeholder.com/150",
+    "image_url": "https://some/image/url",
     "alt": "alt image description",
     "description": "description for Laminate/Safety Glass",
     "config_options": {
@@ -48,13 +48,13 @@
       "edgework": "",
       "lami_layer": ""
     },
-    "date_created": "6/27/2024, 3:26:42 PM",
-    "date_updated": "9/23/2024, 9:41:03 PM"
+    "date_created": "2022-10-21T07:52:19.303Z",
+    "date_updated": "2024-09-21T14:56:51.652Z"
   },
   {
-    "id": "8abc2a14-0f50-4070-8ca5-db0fb9b756ca",
+    "id": "f2148e13-6eaa-4bbf-bbe2-441fb033a40b",
     "type": "Tempered Laminate",
-    "image_url": "https://via.placeholder.com/150",
+    "image_url": "https://some/image/url",
     "alt": "alt image description",
     "description": "description for Tempered Laminate",
     "config_options": {
@@ -65,13 +65,13 @@
       "edgework": "",
       "misc": ""
     },
-    "date_created": "5/13/2023, 10:49:22 AM",
-    "date_updated": "9/26/2024, 4:08:49 AM"
+    "date_created": "2024-08-27T12:21:53.810Z",
+    "date_updated": "2024-10-09T05:01:01.918Z"
   },
   {
-    "id": "4efad208-bfa4-4bfa-8e09-a8e857ae6697",
+    "id": "20ca5925-7ce2-480d-8e6d-87461c916562",
     "type": "Shower Doors/Panels",
-    "image_url": "https://via.placeholder.com/150",
+    "image_url": "https://some/image/url",
     "alt": "alt image description",
     "description": "description for Shower Doors/Panels",
     "config_options": {
@@ -82,13 +82,13 @@
       "fabrication": "",
       "misc": ""
     },
-    "date_created": "4/13/2023, 8:58:04 AM",
-    "date_updated": "9/16/2024, 1:49:04 AM"
+    "date_created": "2023-12-09T00:37:16.746Z",
+    "date_updated": "2024-09-25T09:12:40.649Z"
   },
   {
-    "id": "4b4cfaf7-899d-4309-a245-15714f74ff40",
+    "id": "2ee1a846-0ed0-4349-b85c-f81aff86a8f7",
     "type": "Annealed Glass",
-    "image_url": "https://via.placeholder.com/150",
+    "image_url": "https://some/image/url",
     "alt": "alt image description",
     "description": "description for Annealed Glass",
     "config_options": {
@@ -99,7 +99,7 @@
       "fabrication": "",
       "misc": ""
     },
-    "date_created": "5/6/2023, 11:00:53 PM",
-    "date_updated": "9/17/2024, 8:15:18 AM"
+    "date_created": "2024-03-25T02:38:41.970Z",
+    "date_updated": "2024-10-04T14:52:32.502Z"
   }
 ]

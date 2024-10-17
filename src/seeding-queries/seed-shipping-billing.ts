@@ -2,8 +2,7 @@ import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { shippingInfoArray } from "../seed-data/shipping-info";
 import { billingInfoArray } from "../seed-data/billing-info";
-import { SchemaName } from "../lib/utils";
-
+import { getSchemaName } from "../lib/utils";
 
 export const seedShippingInfo = async () => {
   console.log("seeding shipping info ...");
@@ -12,7 +11,7 @@ export const seedShippingInfo = async () => {
     await db.transaction(async (trx) => {
       for (const shippingInfo of shippingInfoArray) {
         await trx.execute(
-          sql`INSERT INTO "${sql.raw(SchemaName())}".shipping_info 
+          sql`INSERT INTO "${sql.raw(getSchemaName())}".shipping_info 
                   (id, 
                   user_id, 
                   address, 
@@ -31,21 +30,23 @@ export const seedShippingInfo = async () => {
                   ${shippingInfo.note})`
         );
       }
-      console.log(`${shippingInfoArray.length} Shipping info seeded successfully`);
+      console.log(
+        `${shippingInfoArray.length} Shipping info seeded successfully`
+      );
     });
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export async function SeedBillingInfo() {
-    console.log("seeding billing info ...");
-    
-    try {
-        await db.transaction(async (trx) => {
-        for (const billingInfo of billingInfoArray) {
-          await trx.execute(
-            sql`INSERT INTO "${sql.raw(SchemaName())}".billing_info 
+  console.log("seeding billing info ...");
+
+  try {
+    await db.transaction(async (trx) => {
+      for (const billingInfo of billingInfoArray) {
+        await trx.execute(
+          sql`INSERT INTO "${sql.raw(getSchemaName())}".billing_info 
                     (id, 
                     user_id, 
                     address, 
@@ -74,11 +75,13 @@ export async function SeedBillingInfo() {
                     ${billingInfo.fax_num},
                     ${billingInfo.is_primary},
                     ${billingInfo.is_active})`
-          );
-        }
-        console.log(`${billingInfoArray.length} Billing info seeded successfully`);
-        });
-    } catch (error) {
-        console.error(error);
-    }
+        );
+      }
+      console.log(
+        `${billingInfoArray.length} Billing info seeded successfully`
+      );
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }

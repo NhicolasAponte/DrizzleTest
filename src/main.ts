@@ -109,6 +109,7 @@ async function main() {
   //   TRUNCATE TABLE "dev-schema".invoices RESTART IDENTITY CASCADE;
   //   SET session_replication_role = 'origin';
   //   `);
+  // await seedUsers();
   // seedUsers();
   // SeedUserProfiles();
   //   seedShippingInfo();
@@ -124,6 +125,9 @@ async function main() {
   // ------------ CASCADING SEEDING ------------
   // resetDatabase();
   // await seedUserInfo();
+  // await seedUsers();
+  seedUsers(); 
+  // seedUserInfo();
   // -------------- FETCH QUERIES --------------
   // GetUsers();
   // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");

@@ -2,7 +2,7 @@ import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { productsArray } from "../seed-data/products";
 import { glassInventoryArray } from "../seed-data/glass-inventory";
-import { SchemaName } from "../lib/utils";
+import { getSchemaName } from "../lib/utils";
 
 export async function SeedProducts() {
   console.log("seeding products ...");
@@ -12,7 +12,7 @@ export async function SeedProducts() {
       for (const product of productsArray) {
         const serializedConfigOptions = JSON.stringify(product.config_options);
         await trx.execute(
-          sql`INSERT INTO "${sql.raw(SchemaName())}".products 
+          sql`INSERT INTO "${sql.raw(getSchemaName())}".products 
                     (id, 
                     type, 
                     "image_url", 
@@ -54,7 +54,7 @@ export async function SeedGlassInventory() {
           item.quantity_incoming
         );
         await trx.execute(
-          sql`INSERT INTO "${sql.raw(SchemaName())}".glass_inventory_item 
+          sql`INSERT INTO "${sql.raw(getSchemaName())}".glass_inventory_item 
                     (id, 
                      name, 
                      description, 
@@ -81,7 +81,9 @@ export async function SeedGlassInventory() {
                     ${item.updated_by})`
         );
       }
-      console.log(`${glassInventoryArray.length} Glass Inventory seeded successfully`);
+      console.log(
+        `${glassInventoryArray.length} Glass Inventory seeded successfully`
+      );
     });
   } catch (error) {
     console.error(error);

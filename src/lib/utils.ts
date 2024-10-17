@@ -28,7 +28,7 @@ export async function getPGSchema() {
 // SELECT nspname
 // FROM pg_catalog.pg_namespace;
 
-export function SchemaName() {
+export function getSchemaName() {
   return process.env.NODE_ENV === "production"
     ? process.env.PROD_SCHEMA!
     : process.env.DEV_SCHEMA!;
@@ -36,6 +36,16 @@ export function SchemaName() {
 
 export function getSystemTimeZone(): string {
   return Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
+export function LogData(data: {
+  fileName: string;
+  functionName: string;
+  params: any;
+}) {
+  console.log("------------ LOGGING DATA ------------");
+  console.log(data);
+  console.log("------------ END OF LOG ------------");
 }
 
 export function consoleLogLoop() {
@@ -210,7 +220,11 @@ export function getTimeArithmetic(date: Date, x: number) {
   console.log("new date: ", new Date(newDateSet));
 }
 
-export function getMidpointBetweenDates(newestDate: Date, oldestDate: Date, functionName: string) {
+export function getMidpointBetweenDates(
+  newestDate: Date,
+  oldestDate: Date,
+  functionName: string
+) {
   // console.log("----")
   // console.log("called from ->", functionName)
   const newDate = new Date(newestDate);
@@ -221,9 +235,9 @@ export function getMidpointBetweenDates(newestDate: Date, oldestDate: Date, func
 
   const diff = newDate.getTime() - oldDate.getTime();
   // console.log("difference in milliseconds:", diff);
-  const midpoint = newDate.getTime() - (diff / 2);
+  const midpoint = newDate.getTime() - diff / 2;
   // console.log("        midpoint:", midpoint);
-  
+
   const midDate = new Date(midpoint);
   // console.log("        mid date:", midDate);
 
@@ -231,16 +245,19 @@ export function getMidpointBetweenDates(newestDate: Date, oldestDate: Date, func
   // console.log("difference in milliseconds reverse:", diffReverse);
   // const midpointReverse = oldDate.getTime() - (diffReverse / 2);
   // console.log("midpoint reverse:", midpointReverse);
-  
+
   // const midDateReverse = new Date(midpointReverse);
   // console.log("mid date reverse:", midDateReverse);
 
   return midDate;
 }
-// pass the dates in reverse to make sure data arithmetic is consistent 
-export function getMidpointBetweenDatesReverse(newestDate: Date, oldestDate: Date) {
-  console.log("----")
-  console.log("reverse ")
+// pass the dates in reverse to make sure data arithmetic is consistent
+export function getMidpointBetweenDatesReverse(
+  newestDate: Date,
+  oldestDate: Date
+) {
+  console.log("----");
+  console.log("reverse ");
   const newDate = new Date(newestDate);
   const oldDate = new Date(oldestDate);
   console.log("newest date:", newDate);
@@ -249,9 +266,9 @@ export function getMidpointBetweenDatesReverse(newestDate: Date, oldestDate: Dat
 
   const diff = newDate.getTime() - oldDate.getTime();
   console.log("difference in milliseconds:", diff);
-  const midpoint = newDate.getTime() - (diff / 2);
+  const midpoint = newDate.getTime() - diff / 2;
   console.log("        midpoint:", midpoint);
-  
+
   const midDate = new Date(midpoint);
   console.log("        mid date:", midDate);
 
@@ -259,7 +276,7 @@ export function getMidpointBetweenDatesReverse(newestDate: Date, oldestDate: Dat
   // console.log("difference in milliseconds reverse:", diffReverse);
   // const midpointReverse = oldDate.getTime() - (diffReverse / 2);
   // console.log("midpoint reverse:", midpointReverse);
-  
+
   // const midDateReverse = new Date(midpointReverse);
   // console.log("mid date reverse:", midDateReverse);
 
@@ -269,7 +286,7 @@ export function getMidpointBetweenDatesReverse(newestDate: Date, oldestDate: Dat
 export function dateArithmetic(dateNow: Date, fakerDate: Date, x: number) {
   // let dateCreated = faker.date.past({ years: 2 }); //.toLocaleString();
   const today = new Date(dateNow);
-  let startDate = new Date(fakerDate)
+  let startDate = new Date(fakerDate);
   const maxShippedDate = new Date(startDate.setDate(startDate.getDate() + 205));
   // console.log("maxDate type:", typeof maxDate);
   while (maxShippedDate > today) {
@@ -289,7 +306,7 @@ export function dateArithmetic(dateNow: Date, fakerDate: Date, x: number) {
     dateUpdated = faker.date.soon({ days: 65, refDate: startDate });
     dateSubmitted = dateUpdated;
     dateShipped = faker.date.soon({ days: 120, refDate: dateSubmitted });
-    // date delivered should be date.between dateShipped and today 
+    // date delivered should be date.between dateShipped and today
     dateDelivered = faker.date.soon({ days: 20, refDate: dateShipped });
 
     if (
@@ -311,7 +328,6 @@ export function dateArithmetic(dateNow: Date, fakerDate: Date, x: number) {
   }
   console.log("dates in future:", count);
 }
-
 
 // const dateNow = new Date();
 // console.log("dateNow:", dateNow);
@@ -372,7 +388,7 @@ export function dateArithmetic(dateNow: Date, fakerDate: Date, x: number) {
 // console.log(dateNow.getTimezoneOffset());
 // console.log("dateCreatedPlusXAsDate type:", typeof dateCreatedPlusXAsDate);
 
-// couldn't get this to work 
+// couldn't get this to work
 export async function userInputMethod() {
   process.stdin.on("readable", () => {
     let chunk;
@@ -380,5 +396,5 @@ export async function userInputMethod() {
     while ((chunk = process.stdin.read()) !== null) {
       process.stdout.write("input: ", chunk);
     }
-  })
+  });
 }

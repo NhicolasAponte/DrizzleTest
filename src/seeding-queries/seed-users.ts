@@ -3,7 +3,7 @@ import { db } from "../drizzle/db";
 import { users } from "../seed-data/users";
 import { UserTable } from "../drizzle/schema";
 import { profiles } from "../seed-data/user-profiles";
-import { SchemaName } from "../lib/utils";
+import { getSchemaName } from "../lib/utils";
 
 export async function seedUsers() {
   console.log("seeding users ...");
@@ -15,14 +15,14 @@ export async function seedUsers() {
       //trx.insert(UserTable).values(users).execute();
 
       for (const user of users) {
+        const randEmail =
+          Math.random().toString(36).substring(7) + "@some-email.com";
         await trx.execute(
-          sql`INSERT INTO "${sql.raw(SchemaName())}".users 
-                      (id, 
-                      email, 
+          sql`INSERT INTO "${sql.raw(getSchemaName())}".users 
+                      (email, 
                       password, 
                       role) 
-          VALUES (${user.id},
-                  ${user.email},
+          VALUES (${randEmail},
                   ${user.password},
                   ${user.role})`
         );
@@ -44,7 +44,7 @@ export async function SeedUserProfiles() {
         // count++;
         // console.log(" count ", count);
         await trx.execute(
-          sql`INSERT INTO "${sql.raw(SchemaName())}".user_profiles 
+          sql`INSERT INTO "${sql.raw(getSchemaName())}".user_profiles 
               (id, 
               "user_id", 
               "first_name", 
