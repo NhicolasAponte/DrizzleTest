@@ -6,11 +6,15 @@ import type { PgSelectConfig } from "./query-builders/select.types.cjs";
 import { PgTable } from "./table.cjs";
 import { type BuildRelationalQueryResult, type DBQueryConfig, type Relation, type TableRelationalConfig, type TablesRelationalConfig } from "../relations.cjs";
 import { type DriverValueEncoder, type QueryTypingsValue, type QueryWithTypings, SQL } from "../sql/sql.cjs";
-import { type UpdateSet } from "../utils.cjs";
+import { type Casing, type UpdateSet } from "../utils.cjs";
 import type { PgSession } from "./session.cjs";
 import type { PgMaterializedView } from "./view.cjs";
+export interface PgDialectConfig {
+    casing?: Casing;
+}
 export declare class PgDialect {
     static readonly [entityKind]: string;
+    constructor(config?: PgDialectConfig);
     migrate(migrations: MigrationMeta[], session: PgSession, config: string | MigrationConfig): Promise<void>;
     escapeName(name: string): string;
     escapeParam(num: number): string;

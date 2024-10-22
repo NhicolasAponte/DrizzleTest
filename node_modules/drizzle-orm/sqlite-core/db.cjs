@@ -24,8 +24,10 @@ __export(db_exports, {
 module.exports = __toCommonJS(db_exports);
 var import_entity = require("../entity.cjs");
 var import_selection_proxy = require("../selection-proxy.cjs");
+var import_sql = require("../sql/sql.cjs");
 var import_query_builders = require("./query-builders/index.cjs");
 var import_subquery = require("../subquery.cjs");
+var import_count = require("./query-builders/count.cjs");
 var import_query = require("./query-builders/query.cjs");
 var import_raw = require("./query-builders/raw.cjs");
 class BaseSQLiteDatabase {
@@ -94,10 +96,11 @@ class BaseSQLiteDatabase {
    * ```
    */
   $with(alias) {
+    const self = this;
     return {
       as(qb) {
         if (typeof qb === "function") {
-          qb = qb(new import_query_builders.QueryBuilder());
+          qb = qb(new import_query_builders.QueryBuilder(self.dialect));
         }
         return new Proxy(
           new import_subquery.WithSubquery(qb.getSQL(), qb.getSelectedFields(), alias, true),
@@ -105,6 +108,9 @@ class BaseSQLiteDatabase {
         );
       }
     };
+  }
+  $count(source, filters) {
+    return new import_count.SQLiteCountBuilder({ source, filters, session: this.session });
   }
   /**
    * Incorporates a previously defined CTE (using `$with`) into the main query.
@@ -251,56 +257,56 @@ class BaseSQLiteDatabase {
     return new import_query_builders.SQLiteDeleteBase(from, this.session, this.dialect);
   }
   run(query) {
-    const sql = query.getSQL();
+    const sequel = typeof query === "string" ? import_sql.sql.raw(query) : query.getSQL();
     if (this.resultKind === "async") {
       return new import_raw.SQLiteRaw(
-        async () => this.session.run(sql),
-        () => sql,
+        async () => this.session.run(sequel),
+        () => sequel,
         "run",
         this.dialect,
         this.session.extractRawRunValueFromBatchResult.bind(this.session)
       );
     }
-    return this.session.run(sql);
+    return this.session.run(sequel);
   }
   all(query) {
-    const sql = query.getSQL();
+    const sequel = typeof query === "string" ? import_sql.sql.raw(query) : query.getSQL();
     if (this.resultKind === "async") {
       return new import_raw.SQLiteRaw(
-        async () => this.session.all(sql),
-        () => sql,
+        async () => this.session.all(sequel),
+        () => sequel,
         "all",
         this.dialect,
         this.session.extractRawAllValueFromBatchResult.bind(this.session)
       );
     }
-    return this.session.all(sql);
+    return this.session.all(sequel);
   }
   get(query) {
-    const sql = query.getSQL();
+    const sequel = typeof query === "string" ? import_sql.sql.raw(query) : query.getSQL();
     if (this.resultKind === "async") {
       return new import_raw.SQLiteRaw(
-        async () => this.session.get(sql),
-        () => sql,
+        async () => this.session.get(sequel),
+        () => sequel,
         "get",
         this.dialect,
         this.session.extractRawGetValueFromBatchResult.bind(this.session)
       );
     }
-    return this.session.get(sql);
+    return this.session.get(sequel);
   }
   values(query) {
-    const sql = query.getSQL();
+    const sequel = typeof query === "string" ? import_sql.sql.raw(query) : query.getSQL();
     if (this.resultKind === "async") {
       return new import_raw.SQLiteRaw(
-        async () => this.session.values(sql),
-        () => sql,
+        async () => this.session.values(sequel),
+        () => sequel,
         "values",
         this.dialect,
         this.session.extractRawValuesValueFromBatchResult.bind(this.session)
       );
     }
-    return this.session.values(sql);
+    return this.session.values(sequel);
   }
   transaction(transaction, config) {
     return this.session.transaction(transaction, config);

@@ -7,7 +7,9 @@ import {
   QueryBuilder
 } from "./query-builders/index.js";
 import { SelectionProxyHandler } from "../selection-proxy.js";
+import { sql } from "../sql/sql.js";
 import { WithSubquery } from "../subquery.js";
+import { PgCountBuilder } from "./query-builders/count.js";
 import { RelationalQueryBuilder } from "./query-builders/query.js";
 import { PgRaw } from "./query-builders/raw.js";
 import { PgRefreshMaterializedView } from "./query-builders/refresh-materialized-view.js";
@@ -76,10 +78,11 @@ class PgDatabase {
    * ```
    */
   $with(alias) {
+    const self = this;
     return {
       as(qb) {
         if (typeof qb === "function") {
-          qb = qb(new QueryBuilder());
+          qb = qb(new QueryBuilder(self.dialect));
         }
         return new Proxy(
           new WithSubquery(qb.getSQL(), qb.getSelectedFields(), alias, true),
@@ -87,6 +90,9 @@ class PgDatabase {
         );
       }
     };
+  }
+  $count(source, filters) {
+    return new PgCountBuilder({ source, filters, session: this.session });
   }
   /**
    * Incorporates a previously defined CTE (using `$with`) into the main query.
@@ -257,8 +263,8 @@ class PgDatabase {
     return new PgRefreshMaterializedView(view, this.session, this.dialect);
   }
   execute(query) {
-    const sql = query.getSQL();
-    const builtQuery = this.dialect.sqlToQuery(sql);
+    const sequel = typeof query === "string" ? sql.raw(query) : query.getSQL();
+    const builtQuery = this.dialect.sqlToQuery(sequel);
     const prepared = this.session.prepareQuery(
       builtQuery,
       void 0,
@@ -267,7 +273,7 @@ class PgDatabase {
     );
     return new PgRaw(
       () => prepared.execute(),
-      sql,
+      sequel,
       builtQuery,
       (result) => prepared.mapResult(result, true)
     );

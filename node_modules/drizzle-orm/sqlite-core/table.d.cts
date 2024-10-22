@@ -2,6 +2,7 @@ import type { BuildColumns } from "../column-builder.cjs";
 import { entityKind } from "../entity.cjs";
 import { Table, type TableConfig as TableConfigBase, type UpdateTableConfig } from "../table.cjs";
 import type { CheckBuilder } from "./checks.cjs";
+import { type SQLiteColumnBuilders } from "./columns/all.cjs";
 import type { SQLiteColumn, SQLiteColumnBuilderBase } from "./columns/common.cjs";
 import type { ForeignKeyBuilder } from "./foreign-keys.cjs";
 import type { IndexBuilder } from "./indexes.cjs";
@@ -18,6 +19,12 @@ export type SQLiteTableWithColumns<T extends TableConfig> = SQLiteTable<T> & {
 };
 export interface SQLiteTableFn<TSchema extends string | undefined = undefined> {
     <TTableName extends string, TColumnsMap extends Record<string, SQLiteColumnBuilderBase>>(name: TTableName, columns: TColumnsMap, extraConfig?: (self: BuildColumns<TTableName, TColumnsMap, 'sqlite'>) => SQLiteTableExtraConfig): SQLiteTableWithColumns<{
+        name: TTableName;
+        schema: TSchema;
+        columns: BuildColumns<TTableName, TColumnsMap, 'sqlite'>;
+        dialect: 'sqlite';
+    }>;
+    <TTableName extends string, TColumnsMap extends Record<string, SQLiteColumnBuilderBase>>(name: TTableName, columns: (columnTypes: SQLiteColumnBuilders) => TColumnsMap, extraConfig?: (self: BuildColumns<TTableName, TColumnsMap, 'sqlite'>) => SQLiteTableExtraConfig): SQLiteTableWithColumns<{
         name: TTableName;
         schema: TSchema;
         columns: BuildColumns<TTableName, TColumnsMap, 'sqlite'>;

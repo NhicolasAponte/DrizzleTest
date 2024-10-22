@@ -3,16 +3,17 @@ import { entityKind } from "../entity.js";
 import type { TypedQueryBuilder } from "../query-builders/query-builder.js";
 import type { AddAliasToSelection } from "../query-builders/select.types.js";
 import type { ColumnsSelection, SQL } from "../sql/sql.js";
+import type { RequireAtLeastOne } from "../utils.js";
 import type { PgColumnBuilderBase } from "./columns/common.js";
 import { QueryBuilder } from "./query-builders/query-builder.js";
 import type { SelectedFields } from "./query-builders/select.types.js";
 import { PgViewBase } from "./view-base.js";
 import { PgViewConfig } from "./view-common.js";
-export interface ViewWithConfig {
+export type ViewWithConfig = RequireAtLeastOne<{
     checkOption: 'local' | 'cascaded';
     securityBarrier: boolean;
     securityInvoker: boolean;
-}
+}>;
 export declare class DefaultViewBuilderCore<TConfig extends {
     name: string;
     columns?: unknown;
@@ -46,9 +47,26 @@ export declare class ManualViewBuilder<TName extends string = string, TColumns e
     existing(): PgViewWithSelection<TName, true, BuildColumns<TName, TColumns, 'pg'>>;
     as(query: SQL): PgViewWithSelection<TName, false, BuildColumns<TName, TColumns, 'pg'>>;
 }
-export interface PgMaterializedViewWithConfig {
-    [Key: string]: string | number | boolean | SQL;
-}
+export type PgMaterializedViewWithConfig = RequireAtLeastOne<{
+    fillfactor: number;
+    toastTupleTarget: number;
+    parallelWorkers: number;
+    autovacuumEnabled: boolean;
+    vacuumIndexCleanup: 'auto' | 'off' | 'on';
+    vacuumTruncate: boolean;
+    autovacuumVacuumThreshold: number;
+    autovacuumVacuumScaleFactor: number;
+    autovacuumVacuumCostDelay: number;
+    autovacuumVacuumCostLimit: number;
+    autovacuumFreezeMinAge: number;
+    autovacuumFreezeMaxAge: number;
+    autovacuumFreezeTableAge: number;
+    autovacuumMultixactFreezeMinAge: number;
+    autovacuumMultixactFreezeMaxAge: number;
+    autovacuumMultixactFreezeTableAge: number;
+    logAutovacuumMinDuration: number;
+    userCatalogTable: boolean;
+}>;
 export declare class MaterializedViewBuilderCore<TConfig extends {
     name: string;
     columns?: unknown;
@@ -135,3 +153,5 @@ export declare function pgView<TName extends string>(name: TName): ViewBuilder<T
 export declare function pgView<TName extends string, TColumns extends Record<string, PgColumnBuilderBase>>(name: TName, columns: TColumns): ManualViewBuilder<TName, TColumns>;
 export declare function pgMaterializedView<TName extends string>(name: TName): MaterializedViewBuilder<TName>;
 export declare function pgMaterializedView<TName extends string, TColumns extends Record<string, PgColumnBuilderBase>>(name: TName, columns: TColumns): ManualMaterializedViewBuilder<TName, TColumns>;
+export declare function isPgView(obj: unknown): obj is PgView;
+export declare function isPgMaterializedView(obj: unknown): obj is PgMaterializedView;

@@ -119,6 +119,12 @@ class PgliteSession extends import_session.PgSession {
       return transaction(tx);
     });
   }
+  async count(sql2) {
+    const res = await this.execute(sql2);
+    return Number(
+      res["rows"][0]["count"]
+    );
+  }
 }
 class PgliteTransaction extends import_pg_core.PgTransaction {
   static [import_entity.entityKind] = "PgliteTransaction";

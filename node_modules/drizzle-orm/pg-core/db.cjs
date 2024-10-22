@@ -25,7 +25,9 @@ module.exports = __toCommonJS(db_exports);
 var import_entity = require("../entity.cjs");
 var import_query_builders = require("./query-builders/index.cjs");
 var import_selection_proxy = require("../selection-proxy.cjs");
+var import_sql = require("../sql/sql.cjs");
 var import_subquery = require("../subquery.cjs");
+var import_count = require("./query-builders/count.cjs");
 var import_query = require("./query-builders/query.cjs");
 var import_raw = require("./query-builders/raw.cjs");
 var import_refresh_materialized_view = require("./query-builders/refresh-materialized-view.cjs");
@@ -94,10 +96,11 @@ class PgDatabase {
    * ```
    */
   $with(alias) {
+    const self = this;
     return {
       as(qb) {
         if (typeof qb === "function") {
-          qb = qb(new import_query_builders.QueryBuilder());
+          qb = qb(new import_query_builders.QueryBuilder(self.dialect));
         }
         return new Proxy(
           new import_subquery.WithSubquery(qb.getSQL(), qb.getSelectedFields(), alias, true),
@@ -105,6 +108,9 @@ class PgDatabase {
         );
       }
     };
+  }
+  $count(source, filters) {
+    return new import_count.PgCountBuilder({ source, filters, session: this.session });
   }
   /**
    * Incorporates a previously defined CTE (using `$with`) into the main query.
@@ -275,8 +281,8 @@ class PgDatabase {
     return new import_refresh_materialized_view.PgRefreshMaterializedView(view, this.session, this.dialect);
   }
   execute(query) {
-    const sql = query.getSQL();
-    const builtQuery = this.dialect.sqlToQuery(sql);
+    const sequel = typeof query === "string" ? import_sql.sql.raw(query) : query.getSQL();
+    const builtQuery = this.dialect.sqlToQuery(sequel);
     const prepared = this.session.prepareQuery(
       builtQuery,
       void 0,
@@ -285,7 +291,7 @@ class PgDatabase {
     );
     return new import_raw.PgRaw(
       () => prepared.execute(),
-      sql,
+      sequel,
       builtQuery,
       (result) => prepared.mapResult(result, true)
     );

@@ -1,4 +1,4 @@
-import { entityKind } from "../../entity.js";
+import { entityKind, is } from "../../entity.js";
 import { MySqlDialect } from "../dialect.js";
 import { SelectionProxyHandler } from "../../selection-proxy.js";
 import { WithSubquery } from "../../subquery.js";
@@ -6,6 +6,11 @@ import { MySqlSelectBuilder } from "./select.js";
 class QueryBuilder {
   static [entityKind] = "MySqlQueryBuilder";
   dialect;
+  dialectConfig;
+  constructor(dialect) {
+    this.dialect = is(dialect, MySqlDialect) ? dialect : void 0;
+    this.dialectConfig = is(dialect, MySqlDialect) ? void 0 : dialect;
+  }
   $with(alias) {
     const queryBuilder = this;
     return {
@@ -55,7 +60,7 @@ class QueryBuilder {
   // Lazy load dialect to avoid circular dependency
   getDialect() {
     if (!this.dialect) {
-      this.dialect = new MySqlDialect();
+      this.dialect = new MySqlDialect(this.dialectConfig);
     }
     return this.dialect;
   }

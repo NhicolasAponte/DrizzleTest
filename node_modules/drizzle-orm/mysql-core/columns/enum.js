@@ -1,4 +1,5 @@
 import { entityKind } from "../../entity.js";
+import { getColumnNameAndConfig } from "../../utils.js";
 import { MySqlColumn, MySqlColumnBuilder } from "./common.js";
 class MySqlEnumColumnBuilder extends MySqlColumnBuilder {
   static [entityKind] = "MySqlEnumColumnBuilder";
@@ -21,7 +22,8 @@ class MySqlEnumColumn extends MySqlColumn {
     return `enum(${this.enumValues.map((value) => `'${value}'`).join(",")})`;
   }
 }
-function mysqlEnum(name, values) {
+function mysqlEnum(a, b) {
+  const { name, config: values } = getColumnNameAndConfig(a, b);
   if (values.length === 0) {
     throw new Error(`You have an empty array for "${name}" enum values`);
   }

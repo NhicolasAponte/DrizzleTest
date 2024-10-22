@@ -1,7 +1,12 @@
 import { entityKind } from "../../entity.js";
 import { QueryPromise } from "../../query-promise.js";
+import { SelectionProxyHandler } from "../../selection-proxy.js";
 import { SQLiteTable } from "../table.js";
-import { mapUpdateSet, orderSelectedFields } from "../../utils.js";
+import { Table } from "../../table.js";
+import {
+  mapUpdateSet,
+  orderSelectedFields
+} from "../../utils.js";
 class SQLiteUpdateBuilder {
   constructor(table, session, dialect, withList) {
     this.table = table;
@@ -65,6 +70,26 @@ class SQLiteUpdateBase extends QueryPromise {
    */
   where(where) {
     this.config.where = where;
+    return this;
+  }
+  orderBy(...columns) {
+    if (typeof columns[0] === "function") {
+      const orderBy = columns[0](
+        new Proxy(
+          this.config.table[Table.Symbol.Columns],
+          new SelectionProxyHandler({ sqlAliasedBehavior: "alias", sqlBehavior: "sql" })
+        )
+      );
+      const orderByArray = Array.isArray(orderBy) ? orderBy : [orderBy];
+      this.config.orderBy = orderByArray;
+    } else {
+      const orderByArray = columns;
+      this.config.orderBy = orderByArray;
+    }
+    return this;
+  }
+  limit(limit) {
+    this.config.limit = limit;
     return this;
   }
   returning(fields = this.config.table[SQLiteTable.Symbol.Columns]) {

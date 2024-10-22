@@ -19,9 +19,11 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 var utils_exports = {};
 __export(utils_exports, {
   applyMixins: () => applyMixins,
+  getColumnNameAndConfig: () => getColumnNameAndConfig,
   getTableColumns: () => getTableColumns,
   getTableLikeName: () => getTableLikeName,
   haveSameKeys: () => haveSameKeys,
+  isConfig: () => isConfig,
   mapResultRow: () => mapResultRow,
   mapUpdateSet: () => mapUpdateSet,
   orderSelectedFields: () => orderSelectedFields
@@ -139,12 +141,66 @@ function getTableColumns(table) {
 function getTableLikeName(table) {
   return (0, import_entity.is)(table, import_subquery.Subquery) ? table._.alias : (0, import_entity.is)(table, import_sql.View) ? table[import_view_common.ViewBaseConfig].name : (0, import_entity.is)(table, import_sql.SQL) ? void 0 : table[import_table.Table.Symbol.IsAlias] ? table[import_table.Table.Symbol.Name] : table[import_table.Table.Symbol.BaseName];
 }
+function getColumnNameAndConfig(a, b) {
+  return {
+    name: typeof a === "string" && a.length > 0 ? a : "",
+    config: typeof a === "object" ? a : b
+  };
+}
+const _ = {};
+const __ = {};
+function isConfig(data) {
+  if (typeof data !== "object" || data === null)
+    return false;
+  if (data.constructor.name !== "Object")
+    return false;
+  if ("logger" in data) {
+    const type = typeof data["logger"];
+    if (type !== "boolean" && (type !== "object" || typeof data["logger"]["logQuery"] !== "function") && type !== "undefined")
+      return false;
+    return true;
+  }
+  if ("schema" in data) {
+    const type = typeof data["logger"];
+    if (type !== "object" && type !== "undefined")
+      return false;
+    return true;
+  }
+  if ("casing" in data) {
+    const type = typeof data["logger"];
+    if (type !== "string" && type !== "undefined")
+      return false;
+    return true;
+  }
+  if ("mode" in data) {
+    if (data["mode"] !== "default" || data["mode"] !== "planetscale" || data["mode"] !== void 0)
+      return false;
+    return true;
+  }
+  if ("connection" in data) {
+    const type = typeof data["connection"];
+    if (type !== "string" && type !== "object" && type !== "undefined")
+      return false;
+    return true;
+  }
+  if ("client" in data) {
+    const type = typeof data["client"];
+    if (type !== "object" && type !== "undefined")
+      return false;
+    return true;
+  }
+  if (Object.keys(data).length === 0)
+    return true;
+  return false;
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   applyMixins,
+  getColumnNameAndConfig,
   getTableColumns,
   getTableLikeName,
   haveSameKeys,
+  isConfig,
   mapResultRow,
   mapUpdateSet,
   orderSelectedFields

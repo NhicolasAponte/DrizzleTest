@@ -6,7 +6,7 @@ import { PgPreparedQuery, PgSession } from "../pg-core/session.js";
 import { fillPlaceholders, sql } from "../sql/sql.js";
 import { tracer } from "../tracing.js";
 import { mapResultRow } from "../utils.js";
-const { Pool } = pg;
+const { Pool, types } = pg;
 class NodePgPreparedQuery extends PgPreparedQuery {
   constructor(client, queryString, params, logger, fields, name, _isResponseInArrayMode, customResultMapper) {
     super({ sql: queryString, params });
@@ -18,12 +18,48 @@ class NodePgPreparedQuery extends PgPreparedQuery {
     this.customResultMapper = customResultMapper;
     this.rawQueryConfig = {
       name,
-      text: queryString
+      text: queryString,
+      types: {
+        // @ts-ignore
+        getTypeParser: (typeId, format) => {
+          if (typeId === types.builtins.TIMESTAMPTZ) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.TIMESTAMP) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.DATE) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.INTERVAL) {
+            return (val) => val;
+          }
+          return types.getTypeParser(typeId, format);
+        }
+      }
     };
     this.queryConfig = {
       name,
       text: queryString,
-      rowMode: "array"
+      rowMode: "array",
+      types: {
+        // @ts-ignore
+        getTypeParser: (typeId, format) => {
+          if (typeId === types.builtins.TIMESTAMPTZ) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.TIMESTAMP) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.DATE) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.INTERVAL) {
+            return (val) => val;
+          }
+          return types.getTypeParser(typeId, format);
+        }
+      }
     };
   }
   static [entityKind] = "NodePgPreparedQuery";
@@ -114,6 +150,12 @@ class NodePgSession extends PgSession {
         session.client.release();
       }
     }
+  }
+  async count(sql2) {
+    const res = await this.execute(sql2);
+    return Number(
+      res["rows"][0]["count"]
+    );
   }
 }
 class NodePgTransaction extends PgTransaction {

@@ -24,6 +24,7 @@ __export(varbinary_exports, {
 });
 module.exports = __toCommonJS(varbinary_exports);
 var import_entity = require("../../entity.cjs");
+var import_utils = require("../../utils.cjs");
 var import_common = require("./common.cjs");
 class MySqlVarBinaryBuilder extends import_common.MySqlColumnBuilder {
   static [import_entity.entityKind] = "MySqlVarBinaryBuilder";
@@ -47,8 +48,9 @@ class MySqlVarBinary extends import_common.MySqlColumn {
     return this.length === void 0 ? `varbinary` : `varbinary(${this.length})`;
   }
 }
-function varbinary(name, options) {
-  return new MySqlVarBinaryBuilder(name, options);
+function varbinary(a, b) {
+  const { name, config } = (0, import_utils.getColumnNameAndConfig)(a, b);
+  return new MySqlVarBinaryBuilder(name, config);
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

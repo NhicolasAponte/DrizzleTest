@@ -1,11 +1,11 @@
-import type { NeonQueryFunction } from '@neondatabase/serverless';
+import type { HTTPTransactionOptions, NeonQueryFunction } from '@neondatabase/serverless';
 import type { BatchItem, BatchResponse } from "../batch.cjs";
 import { entityKind } from "../entity.cjs";
 import type { Logger } from "../logger.cjs";
 import { PgDatabase } from "../pg-core/db.cjs";
 import { PgDialect } from "../pg-core/dialect.cjs";
 import type { RelationalSchemaConfig, TablesRelationalConfig } from "../relations.cjs";
-import type { DrizzleConfig } from "../utils.cjs";
+import { type DrizzleConfig, type IfNotImported, type ImportTypeError } from "../utils.cjs";
 import { type NeonHttpClient, type NeonHttpQueryResultHKT, NeonHttpSession } from "./session.cjs";
 export interface NeonDriverOptions {
     logger?: Logger;
@@ -23,4 +23,26 @@ export declare class NeonHttpDatabase<TSchema extends Record<string, unknown> = 
     static readonly [entityKind]: string;
     batch<U extends BatchItem<'pg'>, T extends Readonly<[U, ...U[]]>>(batch: T): Promise<BatchResponse<T>>;
 }
-export declare function drizzle<TSchema extends Record<string, unknown> = Record<string, never>>(client: NeonQueryFunction<any, any>, config?: DrizzleConfig<TSchema>): NeonHttpDatabase<TSchema>;
+export declare function drizzle<TSchema extends Record<string, unknown> = Record<string, never>, TClient extends NeonQueryFunction<any, any> = NeonQueryFunction<false, false>>(...params: IfNotImported<HTTPTransactionOptions<boolean, boolean>, [
+    ImportTypeError<'@neondatabase/serverless'>
+], [
+    TClient | string
+] | [
+    TClient | string,
+    DrizzleConfig<TSchema>
+] | [
+    (DrizzleConfig<TSchema> & ({
+        connection: string | ({
+            connectionString: string;
+        } & HTTPTransactionOptions<boolean, boolean>);
+    } | {
+        client: TClient;
+    }))
+]>): NeonHttpDatabase<TSchema> & {
+    $client: TClient;
+};
+export declare namespace drizzle {
+    function mock<TSchema extends Record<string, unknown> = Record<string, never>>(config?: DrizzleConfig<TSchema>): NeonHttpDatabase<TSchema> & {
+        $client: '$client is not available on drizzle.mock()';
+    };
+}

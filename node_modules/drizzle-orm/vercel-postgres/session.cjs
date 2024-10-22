@@ -41,12 +41,48 @@ class VercelPgPreparedQuery extends import_session.PgPreparedQuery {
     this.customResultMapper = customResultMapper;
     this.rawQuery = {
       name,
-      text: queryString
+      text: queryString,
+      types: {
+        // @ts-ignore
+        getTypeParser: (typeId, format) => {
+          if (typeId === import_postgres.types.builtins.TIMESTAMPTZ) {
+            return (val) => val;
+          }
+          if (typeId === import_postgres.types.builtins.TIMESTAMP) {
+            return (val) => val;
+          }
+          if (typeId === import_postgres.types.builtins.DATE) {
+            return (val) => val;
+          }
+          if (typeId === import_postgres.types.builtins.INTERVAL) {
+            return (val) => val;
+          }
+          return import_postgres.types.getTypeParser(typeId, format);
+        }
+      }
     };
     this.queryConfig = {
       name,
       text: queryString,
-      rowMode: "array"
+      rowMode: "array",
+      types: {
+        // @ts-ignore
+        getTypeParser: (typeId, format) => {
+          if (typeId === import_postgres.types.builtins.TIMESTAMPTZ) {
+            return (val) => val;
+          }
+          if (typeId === import_postgres.types.builtins.TIMESTAMP) {
+            return (val) => val;
+          }
+          if (typeId === import_postgres.types.builtins.DATE) {
+            return (val) => val;
+          }
+          if (typeId === import_postgres.types.builtins.INTERVAL) {
+            return (val) => val;
+          }
+          return import_postgres.types.getTypeParser(typeId, format);
+        }
+      }
     };
   }
   static [import_entity.entityKind] = "VercelPgPreparedQuery";

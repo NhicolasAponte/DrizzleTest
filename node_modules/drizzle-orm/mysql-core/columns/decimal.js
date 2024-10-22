@@ -1,4 +1,5 @@
 import { entityKind } from "../../entity.js";
+import { getColumnNameAndConfig } from "../../utils.js";
 import { MySqlColumnBuilderWithAutoIncrement, MySqlColumnWithAutoIncrement } from "./common.js";
 class MySqlDecimalBuilder extends MySqlColumnBuilderWithAutoIncrement {
   static [entityKind] = "MySqlDecimalBuilder";
@@ -29,7 +30,8 @@ class MySqlDecimal extends MySqlColumnWithAutoIncrement {
     }
   }
 }
-function decimal(name, config = {}) {
+function decimal(a, b = {}) {
+  const { name, config } = getColumnNameAndConfig(a, b);
   return new MySqlDecimalBuilder(name, config.precision, config.scale);
 }
 export {

@@ -24,6 +24,7 @@ __export(decimal_exports, {
 });
 module.exports = __toCommonJS(decimal_exports);
 var import_entity = require("../../entity.cjs");
+var import_utils = require("../../utils.cjs");
 var import_common = require("./common.cjs");
 class MySqlDecimalBuilder extends import_common.MySqlColumnBuilderWithAutoIncrement {
   static [import_entity.entityKind] = "MySqlDecimalBuilder";
@@ -54,7 +55,8 @@ class MySqlDecimal extends import_common.MySqlColumnWithAutoIncrement {
     }
   }
 }
-function decimal(name, config = {}) {
+function decimal(a, b = {}) {
+  const { name, config } = (0, import_utils.getColumnNameAndConfig)(a, b);
   return new MySqlDecimalBuilder(name, config.precision, config.scale);
 }
 // Annotate the CommonJS export names for ESM import in node:

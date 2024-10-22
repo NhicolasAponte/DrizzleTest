@@ -24,7 +24,9 @@ __export(db_exports, {
 module.exports = __toCommonJS(db_exports);
 var import_entity = require("../entity.cjs");
 var import_selection_proxy = require("../selection-proxy.cjs");
+var import_sql = require("../sql/sql.cjs");
 var import_subquery = require("../subquery.cjs");
+var import_count = require("./query-builders/count.cjs");
 var import_query_builders = require("./query-builders/index.cjs");
 var import_query = require("./query-builders/query.cjs");
 class MySqlDatabase {
@@ -92,10 +94,11 @@ class MySqlDatabase {
    * ```
    */
   $with(alias) {
+    const self = this;
     return {
       as(qb) {
         if (typeof qb === "function") {
-          qb = qb(new import_query_builders.QueryBuilder());
+          qb = qb(new import_query_builders.QueryBuilder(self.dialect));
         }
         return new Proxy(
           new import_subquery.WithSubquery(qb.getSQL(), qb.getSelectedFields(), alias, true),
@@ -103,6 +106,9 @@ class MySqlDatabase {
         );
       }
     };
+  }
+  $count(source, filters) {
+    return new import_count.MySqlCountBuilder({ source, filters, session: this.session });
   }
   /**
    * Incorporates a previously defined CTE (using `$with`) into the main query.
@@ -230,7 +236,7 @@ class MySqlDatabase {
     return new import_query_builders.MySqlDeleteBase(table, this.session, this.dialect);
   }
   execute(query) {
-    return this.session.execute(query.getSQL());
+    return this.session.execute(typeof query === "string" ? import_sql.sql.raw(query) : query.getSQL());
   }
   transaction(transaction, config) {
     return this.session.transaction(transaction, config);

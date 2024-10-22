@@ -1,4 +1,5 @@
 import { entityKind } from "../../../entity.js";
+import { getColumnNameAndConfig } from "../../../utils.js";
 import { PgColumn, PgColumnBuilder } from "../common.js";
 class PgVectorBuilder extends PgColumnBuilder {
   static [entityKind] = "PgVectorBuilder";
@@ -24,7 +25,8 @@ class PgVector extends PgColumn {
     return value.slice(1, -1).split(",").map((v) => Number.parseFloat(v));
   }
 }
-function vector(name, config) {
+function vector(a, b) {
+  const { name, config } = getColumnNameAndConfig(a, b);
   return new PgVectorBuilder(name, config);
 }
 export {

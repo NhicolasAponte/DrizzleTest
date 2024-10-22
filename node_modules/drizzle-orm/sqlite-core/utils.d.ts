@@ -17,14 +17,10 @@ export declare function getTableConfig<TTable extends SQLiteTable>(table: TTable
 };
 export type OnConflict = 'rollback' | 'abort' | 'fail' | 'ignore' | 'replace';
 export declare function getViewConfig<TName extends string = string, TExisting extends boolean = boolean>(view: SQLiteView<TName, TExisting>): {
-    algorithm?: "undefined" | "merge" | "temptable" | undefined;
-    definer?: string | undefined;
-    sqlSecurity?: "definer" | "invoker" | undefined;
-    withCheckOption?: "local" | "cascaded" | undefined;
     name: TName;
     originalName: TName;
     schema: string | undefined;
-    selectedFields: import("../operations.js").SelectedFields<import("../column.js").AnyColumn, Table<import("../table.js").TableConfig<import("../column.js").Column<any, object, object>>>>;
+    selectedFields: import("../operations.js").SelectedFields<import("../column.js").AnyColumn, Table>;
     isExisting: TExisting;
     query: TExisting extends true ? undefined : import("../index.js").SQL<unknown>;
     isAlias: boolean;

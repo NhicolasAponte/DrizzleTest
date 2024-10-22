@@ -1,4 +1,5 @@
 import { entityKind } from "../../entity.js";
+import { getColumnNameAndConfig } from "../../utils.js";
 import { MySqlColumn, MySqlColumnBuilder } from "./common.js";
 class MySqlBinaryBuilder extends MySqlColumnBuilder {
   static [entityKind] = "MySqlBinaryBuilder";
@@ -18,7 +19,8 @@ class MySqlBinary extends MySqlColumn {
     return this.length === void 0 ? `binary` : `binary(${this.length})`;
   }
 }
-function binary(name, config = {}) {
+function binary(a, b = {}) {
+  const { name, config } = getColumnNameAndConfig(a, b);
   return new MySqlBinaryBuilder(name, config.length);
 }
 export {

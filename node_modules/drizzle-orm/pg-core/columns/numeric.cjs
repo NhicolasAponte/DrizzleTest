@@ -25,6 +25,7 @@ __export(numeric_exports, {
 });
 module.exports = __toCommonJS(numeric_exports);
 var import_entity = require("../../entity.cjs");
+var import_utils = require("../../utils.cjs");
 var import_common = require("./common.cjs");
 class PgNumericBuilder extends import_common.PgColumnBuilder {
   static [import_entity.entityKind] = "PgNumericBuilder";
@@ -57,7 +58,8 @@ class PgNumeric extends import_common.PgColumn {
     }
   }
 }
-function numeric(name, config) {
+function numeric(a, b) {
+  const { name, config } = (0, import_utils.getColumnNameAndConfig)(a, b);
   return new PgNumericBuilder(name, config?.precision, config?.scale);
 }
 const decimal = numeric;

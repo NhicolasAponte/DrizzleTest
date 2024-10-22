@@ -1,4 +1,5 @@
 import { entityKind } from "../../entity.js";
+import { getColumnNameAndConfig } from "../../utils.js";
 import { PgColumn, PgColumnBuilder } from "./common.js";
 class PgNumericBuilder extends PgColumnBuilder {
   static [entityKind] = "PgNumericBuilder";
@@ -31,7 +32,8 @@ class PgNumeric extends PgColumn {
     }
   }
 }
-function numeric(name, config) {
+function numeric(a, b) {
+  const { name, config } = getColumnNameAndConfig(a, b);
   return new PgNumericBuilder(name, config?.precision, config?.scale);
 }
 const decimal = numeric;

@@ -68,6 +68,12 @@ class PgSession {
       false
     ).all();
   }
+  async count(sql2) {
+    const res = await this.execute(sql2);
+    return Number(
+      res[0]["count"]
+    );
+  }
 }
 class PgTransaction extends import_db.PgDatabase {
   constructor(dialect, session, schema, nestedIndex = 0) {

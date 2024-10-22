@@ -24,6 +24,7 @@ __export(enum_exports, {
 });
 module.exports = __toCommonJS(enum_exports);
 var import_entity = require("../../entity.cjs");
+var import_utils = require("../../utils.cjs");
 var import_common = require("./common.cjs");
 class MySqlEnumColumnBuilder extends import_common.MySqlColumnBuilder {
   static [import_entity.entityKind] = "MySqlEnumColumnBuilder";
@@ -46,7 +47,8 @@ class MySqlEnumColumn extends import_common.MySqlColumn {
     return `enum(${this.enumValues.map((value) => `'${value}'`).join(",")})`;
   }
 }
-function mysqlEnum(name, values) {
+function mysqlEnum(a, b) {
+  const { name, config: values } = (0, import_utils.getColumnNameAndConfig)(a, b);
   if (values.length === 0) {
     throw new Error(`You have an empty array for "${name}" enum values`);
   }

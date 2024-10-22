@@ -44,8 +44,7 @@ export declare class ManualViewBuilder<TName extends string = string, TColumns e
 }
 export declare class SQLiteView<TName extends string = string, TExisting extends boolean = boolean, TSelection extends ColumnsSelection = ColumnsSelection> extends SQLiteViewBase<TName, TExisting, TSelection> {
     static readonly [entityKind]: string;
-    constructor({ sqliteConfig, config }: {
-        sqliteConfig: ViewBuilderConfig | undefined;
+    constructor({ config }: {
         config: {
             name: TName;
             schema: string | undefined;

@@ -1,4 +1,4 @@
-import { entityKind } from "../../entity.js";
+import { entityKind, is } from "../../entity.js";
 import { PgDialect } from "../dialect.js";
 import { SelectionProxyHandler } from "../../selection-proxy.js";
 import { WithSubquery } from "../../subquery.js";
@@ -6,6 +6,11 @@ import { PgSelectBuilder } from "./select.js";
 class QueryBuilder {
   static [entityKind] = "PgQueryBuilder";
   dialect;
+  dialectConfig;
+  constructor(dialect) {
+    this.dialect = is(dialect, PgDialect) ? dialect : void 0;
+    this.dialectConfig = is(dialect, PgDialect) ? void 0 : dialect;
+  }
   $with(alias) {
     const queryBuilder = this;
     return {
@@ -74,7 +79,7 @@ class QueryBuilder {
   // Lazy load dialect to avoid circular dependency
   getDialect() {
     if (!this.dialect) {
-      this.dialect = new PgDialect();
+      this.dialect = new PgDialect(this.dialectConfig);
     }
     return this.dialect;
   }

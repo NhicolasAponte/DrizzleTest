@@ -28,7 +28,7 @@ export declare class SQLiteInsertBuilder<TTable extends SQLiteTable, TResultType
     protected dialect: SQLiteDialect;
     private withList?;
     static readonly [entityKind]: string;
-    constructor(table: TTable, session: SQLiteSession<any, any, any, any>, dialect: SQLiteDialect, withList?: Subquery<string, Record<string, unknown>>[] | undefined);
+    constructor(table: TTable, session: SQLiteSession<any, any, any, any>, dialect: SQLiteDialect, withList?: Subquery[] | undefined);
     values(value: SQLiteInsertValue<TTable>): SQLiteInsertBase<TTable, TResultType, TRunResult>;
     values(values: SQLiteInsertValue<TTable>[]): SQLiteInsertBase<TTable, TResultType, TRunResult>;
 }

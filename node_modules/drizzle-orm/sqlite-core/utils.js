@@ -7,7 +7,6 @@ import { IndexBuilder } from "./indexes.js";
 import { PrimaryKeyBuilder } from "./primary-keys.js";
 import { SQLiteTable } from "./table.js";
 import { UniqueConstraintBuilder } from "./unique-constraint.js";
-import { SQLiteViewConfig } from "./view-common.js";
 function getTableConfig(table) {
   const columns = Object.values(table[SQLiteTable.Symbol.Columns]);
   const indexes = [];
@@ -45,8 +44,8 @@ function getTableConfig(table) {
 }
 function getViewConfig(view) {
   return {
-    ...view[ViewBaseConfig],
-    ...view[SQLiteViewConfig]
+    ...view[ViewBaseConfig]
+    // ...view[SQLiteViewConfig],
   };
 }
 export {

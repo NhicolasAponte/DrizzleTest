@@ -1,6 +1,8 @@
 import { entityKind } from "../entity.js";
 import { SelectionProxyHandler } from "../selection-proxy.js";
+import { sql } from "../sql/sql.js";
 import { WithSubquery } from "../subquery.js";
+import { MySqlCountBuilder } from "./query-builders/count.js";
 import {
   MySqlDeleteBase,
   MySqlInsertBuilder,
@@ -74,10 +76,11 @@ class MySqlDatabase {
    * ```
    */
   $with(alias) {
+    const self = this;
     return {
       as(qb) {
         if (typeof qb === "function") {
-          qb = qb(new QueryBuilder());
+          qb = qb(new QueryBuilder(self.dialect));
         }
         return new Proxy(
           new WithSubquery(qb.getSQL(), qb.getSelectedFields(), alias, true),
@@ -85,6 +88,9 @@ class MySqlDatabase {
         );
       }
     };
+  }
+  $count(source, filters) {
+    return new MySqlCountBuilder({ source, filters, session: this.session });
   }
   /**
    * Incorporates a previously defined CTE (using `$with`) into the main query.
@@ -212,7 +218,7 @@ class MySqlDatabase {
     return new MySqlDeleteBase(table, this.session, this.dialect);
   }
   execute(query) {
-    return this.session.execute(query.getSQL());
+    return this.session.execute(typeof query === "string" ? sql.raw(query) : query.getSQL());
   }
   transaction(transaction, config) {
     return this.session.transaction(transaction, config);

@@ -1,5 +1,6 @@
 import { entityKind } from "../entity.js";
 import { SelectionProxyHandler } from "../selection-proxy.js";
+import { sql } from "../sql/sql.js";
 import {
   QueryBuilder,
   SQLiteDeleteBase,
@@ -8,6 +9,7 @@ import {
   SQLiteUpdateBuilder
 } from "./query-builders/index.js";
 import { WithSubquery } from "../subquery.js";
+import { SQLiteCountBuilder } from "./query-builders/count.js";
 import { RelationalQueryBuilder } from "./query-builders/query.js";
 import { SQLiteRaw } from "./query-builders/raw.js";
 class BaseSQLiteDatabase {
@@ -76,10 +78,11 @@ class BaseSQLiteDatabase {
    * ```
    */
   $with(alias) {
+    const self = this;
     return {
       as(qb) {
         if (typeof qb === "function") {
-          qb = qb(new QueryBuilder());
+          qb = qb(new QueryBuilder(self.dialect));
         }
         return new Proxy(
           new WithSubquery(qb.getSQL(), qb.getSelectedFields(), alias, true),
@@ -87,6 +90,9 @@ class BaseSQLiteDatabase {
         );
       }
     };
+  }
+  $count(source, filters) {
+    return new SQLiteCountBuilder({ source, filters, session: this.session });
   }
   /**
    * Incorporates a previously defined CTE (using `$with`) into the main query.
@@ -233,56 +239,56 @@ class BaseSQLiteDatabase {
     return new SQLiteDeleteBase(from, this.session, this.dialect);
   }
   run(query) {
-    const sql = query.getSQL();
+    const sequel = typeof query === "string" ? sql.raw(query) : query.getSQL();
     if (this.resultKind === "async") {
       return new SQLiteRaw(
-        async () => this.session.run(sql),
-        () => sql,
+        async () => this.session.run(sequel),
+        () => sequel,
         "run",
         this.dialect,
         this.session.extractRawRunValueFromBatchResult.bind(this.session)
       );
     }
-    return this.session.run(sql);
+    return this.session.run(sequel);
   }
   all(query) {
-    const sql = query.getSQL();
+    const sequel = typeof query === "string" ? sql.raw(query) : query.getSQL();
     if (this.resultKind === "async") {
       return new SQLiteRaw(
-        async () => this.session.all(sql),
-        () => sql,
+        async () => this.session.all(sequel),
+        () => sequel,
         "all",
         this.dialect,
         this.session.extractRawAllValueFromBatchResult.bind(this.session)
       );
     }
-    return this.session.all(sql);
+    return this.session.all(sequel);
   }
   get(query) {
-    const sql = query.getSQL();
+    const sequel = typeof query === "string" ? sql.raw(query) : query.getSQL();
     if (this.resultKind === "async") {
       return new SQLiteRaw(
-        async () => this.session.get(sql),
-        () => sql,
+        async () => this.session.get(sequel),
+        () => sequel,
         "get",
         this.dialect,
         this.session.extractRawGetValueFromBatchResult.bind(this.session)
       );
     }
-    return this.session.get(sql);
+    return this.session.get(sequel);
   }
   values(query) {
-    const sql = query.getSQL();
+    const sequel = typeof query === "string" ? sql.raw(query) : query.getSQL();
     if (this.resultKind === "async") {
       return new SQLiteRaw(
-        async () => this.session.values(sql),
-        () => sql,
+        async () => this.session.values(sequel),
+        () => sequel,
         "values",
         this.dialect,
         this.session.extractRawValuesValueFromBatchResult.bind(this.session)
       );
     }
-    return this.session.values(sql);
+    return this.session.values(sequel);
   }
   transaction(transaction, config) {
     return this.session.transaction(transaction, config);

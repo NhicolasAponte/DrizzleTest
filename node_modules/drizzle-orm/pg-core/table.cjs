@@ -27,6 +27,7 @@ __export(table_exports, {
 module.exports = __toCommonJS(table_exports);
 var import_entity = require("../entity.cjs");
 var import_table = require("../table.cjs");
+var import_all = require("./columns/all.cjs");
 const InlineForeignKeys = Symbol.for("drizzle:PgInlineForeignKeys");
 class PgTable extends import_table.Table {
   static [import_entity.entityKind] = "PgTable";
@@ -41,17 +42,20 @@ class PgTable extends import_table.Table {
 }
 function pgTableWithSchema(name, columns, extraConfig, schema, baseName = name) {
   const rawTable = new PgTable(name, schema, baseName);
+  const parsedColumns = typeof columns === "function" ? columns((0, import_all.getPgColumnBuilders)()) : columns;
   const builtColumns = Object.fromEntries(
-    Object.entries(columns).map(([name2, colBuilderBase]) => {
+    Object.entries(parsedColumns).map(([name2, colBuilderBase]) => {
       const colBuilder = colBuilderBase;
+      colBuilder.setName(name2);
       const column = colBuilder.build(rawTable);
       rawTable[InlineForeignKeys].push(...colBuilder.buildForeignKeys(column, rawTable));
       return [name2, column];
     })
   );
   const builtColumnsForExtraConfig = Object.fromEntries(
-    Object.entries(columns).map(([name2, colBuilderBase]) => {
+    Object.entries(parsedColumns).map(([name2, colBuilderBase]) => {
       const colBuilder = colBuilderBase;
+      colBuilder.setName(name2);
       const column = colBuilder.buildExtraConfigColumn(rawTable);
       return [name2, column];
     })

@@ -1,4 +1,5 @@
 import {
+  types,
   VercelPool
 } from "@vercel/postgres";
 import { entityKind } from "../entity.js";
@@ -18,12 +19,48 @@ class VercelPgPreparedQuery extends PgPreparedQuery {
     this.customResultMapper = customResultMapper;
     this.rawQuery = {
       name,
-      text: queryString
+      text: queryString,
+      types: {
+        // @ts-ignore
+        getTypeParser: (typeId, format) => {
+          if (typeId === types.builtins.TIMESTAMPTZ) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.TIMESTAMP) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.DATE) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.INTERVAL) {
+            return (val) => val;
+          }
+          return types.getTypeParser(typeId, format);
+        }
+      }
     };
     this.queryConfig = {
       name,
       text: queryString,
-      rowMode: "array"
+      rowMode: "array",
+      types: {
+        // @ts-ignore
+        getTypeParser: (typeId, format) => {
+          if (typeId === types.builtins.TIMESTAMPTZ) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.TIMESTAMP) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.DATE) {
+            return (val) => val;
+          }
+          if (typeId === types.builtins.INTERVAL) {
+            return (val) => val;
+          }
+          return types.getTypeParser(typeId, format);
+        }
+      }
     };
   }
   static [entityKind] = "VercelPgPreparedQuery";

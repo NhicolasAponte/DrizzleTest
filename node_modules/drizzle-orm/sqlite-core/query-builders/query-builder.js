@@ -1,11 +1,16 @@
-import { entityKind } from "../../entity.js";
+import { entityKind, is } from "../../entity.js";
 import { SelectionProxyHandler } from "../../selection-proxy.js";
-import { SQLiteSyncDialect } from "../dialect.js";
+import { SQLiteDialect, SQLiteSyncDialect } from "../dialect.js";
 import { WithSubquery } from "../../subquery.js";
 import { SQLiteSelectBuilder } from "./select.js";
 class QueryBuilder {
   static [entityKind] = "SQLiteQueryBuilder";
   dialect;
+  dialectConfig;
+  constructor(dialect) {
+    this.dialect = is(dialect, SQLiteDialect) ? dialect : void 0;
+    this.dialectConfig = is(dialect, SQLiteDialect) ? void 0 : dialect;
+  }
   $with(alias) {
     const queryBuilder = this;
     return {
@@ -55,7 +60,7 @@ class QueryBuilder {
   // Lazy load dialect to avoid circular dependency
   getDialect() {
     if (!this.dialect) {
-      this.dialect = new SQLiteSyncDialect();
+      this.dialect = new SQLiteSyncDialect(this.dialectConfig);
     }
     return this.dialect;
   }

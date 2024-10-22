@@ -29,6 +29,11 @@ var import_select = require("./select.cjs");
 class QueryBuilder {
   static [import_entity.entityKind] = "MySqlQueryBuilder";
   dialect;
+  dialectConfig;
+  constructor(dialect) {
+    this.dialect = (0, import_entity.is)(dialect, import_dialect.MySqlDialect) ? dialect : void 0;
+    this.dialectConfig = (0, import_entity.is)(dialect, import_dialect.MySqlDialect) ? void 0 : dialect;
+  }
   $with(alias) {
     const queryBuilder = this;
     return {
@@ -78,7 +83,7 @@ class QueryBuilder {
   // Lazy load dialect to avoid circular dependency
   getDialect() {
     if (!this.dialect) {
-      this.dialect = new import_dialect.MySqlDialect();
+      this.dialect = new import_dialect.MySqlDialect(this.dialectConfig);
     }
     return this.dialect;
   }

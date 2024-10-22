@@ -10,7 +10,6 @@ import { MySqlViewBase } from "./view-base.cjs";
 import { MySqlViewConfig } from "./view-common.cjs";
 export interface ViewBuilderConfig {
     algorithm?: 'undefined' | 'merge' | 'temptable';
-    definer?: string;
     sqlSecurity?: 'definer' | 'invoker';
     withCheckOption?: 'cascaded' | 'local';
 }
@@ -28,7 +27,6 @@ export declare class ViewBuilderCore<TConfig extends {
     constructor(name: TConfig['name'], schema: string | undefined);
     protected config: ViewBuilderConfig;
     algorithm(algorithm: Exclude<ViewBuilderConfig['algorithm'], undefined>): this;
-    definer(definer: Exclude<ViewBuilderConfig['definer'], undefined>): this;
     sqlSecurity(sqlSecurity: Exclude<ViewBuilderConfig['sqlSecurity'], undefined>): this;
     withCheckOption(withCheckOption?: Exclude<ViewBuilderConfig['withCheckOption'], undefined>): this;
 }

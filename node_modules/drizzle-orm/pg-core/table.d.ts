@@ -2,6 +2,7 @@ import type { BuildColumns, BuildExtraConfigColumns } from "../column-builder.js
 import { entityKind } from "../entity.js";
 import { Table, type TableConfig as TableConfigBase, type UpdateTableConfig } from "../table.js";
 import type { CheckBuilder } from "./checks.js";
+import { type PgColumnsBuilders } from "./columns/all.js";
 import type { PgColumn, PgColumnBuilderBase } from "./columns/common.js";
 import type { ForeignKeyBuilder } from "./foreign-keys.js";
 import type { AnyIndexBuilder } from "./indexes.js";
@@ -18,6 +19,12 @@ export type PgTableWithColumns<T extends TableConfig> = PgTable<T> & {
 };
 export interface PgTableFn<TSchema extends string | undefined = undefined> {
     <TTableName extends string, TColumnsMap extends Record<string, PgColumnBuilderBase>>(name: TTableName, columns: TColumnsMap, extraConfig?: (self: BuildExtraConfigColumns<TTableName, TColumnsMap, 'pg'>) => PgTableExtraConfig): PgTableWithColumns<{
+        name: TTableName;
+        schema: TSchema;
+        columns: BuildColumns<TTableName, TColumnsMap, 'pg'>;
+        dialect: 'pg';
+    }>;
+    <TTableName extends string, TColumnsMap extends Record<string, PgColumnBuilderBase>>(name: TTableName, columns: (columnTypes: PgColumnsBuilders) => TColumnsMap, extraConfig?: (self: BuildExtraConfigColumns<TTableName, TColumnsMap, 'pg'>) => PgTableExtraConfig): PgTableWithColumns<{
         name: TTableName;
         schema: TSchema;
         columns: BuildColumns<TTableName, TColumnsMap, 'pg'>;

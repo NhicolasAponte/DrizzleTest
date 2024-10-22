@@ -1,4 +1,5 @@
 import { entityKind } from "../../entity.js";
+import { getColumnNameAndConfig } from "../../utils.js";
 import { MySqlColumnBuilderWithAutoIncrement, MySqlColumnWithAutoIncrement } from "./common.js";
 class MySqlDoubleBuilder extends MySqlColumnBuilderWithAutoIncrement {
   static [entityKind] = "MySqlDoubleBuilder";
@@ -26,7 +27,8 @@ class MySqlDouble extends MySqlColumnWithAutoIncrement {
     }
   }
 }
-function double(name, config) {
+function double(a, b) {
+  const { name, config } = getColumnNameAndConfig(a, b);
   return new MySqlDoubleBuilder(name, config);
 }
 export {

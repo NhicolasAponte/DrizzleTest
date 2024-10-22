@@ -31,7 +31,6 @@ var import_indexes = require("./indexes.cjs");
 var import_primary_keys = require("./primary-keys.cjs");
 var import_table2 = require("./table.cjs");
 var import_unique_constraint = require("./unique-constraint.cjs");
-var import_view_common2 = require("./view-common.cjs");
 function getTableConfig(table) {
   const columns = Object.values(table[import_table2.SQLiteTable.Symbol.Columns]);
   const indexes = [];
@@ -69,8 +68,8 @@ function getTableConfig(table) {
 }
 function getViewConfig(view) {
   return {
-    ...view[import_view_common.ViewBaseConfig],
-    ...view[import_view_common2.SQLiteViewConfig]
+    ...view[import_view_common.ViewBaseConfig]
+    // ...view[SQLiteViewConfig],
   };
 }
 // Annotate the CommonJS export names for ESM import in node:

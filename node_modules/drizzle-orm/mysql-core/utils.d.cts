@@ -18,14 +18,13 @@ export declare function getTableConfig(table: MySqlTable): {
     baseName: string;
 };
 export declare function getViewConfig<TName extends string = string, TExisting extends boolean = boolean>(view: MySqlView<TName, TExisting>): {
-    algorithm?: "undefined" | "merge" | "temptable" | undefined;
-    definer?: string | undefined;
-    sqlSecurity?: "definer" | "invoker" | undefined;
-    withCheckOption?: "local" | "cascaded" | undefined;
+    algorithm?: "undefined" | "merge" | "temptable";
+    sqlSecurity?: "definer" | "invoker";
+    withCheckOption?: "cascaded" | "local";
     name: TName;
     originalName: TName;
     schema: string | undefined;
-    selectedFields: import("../operations.ts").SelectedFields<import("../column.ts").AnyColumn, Table<import("../table.ts").TableConfig<import("../column.ts").Column<any, object, object>>>>;
+    selectedFields: import("../operations.ts").SelectedFields<import("../column.ts").AnyColumn, Table>;
     isExisting: TExisting;
     query: TExisting extends true ? undefined : import("../index.ts").SQL<unknown>;
     isAlias: boolean;

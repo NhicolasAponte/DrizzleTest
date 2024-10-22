@@ -26,6 +26,7 @@ __export(text_exports, {
 });
 module.exports = __toCommonJS(text_exports);
 var import_entity = require("../../entity.cjs");
+var import_utils = require("../../utils.cjs");
 var import_common = require("./common.cjs");
 class SQLiteTextBuilder extends import_common.SQLiteColumnBuilder {
   static [import_entity.entityKind] = "SQLiteTextBuilder";
@@ -75,8 +76,12 @@ class SQLiteTextJson extends import_common.SQLiteColumn {
     return JSON.stringify(value);
   }
 }
-function text(name, config = {}) {
-  return config.mode === "json" ? new SQLiteTextJsonBuilder(name) : new SQLiteTextBuilder(name, config);
+function text(a, b = {}) {
+  const { name, config } = (0, import_utils.getColumnNameAndConfig)(a, b);
+  if (config.mode === "json") {
+    return new SQLiteTextJsonBuilder(name);
+  }
+  return new SQLiteTextBuilder(name, config);
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

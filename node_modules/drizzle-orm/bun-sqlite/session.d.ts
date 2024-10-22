@@ -1,4 +1,3 @@
-/// <reference types="bun-types" />
 import type { Database, Statement as BunStatement } from 'bun:sqlite';
 import { entityKind } from "../entity.js";
 import type { Logger } from "../logger.js";

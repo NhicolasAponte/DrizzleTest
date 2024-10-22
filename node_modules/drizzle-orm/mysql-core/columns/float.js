@@ -17,7 +17,7 @@ class MySqlFloat extends MySqlColumnWithAutoIncrement {
   }
 }
 function float(name) {
-  return new MySqlFloatBuilder(name);
+  return new MySqlFloatBuilder(name ?? "");
 }
 export {
   MySqlFloat,

@@ -129,6 +129,12 @@ class NeonHttpSession extends import_session.PgSession {
   async queryObjects(query, params) {
     return this.client(query, params, { arrayMode: false, fullResults: true });
   }
+  async count(sql) {
+    const res = await this.execute(sql);
+    return Number(
+      res["rows"][0]["count"]
+    );
+  }
   async transaction(_transaction, _config = {}) {
     throw new Error("No transactions support in neon-http driver");
   }

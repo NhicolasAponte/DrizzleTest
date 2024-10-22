@@ -1,4 +1,5 @@
 import { entityKind } from "../../entity.js";
+import { getColumnNameAndConfig } from "../../utils.js";
 import { SQLiteColumn, SQLiteColumnBuilder } from "./common.js";
 class SQLiteBigIntBuilder extends SQLiteColumnBuilder {
   static [entityKind] = "SQLiteBigIntBuilder";
@@ -63,7 +64,8 @@ class SQLiteBlobBuffer extends SQLiteColumn {
     return "blob";
   }
 }
-function blob(name, config) {
+function blob(a, b) {
+  const { name, config } = getColumnNameAndConfig(a, b);
   if (config?.mode === "json") {
     return new SQLiteBlobJsonBuilder(name);
   }
