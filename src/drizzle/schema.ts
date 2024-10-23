@@ -1,5 +1,7 @@
+import { sql } from "drizzle-orm";
 import {
   boolean,
+  check,
   date,
   decimal,
   integer,
@@ -30,15 +32,24 @@ if (!dbSchema.schemaName) {
   throw new Error("Schema not found");
 }
 
-export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
+// export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
 
-export const UserTable = dbSchema.table("users", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  email: varchar("email", { length: 255 }).notNull().unique(),
-  // emailVerified: date('emailVerified'),
-  password: varchar("password", { length: 255 }).notNull(),
-  role: UserRole("role").default("USER"),
-});
+export const UserTable = dbSchema.table(
+  "users",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    email: varchar("email", { length: 255 }).notNull().unique(),
+    // emailVerified: date('emailVerified'),
+    password: varchar("password", { length: 255 }).notNull(),
+    role: varchar("role", { length: 255 }).default("USER"),
+  },
+  (table) => ({
+    checkConstraint: check(
+      "ROLE_CHECK",
+      sql`${table.role} = 'ADMIN' OR ${table.role} = 'USER'`
+    ),
+  })
+);
 // user profile and and user tables could be one table, but the profile is
 // more likely to change, so if i keep them separate, the user
 // table, which has credentials, is less likely to need modification
@@ -94,7 +105,7 @@ export const BillingInfoTable = dbSchema.table("billing_info", {
 });
 
 export const ProductTable = dbSchema.table("products", {
-  id: uuid("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   // type: "Tempered Glass", "Laminated Glass", "Insulated Glass", "Mirror", "Shower Door"
   type: varchar("type", { length: 255 }).notNull(),
   image_url: varchar("image_url", { length: 255 }),
@@ -106,7 +117,7 @@ export const ProductTable = dbSchema.table("products", {
 });
 
 export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
-  id: uuid("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   // list of product for which this glass can be used
   description: varchar("description", { length: 255 }),
@@ -125,11 +136,12 @@ export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
   updated_by: uuid("updated_by")
     .notNull()
     .references(() => UserTable.id),
+  // could add a check constraint to ensure user is ADMIN
 });
 
 // one-to-many with user table
 export const OrderTable = dbSchema.table("orders", {
-  id: uuid("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   user_id: uuid("user_id")
     .notNull()
     .references(() => UserTable.id, { onDelete: "cascade" }),
@@ -159,7 +171,7 @@ export const OrderItemTable = dbSchema.table("order_items", {
 });
 
 export const InvoiceTable = dbSchema.table("invoices", {
-  id: uuid("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   user_id: uuid("user_id")
     .notNull()
     .references(() => UserTable.id, { onDelete: "cascade" }),

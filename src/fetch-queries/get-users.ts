@@ -1,3 +1,4 @@
+import { User } from "../data-generating-functions/type-definitions";
 import { db } from "../drizzle/db";
 import {
   InvoiceTable,
@@ -8,7 +9,7 @@ import {
 } from "../drizzle/schema";
 import { eq } from "drizzle-orm";
 
-export async function GetUsers() {
+export async function GetUserIds() {
   console.log("---- fetching users ----");
 
   try {
@@ -23,8 +24,14 @@ export async function GetUsers() {
       console.log(user);
     }
     console.log("Users fetched successfully");
+    return users;
   } catch (error) {
     console.error(error);
+    return [];
+    // initially i thought the return type needed to be specified as Promise<{id: string}[]>,
+    // but the actual cause of my user id arrays potentially being
+    // undefined where this function was called was due to the missing return
+    // in a possible branch of code
   }
 }
 
@@ -51,5 +58,6 @@ export async function GetUsersByState(state: string) {
     console.log("Users fetched successfully");
   } catch (error) {
     console.error(error);
+    return [];
   }
 }

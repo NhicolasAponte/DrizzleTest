@@ -43,9 +43,17 @@ export function LogData(data: {
   functionName: string;
   params: any;
 }) {
+  console.log("");
   console.log("------------ LOGGING DATA ------------");
   console.log(data);
   console.log("------------ END OF LOG ------------");
+  console.log("");
+}
+
+export function consoleLogSpacer() {
+  console.log("");
+  console.log("----------------------------------------");
+  console.log("");
 }
 
 export function consoleLogLoop() {

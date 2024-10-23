@@ -38,7 +38,7 @@ import {
   SeedOrders,
 } from "./seeding-queries/seed-orders-items";
 import { ordersArray } from "./seed-data/orders";
-import { GetUsers, GetUsersByState } from "./fetch-queries/get-users";
+import { GetUserIds, GetUsersByState } from "./fetch-queries/get-users";
 import { GetOrdersByUser } from "./fetch-queries/get-orders";
 import { generateInvoices } from "./data-generating-functions/generate-invoices";
 import {
@@ -59,13 +59,14 @@ import {
 } from "./data-generating-functions/seed-db";
 import { seedUserInfo } from "./native_id_seeding/user-info-seeding";
 import { resetDatabase } from "./native_id_seeding/reset-db";
+import { seedGlassInventory, seedProducts } from "./native_id_seeding/product-inventory-seeding";
 
 async function main() {
   console.log("------------- Hello World ----");
   console.log("");
   console.log("");
 
-  // const outputDir = undefined; //process.env.LOCAL_OUTPUT_DIR;
+  const outputDir = undefined; //process.env.LOCAL_OUTPUT_DIR;
   // console.log("STARTING SEEDING PROCESS :");
   // const result = await generateData(outputDir);
   // const result = await testInput();
@@ -125,9 +126,8 @@ async function main() {
   // ------------ CASCADING SEEDING ------------
   // resetDatabase();
   // await seedUserInfo();
-  // await seedUsers();
-  seedUsers(); 
-  // seedUserInfo();
+  // await seedProducts();
+  // await seedGlassInventory();
   // -------------- FETCH QUERIES --------------
   // GetUsers();
   // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");

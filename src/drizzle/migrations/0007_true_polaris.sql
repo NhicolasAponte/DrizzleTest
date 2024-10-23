@@ -1,0 +1,1 @@
+ALTER TABLE "dev-schema"."users" ADD CONSTRAINT "ROLE_CHECK" CHECK ("users"."role" = 'ADMIN' OR "users"."role" = 'USER');
