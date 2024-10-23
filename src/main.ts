@@ -60,6 +60,7 @@ import {
 import { seedUserInfo } from "./native_id_seeding/user-info-seeding";
 import { resetDatabase } from "./native_id_seeding/reset-db";
 import { seedGlassInventory, seedProducts } from "./native_id_seeding/product-inventory-seeding";
+import { seedOrders } from "./native_id_seeding/order-item-invoice-seeding";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -124,10 +125,13 @@ async function main() {
   //   SeedInvoices();
 
   // ------------ CASCADING SEEDING ------------
+  // NOTE: run all seeding function at once, without await 
+  // NOTE: run all seeding function at once, with await 
   // resetDatabase();
   // await seedUserInfo();
   // await seedProducts();
   // await seedGlassInventory();
+  // await seedOrders();
   // -------------- FETCH QUERIES --------------
   // GetUsers();
   // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
