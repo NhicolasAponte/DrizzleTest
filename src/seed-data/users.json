@@ -1,92 +1,92 @@
 [
   {
-    "id": "c5f60788-09c4-4010-8ab0-7ad2145211dc",
-    "email": "port.given@example.com",
-    "password": "rlsy7k",
-    "role": "ADMIN"
-  },
-  {
-    "id": "e1514638-1f75-43ee-a2ed-f997eeb77065",
-    "email": "vowel.of@example.com",
-    "password": "ay7a6",
-    "role": "ADMIN"
-  },
-  {
-    "id": "6bdfe07f-1816-4ef3-9261-dab5cce8dae6",
-    "email": "coming.certain@example.com",
-    "password": "fgcbll",
+    "id": "c9bee60b-59ca-4040-9eb5-5e4400d0b5da",
+    "email": "women.out@example.com",
+    "password": "2rrae",
     "role": "USER"
   },
   {
-    "id": "bdc96a80-747c-4a5b-b7c8-c21f1e432051",
-    "email": "fine.can@example.com",
-    "password": "z5gwl9",
-    "role": "ADMIN"
-  },
-  {
-    "id": "67c61ad5-ea2f-4574-8433-1fa9f4703dbb",
-    "email": "load.troops@example.com",
-    "password": "uio5rg",
-    "role": "ADMIN"
-  },
-  {
-    "id": "2f51a626-0656-497a-9131-c7135eb19c92",
-    "email": "offer.result@example.com",
-    "password": "qtkxhp",
+    "id": "684b9544-e3f7-49e1-940b-69cc75da5f03",
+    "email": "government.cook@example.com",
+    "password": "9olysd",
     "role": "USER"
   },
   {
-    "id": "30a16ecd-f7ed-4575-9755-177298745d7b",
-    "email": "function.saw@example.com",
-    "password": "hs1it",
+    "id": "d6f25632-e25b-421b-b181-c2a9918edeb7",
+    "email": "wing.feathers@example.com",
+    "password": "arpckfa",
     "role": "USER"
   },
   {
-    "id": "613fd2bf-d410-499e-8eb8-fba444d9b6e4",
-    "email": "of.cloth@example.com",
-    "password": "x7j489",
+    "id": "70a348b7-0697-49f5-98af-27a57340a27b",
+    "email": "noun.six@example.com",
+    "password": "zwxd",
     "role": "USER"
   },
   {
-    "id": "321bc0f4-f70c-45fe-833f-3dcf524ea06e",
-    "email": "aside.how@example.com",
-    "password": "vbhixv",
-    "role": "ADMIN"
-  },
-  {
-    "id": "b5ae71e8-caf0-4c07-b336-849e3daa2e68",
-    "email": "vote.connected@example.com",
-    "password": "krehgi",
-    "role": "ADMIN"
-  },
-  {
-    "id": "faa8fb3d-9a7d-4433-b621-8908428b4a19",
-    "email": "track.frozen@example.com",
-    "password": "an7ug",
+    "id": "d0c06fd8-a321-4e24-9b16-38d11a3cefe6",
+    "email": "continued.state@example.com",
+    "password": "c39p89",
     "role": "USER"
   },
   {
-    "id": "72fc63d3-c4ee-4525-88f7-10bf93685f3d",
-    "email": "ten.bound@example.com",
-    "password": "ciunv",
+    "id": "6328aaed-e5d2-4177-a7ae-28f43480f494",
+    "email": "bee.make@example.com",
+    "password": "ee8eac",
     "role": "ADMIN"
   },
   {
-    "id": "91e13eed-6052-4bc5-af1e-70f092f6637e",
-    "email": "police.globe@example.com",
-    "password": "ya667s",
+    "id": "393b1cdd-5248-4c74-833a-99bfdad84584",
+    "email": "sides.tool@example.com",
+    "password": "f1egq",
     "role": "ADMIN"
   },
   {
-    "id": "0159a148-49dd-4cea-8db0-3be5e0d06471",
-    "email": "block.upon@example.com",
-    "password": "u8si3",
+    "id": "9e481f5d-b360-497d-9f96-c427845fc671",
+    "email": "behind.sit@example.com",
+    "password": "7y7ps",
+    "role": "USER"
+  },
+  {
+    "id": "6b191dab-3c11-40cc-9480-6184f5a95408",
+    "email": "they.grade@example.com",
+    "password": "iw41bt",
+    "role": "USER"
+  },
+  {
+    "id": "89907e09-98b2-4d39-9382-e3e30ee9f4ed",
+    "email": "blue.look@example.com",
+    "password": "0e9vqp",
     "role": "ADMIN"
   },
   {
-    "id": "7183373c-6aec-4b9f-981d-8672f8542ee7",
-    "email": "thrown.cotton@example.com",
-    "password": "6j878n",
+    "id": "818d091f-6e86-4ed7-9323-23dd0214d77d",
+    "email": "dropped.whenever@example.com",
+    "password": "oso0o",
+    "role": "ADMIN"
+  },
+  {
+    "id": "bfac6a86-4743-468d-8bc9-ada47016b52a",
+    "email": "yet.dog@example.com",
+    "password": "oe2sca",
+    "role": "ADMIN"
+  },
+  {
+    "id": "f4fdb028-142f-4a08-8604-70de77151f89",
+    "email": "still.official@example.com",
+    "password": "z2w27s",
+    "role": "ADMIN"
+  },
+  {
+    "id": "1ca827ef-a429-49bd-9ad0-214248b64851",
+    "email": "feet.to@example.com",
+    "password": "3gbqps",
+    "role": "USER"
+  },
+  {
+    "id": "a6159e20-4c92-4596-b102-d5878735ec6e",
+    "email": "law.yesterday@example.com",
+    "password": "lgq8xzq",
     "role": "ADMIN"
   }
 ]
