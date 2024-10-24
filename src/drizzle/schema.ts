@@ -37,7 +37,7 @@ if (!dbSchema.schemaName) {
 export const UserTable = dbSchema.table(
   "users",
   {
-    id: uuid("id").defaultRandom().primaryKey(),
+    id: uuid("id").defaultRandom().primaryKey(), // need .defaultRandom() for generating UUIDs
     email: varchar("email", { length: 255 }).notNull().unique(),
     // emailVerified: date('emailVerified'),
     password: varchar("password", { length: 255 }).notNull(),
