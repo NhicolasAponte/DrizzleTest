@@ -2,8 +2,13 @@ export type User = {
   id: string;
   email: string;
   password: string;
-  role: string;
+  role: Role;
 };
+
+export enum Role {
+  ADMIN = "ADMIN",
+  USER = "USER",
+}
 
 export type UserProfile = {
   id: number;
@@ -15,10 +20,11 @@ export type UserProfile = {
   phone_num?: string;
 };
 
-export type ShippingInfo = {
-  id: number;
-  user_id: string;
-  address: string;
+export type UserShippingInformation = {
+  id?: number;
+  user_id?: string;
+  street: string;
+  apt_num?: string;
   city: string;
   state: string;
   zip: string;
@@ -26,10 +32,11 @@ export type ShippingInfo = {
   note: string;
 };
 
-export type BillingInfo = {
+export type UserBillingInformation = {
   id: number;
   user_id: string;
-  address: string;
+  street: string;
+  apt_num?: string;
   city: string;
   state: string;
   zip: string;
@@ -44,6 +51,7 @@ export type BillingInfo = {
   is_active: boolean;
 };
 
+// used when generating billing info for orders 
 export const payment_method_codes = [
   "CREDIT",
   "DEBIT",
@@ -99,20 +107,51 @@ interface quantityIncoming {
   supplier_id: string;
   expected_arrival_date: Date;
 }
+// front-end only
+export enum OrderStatus {
+  /** Saved by the user but not yet submitted. */
+  Draft = "DRAFT",
+  /** Submitted but not yet viewed by admin. */
+  Pending = "PENDING",
+  /** Submitted as a quote. */
+  Quote = "QUOTE",
+  /** Viewed by admin but not yet shipped. */
+  Processing = "PROCESSING",
+  /** Shipped but not yet received. */
+  Shipped = "SHIPPED",
+  /** Received by customer. */
+  Delivered = "DELIVERED",
+  /** Cancelled by user or admin. */
+  Cancelled = "CANCELLED",
+}
+// NOTE TODO: revise statuses to be more descriptive
+// - NEW, AWAITING CONFIRMATION, CONFIRMED, IN PRODUCTION, SHIPPED, DELIVERED
+
+export type BillingInfoWithoutIds = Omit<
+  UserBillingInformation,
+  "id" | "user_id"
+>;
+export type ShippingInfoWithoutIds = Omit<
+  UserShippingInformation,
+  "id" | "user_id"
+>;
 
 export type Order = {
   id: string;
-  user_id: string;
+  user_id: string | null;
   order_name: string;
-  billing_info: BillingInfo;
-  shipping_info: ShippingInfo;
-  status: string;
+  billing_data: BillingInfoWithoutIds;
+  shipping_data: ShippingInfoWithoutIds;
+  status: OrderStatus;
   date_created: Date;
   date_updated: Date;
-  date_submitted?: Date;
-  date_shipped?: Date;
-  date_delivered?: Date;
+  date_submitted?: Date | null;
+  date_shipped?: Date | null;
+  date_delivered?: Date | null;
 };
+
+// front-end only
+export type NewOrder = Omit<Order, "id">;
 
 export type OrderItem = {
   id: number;
@@ -122,6 +161,8 @@ export type OrderItem = {
   quantity: number;
   note: string;
 };
+
+export type NewOrderItem = Omit<OrderItem, "id" | "order_id">;
 
 export type Invoice = {
   id: string;
