@@ -1,22 +1,24 @@
 import * as fs from "fs";
 import * as path from "path";
 import { faker } from "@faker-js/faker";
-import { users } from "../seed-data/users";
-import { profiles } from "../seed-data/user-profiles";
 import {
-  BillingInfo,
-  payment_method_codes,
+  UserBillingInformation,
   UserProfile,
+  payment_method_codes,
 } from "./type-definitions";
+import { FlipCoin } from "../lib/utils";
+import { usersSeedArray } from "../seed-data/seedUsers";
+import { profilesSeedArray } from "../seed-data/seedUserProfiles";
 
 function generateRandomBillingInfo(
   profile: UserProfile,
   email: string
-): BillingInfo {
+): UserBillingInformation {
   return {
     id: Math.floor(Math.random() * 1000),
     user_id: profile.user_id,
-    address: faker.location.streetAddress(),
+    street: faker.location.streetAddress(false),
+    apt_num: FlipCoin() ? faker.location.secondaryAddress() : null,
     city: faker.location.city(),
     state: faker.location.state(),
     zip: faker.location.zipCode(),
@@ -35,11 +37,11 @@ function generateRandomBillingInfo(
 }
 
 export function generateBillingInfo(outputDir?: string) {
-  const billingInfoData: BillingInfo[] = [];
-  for (let user of users) {
+  const billingInfoData: UserBillingInformation[] = [];
+  for (let user of usersSeedArray) {
     const numBillingInfo = Math.floor(Math.random() * 3) + 1;
     for (let i = 0; i < numBillingInfo; i++) {
-      const userProfile = profiles.find(
+      const userProfile = profilesSeedArray.find(
         (profile) => user.id === profile.user_id
       );
       userProfile
