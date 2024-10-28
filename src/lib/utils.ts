@@ -54,7 +54,9 @@ export function saveSeedDataToFiles(
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), "utf-8");
-  console.log(`Generated ${data.length} ${dataType}s and saved to ${jsonPath}`);
+  console.log(
+    `Generated ${data.length} ${dataType} Objects and saved to ${jsonPath}`
+  );
 
   const tsContent = `${importLine}\nexport const ${arrayName}: ${dataType}[] = ${JSON.stringify(
     data,
@@ -62,7 +64,9 @@ export function saveSeedDataToFiles(
     2
   )};\n`;
   fs.writeFileSync(tsPath, tsContent, "utf-8");
-  console.log(`Generated ${data.length} ${dataType}s and saved to ${tsPath}`);
+  console.log(
+    `Generated ${data.length} ${dataType} Objects and saved to ${tsPath}`
+  );
 }
 
 export function LogData(data: {
