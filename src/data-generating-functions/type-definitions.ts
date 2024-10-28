@@ -2,12 +2,12 @@ export type User = {
   id: string;
   email: string;
   password: string;
-  role: Role;
+  role: UserRole;
 };
 
-export enum Role {
-  ADMIN = "ADMIN",
-  USER = "USER",
+export enum UserRole {
+  Admin = "ADMIN",
+  User = "USER",
 }
 
 export type UserProfile = {

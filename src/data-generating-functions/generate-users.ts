@@ -16,8 +16,8 @@ function generateRandomUser(): User {
   const password = Math.random().toString(36).substring(7);
   const roleNum = Math.floor(Math.random() * 10);
   // console.log("roleNum: ", roleNum);
-  const role = roleNum % 2 === 0 ? UserRole.User : UserRole.Admin; // Default role as per the schema
-  return { id, email, password, role };
+  const role = roleNum % 2 === 0 ? "User" : "Admin"; // Default role as per the schema
+  return { id, email, password, role: role as UserRole };
 }
 
 // Function to generate user objects and write to a JSON file
@@ -31,7 +31,7 @@ export function generateUsers(numUsers: number, outputDir?: string) {
   let fileName = "seedUsers";
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { User } from '../data-generating-functions/type-definitions';\n`;
+  let importLine = `import { User, UserRole } from '../data-generating-functions/type-definitions';\n`;
 
   saveSeedDataToFiles(users, "User", jsonPath, tsPath, importLine);
 
@@ -82,16 +82,15 @@ export function saveSeedDataToFiles(
 
   // write to typescript file
   // create file content as string
-  const tsContent = `${importLine}\nexport const usersSeedArray: User[] = ${JSON.stringify(
-    data,
-    (key, value) => {
-      if (key === "role") {
-        return `UserRole.${value}`;
-      }
-      return value;
-    },
-    2
-  )};\n`;
+  const tsContent = `${importLine}\nexport const usersSeedArray: User[] = [\n${data
+    .map((user: User) => {
+      return `  {
+    id: "${user.id}",
+    email: "${user.email}",
+    password: "${user.password}",
+    role: UserRole.${user.role},\n  }`;
+    })
+    .join(",\n")}\n];\n`;
   fs.writeFileSync(tsPath, tsContent, "utf-8");
   console.log(`Generated ${data.length} ${dataType}s and saved to ${tsPath}`);
 }
