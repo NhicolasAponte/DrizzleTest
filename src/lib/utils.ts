@@ -1,3 +1,5 @@
+import * as fs from "fs";
+import * as path from "path";
 import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { pgSchema } from "drizzle-orm/pg-core";
@@ -36,6 +38,31 @@ export function getSchemaName() {
 
 export function getSystemTimeZone(): string {
   return Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
+export function saveSeedDataToFiles(
+  data: any,
+  dataType: string,
+  arrayName: string,
+  jsonPath: string,
+  tsPath: string,
+  importLine: string
+) {
+  const outputDirectory = path.dirname(jsonPath);
+  if (!fs.existsSync(outputDirectory)) {
+    fs.mkdirSync(outputDirectory, { recursive: true });
+  }
+
+  fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), "utf-8");
+  console.log(`Generated ${data.length} ${dataType}s and saved to ${jsonPath}`);
+
+  const tsContent = `${importLine}\nexport const ${arrayName}: ${dataType}[] = ${JSON.stringify(
+    data,
+    null,
+    2
+  )};\n`;
+  fs.writeFileSync(tsPath, tsContent, "utf-8");
+  console.log(`Generated ${data.length} ${dataType}s and saved to ${tsPath}`);
 }
 
 export function LogData(data: {
@@ -131,7 +158,7 @@ export function compareDateToStringFunctions() {
     "                                    : dateToUTCString"
   );
 }
-// function for testing logic behind determining number of orders to gnerate
+// function for testing logic behind determining number of orders to generate
 export function numOrders() {
   let max = 0;
   let min = 100;
