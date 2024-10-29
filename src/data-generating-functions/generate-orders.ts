@@ -10,9 +10,9 @@ import {
   UserBillingInformation,
   UserShippingInformation,
 } from "./type-definitions";
-import { usersSeedArray } from "../seed-data/seedUsers";
-import { shippingInfoSeedArray } from "../seed-data/seedUserShippingInfo";
-import { billingInfoSeedArray } from "../seed-data/seedUserBillingInfo";
+import { usersSeed } from "../seed-data/seed-users";
+import { shippingInfoSeed } from "../seed-data/seed-user-shipping-info";
+import { billingInfoSeed } from "../seed-data/seed-user-billing-info";
 
 function generateRandomOrder(
   userId: string,
@@ -198,14 +198,15 @@ function generateRandomStatus() {
 // generate a random amount of orders for each user; anywhere between 2 and 10 orders
 export function generateOrders(outputDir?: string) {
   const orders: Order[] = [];
-  usersSeedArray.forEach((seedUser) => {
+  usersSeed.forEach((seedUser) => {
     // range for number of order: 2 - 26
     const numOrders = Math.floor(Math.random() * 25) + 2;
     console.log(`Generating ${numOrders} orders for user ${seedUser.id}`);
     const usersShippingInfo: UserShippingInformation[] =
-      shippingInfoSeedArray.filter((info) => seedUser.id === info.user_id);
-    const usersBillingInfo: UserBillingInformation[] =
-      billingInfoSeedArray.filter((info) => seedUser.id === info.user_id);
+      shippingInfoSeed.filter((info) => seedUser.id === info.user_id);
+    const usersBillingInfo: UserBillingInformation[] = billingInfoSeed.filter(
+      (info) => seedUser.id === info.user_id
+    );
 
     for (let i = 0; i < numOrders; i++) {
       const billingInfo =
@@ -217,15 +218,14 @@ export function generateOrders(outputDir?: string) {
   });
 
   const dataType = "Order";
-  const arrayName = "ordersSeedArray";
+  const arrayName = "ordersSeed";
 
   const dir = "./src/seed-data";
-  const fileName = "seedOrders";
+  const fileName = "seed-orders";
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine =
-    'import { Order } from "../data-generating-functions/type-definitions";\n';
+  let importLine = `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
 
   saveSeedDataToFiles(
     orders,
@@ -239,7 +239,7 @@ export function generateOrders(outputDir?: string) {
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = 'import { Order } from "../definitions/data-model";\n';
+    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
 
     saveSeedDataToFiles(
       orders,
