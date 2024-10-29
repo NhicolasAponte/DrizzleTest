@@ -27,19 +27,37 @@ export function generateUsers(numUsers: number, outputDir?: string) {
     users.push(generateRandomUser());
   }
 
-  let dir = "./src/seed-data";
-  let fileName = "seedUsers";
+  const dataType = "User";
+  const arrayName = "usersSeed";
+
+  const dir = "./src/seed-data";
+  const fileName = "seed-users";
+
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
   let importLine = `import { User, UserRole } from '../data-generating-functions/type-definitions';\n`;
 
-  saveUserSeedDataToFiles(users, "User", jsonPath, tsPath, importLine);
+  saveUserSeedDataToFiles(
+    users,
+    dataType,
+    arrayName,
+    jsonPath,
+    tsPath,
+    importLine
+  );
 
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
     importLine = `import { User, UserRole } from "../definitions/data-model";\n`;
-    saveUserSeedDataToFiles(users, "User", jsonPath, tsPath, importLine);
+    saveUserSeedDataToFiles(
+      users,
+      dataType,
+      arrayName,
+      jsonPath,
+      tsPath,
+      importLine
+    );
   }
   // // check if directory exists, if not create it
   // const outputDirectory = path.dirname(jsonPath);
@@ -67,6 +85,7 @@ export function generateUsers(numUsers: number, outputDir?: string) {
 export function saveUserSeedDataToFiles(
   data: any,
   dataType: string,
+  arrayName: string,
   jsonPath: string,
   tsPath: string,
   importLine: string
@@ -82,7 +101,7 @@ export function saveUserSeedDataToFiles(
 
   // write to typescript file
   // create file content as string
-  const tsContent = `${importLine}\nexport const usersSeedArray: User[] = [\n${data
+  const tsContent = `${importLine}\nexport const ${arrayName}: ${dataType}[] = [\n${data
     .map((user: User) => {
       return `  {
     id: "${user.id}",

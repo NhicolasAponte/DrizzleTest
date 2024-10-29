@@ -4,7 +4,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { faker } from "@faker-js/faker";
 import { UserShippingInformation } from "./type-definitions";
-import { usersSeedArray } from "../seed-data/seedUsers";
+import { usersSeed } from "../seed-data/seed-users";
 import { FlipCoin, saveSeedDataToFiles } from "../lib/utils";
 
 function generateRandomAddress(userId: string): UserShippingInformation {
@@ -23,7 +23,7 @@ function generateRandomAddress(userId: string): UserShippingInformation {
 
 export function generateShippingInfo(outputDir?: string) {
   const shippingInfoData: UserShippingInformation[] = [];
-  for (let user of usersSeedArray) {
+  for (let user of usersSeed) {
     const numShippingInfo = Math.floor(Math.random() * 3) + 1;
     for (let i = 0; i < numShippingInfo; i++) {
       shippingInfoData.push(generateRandomAddress(user.id));
@@ -31,14 +31,15 @@ export function generateShippingInfo(outputDir?: string) {
   }
 
   let dataType = "UserShippingInformation";
-  let arrayName = "shippingInfoSeedArray";
+  let arrayName = "shippingInfoSeed";
 
   const dir = "./src/seed-data";
-  const fileName = "seedUserShippingInfo";
+  const fileName = "seed-user-shipping-info";
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { UserShippingInformation } from "../data-generating-functions/type-definitions";\n`;
+  let importLine =
+  `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
 
   saveSeedDataToFiles(
     shippingInfoData,
@@ -52,7 +53,8 @@ export function generateShippingInfo(outputDir?: string) {
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { UserShippingInformation } from "../definitions/data-model";\n`;
+    importLine =
+      `import { ${dataType} } from "../definitions/data-model";\n`;
 
     saveSeedDataToFiles(
       shippingInfoData,

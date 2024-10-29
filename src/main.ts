@@ -48,7 +48,6 @@ import {
 } from "./drizzle/schema";
 import { pgSchema } from "drizzle-orm/pg-core";
 import { GetInvoiceByAmountWithUser } from "./fetch-queries/get-invoices";
-import { invoicesArray } from "./seed-data/invoices";
 import { da, faker } from "@faker-js/faker";
 import { date } from "drizzle-orm/mysql-core";
 import {
@@ -60,7 +59,7 @@ import { seedUserInfo } from "./native_id_seeding/user-info-seeding";
 import { resetDatabase } from "./native_id_seeding/reset-db";
 import { seedGlassInventory, seedProducts } from "./native_id_seeding/product-inventory-seeding";
 import { seedOrderInfo } from "./native_id_seeding/order-item-invoice-seeding";
-import { orderItemsArray } from "./seed-data/order-items";
+
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -90,7 +89,7 @@ async function main() {
 
   // generateOrders(outputDir); // rand between 1 - 26 orders per user
   //   // random number of order items per existing order
-  generateOrderItems(outputDir);
+  // generateOrderItems(outputDir);
   // generateInvoices(outputDir);
 
   //   // -------- SEED SEQUENCE --------

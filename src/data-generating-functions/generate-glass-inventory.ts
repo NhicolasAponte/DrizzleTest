@@ -8,9 +8,9 @@ import {
   shapeOptions,
   tintOptions,
 } from "../seed-data/placeholder-data";
-import { productsArray } from "../seed-data/products";
+import { productsSeed } from "../seed-data/seed-products";
 import { GlassInventoryItem } from "./type-definitions";
-import { usersSeedArray } from "../seed-data/seedUsers";
+import { usersSeed } from "../seed-data/seed-users";
 import { saveSeedDataToFiles } from "../lib/utils";
 
 function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
@@ -31,10 +31,10 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     );
   }
   const compatibleProducts = [];
-  for (let i = 0; i < productsArray.length; i++) {
+  for (let i = 0; i < productsSeed.length; i++) {
     const coin = Math.floor(Math.random() * 2) + 1;
     if (coin % 2 === 0) {
-      compatibleProducts.push(productsArray[i].id);
+      compatibleProducts.push(productsSeed[i].id);
     }
   }
 
@@ -88,8 +88,7 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     // the amount of material coming in from  a supplier
     date_created: dateCreated,
     date_updated: dateUpdated,
-    updated_by:
-      usersSeedArray[Math.floor(Math.random() * usersSeedArray.length)].id,
+    updated_by: usersSeed[Math.floor(Math.random() * usersSeed.length)].id,
   };
 }
 
@@ -100,15 +99,14 @@ export function generateGlassInventory(outputDir?: string) {
   }
 
   let dataType = "GlassInventoryItem";
-  let arrayName = "glassInventoryArray";
+  let arrayName = "glassInventorySeed";
 
   const dir = "./src/seed-data";
-  const fileName = "seedGlassInventory";
+  const fileName = "seed-glass-inventory";
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine =
-    'import { GlassInventoryItem } from "../data-generating-functions/type-definitions";\n';
+  let importLine = `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
 
   saveSeedDataToFiles(
     glassInventory,
@@ -122,8 +120,7 @@ export function generateGlassInventory(outputDir?: string) {
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
-    importLine =
-      'import { GlassInventoryItem } from "../definitions/data-model";\n';
+    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
 
     saveSeedDataToFiles(
       glassInventory,

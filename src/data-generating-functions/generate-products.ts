@@ -32,15 +32,15 @@ export function generateProducts(outputDir?: string) {
   }
 
   const dataType = "Product";
-  const arrayName = "productsArray";
+  const arrayName = "productsSeed";
 
   const dir = "./src/seed-data";
-  const fileName = "seedProducts";
+  const fileName = "seed-products";
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
   let importLine =
-    'import { Product } from "../data-generating-functions/type-definitions";\n';
+  `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
 
   saveSeedDataToFiles(
     products,
@@ -54,7 +54,8 @@ export function generateProducts(outputDir?: string) {
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = 'import { Product } from "../definitions/data-model";\n';
+    importLine =
+      `import { ${dataType} } from "../definitions/data-model";\n`;
 
     saveSeedDataToFiles(
       products,

@@ -3,7 +3,7 @@
 import { faker } from "@faker-js/faker";
 import { generate } from "random-words";
 import { UserProfile } from "./type-definitions";
-import { usersSeedArray } from "../seed-data/seedUsers";
+import { usersSeed } from "../seed-data/seed-users";
 import { saveSeedDataToFiles } from "../lib/utils";
 
 function generateRandomUserProfile(user_id: string): UserProfile {
@@ -33,20 +33,21 @@ function generateRandomUserProfile(user_id: string): UserProfile {
 
 export function generateUserProfiles(outputDir?: string) {
   const profiles: UserProfile[] = [];
-  for (let user of usersSeedArray) {
+  for (let user of usersSeed) {
     profiles.push(generateRandomUserProfile(user.id));
   }
 
   // let dir = outputDir ? outputDir : "./src/seed-data";
   let dataType = "UserProfile";
-  let arrayName = "profilesSeedArray";
+  let arrayName = "profilesSeed";
 
   let dir = "./src/seed-data";
-  let fileName = "seedUserProfiles";
+  let fileName = "seed-user-profiles";
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { UserProfile } from "../data-generating-functions/type-definitions";\n`;
+  let importLine =
+  `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
 
   saveSeedDataToFiles(
     profiles,
@@ -60,7 +61,8 @@ export function generateUserProfiles(outputDir?: string) {
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { UserProfile } from "../definitions/data-model";\n`;
+    importLine =
+      `import { ${dataType} } from "../definitions/data-model";\n`;
     saveSeedDataToFiles(
       profiles,
       dataType,

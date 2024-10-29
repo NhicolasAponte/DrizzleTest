@@ -7,8 +7,8 @@ import {
   payment_method_codes,
 } from "./type-definitions";
 import { FlipCoin, saveSeedDataToFiles } from "../lib/utils";
-import { usersSeedArray } from "../seed-data/seedUsers";
-import { profilesSeedArray } from "../seed-data/seedUserProfiles";
+import { usersSeed } from "../seed-data/seed-users";
+import { profilesSeed } from "../seed-data/seed-user-profiles";
 
 function generateRandomBillingInfo(
   profile: UserProfile,
@@ -38,10 +38,10 @@ function generateRandomBillingInfo(
 
 export function generateBillingInfo(outputDir?: string) {
   const billingInfoData: UserBillingInformation[] = [];
-  for (let user of usersSeedArray) {
+  for (let user of usersSeed) {
     const numBillingInfo = Math.floor(Math.random() * 3) + 1;
     for (let i = 0; i < numBillingInfo; i++) {
-      const userProfile = profilesSeedArray.find(
+      const userProfile = profilesSeed.find(
         (profile) => user.id === profile.user_id
       );
       userProfile
@@ -53,15 +53,15 @@ export function generateBillingInfo(outputDir?: string) {
   }
 
   let dataType = "UserBillingInformation";
-  let arrayName = "billingInfoSeedArray";
+  let arrayName = "billingInfoSeed";
 
   const dir = "./src/seed-data";
-  const fileName = "seedUserBillingInfo";
+  const fileName = "seed-user-billing-info";
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
   let importLine =
-    'import { UserBillingInformation } from "../data-generating-functions/type-definitions";\n';
+    `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
 
   saveSeedDataToFiles(
     billingInfoData,
@@ -76,7 +76,7 @@ export function generateBillingInfo(outputDir?: string) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
     importLine =
-      'import { UserBillingInformation } from "../definitions/data-model";\n';
+      `import { ${dataType} } from "../definitions/data-model";\n`;
 
     saveSeedDataToFiles(
       billingInfoData,
