@@ -8,14 +8,15 @@ import {
   shapeOptions,
   tintOptions,
 } from "../seed-data/placeholder-data";
-import { productsSeed } from "../seed-data/seed-products";
-import { GlassInventoryItem } from "./type-definitions";
+import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
+import { InventoryGlassItem } from "./type-definitions";
 import { usersSeed } from "../seed-data/seed-users";
 import { saveSeedDataToFiles } from "../lib/utils";
 
-function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
+function generateRandomInventoryGlassItem(name: string): InventoryGlassItem {
+  const inventoryGlassItems = GlassInventoryItems;
   const randomName =
-    GlassInventoryItems[Math.floor(Math.random() * GlassInventoryItems.length)];
+    inventoryGlassItems[Math.floor(Math.random() * inventoryGlassItems.length)];
   const numShapes = Math.floor(Math.random() * 20) + 5;
   const compatibleShapes = [];
   for (let i = 0; i < numShapes; i++) {
@@ -31,10 +32,10 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     );
   }
   const compatibleProducts = [];
-  for (let i = 0; i < productsSeed.length; i++) {
+  for (let i = 0; i < inventoryProductSeed.length; i++) {
     const coin = Math.floor(Math.random() * 2) + 1;
     if (coin % 2 === 0) {
-      compatibleProducts.push(productsSeed[i].id);
+      compatibleProducts.push(inventoryProductSeed[i].id);
     }
   }
 
@@ -92,17 +93,17 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
   };
 }
 
-export function generateGlassInventory(outputDir?: string) {
-  const glassInventory: GlassInventoryItem[] = [];
+export function generateInventoryGlass(outputDir?: string) {
+  const glassInventory: InventoryGlassItem[] = [];
   for (let item of GlassInventoryItems) {
-    glassInventory.push(generateRandomGlassInventoryItem(item.name));
+    glassInventory.push(generateRandomInventoryGlassItem(item.name));
   }
 
-  let dataType = "GlassInventoryItem";
-  let arrayName = "glassInventorySeed";
+  let dataType = "InventoryGlassItem";
+  let arrayName = "inventoryGlassSeed";
 
   const dir = "./src/seed-data";
-  const fileName = "seed-glass-inventory";
+  const fileName = "seed-inventory-glass";
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;

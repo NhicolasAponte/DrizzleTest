@@ -66,7 +66,7 @@ export const payment_method_codes = [
 //   type: string;
 // };
 
-export type Product = {
+export type InventoryProduct = {
   id: string;
   type: string;
   image_url: string;
@@ -80,7 +80,7 @@ export type Product = {
   date_updated: Date;
 };
 
-export type GlassInventoryItem = {
+export type InventoryGlassItem = {
   id: string;
   name: string;
   description: string;
@@ -164,7 +164,7 @@ export type OrderItem = {
 
 export type NewOrderItem = Omit<OrderItem, "id" | "order_id">;
 
-export type Invoice = {
+export type OrderInvoice = {
   id: string;
   user_id: string;
   order_id: string;

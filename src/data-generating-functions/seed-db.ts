@@ -16,7 +16,7 @@ import {
 } from "../seeding-queries/seed-shipping-billing";
 import { seedUsers, SeedUserProfiles } from "../seeding-queries/seed-users";
 import { generateBillingInfo } from "./generate-billingInfo";
-import { generateGlassInventory } from "./generate-glass-inventory";
+import { generateInventoryGlass } from "./generate-glass-inventory";
 import { generateInvoices } from "./generate-invoices";
 import { generateOrderItems } from "./generate-order-items";
 import { generateOrders } from "./generate-orders";
@@ -30,7 +30,7 @@ import {
 } from "../drizzle/schema";
 import { setTimeout } from "timers/promises";
 
-// NOTE TODO: get user input to work for interactive data generation and db seeding 
+// NOTE TODO: get user input to work for interactive data generation and db seeding
 export function getUserInput(question: string): Promise<void> {
   const rl = readline.createInterface({
     input: process.stdin,

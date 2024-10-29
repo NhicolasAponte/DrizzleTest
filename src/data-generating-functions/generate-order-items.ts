@@ -1,9 +1,10 @@
 import * as fs from "fs";
 import * as path from "path";
-import { ordersArray } from "../seed-data/orders";
-import { glassInventoryArray } from "../seed-data/glass-inventory";
-import { productsArray } from "../seed-data/products";
 import { OrderItem } from "./type-definitions";
+import { inventoryGlassSeed } from "../seed-data/seed-inventory-glass";
+import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
+import { ordersSeed } from "../seed-data/seed-orders";
+import { saveSeedDataToFiles } from "../lib/utils";
 
 // interface productConfig {
 //   productId: string;
@@ -29,13 +30,15 @@ import { OrderItem } from "./type-definitions";
 // need an array of products and configs
 function generateRandomOrderItem(itemId: number, orderId: string) {
   const randomGlass =
-    glassInventoryArray[Math.floor(Math.random() * glassInventoryArray.length)];
+    inventoryGlassSeed[Math.floor(Math.random() * inventoryGlassSeed.length)];
   const dimensions = getRandomDimensions();
   return {
     id: itemId,
     order_id: orderId,
     product_type_id:
-      productsArray[Math.floor(Math.random() * productsArray.length)].id, // get product id from generated products
+      inventoryProductSeed[
+        Math.floor(Math.random() * inventoryProductSeed.length)
+      ].id, // get product id from generated products
     // use math.random to generate a number 1-5 and get the product[i] at that index
     product_config: {
       // combination of product and glass config
@@ -86,7 +89,7 @@ export function generateOrderItems(outputDir?: string) {
   const item_ids: number[] = [];
   console.log("Generating order items...");
 
-  for (let order of ordersArray) {
+  for (let order of ordersSeed) {
     const numItems = Math.floor(Math.random() * 9) + 1;
     console.log(`Generating ${numItems} order items for order ${order.id}`);
     for (let i = 0; i < numItems; i++) {
@@ -103,27 +106,55 @@ export function generateOrderItems(outputDir?: string) {
     }
   }
 
-  const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `${dir}/order-items.json`;
-  const tsPath = `${dir}/order-items.ts`;
+  const dataType = "OrderItem";
+  const arrayName = "orderItemsSeed";
 
-  const outputDirectory = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDirectory)) {
-    fs.mkdirSync(outputDirectory, { recursive: true });
-  }
+  const dir = "./src/seed-data";
+  const fileName = "seed-order-items";
 
-  fs.writeFileSync(jsonPath, JSON.stringify(orderItemsData, null, 2), "utf-8");
-  console.log(
-    `Generated ${orderItemsData.length} order items and saved to ${jsonPath}`
-  );
+  let jsonPath = `${dir}/${fileName}.json`;
+  let tsPath = `${dir}/${fileName}.ts`;
+  let importLine = `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
 
-  const tsContent = `import { OrderItem } from "../data-generating-functions/type-definitions";\n\nexport const orderItemsArray: OrderItem[] = ${JSON.stringify(
+  saveSeedDataToFiles(
     orderItemsData,
-    null,
-    2
-  )};\n`;
-  fs.writeFileSync(tsPath, tsContent, "utf-8");
-  console.log(
-    `Generated ${orderItemsData.length} order items and saved to ${tsPath}`
+    dataType,
+    arrayName,
+    jsonPath,
+    tsPath,
+    importLine
   );
+
+  if (outputDir) {
+    jsonPath = `${outputDir}/${fileName}.json`;
+    tsPath = `${outputDir}/${fileName}.ts`;
+    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
+    saveSeedDataToFiles(
+      orderItemsData,
+      dataType,
+      arrayName,
+      jsonPath,
+      tsPath,
+      importLine
+    );
+  }
 }
+// const outputDirectory = path.dirname(jsonPath);
+// if (!fs.existsSync(outputDirectory)) {
+//   fs.mkdirSync(outputDirectory, { recursive: true });
+// }
+
+// fs.writeFileSync(jsonPath, JSON.stringify(orderItemsData, null, 2), "utf-8");
+// console.log(
+//   `Generated ${orderItemsData.length} order items and saved to ${jsonPath}`
+// );
+
+// const tsContent = `import { OrderItem } from "../data-generating-functions/type-definitions";\n\nexport const orderItemsArray: OrderItem[] = ${JSON.stringify(
+//   orderItemsData,
+//   null,
+//   2
+// )};\n`;
+// fs.writeFileSync(tsPath, tsContent, "utf-8");
+// console.log(
+//   `Generated ${orderItemsData.length} order items and saved to ${tsPath}`
+// );

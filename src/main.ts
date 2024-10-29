@@ -21,7 +21,7 @@ import {
   numOrders,
   OneLineDateArithmetic,
 } from "./lib/utils";
-import { generateGlassInventory } from "./data-generating-functions/generate-glass-inventory";
+import { generateInventoryGlass } from "./data-generating-functions/generate-glass-inventory";
 import { generateOrderItems } from "./data-generating-functions/generate-order-items";
 import { SeedUserProfiles, seedUsers } from "./seeding-queries/seed-users";
 import {
@@ -57,42 +57,46 @@ import {
 } from "./data-generating-functions/seed-db";
 import { seedUserInfo } from "./native_id_seeding/user-info-seeding";
 import { resetDatabase } from "./native_id_seeding/reset-db";
-import { seedGlassInventory, seedProducts } from "./native_id_seeding/product-inventory-seeding";
+import {
+  seedGlassInventory,
+  seedProducts,
+} from "./native_id_seeding/product-inventory-seeding";
 import { seedOrderInfo } from "./native_id_seeding/order-item-invoice-seeding";
-
 
 async function main() {
   console.log("------------- Hello World ----");
   console.log("");
   console.log("");
-  const outputDir = process.env.ORDER_PROJECT_PATH //orderProjDir// undefined; //process.env.LOCAL_OUTPUT_DIR;
-  // console.log("outputDir: ", outputDir);
-  // console.log("STARTING SEEDING PROCESS :");
-  // const result = await generateData(outputDir);
-  // const result = await testInput();
-  // console.log("result: ", result);
+  const outputDir = process.env.ORDER_PROJECT_PATH; //orderProjDir// undefined; //process.env.LOCAL_OUTPUT_DIR;
 
-  // console.log("main: testing user input");
-  // await testInput();
-  // testInput();
-  //   // -------- GENERATE SEQUENCE --------
+  //   -------- GENERATE DATA SEQUENCE --------
+
+  //   -------- USER INFO --------
+
   // generateUsers(2, outputDir);
   // generateUserProfiles(outputDir); // 1 profile per user
 
   // generateShippingInfo(outputDir); // 1-3 per user
   // generateBillingInfo(outputDir); // 1-3 per user
-  // generateProducts(outputDir); // there's few products and they don't depend on other data
 
-  //   // each item has a random amount of compatible products
-  //   // each item has a random existing user id in the updated_by field
-  // generateGlassInventory(outputDir);
+  //    -------- INVENTORY --------
+
+  // there's few products and they don't depend on other data
+  // generateProducts(outputDir);
+
+  // each item has a random amount of compatible products
+  // each item has a random existing user id in the updated_by field
+  // generateInventoryGlass(outputDir);
+
+  //    -------- ORDERS --------
 
   // generateOrders(outputDir); // rand between 1 - 26 orders per user
-  //   // random number of order items per existing order
-  // generateOrderItems(outputDir);
-  // generateInvoices(outputDir);
+  // generateOrderItems(outputDir); // rand between 1 - 9 items per order
+  generateInvoices(outputDir);
 
-  //   // -------- SEED SEQUENCE --------
+
+  // -------- SEED DATABASE SEQUENCE -------- 
+
   // await db.delete(GlassInventoryTable);
   // await db.delete(UserTable);
   // await db.delete(ProductTable);
@@ -124,8 +128,8 @@ async function main() {
   //   SeedInvoices();
 
   // ------------ CASCADING SEEDING ------------
-  // NOTE: run all seeding function at once, without await 
-  // NOTE: run all seeding function at once, with await 
+  // NOTE: run all seeding function at once, without await
+  // NOTE: run all seeding function at once, with await
   // resetDatabase();
   // await seedUserInfo();
   // await seedProducts();

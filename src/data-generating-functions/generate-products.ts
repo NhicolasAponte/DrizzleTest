@@ -3,10 +3,13 @@ import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
 import { productTypes } from "../seed-data/placeholder-data";
-import { Product } from "./type-definitions";
+import { InventoryProduct } from "./type-definitions";
 import { saveSeedDataToFiles } from "../lib/utils";
 
-function generateRandomProduct(type: string, config_options: any): Product {
+function generateRandomProduct(
+  type: string,
+  config_options: any
+): InventoryProduct {
   const date_created = faker.date.past({ years: 2 });
   let date_updated = faker.date.recent({ days: 30 });
   while (date_updated < date_created) {
@@ -26,21 +29,20 @@ function generateRandomProduct(type: string, config_options: any): Product {
 }
 
 export function generateProducts(outputDir?: string) {
-  const products: Product[] = [];
+  const products: InventoryProduct[] = [];
   for (let product of productTypes) {
     products.push(generateRandomProduct(product.type, product.config_options));
   }
 
-  const dataType = "Product";
-  const arrayName = "productsSeed";
+  const dataType = "InventoryProduct";
+  const arrayName = "inventoryProductSeed";
 
   const dir = "./src/seed-data";
-  const fileName = "seed-products";
+  const fileName = "seed-inventory-products";
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine =
-  `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
+  let importLine = `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
 
   saveSeedDataToFiles(
     products,
@@ -54,8 +56,7 @@ export function generateProducts(outputDir?: string) {
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
-    importLine =
-      `import { ${dataType} } from "../definitions/data-model";\n`;
+    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
 
     saveSeedDataToFiles(
       products,
