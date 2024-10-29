@@ -12,17 +12,18 @@ import {
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
+import { OrderStatus } from "../data-generating-functions/type-definitions";
 
 // NOTE TODO: optimize date types - check why drizzle is inferring { mode: string }
 // SET TIMEZONE in db connection
 
-// NOTE UNDO: hardcoding schema 
-// export const dbSchema = pgSchema(
-//   process.env.NODE_ENV === "production"
-//     ? process.env.PROD_SCHEMA!
-//     : process.env.DEV_SCHEMA!
-// );
-export const dbSchema = pgSchema("prod-orders");
+// NOTE UNDO: hardcoding schema
+export const dbSchema = pgSchema(
+  process.env.NODE_ENV === "production"
+    ? process.env.PROD_SCHEMA!
+    : process.env.DEV_SCHEMA!
+);
+// export const dbSchema = pgSchema("prod-orders");
 // NOTE TODO: is this the best place to throw this error
 if (!dbSchema.schemaName) {
   throw new Error("Schema not found");
@@ -41,7 +42,7 @@ export const UserTable = dbSchema.table(
   },
   (table) => ({
     checkConstraint: check(
-      "ROLE_CHECK",
+      "USER_ROLE_CHECK",
       sql`${table.role} = 'ADMIN' OR ${table.role} = 'USER'`
     ),
   })
@@ -108,7 +109,7 @@ export const UserBillingInformationTable = dbSchema.table(
   }
 );
 
-export const ProductTable = dbSchema.table("products", {
+export const InventoryProductTable = dbSchema.table("inventory_products", {
   id: uuid("id").defaultRandom().primaryKey(),
   // type: "Tempered Glass", "Laminated Glass", "Insulated Glass", "Mirror", "Shower Door"
   type: varchar("type", { length: 255 }).notNull(),
@@ -120,7 +121,7 @@ export const ProductTable = dbSchema.table("products", {
   date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
 });
 
-export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
+export const InventoryGlassTable = dbSchema.table("inventory_glass_item", {
   id: uuid("id").defaultRandom().primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   // list of product for which this glass can be used
@@ -143,6 +144,7 @@ export const GlassInventoryTable = dbSchema.table("glass_inventory_item", {
   updated_by: uuid("updated_by")
     .notNull()
     .references(() => UserTable.id),
+  // could use user name instead of id incase a user is deleted
   // could add a check constraint to ensure user is ADMIN
 });
 
@@ -155,8 +157,8 @@ export const OrderTable = dbSchema.table(
       .notNull()
       .references(() => UserTable.id, { onDelete: "cascade" }),
     order_name: varchar("order_name", { length: 255 }).notNull(),
-    billing_data: jsonb("billing_data").notNull(),
     shipping_data: jsonb("shipping_data").notNull(),
+    billing_data: jsonb("billing_data").notNull(),
     status: varchar("status", { length: 255 }).notNull(),
     // NOTE TODO: determine if mode: string is needed
     date_created: timestamp("date_created", { withTimezone: true }).notNull(),
@@ -168,7 +170,7 @@ export const OrderTable = dbSchema.table(
   (table) => ({
     checkConstraint: check(
       "STATUS_CHECK",
-      sql`${table.status} = 'DRAFT' OR ${table.status} = 'PENDING' OR ${table.status} = 'QUOTE' OR ${table.status} = 'PROCESSING' OR ${table.status} = 'SHIPPED' OR ${table.status} = 'DELIVERED' OR ${table.status} = 'CANCELLED'`
+      sql`${table.status} = ${OrderStatus.Draft} OR ${table.status} = ${OrderStatus.Pending} OR ${table.status} = ${OrderStatus.Quote} OR ${table.status} = ${OrderStatus.Processing} OR ${table.status} = ${OrderStatus.Shipped} OR ${table.status} = ${OrderStatus.Delivered} OR ${table.status} = ${OrderStatus.Cancelled}`
     ),
   })
 );
@@ -180,13 +182,13 @@ export const OrderItemTable = dbSchema.table("order_items", {
     .references(() => OrderTable.id, { onDelete: "cascade" }),
   product_type_id: uuid("product_type_id")
     .notNull()
-    .references(() => ProductTable.id, { onDelete: "cascade" }),
+    .references(() => InventoryProductTable.id, { onDelete: "cascade" }),
   product_config: jsonb("product_config").notNull(),
   quantity: integer("quantity").notNull(),
   note: varchar("note", { length: 255 }),
 });
 
-export const InvoiceTable = dbSchema.table("invoices", {
+export const OrderInvoiceTable = dbSchema.table("order_invoices", {
   id: uuid("id").defaultRandom().primaryKey(),
   user_id: uuid("user_id")
     .notNull()

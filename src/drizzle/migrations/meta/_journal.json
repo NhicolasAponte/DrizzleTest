@@ -64,6 +64,27 @@
       "when": 1729714450074,
       "tag": "0008_overjoyed_cassandra_nova",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1729803848580,
+      "tag": "0009_charming_tombstone",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1729804015711,
+      "tag": "0010_silent_thunderball",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1730235761758,
+      "tag": "0011_nosy_tigra",
+      "breakpoints": true
     }
   ]
 }

@@ -40,12 +40,6 @@ import {
 import { GetUserIds, GetUsersByState } from "./fetch-queries/get-users";
 import { GetOrdersByUser } from "./fetch-queries/get-orders";
 import { generateInvoices } from "./data-generating-functions/generate-invoices";
-import {
-  dbSchema,
-  GlassInventoryTable,
-  ProductTable,
-  UserTable,
-} from "./drizzle/schema";
 import { pgSchema } from "drizzle-orm/pg-core";
 import { GetInvoiceByAmountWithUser } from "./fetch-queries/get-invoices";
 import { da, faker } from "@faker-js/faker";
@@ -92,10 +86,26 @@ async function main() {
 
   // generateOrders(outputDir); // rand between 1 - 26 orders per user
   // generateOrderItems(outputDir); // rand between 1 - 9 items per order
-  generateInvoices(outputDir);
+  // generateInvoices(outputDir);
+  // ---------------------------------------------------
 
+  // ------------ CASCADING SEEDING ------------
+  // NOTE: run all seeding function at once, without await
+  // NOTE: run all seeding function at once, with await
+  // resetDatabase();
+  // await seedUserInfo();
+  // await seedProducts();
+  // await seedGlassInventory();
+  // await seedOrderInfo();
 
-  // -------- SEED DATABASE SEQUENCE -------- 
+  // -------------- FETCH QUERIES --------------
+  // GetUsers();
+  // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
+  // GetUsersByState("Minnesota");
+  // GetInvoiceByAmountWithUser();
+  // -------------------------------------------
+
+  // -------- SEED DATABASE SEQUENCE --------
 
   // await db.delete(GlassInventoryTable);
   // await db.delete(UserTable);
@@ -127,20 +137,7 @@ async function main() {
   //   SeedOrderItems();
   //   SeedInvoices();
 
-  // ------------ CASCADING SEEDING ------------
-  // NOTE: run all seeding function at once, without await
-  // NOTE: run all seeding function at once, with await
-  // resetDatabase();
-  // await seedUserInfo();
-  // await seedProducts();
-  // await seedGlassInventory();
-  // await seedOrderInfo();
-  // -------------- FETCH QUERIES --------------
-  // GetUsers();
-  // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
-  // GetUsersByState("Minnesota");
-  // GetInvoiceByAmountWithUser();
-  // -------------------------------------------
+  // ---------------------------------------------------
 
   // console.log(dbSchema);
   // const items: number[] = [1, 2, 3, 4, 5, 6];
