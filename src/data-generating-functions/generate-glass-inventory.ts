@@ -8,9 +8,10 @@ import {
   shapeOptions,
   tintOptions,
 } from "../seed-data/placeholder-data";
-import { users } from "../seed-data/users";
 import { productsArray } from "../seed-data/products";
 import { GlassInventoryItem } from "./type-definitions";
+import { usersSeedArray } from "../seed-data/seedUsers";
+import { saveSeedDataToFiles } from "../lib/utils";
 
 function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
   const randomName =
@@ -37,10 +38,10 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     }
   }
 
-  const dateCreated = faker.date.past({ years: 2 })
-  let dateUpdated = faker.date.recent({ days: 60 })
+  const dateCreated = faker.date.past({ years: 2 });
+  let dateUpdated = faker.date.recent({ days: 60 });
   while (dateUpdated < dateCreated) {
-    dateUpdated = faker.date.recent({ days: 60 })
+    dateUpdated = faker.date.recent({ days: 60 });
   }
 
   return {
@@ -87,7 +88,8 @@ function generateRandomGlassInventoryItem(name: string): GlassInventoryItem {
     // the amount of material coming in from  a supplier
     date_created: dateCreated,
     date_updated: dateUpdated,
-    updated_by: users[Math.floor(Math.random() * users.length)].id,
+    updated_by:
+      usersSeedArray[Math.floor(Math.random() * usersSeedArray.length)].id,
   };
 }
 
@@ -97,27 +99,59 @@ export function generateGlassInventory(outputDir?: string) {
     glassInventory.push(generateRandomGlassInventoryItem(item.name));
   }
 
-  const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `${dir}/glass-inventory.json`;
-  const tsPath = `${dir}/glass-inventory.ts`;
+  let dataType = "GlassInventoryItem";
+  let arrayName = "glassInventoryArray";
 
-  const outputDirectory = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDirectory)) {
-    fs.mkdirSync(outputDirectory, { recursive: true });
-  }
+  const dir = "./src/seed-data";
+  const fileName = "seedGlassInventory";
 
-  fs.writeFileSync(jsonPath, JSON.stringify(glassInventory, null, 2), "utf-8");
-  console.log(
-    `Generated ${glassInventory.length} glass inventory items and saved to ${jsonPath}`
-  );
+  let jsonPath = `${dir}/${fileName}.json`;
+  let tsPath = `${dir}/${fileName}.ts`;
+  let importLine =
+    'import { GlassInventoryItem } from "../data-generating-functions/type-definitions";\n';
 
-  const tsContent = `import { GlassInventoryItem } from "../data-generating-functions/type-definitions";\n\nexport const glassInventoryArray: GlassInventoryItem[] = ${JSON.stringify(
+  saveSeedDataToFiles(
     glassInventory,
-    null,
-    2
-  )};\n`;
-  fs.writeFileSync(tsPath, tsContent, "utf-8");
-  console.log(
-    `Generated ${glassInventory.length} glass inventory items and saved to ${tsPath}`
+    dataType,
+    arrayName,
+    jsonPath,
+    tsPath,
+    importLine
   );
+
+  if (outputDir) {
+    jsonPath = `${outputDir}/${fileName}.json`;
+    tsPath = `${outputDir}/${fileName}.ts`;
+    importLine =
+      'import { GlassInventoryItem } from "../definitions/data-model";\n';
+
+    saveSeedDataToFiles(
+      glassInventory,
+      dataType,
+      arrayName,
+      jsonPath,
+      tsPath,
+      importLine
+    );
+  }
 }
+
+// const outputDirectory = path.dirname(jsonPath);
+// if (!fs.existsSync(outputDirectory)) {
+//   fs.mkdirSync(outputDirectory, { recursive: true });
+// }
+
+// fs.writeFileSync(jsonPath, JSON.stringify(glassInventory, null, 2), "utf-8");
+// console.log(
+//   `Generated ${glassInventory.length} glass inventory items and saved to ${jsonPath}`
+// );
+
+// const tsContent = `import { GlassInventoryItem } from "../data-generating-functions/type-definitions";\n\nexport const glassInventoryArray: GlassInventoryItem[] = ${JSON.stringify(
+//   glassInventory,
+//   null,
+//   2
+// )};\n`;
+// fs.writeFileSync(tsPath, tsContent, "utf-8");
+// console.log(
+//   `Generated ${glassInventory.length} glass inventory items and saved to ${tsPath}`
+// );

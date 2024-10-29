@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
 import { productTypes } from "../seed-data/placeholder-data";
 import { Product } from "./type-definitions";
+import { saveSeedDataToFiles } from "../lib/utils";
 
 function generateRandomProduct(type: string, config_options: any): Product {
   const date_created = faker.date.past({ years: 2 });
@@ -30,23 +31,54 @@ export function generateProducts(outputDir?: string) {
     products.push(generateRandomProduct(product.type, product.config_options));
   }
 
-  const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `${dir}/products.json`;
-  const tsPath = `${dir}/products.ts`;
+  const dataType = "Product";
+  const arrayName = "productsArray";
 
-  const outputDirectory = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDirectory)) {
-    fs.mkdirSync(outputDirectory, { recursive: true });
-  }
+  const dir = "./src/seed-data";
+  const fileName = "seedProducts";
 
-  fs.writeFileSync(jsonPath, JSON.stringify(products, null, 2), "utf-8");
-  console.log(`Generated ${products.length} products and saved to ${jsonPath}`);
+  let jsonPath = `${dir}/${fileName}.json`;
+  let tsPath = `${dir}/${fileName}.ts`;
+  let importLine =
+    'import { Product } from "../data-generating-functions/type-definitions";\n';
 
-  const tsContent = `import { Product } from "../data-generating-functions/type-definitions";\n\nexport const productsArray: Product[] = ${JSON.stringify(
+  saveSeedDataToFiles(
     products,
-    null,
-    2
-  )};\n`;
-  fs.writeFileSync(tsPath, tsContent, "utf-8");
-  console.log(`Generated ${products.length} products and saved to ${tsPath}`);
+    dataType,
+    arrayName,
+    jsonPath,
+    tsPath,
+    importLine
+  );
+
+  if (outputDir) {
+    jsonPath = `${outputDir}/${fileName}.json`;
+    tsPath = `${outputDir}/${fileName}.ts`;
+    importLine = 'import { Product } from "../definitions/data-model";\n';
+
+    saveSeedDataToFiles(
+      products,
+      dataType,
+      arrayName,
+      jsonPath,
+      tsPath,
+      importLine
+    );
+  }
 }
+
+// const outputDirectory = path.dirname(jsonPath);
+// if (!fs.existsSync(outputDirectory)) {
+//   fs.mkdirSync(outputDirectory, { recursive: true });
+// }
+
+// fs.writeFileSync(jsonPath, JSON.stringify(products, null, 2), "utf-8");
+// console.log(`Generated ${products.length} products and saved to ${jsonPath}`);
+
+// const tsContent = `import { Product } from "../data-generating-functions/type-definitions";\n\nexport const productsArray: Product[] = ${JSON.stringify(
+//   products,
+//   null,
+//   2
+// )};\n`;
+// fs.writeFileSync(tsPath, tsContent, "utf-8");
+// console.log(`Generated ${products.length} products and saved to ${tsPath}`);

@@ -1,9 +1,10 @@
-import * as fs from "fs";
-import * as path from "path";
+// import * as fs from "fs";
+// import * as path from "path";
 import { faker } from "@faker-js/faker";
 import { generate } from "random-words";
-import { users } from "../seed-data/users";
 import { UserProfile } from "./type-definitions";
+import { usersSeedArray } from "../seed-data/seedUsers";
+import { saveSeedDataToFiles } from "../lib/utils";
 
 function generateRandomUserProfile(user_id: string): UserProfile {
   const id = Math.floor(Math.random() * 10000);
@@ -32,27 +33,57 @@ function generateRandomUserProfile(user_id: string): UserProfile {
 
 export function generateUserProfiles(outputDir?: string) {
   const profiles: UserProfile[] = [];
-  for (let user of users) {
+  for (let user of usersSeedArray) {
     profiles.push(generateRandomUserProfile(user.id));
   }
 
-  const dir = outputDir ? outputDir : "./src/seed-data";
-  const jsonPath = `${dir}/user-profiles.json`;
-  const tsPath = `${dir}/user-profiles.ts`;
+  // let dir = outputDir ? outputDir : "./src/seed-data";
+  let dataType = "UserProfile";
+  let arrayName = "profilesSeedArray";
 
-  const outputDirectory = path.dirname(jsonPath);
-  if (!fs.existsSync(outputDirectory)) {
-    fs.mkdirSync(outputDirectory, { recursive: true });
-  }
+  let dir = "./src/seed-data";
+  let fileName = "seedUserProfiles";
 
-  fs.writeFileSync(jsonPath, JSON.stringify(profiles, null, 2), "utf-8");
-  console.log(`Generated ${profiles.length} profiles and saved to ${jsonPath}`);
+  let jsonPath = `${dir}/${fileName}.json`;
+  let tsPath = `${dir}/${fileName}.ts`;
+  let importLine = `import { UserProfile } from "../data-generating-functions/type-definitions";\n`;
 
-  const tsContent = `import { UserProfile } from "../data-generating-functions/type-definitions";\n\nexport const profiles: UserProfile[] = ${JSON.stringify(
+  saveSeedDataToFiles(
     profiles,
-    null,
-    2
-  )};\n`;
-  fs.writeFileSync(tsPath, tsContent, "utf-8");
-  console.log(`Generated ${profiles.length} profiles and saved to ${tsPath}`);
+    dataType,
+    arrayName,
+    jsonPath,
+    tsPath,
+    importLine
+  );
+
+  if (outputDir) {
+    jsonPath = `${outputDir}/${fileName}.json`;
+    tsPath = `${outputDir}/${fileName}.ts`;
+    importLine = `import { UserProfile } from "../definitions/data-model";\n`;
+    saveSeedDataToFiles(
+      profiles,
+      dataType,
+      arrayName,
+      jsonPath,
+      tsPath,
+      importLine
+    );
+  }
 }
+
+// const outputDirectory = path.dirname(jsonPath);
+// if (!fs.existsSync(outputDirectory)) {
+//   fs.mkdirSync(outputDirectory, { recursive: true });
+// }
+
+// fs.writeFileSync(jsonPath, JSON.stringify(profiles, null, 2), "utf-8");
+// console.log(`Generated ${profiles.length} profiles and saved to ${jsonPath}`);
+
+// const tsContent = `import { UserProfile } from "../data-generating-functions/type-definitions";\n\nexport const profilesSeedArray: UserProfile[] = ${JSON.stringify(
+//   profiles,
+//   null,
+//   2
+// )};\n`;
+// fs.writeFileSync(tsPath, tsContent, "utf-8");
+// console.log(`Generated ${profiles.length} profiles and saved to ${tsPath}`);

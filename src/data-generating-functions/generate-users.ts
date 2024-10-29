@@ -33,13 +33,13 @@ export function generateUsers(numUsers: number, outputDir?: string) {
   let tsPath = `${dir}/${fileName}.ts`;
   let importLine = `import { User, UserRole } from '../data-generating-functions/type-definitions';\n`;
 
-  saveSeedDataToFiles(users, "User", jsonPath, tsPath, importLine);
+  saveUserSeedDataToFiles(users, "User", jsonPath, tsPath, importLine);
 
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
     importLine = `import { User, UserRole } from "../definitions/data-model";\n`;
-    saveSeedDataToFiles(users, "User", jsonPath, tsPath, importLine);
+    saveUserSeedDataToFiles(users, "User", jsonPath, tsPath, importLine);
   }
   // // check if directory exists, if not create it
   // const outputDirectory = path.dirname(jsonPath);
@@ -64,7 +64,7 @@ export function generateUsers(numUsers: number, outputDir?: string) {
 // Example usage
 //generateUsers(10, './seed-data/users.json');
 
-export function saveSeedDataToFiles(
+export function saveUserSeedDataToFiles(
   data: any,
   dataType: string,
   jsonPath: string,

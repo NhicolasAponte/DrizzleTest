@@ -37,7 +37,6 @@ import {
   SeedOrderItems,
   SeedOrders,
 } from "./seeding-queries/seed-orders-items";
-import { ordersArray } from "./seed-data/orders";
 import { GetUserIds, GetUsersByState } from "./fetch-queries/get-users";
 import { GetOrdersByUser } from "./fetch-queries/get-orders";
 import { generateInvoices } from "./data-generating-functions/generate-invoices";
@@ -67,8 +66,8 @@ async function main() {
   console.log("------------- Hello World ----");
   console.log("");
   console.log("");
-
-  const outputDir = undefined; //process.env.LOCAL_OUTPUT_DIR;
+  const outputDir = process.env.ORDER_PROJECT_PATH //orderProjDir// undefined; //process.env.LOCAL_OUTPUT_DIR;
+  // console.log("outputDir: ", outputDir);
   // console.log("STARTING SEEDING PROCESS :");
   // const result = await generateData(outputDir);
   // const result = await testInput();
@@ -78,7 +77,7 @@ async function main() {
   // await testInput();
   // testInput();
   //   // -------- GENERATE SEQUENCE --------
-  // generateUsers(15, outputDir);
+  // generateUsers(2, outputDir);
   // generateUserProfiles(outputDir); // 1 profile per user
 
   // generateShippingInfo(outputDir); // 1-3 per user
@@ -91,7 +90,7 @@ async function main() {
 
   // generateOrders(outputDir); // rand between 1 - 26 orders per user
   //   // random number of order items per existing order
-  // generateOrderItems(outputDir);
+  generateOrderItems(outputDir);
   // generateInvoices(outputDir);
 
   //   // -------- SEED SEQUENCE --------

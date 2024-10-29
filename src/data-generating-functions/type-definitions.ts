@@ -127,12 +127,12 @@ export enum OrderStatus {
 // NOTE TODO: revise statuses to be more descriptive
 // - NEW, AWAITING CONFIRMATION, CONFIRMED, IN PRODUCTION, SHIPPED, DELIVERED
 
-export type BillingInfoWithoutIds = Omit<
-  UserBillingInformation,
-  "id" | "user_id"
->;
 export type ShippingInfoWithoutIds = Omit<
   UserShippingInformation,
+  "id" | "user_id"
+>;
+export type BillingInfoWithoutIds = Omit<
+  UserBillingInformation,
   "id" | "user_id"
 >;
 
@@ -140,8 +140,8 @@ export type Order = {
   id: string;
   user_id: string | null;
   order_name: string;
-  billing_data: BillingInfoWithoutIds;
   shipping_data: ShippingInfoWithoutIds;
+  billing_data: BillingInfoWithoutIds;
   status: OrderStatus;
   date_created: Date;
   date_updated: Date;
