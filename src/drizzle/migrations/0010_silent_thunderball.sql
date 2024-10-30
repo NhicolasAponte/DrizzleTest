@@ -1,2 +1,0 @@
-ALTER TABLE "dev-schema"."orders" DROP CONSTRAINT "STATUS_CHECK";--> statement-breakpoint
-ALTER TABLE "dev-schema"."orders" ADD CONSTRAINT "STATUS_CHECK" CHECK ("orders"."status" IN ($1, $2, $3, $4, $5, $6, $7));
