@@ -67,7 +67,7 @@ async function main() {
 
   //   -------- USER INFO --------
 
-  // generateUsers(2, outputDir);
+  generateUsers(15, outputDir);
   // generateUserProfiles(outputDir); // 1 profile per user
 
   // generateShippingInfo(outputDir); // 1-3 per user
@@ -92,7 +92,7 @@ async function main() {
   // ------------ CASCADING SEEDING ------------
   // NOTE: run all seeding function at once, without await
   // NOTE: run all seeding function at once, with await
-  // resetDatabase();
+  // await resetDatabase();
   // await seedUserInfo();
   // await seedProducts();
   // await seedGlassInventory();

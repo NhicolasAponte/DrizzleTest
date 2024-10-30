@@ -12,7 +12,10 @@ import {
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
-import { OrderStatus } from "../data-generating-functions/type-definitions";
+import {
+  OrderStatus,
+  UserRole,
+} from "../data-generating-functions/type-definitions";
 
 // NOTE TODO: optimize date types - check why drizzle is inferring { mode: string }
 // SET TIMEZONE in db connection
@@ -43,7 +46,9 @@ export const UserTable = dbSchema.table(
   (table) => ({
     checkConstraint: check(
       "USER_ROLE_CHECK",
-      sql`${table.role} = 'ADMIN' OR ${table.role} = 'USER'`
+      sql`${table.role} = '${sql.raw(UserRole.Admin)}' OR ${
+        table.role
+      } = '${sql.raw(UserRole.User)}'`
     ),
   })
 );
@@ -169,16 +174,16 @@ export const OrderTable = dbSchema.table(
   },
   (table) => ({
     checkConstraint: check(
-      "STATUS_CHECK",
-      sql`${table.status} = "${sql.raw(OrderStatus.Draft)}" OR ${
+      "ORDER_STATUS_CHECK",
+      sql`${table.status} = '${sql.raw(OrderStatus.Draft)}' OR ${
         table.status
-      } = "${sql.raw(OrderStatus.Pending)}" OR ${table.status} = "${sql.raw(
+      } = '${sql.raw(OrderStatus.Pending)}' OR ${table.status} = '${sql.raw(
         OrderStatus.Quote
-      )}" OR ${table.status} = "${sql.raw(OrderStatus.Processing)}" OR ${
+      )}' OR ${table.status} = '${sql.raw(OrderStatus.Processing)}' OR ${
         table.status
-      } = "${sql.raw(OrderStatus.Shipped)}" OR ${table.status} = "${sql.raw(
+      } = '${sql.raw(OrderStatus.Shipped)}' OR ${table.status} = '${sql.raw(
         OrderStatus.Delivered
-      )}" OR ${table.status} = "${sql.raw(OrderStatus.Cancelled)}"`
+      )}' OR ${table.status} = '${sql.raw(OrderStatus.Cancelled)}'`
     ),
   })
 );
