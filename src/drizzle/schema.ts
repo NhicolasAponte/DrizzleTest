@@ -170,7 +170,15 @@ export const OrderTable = dbSchema.table(
   (table) => ({
     checkConstraint: check(
       "STATUS_CHECK",
-      sql`${table.status} = ${OrderStatus.Draft} OR ${table.status} = ${OrderStatus.Pending} OR ${table.status} = ${OrderStatus.Quote} OR ${table.status} = ${OrderStatus.Processing} OR ${table.status} = ${OrderStatus.Shipped} OR ${table.status} = ${OrderStatus.Delivered} OR ${table.status} = ${OrderStatus.Cancelled}`
+      sql`${table.status} = "${sql.raw(OrderStatus.Draft)}" OR ${
+        table.status
+      } = "${sql.raw(OrderStatus.Pending)}" OR ${table.status} = "${sql.raw(
+        OrderStatus.Quote
+      )}" OR ${table.status} = "${sql.raw(OrderStatus.Processing)}" OR ${
+        table.status
+      } = "${sql.raw(OrderStatus.Shipped)}" OR ${table.status} = "${sql.raw(
+        OrderStatus.Delivered
+      )}" OR ${table.status} = "${sql.raw(OrderStatus.Cancelled)}"`
     ),
   })
 );

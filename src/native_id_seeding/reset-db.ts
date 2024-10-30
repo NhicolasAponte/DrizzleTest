@@ -11,13 +11,13 @@ export async function resetDatabase() {
     const result = await db.execute(
       sql`TRUNCATE TABLE "${sql.raw(
         getSchemaName()
-      )}".billing_info RESTART IDENTITY CASCADE;
+      )}".user_billing_information RESTART IDENTITY CASCADE;
       TRUNCATE TABLE "${sql.raw(
         getSchemaName()
-      )}".glass_inventory_item RESTART IDENTITY CASCADE;
+      )}".inventory_glass_item RESTART IDENTITY CASCADE;
       TRUNCATE TABLE "${sql.raw(
         getSchemaName()
-      )}".invoices RESTART IDENTITY CASCADE;
+      )}".order_invoices RESTART IDENTITY CASCADE;
       TRUNCATE TABLE "${sql.raw(
         getSchemaName()
       )}".order_items RESTART IDENTITY CASCADE;
@@ -26,10 +26,10 @@ export async function resetDatabase() {
       )}".orders RESTART IDENTITY CASCADE;
       TRUNCATE TABLE "${sql.raw(
         getSchemaName()
-      )}".products RESTART IDENTITY CASCADE;
+      )}".inventory_products RESTART IDENTITY CASCADE;
       TRUNCATE TABLE "${sql.raw(
         getSchemaName()
-      )}".shipping_info RESTART IDENTITY CASCADE;
+      )}".user_shipping_information RESTART IDENTITY CASCADE;
       TRUNCATE TABLE "${sql.raw(
         getSchemaName()
       )}".user_profiles RESTART IDENTITY CASCADE;
