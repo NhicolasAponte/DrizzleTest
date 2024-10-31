@@ -1,9 +1,9 @@
 import { User } from "../data-generating-functions/type-definitions";
 import { db } from "../drizzle/db";
 import {
-  InvoiceTable,
+  OrderInvoiceTable,
   OrderTable,
-  ShippingInfoTable,
+  UserShippingInformationTable,
   UserProfileTable,
   UserTable,
 } from "../drizzle/schema";
@@ -18,11 +18,11 @@ export async function GetUserIds() {
     // const user = users[0] as User;
     // console.log("USER:", user);
     // console.log(typeof user);
-    console.log("COUNT: ", users.length);
-    for (const user of users) {
-      console.log("----");
-      console.log(user);
-    }
+    // console.log("COUNT: ", users.length);
+    // for (const user of users) {
+    //   console.log("----");
+    //   console.log(user);
+    // }
     console.log("Users fetched successfully");
     return users;
   } catch (error) {
@@ -73,13 +73,13 @@ export async function GetUsersByState(state: string) {
         first_name: UserProfileTable.first_name,
         last_name: UserProfileTable.last_name,
         company: UserProfileTable.company,
-        city: ShippingInfoTable.city,
-        state: ShippingInfoTable.state,
+        city: UserShippingInformationTable.city,
+        state: UserShippingInformationTable.state,
       })
       .from(UserTable)
       .innerJoin(UserProfileTable, eq(UserTable.id, UserProfileTable.user_id))
-      .innerJoin(ShippingInfoTable, eq(UserTable.id, ShippingInfoTable.user_id))
-      .where(eq(ShippingInfoTable.state, state));
+      .innerJoin(UserShippingInformationTable, eq(UserTable.id, UserShippingInformationTable.user_id))
+      .where(eq(UserShippingInformationTable.state, state));
     console.log(users);
     console.log("Users fetched successfully");
   } catch (error) {

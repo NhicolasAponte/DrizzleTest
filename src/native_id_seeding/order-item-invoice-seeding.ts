@@ -1,16 +1,16 @@
 import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
-import { ordersArray } from "../seed-data/orders";
-import { orderItemsArray } from "../seed-data/order-items";
-import { invoicesArray } from "../seed-data/invoices";
+import { ordersSeed } from "../seed-data/seed-orders";
+import { orderItemsSeed } from "../seed-data/seed-order-items";
+import { orderInvoiceSeed } from "../seed-data/seed-order-invoice";
 import { consoleLogSpacer, getSchemaName } from "../lib/utils";
-import { OrderTable, ProductTable } from "../drizzle/schema";
+import { OrderTable, InventoryProductTable } from "../drizzle/schema";
 import { GetUserEmails, GetUserIds } from "../fetch-queries/get-users";
-import { users as seedUsers } from "../seed-data/users";
-import { productsArray as seedProducts } from "../seed-data/products";
+import { usersSeed } from "../seed-data/seed-users";
+import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
 
 function matchUserId(seedId: string, dbUsers: { id: string; email: string }[]) {
-  for (const seedUser of seedUsers) {
+  for (const seedUser of usersSeed) {
     if (seedUser.id === seedId) {
       for (const dbUser of dbUsers) {
         if (dbUser.email === seedUser.email) {
@@ -33,7 +33,7 @@ function matchProductId(
   seedId: string,
   dbProducts: { id: string; type: string }[]
 ) {
-  for (const seedProduct of seedProducts) {
+  for (const seedProduct of inventoryProductSeed) {
     if (seedProduct.id === seedId) {
       for (const dbProduct of dbProducts) {
         if (dbProduct.type === seedProduct.type) {
@@ -49,40 +49,42 @@ export async function seedOrderInfo() {
   const dbUsers = await GetUserEmails();
   const dbProducts = await db
     .select({
-      id: ProductTable.id,
-      type: ProductTable.type,
+      id: InventoryProductTable.id,
+      type: InventoryProductTable.type,
     })
-    .from(ProductTable);
+    .from(InventoryProductTable);
   try {
     await db.transaction(async (trx) => {
       console.log("-------- TRANSACTION STARTED --------");
       console.log("");
-      for (const order of ordersArray) {
+      for (const order of ordersSeed) {
         console.log("xxxxxx NEW ORDER xxxxxx");
         consoleLogSpacer();
 
         let userID = matchUserId(order.user_id, dbUsers); // userIds[Math.floor(Math.random() * userIds.length)];
 
-        const { shipping_info, billing_info } = order;
+        const { shipping_data, billing_data } = order;
         const billingInfoData = {
-          address: billing_info.address,
-          city: billing_info.city,
-          state: billing_info.state,
-          zip: billing_info.zip,
-          payment_method: billing_info.payment_method,
-          purchase_order: billing_info.purchase_order,
-          primary_contact_name: billing_info.primary_contact_name,
-          primary_contact_email: billing_info.primary_contact_email,
-          primary_contact_phone: billing_info.primary_contact_phone,
-          fax_num: billing_info.fax_num,
+          street: billing_data.street,
+          apt_num: billing_data.apt_num,
+          city: billing_data.city,
+          state: billing_data.state,
+          zip: billing_data.zip,
+          payment_method: billing_data.payment_method,
+          purchase_order: billing_data.purchase_order,
+          primary_contact_name: billing_data.primary_contact_name,
+          primary_contact_email: billing_data.primary_contact_email,
+          primary_contact_phone: billing_data.primary_contact_phone,
+          fax_num: billing_data.fax_num,
         };
         const shippingInfoData = {
-          address: shipping_info.address,
-          city: shipping_info.city,
-          state: shipping_info.state,
-          zip: shipping_info.zip,
-          is_job_site: shipping_info.is_job_site,
-          note: shipping_info.note,
+          street: shipping_data.street,
+          apt_num: shipping_data.apt_num,
+          city: shipping_data.city,
+          state: shipping_data.state,
+          zip: shipping_data.zip,
+          is_job_site: shipping_data.is_job_site,
+          note: shipping_data.note,
         };
         const serializedBillingInfo = JSON.stringify(billingInfoData);
         const serializedShippingInfo = JSON.stringify(shippingInfoData);
@@ -90,8 +92,8 @@ export async function seedOrderInfo() {
           sql`INSERT INTO "${sql.raw(getSchemaName())}".orders 
                       ("user_id",
                       "order_name",
-                      "billing_info",
-                      "shipping_info",
+                      "shipping_data",
+                      "billing_data",
                       status,
                       "date_created",
                       "date_updated",
@@ -100,8 +102,8 @@ export async function seedOrderInfo() {
                       "date_delivered")
             VALUES (${userID},
                     ${order.order_name},
-                    ${serializedBillingInfo},
                     ${serializedShippingInfo},
+                    ${serializedBillingInfo},
                     ${order.status},
                     ${order.date_created},
                     ${order.date_updated},
@@ -115,7 +117,7 @@ export async function seedOrderInfo() {
         console.log(`Inserted order with Order ID: ${orderId}`);
         consoleLogSpacer();
         let itemsCount = 0;
-        for (const item of orderItemsArray) {
+        for (const item of orderItemsSeed) {
           if (order.id === item.order_id) {
             console.log("xxx SEEDING ORDER ITEMS xxx");
             itemsCount++;
@@ -145,12 +147,12 @@ export async function seedOrderInfo() {
         );
         consoleLogSpacer();
         let invoiceCount = 0;
-        for (const invoice of invoicesArray) {
+        for (const invoice of orderInvoiceSeed) {
           if (invoice.order_id === order.id) {
             console.log("xxx SEEDING INVOICE xxx");
             invoiceCount++;
             await trx.execute(
-              sql`INSERT INTO "${sql.raw(getSchemaName())}"."invoices"
+              sql`INSERT INTO "${sql.raw(getSchemaName())}"."order_invoices"
                             (user_id,
                             order_id,
                             date_created,
@@ -168,7 +170,7 @@ export async function seedOrderInfo() {
           `${invoiceCount} Invoices seeded for order: ${orderId} successfully`
         );
       }
-      console.log(`${ordersArray.length} Orders seeded successfully`);
+      console.log(`${ordersSeed.length} Orders seeded successfully`);
     });
   } catch (error) {
     console.error(error);

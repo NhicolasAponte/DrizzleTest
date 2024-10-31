@@ -1,37 +1,40 @@
 import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
-import { productsArray } from "../seed-data/products";
-import { glassInventoryArray } from "../seed-data/glass-inventory";
+import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
+import { inventoryGlassSeed } from "../seed-data/seed-inventory-glass";
 import { FlipCoin, getSchemaName } from "../lib/utils";
-import { ProductTable } from "../drizzle/schema";
-import { GetUserIds } from "../fetch-queries/get-users";
+import { InventoryProductTable } from "../drizzle/schema";
 
 export async function seedProducts() {
   console.log("seeding products ...");
 
   try {
     await db.transaction(async (trx) => {
-      for (const product of productsArray) {
+      for (const product of inventoryProductSeed) {
         const serializedConfigOptions = JSON.stringify(product.config_options);
         await trx.execute(
-          sql`INSERT INTO "${sql.raw(getSchemaName())}".products 
+          sql`INSERT INTO "${sql.raw(getSchemaName())}".inventory_products 
                     (type, 
                     "image_url", 
                     alt, 
                     description, 
                     "config_options", 
                     "date_created", 
-                    "date_updated")
+                    "date_updated",
+                    "updated_by")
             VALUES (${product.type},
                     ${product.image_url},
                     ${product.alt},
                     ${product.description},
                     ${serializedConfigOptions},
                     ${product.date_created},
-                    ${product.date_updated})`
+                    ${product.date_updated},
+                    ${product.updated_by})`
         );
       }
-      console.log(`${productsArray.length} Products seeded successfully`);
+      console.log(
+        `${inventoryProductSeed.length} Products seeded successfully`
+      );
     });
   } catch (error) {
     console.error(error);
@@ -40,16 +43,16 @@ export async function seedProducts() {
 
 export async function seedGlassInventory() {
   const productIds = await db
-    .select({ id: ProductTable.id })
-    .from(ProductTable);
-  console.log("Product IDs: ", productIds);
-  const userIds = await GetUserIds();
-  console.log("User IDs: ", userIds);
-  console.log("");
+    .select({ id: InventoryProductTable.id })
+    .from(InventoryProductTable);
+  // console.log("Product IDs: ", productIds);
+  // const userIds = await GetUserIds();
+  // console.log("User IDs: ", userIds);
+  // console.log("");
   try {
     console.log("seeding glass inventory ...");
     await db.transaction(async (trx) => {
-      for (const item of glassInventoryArray) {
+      for (const item of inventoryGlassSeed) {
         const serializedThickness = JSON.stringify(item.thickness);
         const serializedShapes = JSON.stringify(item.shapes);
         const serializedTint = JSON.stringify(item.tint);
@@ -63,14 +66,15 @@ export async function seedGlassInventory() {
           compatibleProducts.push(productIds[0].id);
           compatibleProducts.push(productIds[1].id);
         }
+        // console.log("Compatible Products: ", compatibleProducts);
         const serializedCompatibleProducts = JSON.stringify(compatibleProducts);
         const serializedQuantityIncoming = JSON.stringify(
           item.quantity_incoming
         );
-        const randomUserId =
-          userIds[Math.floor(Math.random() * userIds.length)].id;
+        // console.log("serialized compatible products", serializedCompatibleProducts);
+
         await trx.execute(
-          sql`INSERT INTO "${sql.raw(getSchemaName())}".glass_inventory_item 
+          sql`INSERT INTO "${sql.raw(getSchemaName())}".inventory_glass_item 
                       (name, 
                        description, 
                        thickness, 
@@ -92,11 +96,11 @@ export async function seedGlassInventory() {
                       ${serializedQuantityIncoming},
                       ${item.date_created},
                       ${item.date_updated},
-                      ${randomUserId})`
+                      ${item.updated_by})`
         );
       }
       console.log(
-        `${glassInventoryArray.length} Glass Inventory seeded successfully`
+        `${inventoryGlassSeed.length} Glass Inventory seeded successfully`
       );
     });
   } catch (error) {

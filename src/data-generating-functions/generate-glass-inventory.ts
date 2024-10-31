@@ -12,6 +12,8 @@ import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
 import { InventoryGlassItem } from "./type-definitions";
 import { usersSeed } from "../seed-data/seed-users";
 import { saveSeedDataToFiles } from "../lib/utils";
+import { seedUsers } from "../seeding-queries/seed-users";
+import { profilesSeed } from "../seed-data/seed-user-profiles";
 
 function generateRandomInventoryGlassItem(name: string): InventoryGlassItem {
   const inventoryGlassItems = GlassInventoryItems;
@@ -44,6 +46,9 @@ function generateRandomInventoryGlassItem(name: string): InventoryGlassItem {
   while (dateUpdated < dateCreated) {
     dateUpdated = faker.date.recent({ days: 60 });
   }
+
+  const randomUserProfile =
+    profilesSeed[Math.floor(Math.random() * profilesSeed.length)];
 
   return {
     id: uuidv4(),
@@ -89,7 +94,8 @@ function generateRandomInventoryGlassItem(name: string): InventoryGlassItem {
     // the amount of material coming in from  a supplier
     date_created: dateCreated,
     date_updated: dateUpdated,
-    updated_by: usersSeed[Math.floor(Math.random() * usersSeed.length)].id,
+    updated_by:
+      randomUserProfile.first_name + " " + randomUserProfile.last_name,
   };
 }
 

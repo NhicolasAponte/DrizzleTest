@@ -1,1 +1,0 @@
-ALTER TABLE "dev-schema"."users" ALTER COLUMN "role" SET DATA TYPE varchar(255);

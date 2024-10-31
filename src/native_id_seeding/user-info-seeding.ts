@@ -1,9 +1,9 @@
 import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
-import { users } from "../seed-data/users";
-import { profiles } from "../seed-data/user-profiles";
-import { shippingInfoArray } from "../seed-data/shipping-info";
-import { billingInfoArray } from "../seed-data/billing-info";
+import { usersSeed } from "../seed-data/seed-users";
+import { profilesSeed } from "../seed-data/seed-user-profiles";
+import { shippingInfoSeed } from "../seed-data/seed-user-shipping-info";
+import { billingInfoSeed } from "../seed-data/seed-user-billing-info";
 import { consoleLogSpacer, getSchemaName, LogData } from "../lib/utils";
 
 export async function seedUserInfo() {
@@ -15,7 +15,7 @@ export async function seedUserInfo() {
       let infoCount = 0;
       // iterate over users array
       console.log("Seeding users...");
-      for (const user of users) {
+      for (const user of usersSeed) {
         console.log("xxxxxx NEW USER xxxxxx");
         consoleLogSpacer();
         userCount++;
@@ -39,7 +39,7 @@ export async function seedUserInfo() {
 
         // await seedUserProfile(user.id, dbUserId, trx);
         // iterate over profiles array
-        for (const profile of profiles) {
+        for (const profile of profilesSeed) {
           if (seedUserId === profile.user_id) {
             console.log(`x Seeding profile ${userCount}...`);
             await trx.execute(
@@ -65,22 +65,24 @@ export async function seedUserInfo() {
         // await seedUserShippingInfo(user.id, newUserId, trx);
         // iterate over shipping info array
         infoCount = 0;
-        for (const shippingInfo of shippingInfoArray) {
+        for (const shippingInfo of shippingInfoSeed) {
           if (seedUserId === shippingInfo.user_id) {
             infoCount++;
             console.log("");
             console.log(`x Seeding shipping info ${infoCount}...`);
             await trx.execute(
-              sql`INSERT INTO "${sql.raw(getSchemaName())}".shipping_info 
+              sql`INSERT INTO "${sql.raw(getSchemaName())}".user_shipping_information 
                 (user_id, 
-                address, 
+                street,
+                apt_num, 
                 city, 
                 state, 
                 zip, 
                 is_job_site, 
                 note) 
         VALUES (${dbUserId},
-                ${shippingInfo.address},
+                ${shippingInfo.street},
+                ${shippingInfo.apt_num},
                 ${shippingInfo.city},
                 ${shippingInfo.state},
                 ${shippingInfo.zip},
@@ -96,15 +98,16 @@ export async function seedUserInfo() {
         // await seedUserBillingInfo(user.id, newUserId, trx);
         // iterate over billing info array
         infoCount = 0;
-        for (const billingInfo of billingInfoArray) {
+        for (const billingInfo of billingInfoSeed) {
           if (seedUserId === billingInfo.user_id) {
             infoCount++;
             console.log("");
             console.log(`x Seeding billing info ${infoCount}...`);
             await trx.execute(
-              sql`INSERT INTO "${sql.raw(getSchemaName())}".billing_info 
+              sql`INSERT INTO "${sql.raw(getSchemaName())}".user_billing_information 
                 (user_id, 
-                address, 
+                street,
+                apt_num,
                 city, 
                 state, 
                 zip, 
@@ -117,7 +120,8 @@ export async function seedUserInfo() {
                 is_primary, 
                 is_active) 
         VALUES (${dbUserId},
-                ${billingInfo.address},
+                ${billingInfo.street},
+                ${billingInfo.apt_num},
                 ${billingInfo.city},
                 ${billingInfo.state},
                 ${billingInfo.zip},
@@ -138,7 +142,7 @@ export async function seedUserInfo() {
         consoleLogSpacer();
       }
       console.log(
-        `User info for ${users.length} Users was seeded successfully`
+        `User info for ${usersSeed.length} Users was seeded successfully`
       );
     });
     console.log("-------- TRANSACTION COMPLETED --------");

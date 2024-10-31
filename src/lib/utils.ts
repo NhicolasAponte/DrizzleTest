@@ -53,10 +53,10 @@ export function saveSeedDataToFiles(
     fs.mkdirSync(outputDirectory, { recursive: true });
   }
 
-  fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), "utf-8");
-  console.log(
-    `Generated ${data.length} ${dataType} Objects and saved to ${jsonPath}`
-  );
+  // fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), "utf-8");
+  // console.log(
+  //   `Generated ${data.length} ${dataType} Objects and saved to ${jsonPath}`
+  // );
 
   const tsContent = `${importLine}\nexport const ${arrayName}: ${dataType}[] = ${JSON.stringify(
     data,

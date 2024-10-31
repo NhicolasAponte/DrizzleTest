@@ -96,8 +96,8 @@ export function saveUserSeedDataToFiles(
     fs.mkdirSync(outputDirectory, { recursive: true });
   }
   // write to json file in specified directory
-  fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), "utf-8");
-  console.log(`Generated ${data.length} ${dataType}s and saved to ${jsonPath}`);
+  // fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), "utf-8");
+  // console.log(`Generated ${data.length} ${dataType}s and saved to ${jsonPath}`);
 
   // write to typescript file
   // create file content as string

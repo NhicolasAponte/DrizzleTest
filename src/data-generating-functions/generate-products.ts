@@ -5,6 +5,7 @@ import { faker } from "@faker-js/faker";
 import { productTypes } from "../seed-data/placeholder-data";
 import { InventoryProduct } from "./type-definitions";
 import { saveSeedDataToFiles } from "../lib/utils";
+import { profilesSeed } from "../seed-data/seed-user-profiles";
 
 function generateRandomProduct(
   type: string,
@@ -15,6 +16,9 @@ function generateRandomProduct(
   while (date_updated < date_created) {
     date_updated = faker.date.recent({ days: 30 });
   }
+  const randomUserProfile =
+    profilesSeed[Math.floor(Math.random() * profilesSeed.length)];
+
   return {
     id: uuidv4(),
     type: type, // from array of product names
@@ -25,6 +29,8 @@ function generateRandomProduct(
     config_options: config_options,
     date_created,
     date_updated,
+    updated_by:
+      randomUserProfile.first_name + " " + randomUserProfile.last_name,
   };
 }
 

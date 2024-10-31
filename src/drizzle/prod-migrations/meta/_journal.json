@@ -1,13 +1,5 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "7",
-      "when": 1730326006528,
-      "tag": "0000_eminent_adam_warlock",
-      "breakpoints": true
-    }
-  ]
+  "entries": []
 }

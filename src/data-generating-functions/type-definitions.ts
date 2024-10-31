@@ -78,6 +78,7 @@ export type InventoryProduct = {
   // unit:
   date_created: Date;
   date_updated: Date;
+  updated_by: string;
 };
 
 export type InventoryGlassItem = {
@@ -138,7 +139,7 @@ export type BillingInfoWithoutIds = Omit<
 
 export type Order = {
   id: string;
-  user_id: string | null;
+  user_id: string;
   order_name: string;
   shipping_data: ShippingInfoWithoutIds;
   billing_data: BillingInfoWithoutIds;

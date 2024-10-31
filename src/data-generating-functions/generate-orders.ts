@@ -150,9 +150,10 @@ function generateRandomOrder(
       note: shippingData.note,
     },
     billing_data: {
+      street: billingData.street,
+      apt_num: billingData.apt_num,
       state: billingData.state,
       city: billingData.city,
-      street: billingData.street,
       zip: billingData.zip,
       payment_method: billingData.payment_method,
       purchase_order: billingData.purchase_order,

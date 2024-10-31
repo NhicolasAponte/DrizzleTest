@@ -124,6 +124,7 @@ export const InventoryProductTable = dbSchema.table("inventory_products", {
   config_options: jsonb("config_options"),
   date_created: timestamp("date_created", { withTimezone: true }).notNull(),
   date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
+  updated_by: varchar("updated_by").notNull(),
 });
 
 export const InventoryGlassTable = dbSchema.table("inventory_glass_item", {
@@ -135,10 +136,7 @@ export const InventoryGlassTable = dbSchema.table("inventory_glass_item", {
   shapes: jsonb("shapes").notNull(), // list of shape IDs
   tint: jsonb("tint").notNull(), // list of available tints
   // list of products this glass can be used for
-  compatible_products: text("compatible_products")
-    .array()
-    .notNull()
-    .default(sql`ARRAY[]::text[]`),
+  compatible_products: jsonb("compatible_products").notNull(),
   quantity_available: integer("quantity_available").notNull(),
   // quantity_on_premise: integer("quantity"),
   // quantity_on_order: integer("quantity"),
@@ -146,10 +144,8 @@ export const InventoryGlassTable = dbSchema.table("inventory_glass_item", {
   quantity_incoming: jsonb("quantity_incoming"),
   date_created: timestamp("date_created", { withTimezone: true }).notNull(),
   date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
-  updated_by: uuid("updated_by")
-    .notNull()
-    .references(() => UserTable.id),
-  // could use user name instead of id incase a user is deleted
+  updated_by: varchar("updated_by").notNull(),
+  // name of user instead of id incase user is deleted
   // could add a check constraint to ensure user is ADMIN
 });
 
