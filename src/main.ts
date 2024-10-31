@@ -67,7 +67,7 @@ async function main() {
 
   //   -------- USER INFO --------
 
-  generateUsers(15, outputDir);
+  // generateUsers(15, outputDir);
   // generateUserProfiles(outputDir); // 1 profile per user
 
   // generateShippingInfo(outputDir); // 1-3 per user
