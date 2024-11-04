@@ -56,6 +56,8 @@ import {
   seedProducts,
 } from "./native_id_seeding/product-inventory-seeding";
 import { seedOrderInfo } from "./native_id_seeding/order-item-invoice-seeding";
+import { ordersSeed } from "./seed-data/seed-orders";
+import { Order } from "./data-generating-functions/type-definitions";
 
 async function main() {
   console.log("------------- Hello World ----");

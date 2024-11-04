@@ -34,6 +34,8 @@ if (!dbSchema.schemaName) {
 
 // export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
 
+export const UserSessionTable = dbSchema.table();
+
 export const UserTable = dbSchema.table(
   "users",
   {
