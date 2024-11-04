@@ -34,8 +34,6 @@ if (!dbSchema.schemaName) {
 
 // export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
 
-export const UserSessionTable = dbSchema.table();
-
 export const UserTable = dbSchema.table(
   "users",
   {
@@ -45,14 +43,14 @@ export const UserTable = dbSchema.table(
     password: varchar("password", { length: 255 }).notNull(),
     role: varchar("role", { length: 255 }).default("USER"),
   },
-  (table) => ({
-    checkConstraint: check(
+  (table) => [
+    check(
       "USER_ROLE_CHECK",
       sql`${table.role} = '${sql.raw(UserRole.Admin)}' OR ${
         table.role
       } = '${sql.raw(UserRole.User)}'`
     ),
-  })
+  ]
 );
 // user profile and and user tables could be one table, but the profile is
 // more likely to change, so if i keep them separate, the user
@@ -170,8 +168,8 @@ export const OrderTable = dbSchema.table(
     date_shipped: timestamp("date_shipped", { withTimezone: true }),
     date_delivered: timestamp("date_delivered", { withTimezone: true }),
   },
-  (table) => ({
-    checkConstraint: check(
+  (table) => [
+    check(
       "ORDER_STATUS_CHECK",
       sql`${table.status} = '${sql.raw(OrderStatus.Draft)}' OR ${
         table.status
@@ -183,7 +181,7 @@ export const OrderTable = dbSchema.table(
         OrderStatus.Delivered
       )}' OR ${table.status} = '${sql.raw(OrderStatus.Cancelled)}'`
     ),
-  })
+  ]
 );
 // one-to-many with order table
 export const OrderItemTable = dbSchema.table("order_items", {
