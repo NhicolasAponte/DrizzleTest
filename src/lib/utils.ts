@@ -87,10 +87,10 @@ export function consoleLogSpacer() {
   console.log("");
 }
 
-export function consoleLogLoop() {
-  for (let i = 0; i < 100; i++) {
+export function consoleLogLoop(iterations: number, operation: () => void) {
+  for (let i = 0; i < iterations; i++) {
     console.log("--------------------");
-
+    operation();
     // let num = Math.random() * 1000;
     // // num = num > 99 ? num : num + 100;
     // console.log("num:", num);
@@ -115,6 +115,34 @@ export const formatCurrency = (amount: number) => {
     style: "currency",
     currency: "USD",
   });
+};
+
+export const formatDateStringToLocal = (
+  dateStr: string,
+  locale: string = "en-US"
+) => {
+  const date = new Date(dateStr);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  };
+  const formatter = new Intl.DateTimeFormat(locale, options);
+  return formatter.format(date);
+};
+
+export const formatDateToLocal = (
+  dateValue: Date,
+  locale: string = "en-US"
+) => {
+  //const date = new Date(dateStr);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  };
+  const formatter = new Intl.DateTimeFormat(locale, options);
+  return formatter.format(dateValue);
 };
 
 // function for testing date functions

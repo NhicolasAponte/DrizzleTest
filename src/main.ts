@@ -9,9 +9,12 @@ import { generateBillingInfo } from "./data-generating-functions/generate-billin
 import { generateProducts } from "./data-generating-functions/generate-products";
 import {
   consoleLogLoop,
+  consoleLogSpacer,
   dateArithmetic,
   DropSchema,
   FlipCoin,
+  formatDateStringToLocal,
+  formatDateToLocal,
   getAllSchema,
   GetDateArithmetic,
   getMidpointBetweenDates,
@@ -38,7 +41,11 @@ import {
   SeedOrders,
 } from "./seeding-queries/seed-orders-items";
 import { GetUserIds, GetUsersByState } from "./fetch-queries/get-users";
-import { GetOrdersByUser } from "./fetch-queries/get-orders";
+import {
+  fetchOrderItemsPerOrder,
+  fetchOrderTableData,
+  GetOrdersByUser,
+} from "./fetch-queries/get-orders";
 import { generateInvoices } from "./data-generating-functions/generate-invoices";
 import { pgSchema } from "drizzle-orm/pg-core";
 import { GetInvoiceByAmountWithUser } from "./fetch-queries/get-invoices";
@@ -101,45 +108,13 @@ async function main() {
   // await seedOrderInfo();
 
   // -------------- FETCH QUERIES --------------
+
   // GetUsers();
   // GetOrdersByUser("2e421058-ee40-4e41-a8fb-3a24cd842e18");
   // GetUsersByState("Minnesota");
   // GetInvoiceByAmountWithUser();
+
   // -------------------------------------------
-
-  // -------- SEED DATABASE SEQUENCE --------
-
-  // await db.delete(GlassInventoryTable);
-  // await db.delete(UserTable);
-  // await db.delete(ProductTable);
-  // query to reset the primary key sequence
-  // await db.execute(sql`
-  //   SET session_replication_role = 'replica';
-  //   TRUNCATE TABLE "dev-schema".users RESTART IDENTITY CASCADE;
-  //   TRUNCATE TABLE "dev-schema".user_profiles RESTART IDENTITY CASCADE;
-  //   TRUNCATE TABLE "dev-schema".shipping_info RESTART IDENTITY CASCADE;
-  //   TRUNCATE TABLE "dev-schema".billing_info RESTART IDENTITY CASCADE;
-  //   TRUNCATE TABLE "dev-schema".products RESTART IDENTITY CASCADE;
-  //   TRUNCATE TABLE "dev-schema".glass_inventory_item RESTART IDENTITY CASCADE;
-  //   TRUNCATE TABLE "dev-schema".orders RESTART IDENTITY CASCADE;
-  //   TRUNCATE TABLE "dev-schema".order_items RESTART IDENTITY CASCADE;
-  //   TRUNCATE TABLE "dev-schema".invoices RESTART IDENTITY CASCADE;
-  //   SET session_replication_role = 'origin';
-  //   `);
-  // await seedUsers();
-  // seedUsers();
-  // SeedUserProfiles();
-  //   seedShippingInfo();
-  //   SeedBillingInfo();
-
-  //   SeedProducts();
-  //   SeedGlassInventory();
-
-  //   SeedOrders();
-  //   SeedOrderItems();
-  //   SeedInvoices();
-
-  // ---------------------------------------------------
 
   // console.log(dbSchema);
   // const items: number[] = [1, 2, 3, 4, 5, 6];
@@ -155,39 +130,18 @@ async function main() {
 
   //   items.push(item);
   // }
+  // const orders = await fetchOrderTableData();
+  // consoleLogSpacer();
+  // console.log("Number of orders: ", orders.length);
+  // consoleLogSpacer();
+  // for (let i = 0; i < 2; i++) {
+  //   console.log(orders[i]);
+  //   consoleLogSpacer();
+  // }
 
-  // const dateNow = new Date();
-  // // const dateCreated = faker.date.past({ years: 2 });
-  // const dateCreated = faker.date.recent({ days: 30 })
-  // const x = 30;
-
-  // console.log("    dateNow: ", dateNow);
-  // console.log("dateCreated: ", dateCreated);
-  // console.log("    dateNow milliseconds: ", dateNow.getTime())
-  // console.log("dateCreated milliseconds: ", dateCreated.getTime())
-  // // console.log(": ", dateNow - dateCreated);
-  // const diff = dateNow.getTime() - dateCreated.getTime();
-  // console.log("milliseconds: now - created = ", diff);
-  // console.log("milliseconds to days: ", diff/86400000)
-  // const midPoint = dateNow.getTime() - (diff/2);
-  // console.log("midPoint: ", midPoint);
-  // const midDate = new Date(midPoint);
-  // console.log("midDate: ", midDate);
-  // console.log("        days: now - created = ", dateNow.getDate() - dateCreated.getDate());
-
-  // GetDateArithmetic(dateCreated, x);
-  // console.log("----");
-  // OneLineDateArithmetic(dateCreated, x);
-  // console.log("----");
-  // getTimeArithmetic(dateCreated, x);
-  // consoleLogLoop();
-  // getAllSchema();
-  // DropSchema(
-  //   process.env.NODE_ENV === "production"
-  //     ? process.env.PROD_SCHEMA!
-  //     : process.env.DEV_SCHEMA!
-  // );
-  // consoleLogLoop();
+  const ordersWithItems = await fetchOrderItemsPerOrder();
+  consoleLogSpacer();
+  console.log(ordersWithItems);
 }
 
 main()

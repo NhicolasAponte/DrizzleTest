@@ -1,6 +1,10 @@
 import { da } from "@faker-js/faker";
 import { db } from "../drizzle/db";
-import { InvoiceTable, UserProfileTable, UserTable } from "../drizzle/schema";
+import {
+  OrderInvoiceTable,
+  UserProfileTable,
+  UserTable,
+} from "../drizzle/schema";
 import { and, asc, desc, eq, gt, lt, sql } from "drizzle-orm";
 
 export async function GetInvoiceByAmountWithUser() {
@@ -10,31 +14,31 @@ export async function GetInvoiceByAmountWithUser() {
   try {
     const invoices = await db
       .select({
-        invoiceId: InvoiceTable.id,
-        userId: InvoiceTable.user_id,
-        orderId: InvoiceTable.order_id,
-        dateCreated: InvoiceTable.date_created,
-        status: InvoiceTable.status,
-        amount: InvoiceTable.amount,
+        invoiceId: OrderInvoiceTable.id,
+        userId: OrderInvoiceTable.user_id,
+        orderId: OrderInvoiceTable.order_id,
+        dateCreated: OrderInvoiceTable.date_created,
+        status: OrderInvoiceTable.status,
+        amount: OrderInvoiceTable.amount,
         userName: UserProfileTable.first_name,
         lastName: UserProfileTable.last_name,
         company: UserProfileTable.company,
       })
-      .from(InvoiceTable)
+      .from(OrderInvoiceTable)
       .innerJoin(
         UserProfileTable,
-        eq(InvoiceTable.user_id, UserProfileTable.user_id)
+        eq(OrderInvoiceTable.user_id, UserProfileTable.user_id)
       )
       .where(
         and(
-          lt(InvoiceTable.date_created, lessThanDate),
-          gt(InvoiceTable.date_created, greaterDate)
+          lt(OrderInvoiceTable.date_created, lessThanDate),
+          gt(OrderInvoiceTable.date_created, greaterDate)
         )
       )
-      // .orderBy(desc(InvoiceTable.amount), asc(InvoiceTable.date_created))
+      // .orderBy(desc(OrderInvoiceTable.amount), asc(OrderInvoiceTable.date_created))
       .orderBy(
-        asc(sql`DATE_TRUNC('month', ${InvoiceTable.date_created})`),
-        desc(InvoiceTable.amount)
+        asc(sql`DATE_TRUNC('month', ${OrderInvoiceTable.date_created})`),
+        desc(OrderInvoiceTable.amount)
       )
       .limit(15);
 

@@ -70,6 +70,12 @@ function generateRandomOrder(
         from: dateCreated,
         to: dateSubmitted,
       });
+      // NOTE TODO: dateShipped should be between dateSubmitted and dateUpdated 
+      dateShipped = faker.date.between({
+        from: dateSubmitted!,
+        to: new Date(),
+      });
+      
       break;
     case "DELIVERED":
       // console.log("Generating delivered order");
