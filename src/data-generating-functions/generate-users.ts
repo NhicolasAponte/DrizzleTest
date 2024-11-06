@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import * as fs from "fs";
 import * as path from "path";
 import { generate } from "random-words";
-import { User, UserRole } from "./type-definitions";
+import { User, UserRole } from "../data-model/schema-definitions";
 
 // Define the User type based on the UserTable schema
 
@@ -17,7 +17,7 @@ function generateRandomUser(): User {
   const roleNum = Math.floor(Math.random() * 10);
   // console.log("roleNum: ", roleNum);
   const role = roleNum % 2 === 0 ? "User" : "Admin"; // Default role as per the schema
-  return { id, email, password, role: role as UserRole };
+  return { user_id: id, email, password, role: role as UserRole };
 }
 
 // Function to generate user objects and write to a JSON file
@@ -104,7 +104,7 @@ export function saveUserSeedDataToFiles(
   const tsContent = `${importLine}\nexport const ${arrayName}: ${dataType}[] = [\n${data
     .map((user: User) => {
       return `  {
-    id: "${user.id}",
+    id: "${user.user_id}",
     email: "${user.email}",
     password: "${user.password}",
     role: UserRole.${user.role},\n  }`;

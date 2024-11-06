@@ -1,7 +1,4 @@
-import {
-  Order,
-  OrderItem,
-} from "../data-generating-functions/type-definitions";
+import { Order, OrderItem } from "../data-model/schema-definitions";
 import { db } from "../drizzle/db";
 import {
   OrderInvoiceTable,
@@ -17,7 +14,7 @@ export async function GetOrdersByUser(userId: string) {
 
   try {
     const orders = await db
-      .select({ id: OrderTable.id, user_id: OrderTable.user_id })
+      .select({ id: OrderTable.order_id, user_id: OrderTable.user_id })
       .from(OrderTable)
       .where(eq(OrderTable.user_id, userId));
     console.log(orders);
@@ -32,7 +29,7 @@ export async function fetchOrderTableData() {
   try {
     const result = await db
       .select({
-        id: OrderTable.id,
+        order_id: OrderTable.order_id,
         user_id: OrderTable.user_id,
         order_name: OrderTable.order_name,
         status: OrderTable.status,
@@ -46,6 +43,7 @@ export async function fetchOrderTableData() {
         ordered_by_first_name: UserProfileTable.first_name,
         ordered_by_last_name: UserProfileTable.last_name,
         invoice_amount: OrderInvoiceTable.amount,
+        order_items: OrderItemTable,
       })
       .from(OrderTable)
       .leftJoin(
@@ -54,9 +52,12 @@ export async function fetchOrderTableData() {
       )
       .leftJoin(
         OrderInvoiceTable,
-        eq(OrderTable.id, OrderInvoiceTable.order_id)
+        eq(OrderTable.order_id, OrderInvoiceTable.order_id)
       )
-      .leftJoin(OrderItemTable, eq(OrderTable.id, OrderItemTable.order_id));
+      .leftJoin(
+        OrderItemTable,
+        eq(OrderTable.order_id, OrderItemTable.order_id)
+      );
     //2024-07-09T05:00:00.000Z
     //2024-05-01T05:00:00.000Z
     // console.log(data.rows);
@@ -68,7 +69,7 @@ export async function fetchOrderTableData() {
   }
 }
 
-export async function fetchOrderItemsPerOrder() {
+export async function fetchOrderItemsPerOrderArrayOutput() {
   try {
     const result = await db
       .select({
@@ -76,20 +77,68 @@ export async function fetchOrderItemsPerOrder() {
         orderItems: OrderItemTable,
       })
       .from(OrderTable)
-      .leftJoin(OrderItemTable, eq(OrderTable.id, OrderItemTable.order_id));
+      .leftJoin(
+        OrderItemTable,
+        eq(OrderTable.order_id, OrderItemTable.order_id)
+      );
+
+    const reducedResult = result.reduce<
+      {
+        order: Order;
+        orderItems: OrderItem[];
+      }[]
+    >((acc, row) => {
+      const order = row.order as Order;
+      const orderItem = row.orderItems as OrderItem;
+
+      let existingOrder = acc.find((o) => o.order.order_id === order.order_id);
+
+      if (!existingOrder) {
+        existingOrder = { order, orderItems: [] };
+        acc.push(existingOrder);
+      }
+
+      if (orderItem) {
+        existingOrder.orderItems.push(orderItem);
+      }
+
+      return acc;
+    }, []);
+    return reducedResult;
+    //return result;
+  } catch (error) {
+    console.log("failed to get orders and order items", error);
+  }
+}
+
+export async function fetchOrderItemsPerOrderObjectOutput() {
+  try {
+    const result = await db
+      .select({
+        order: OrderTable,
+        orderItems: OrderItemTable,
+      })
+      .from(OrderTable)
+      .leftJoin(
+        OrderItemTable,
+        eq(OrderTable.order_id, OrderItemTable.order_id)
+      );
 
     const reducedResult = result.reduce<
       Record<string, { order: Order; orderItems: OrderItem[] }>
     >((acc, row) => {
-      const order = row.order;
-      const orderItem = row.orderItems;
+      const order = row.order as Order;
+      const orderItem = row.orderItems as OrderItem;
 
-      if (!acc[order.id]) {
-        acc[order.id] = { order, orderItems: [] };
+      // const billingData = JSON.parse(order.billing_data);
+      // console.log(typeof order.billing_data);
+
+      if (!acc[order.order_id]) {
+        acc[order.order_id] = { order, orderItems: [] };
       }
 
       if (orderItem) {
-        acc[order.id].orderItems.push(orderItem);
+        acc[order.order_id].orderItems.push(orderItem);
       }
 
       return acc;

@@ -64,6 +64,15 @@ export async function seedOrderInfo() {
         let userID = matchUserId(order.user_id, dbUsers); // userIds[Math.floor(Math.random() * userIds.length)];
 
         const { shipping_data, billing_data } = order;
+        const shippingInfoData = {
+          street: shipping_data.street,
+          apt_num: shipping_data.apt_num,
+          city: shipping_data.city,
+          state: shipping_data.state,
+          zip: shipping_data.zip,
+          is_job_site: shipping_data.is_job_site,
+          note: shipping_data.note,
+        };
         const billingInfoData = {
           street: billing_data.street,
           apt_num: billing_data.apt_num,
@@ -77,17 +86,8 @@ export async function seedOrderInfo() {
           primary_contact_phone: billing_data.primary_contact_phone,
           fax_num: billing_data.fax_num,
         };
-        const shippingInfoData = {
-          street: shipping_data.street,
-          apt_num: shipping_data.apt_num,
-          city: shipping_data.city,
-          state: shipping_data.state,
-          zip: shipping_data.zip,
-          is_job_site: shipping_data.is_job_site,
-          note: shipping_data.note,
-        };
-        const serializedBillingInfo = JSON.stringify(billingInfoData);
         const serializedShippingInfo = JSON.stringify(shippingInfoData);
+        const serializedBillingInfo = JSON.stringify(billingInfoData);
         const result = await trx.execute(
           sql`INSERT INTO "${sql.raw(getSchemaName())}".orders 
                       ("user_id",

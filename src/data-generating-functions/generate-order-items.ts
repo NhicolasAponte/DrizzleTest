@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { OrderItem } from "./type-definitions";
+import { OrderItem } from "../data-model/schema-definitions";
 import { inventoryGlassSeed } from "../seed-data/seed-inventory-glass";
 import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
 import { ordersSeed } from "../seed-data/seed-orders";
@@ -33,16 +33,16 @@ function generateRandomOrderItem(itemId: number, orderId: string) {
     inventoryGlassSeed[Math.floor(Math.random() * inventoryGlassSeed.length)];
   const dimensions = getRandomDimensions();
   return {
-    id: itemId,
+    order_item_id: itemId,
     order_id: orderId,
     product_type_id:
       inventoryProductSeed[
         Math.floor(Math.random() * inventoryProductSeed.length)
-      ].id, // get product id from generated products
+      ].product_id, // get product id from generated products
     // use math.random to generate a number 1-5 and get the product[i] at that index
     product_config: {
       // combination of product and glass config
-      glass_id: randomGlass.id,
+      glass_id: randomGlass.glass_id,
       name: randomGlass.name,
       thickness:
         randomGlass.thickness[
@@ -91,7 +91,9 @@ export function generateOrderItems(outputDir?: string) {
 
   for (let order of ordersSeed) {
     const numItems = Math.floor(Math.random() * 9) + 1;
-    console.log(`Generating ${numItems} order items for order ${order.id}`);
+    console.log(
+      `Generating ${numItems} order items for order ${order.order_id}`
+    );
     for (let i = 0; i < numItems; i++) {
       let itemId = Math.floor(Math.random() * 10000);
 
@@ -100,7 +102,7 @@ export function generateOrderItems(outputDir?: string) {
         itemId = Math.floor(Math.random() * 10000);
       }
       item_ids.push(itemId);
-      const orderItem = generateRandomOrderItem(itemId, order.id);
+      const orderItem = generateRandomOrderItem(itemId, order.order_id);
 
       orderItemsData.push(orderItem);
     }
@@ -114,7 +116,7 @@ export function generateOrderItems(outputDir?: string) {
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
+  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
 
   saveSeedDataToFiles(
     orderItemsData,

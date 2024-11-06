@@ -42,7 +42,7 @@ import {
 } from "./seeding-queries/seed-orders-items";
 import { GetUserIds, GetUsersByState } from "./fetch-queries/get-users";
 import {
-  fetchOrderItemsPerOrder,
+  fetchOrderItemsPerOrderArrayOutput,
   fetchOrderTableData,
   GetOrdersByUser,
 } from "./fetch-queries/get-orders";
@@ -64,7 +64,7 @@ import {
 } from "./native_id_seeding/product-inventory-seeding";
 import { seedOrderInfo } from "./native_id_seeding/order-item-invoice-seeding";
 import { ordersSeed } from "./seed-data/seed-orders";
-import { Order } from "./data-generating-functions/type-definitions";
+import { Order } from "./data-model/schema-definitions";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -139,9 +139,14 @@ async function main() {
   //   consoleLogSpacer();
   // }
 
-  const ordersWithItems = await fetchOrderItemsPerOrder();
+  const ordersWithItems = await fetchOrderItemsPerOrderArrayOutput();
   consoleLogSpacer();
   console.log(ordersWithItems);
+  consoleLogSpacer();
+  const orderId = "83da86c5-9660-45cf-82b7-fdd90551515e";
+  console.log(ordersWithItems![0]);
+  consoleLogSpacer();
+  console.log(ordersWithItems![0].orderItems[0]);
 }
 
 main()

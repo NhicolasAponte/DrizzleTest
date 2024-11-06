@@ -3,7 +3,7 @@ import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
 import { productTypes } from "../seed-data/placeholder-data";
-import { InventoryProduct } from "./type-definitions";
+import { InventoryProduct } from "../data-model/schema-definitions";
 import { saveSeedDataToFiles } from "../lib/utils";
 import { profilesSeed } from "../seed-data/seed-user-profiles";
 
@@ -20,7 +20,7 @@ function generateRandomProduct(
     profilesSeed[Math.floor(Math.random() * profilesSeed.length)];
 
   return {
-    id: uuidv4(),
+    product_id: uuidv4(),
     type: type, // from array of product names
     image_url: "https://some/image/url",
     alt: "alt image description",
@@ -48,7 +48,7 @@ export function generateProducts(outputDir?: string) {
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
+  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
 
   saveSeedDataToFiles(
     products,

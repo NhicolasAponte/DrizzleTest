@@ -9,7 +9,7 @@ import {
   OrderStatus,
   UserBillingInformation,
   UserShippingInformation,
-} from "./type-definitions";
+} from "../data-model/schema-definitions";
 import { usersSeed } from "../seed-data/seed-users";
 import { shippingInfoSeed } from "../seed-data/seed-user-shipping-info";
 import { billingInfoSeed } from "../seed-data/seed-user-billing-info";
@@ -70,12 +70,12 @@ function generateRandomOrder(
         from: dateCreated,
         to: dateSubmitted,
       });
-      // NOTE TODO: dateShipped should be between dateSubmitted and dateUpdated 
+      // NOTE TODO: dateShipped should be between dateSubmitted and dateUpdated
       dateShipped = faker.date.between({
         from: dateSubmitted!,
         to: new Date(),
       });
-      
+
       break;
     case "DELIVERED":
       // console.log("Generating delivered order");
@@ -143,7 +143,7 @@ function generateRandomOrder(
   // }
 
   return {
-    id,
+    order_id: id,
     user_id: userId,
     order_name: orderName,
     shipping_data: {
@@ -208,11 +208,11 @@ export function generateOrders(outputDir?: string) {
   usersSeed.forEach((seedUser) => {
     // range for number of order: 2 - 26
     const numOrders = Math.floor(Math.random() * 25) + 2;
-    console.log(`Generating ${numOrders} orders for user ${seedUser.id}`);
+    console.log(`Generating ${numOrders} orders for user ${seedUser.user_id}`);
     const usersShippingInfo: UserShippingInformation[] =
-      shippingInfoSeed.filter((info) => seedUser.id === info.user_id);
+      shippingInfoSeed.filter((info) => seedUser.user_id === info.user_id);
     const usersBillingInfo: UserBillingInformation[] = billingInfoSeed.filter(
-      (info) => seedUser.id === info.user_id
+      (info) => seedUser.user_id === info.user_id
     );
 
     for (let i = 0; i < numOrders; i++) {
@@ -220,7 +220,7 @@ export function generateOrders(outputDir?: string) {
         usersBillingInfo[Math.floor(Math.random() * usersBillingInfo.length)];
       const shippingInfo =
         usersShippingInfo[Math.floor(Math.random() * usersShippingInfo.length)];
-      orders.push(generateRandomOrder(seedUser.id, billingInfo, shippingInfo));
+      orders.push(generateRandomOrder(seedUser.user_id, billingInfo, shippingInfo));
     }
   });
 
@@ -232,7 +232,7 @@ export function generateOrders(outputDir?: string) {
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
+  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
 
   saveSeedDataToFiles(
     orders,

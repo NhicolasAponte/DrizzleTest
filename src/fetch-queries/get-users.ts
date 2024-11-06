@@ -1,4 +1,4 @@
-import { User } from "../data-generating-functions/type-definitions";
+import { User } from "../data-model/schema-definitions";
 import { db } from "../drizzle/db";
 import {
   OrderInvoiceTable,
@@ -13,7 +13,7 @@ export async function GetUserIds() {
   console.log("---- fetching users ----");
 
   try {
-    const users = await db.select({ id: UserTable.id }).from(UserTable);
+    const users = await db.select({ user_id: UserTable.user_id }).from(UserTable);
     // console.log(users);
     // const user = users[0] as User;
     // console.log("USER:", user);
@@ -39,7 +39,9 @@ export async function GetUserEmails() {
   console.log("---- fetching users ----");
 
   try {
-    const users = await db.select({ id: UserTable.id, email: UserTable.email }).from(UserTable);
+    const users = await db
+      .select({ id: UserTable.user_id, email: UserTable.email })
+      .from(UserTable);
     // console.log(users);
     // const user = users[0] as User;
     // console.log("USER:", user);
@@ -67,7 +69,7 @@ export async function GetUsersByState(state: string) {
   try {
     const users = await db
       .select({
-        id: UserTable.id,
+        id: UserTable.user_id,
         email: UserTable.email,
         role: UserTable.role,
         first_name: UserProfileTable.first_name,
@@ -77,8 +79,11 @@ export async function GetUsersByState(state: string) {
         state: UserShippingInformationTable.state,
       })
       .from(UserTable)
-      .innerJoin(UserProfileTable, eq(UserTable.id, UserProfileTable.user_id))
-      .innerJoin(UserShippingInformationTable, eq(UserTable.id, UserShippingInformationTable.user_id))
+      .innerJoin(UserProfileTable, eq(UserTable.user_id, UserProfileTable.user_id))
+      .innerJoin(
+        UserShippingInformationTable,
+        eq(UserTable.user_id, UserShippingInformationTable.user_id)
+      )
       .where(eq(UserShippingInformationTable.state, state));
     console.log(users);
     console.log("Users fetched successfully");

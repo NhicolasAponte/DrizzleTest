@@ -3,7 +3,7 @@ import { ordersSeed } from "../seed-data/seed-orders";
 import { v4 as uuidv4 } from "uuid";
 import * as fs from "fs";
 import * as path from "path";
-import { OrderInvoice } from "./type-definitions";
+import { OrderInvoice } from "../data-model/schema-definitions";
 import { saveSeedDataToFiles } from "../lib/utils";
 
 function generateRandomInvoice(
@@ -25,7 +25,7 @@ function generateRandomInvoice(
   });
   //.toLocaleString();
   return {
-    id,
+    order_invoice_id: id,
     user_id: userId,
     order_id: orderId,
     date_created: dateCreated,
@@ -43,7 +43,7 @@ export function generateInvoices(outputDir?: string) {
       invoices.push(
         generateRandomInvoice(
           order.user_id ? order.user_id : "1",
-          order.id,
+          order.order_id,
           order.date_submitted
         )
       );
@@ -58,7 +58,7 @@ export function generateInvoices(outputDir?: string) {
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
+  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
 
   saveSeedDataToFiles(
     invoices,

@@ -9,7 +9,7 @@ import {
   tintOptions,
 } from "../seed-data/placeholder-data";
 import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
-import { InventoryGlassItem } from "./type-definitions";
+import { InventoryGlassItem } from "../data-model/schema-definitions";
 import { usersSeed } from "../seed-data/seed-users";
 import { saveSeedDataToFiles } from "../lib/utils";
 import { seedUsers } from "../seeding-queries/seed-users";
@@ -37,7 +37,7 @@ function generateRandomInventoryGlassItem(name: string): InventoryGlassItem {
   for (let i = 0; i < inventoryProductSeed.length; i++) {
     const coin = Math.floor(Math.random() * 2) + 1;
     if (coin % 2 === 0) {
-      compatibleProducts.push(inventoryProductSeed[i].id);
+      compatibleProducts.push(inventoryProductSeed[i].product_id);
     }
   }
 
@@ -51,7 +51,7 @@ function generateRandomInventoryGlassItem(name: string): InventoryGlassItem {
     profilesSeed[Math.floor(Math.random() * profilesSeed.length)];
 
   return {
-    id: uuidv4(),
+    glass_id: uuidv4(),
     name,
     description: "some description for " + name,
     // thickness: Array.from(
@@ -113,7 +113,7 @@ export function generateInventoryGlass(outputDir?: string) {
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
+  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
 
   saveSeedDataToFiles(
     glassInventory,

@@ -5,7 +5,7 @@ import {
   UserBillingInformation,
   UserProfile,
   payment_method_codes,
-} from "./type-definitions";
+} from "../data-model/schema-definitions";
 import { FlipCoin, saveSeedDataToFiles } from "../lib/utils";
 import { usersSeed } from "../seed-data/seed-users";
 import { profilesSeed } from "../seed-data/seed-user-profiles";
@@ -15,7 +15,7 @@ function generateRandomBillingInfo(
   email: string
 ): UserBillingInformation {
   return {
-    id: Math.floor(Math.random() * 1000),
+    billing_info_id: Math.floor(Math.random() * 1000),
     user_id: profile.user_id,
     street: faker.location.streetAddress(false),
     apt_num: FlipCoin() ? faker.location.secondaryAddress() : null,
@@ -42,13 +42,13 @@ export function generateBillingInfo(outputDir?: string) {
     const numBillingInfo = Math.floor(Math.random() * 3) + 1;
     for (let i = 0; i < numBillingInfo; i++) {
       const userProfile = profilesSeed.find(
-        (profile) => user.id === profile.user_id
+        (profile) => user.user_id === profile.user_id
       );
       userProfile
         ? billingInfoData.push(
             generateRandomBillingInfo(userProfile, user.email)
           )
-        : console.error(`No user profile found for user ${user.id}`);
+        : console.error(`No user profile found for user ${user.user_id}`);
     }
   }
 
@@ -60,8 +60,7 @@ export function generateBillingInfo(outputDir?: string) {
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine =
-    `import { ${dataType} } from "../data-generating-functions/type-definitions";\n`;
+  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
 
   saveSeedDataToFiles(
     billingInfoData,
@@ -75,8 +74,7 @@ export function generateBillingInfo(outputDir?: string) {
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
-    importLine =
-      `import { ${dataType} } from "../definitions/data-model";\n`;
+    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
 
     saveSeedDataToFiles(
       billingInfoData,
