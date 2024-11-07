@@ -35,7 +35,7 @@ export function generateUsers(numUsers: number, outputDir?: string) {
 
   let jsonPath = `${dir}/${fileName}.json`;
   let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { User, UserRole } from '../data-generating-functions/type-definitions';\n`;
+  let importLine = `import { User, UserRole } from "../data-model/schema-definitions";\n`;
 
   saveUserSeedDataToFiles(
     users,
@@ -70,7 +70,7 @@ export function generateUsers(numUsers: number, outputDir?: string) {
 
   // // write to typescript file
   // // create file content as string
-  // const tsContent = `import { User } from '../data-generating-functions/type-definitions';\n\nexport const usersSeedArray: User[] = ${JSON.stringify(
+  // const tsContent = `import { User } from "../data-model/schema-definitions";\n\nexport const usersSeedArray: User[] = ${JSON.stringify(
   //   users,
   //   null,
   //   2
@@ -104,7 +104,7 @@ export function saveUserSeedDataToFiles(
   const tsContent = `${importLine}\nexport const ${arrayName}: ${dataType}[] = [\n${data
     .map((user: User) => {
       return `  {
-    id: "${user.user_id}",
+    user_id: "${user.user_id}",
     email: "${user.email}",
     password: "${user.password}",
     role: UserRole.${user.role},\n  }`;

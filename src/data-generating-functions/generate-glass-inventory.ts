@@ -150,7 +150,7 @@ export function generateInventoryGlass(outputDir?: string) {
 //   `Generated ${glassInventory.length} glass inventory items and saved to ${jsonPath}`
 // );
 
-// const tsContent = `import { GlassInventoryItem } from "../data-generating-functions/type-definitions";\n\nexport const glassInventoryArray: GlassInventoryItem[] = ${JSON.stringify(
+// const tsContent = `import { GlassInventoryItem } from ${};\n\nexport const glassInventoryArray: GlassInventoryItem[] = ${JSON.stringify(
 //   glassInventory,
 //   null,
 //   2

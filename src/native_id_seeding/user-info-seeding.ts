@@ -20,7 +20,7 @@ export async function seedUserInfo() {
         consoleLogSpacer();
         userCount++;
         console.log(`x Seeding user ${userCount}...`);
-        const seedUserId = user.id;
+        const seedUserId = user.user_id;
 
         const result = await trx.execute(
           sql`INSERT INTO "${sql.raw(getSchemaName())}".users 
@@ -30,10 +30,10 @@ export async function seedUserInfo() {
           VALUES (${user.email},
                   ${user.password},
                   ${user.role})
-          RETURNING id`
+          RETURNING user_id`
         );
 
-        const dbUserId = result[0].id as string;
+        const dbUserId = result[0].user_id as string;
         console.log(`Inserted user with id: ${dbUserId}`);
         consoleLogSpacer();
 
@@ -71,7 +71,9 @@ export async function seedUserInfo() {
             console.log("");
             console.log(`x Seeding shipping info ${infoCount}...`);
             await trx.execute(
-              sql`INSERT INTO "${sql.raw(getSchemaName())}".user_shipping_information 
+              sql`INSERT INTO "${sql.raw(
+                getSchemaName()
+              )}".user_shipping_information 
                 (user_id, 
                 street,
                 apt_num, 
@@ -104,7 +106,9 @@ export async function seedUserInfo() {
             console.log("");
             console.log(`x Seeding billing info ${infoCount}...`);
             await trx.execute(
-              sql`INSERT INTO "${sql.raw(getSchemaName())}".user_billing_information 
+              sql`INSERT INTO "${sql.raw(
+                getSchemaName()
+              )}".user_billing_information 
                 (user_id, 
                 street,
                 apt_num,

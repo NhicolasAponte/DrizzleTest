@@ -119,7 +119,7 @@ export function generateBillingInfo(outputDir?: string) {
 //   `Generated ${billingInfoData.length} billing info and saved to ${jsonPath}`
 // );
 
-// const tsContent = `import { BillingInfo } from "../data-generating-functions/type-definitions";\n\nexport const billingInfoArray: BillingInfo[] = ${JSON.stringify(
+// const tsContent = `import { BillingInfo } from ${};\n\nexport const billingInfoArray: BillingInfo[] = ${JSON.stringify(
 //   billingInfoData,
 //   null,
 //   2

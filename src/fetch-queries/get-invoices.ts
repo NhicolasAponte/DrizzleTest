@@ -14,7 +14,7 @@ export async function GetInvoiceByAmountWithUser() {
   try {
     const invoices = await db
       .select({
-        invoiceId: OrderInvoiceTable.id,
+        invoiceId: OrderInvoiceTable.order_invoice_id,
         userId: OrderInvoiceTable.user_id,
         orderId: OrderInvoiceTable.order_id,
         dateCreated: OrderInvoiceTable.date_created,

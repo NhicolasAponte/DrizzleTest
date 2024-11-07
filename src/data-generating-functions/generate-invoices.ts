@@ -92,7 +92,7 @@ export function generateInvoices(outputDir?: string) {
 // fs.writeFileSync(jsonPath, JSON.stringify(invoices, null, 2), "utf-8");
 // console.log(`Generated ${invoices.length} invoices and saved to ${jsonPath}`);
 
-// const tsContent = `import { Invoice } from "../data-generating-functions/type-definitions";\n\nexport const invoicesArray: Invoice[] = ${JSON.stringify(
+// const tsContent = `import { Invoice } from ${};\n\nexport const invoicesArray: Invoice[] = ${JSON.stringify(
 //   invoices,
 //   null,
 //   2

@@ -7,7 +7,7 @@ import {
   UserProfileTable,
   UserTable,
 } from "../drizzle/schema";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 export async function GetOrdersByUser(userId: string) {
   console.log("---- fetching orders by user ----");
@@ -40,8 +40,10 @@ export async function fetchOrderTableData() {
         date_submitted: OrderTable.date_submitted,
         date_shipped: OrderTable.date_shipped,
         date_delivered: OrderTable.date_delivered,
-        ordered_by_first_name: UserProfileTable.first_name,
-        ordered_by_last_name: UserProfileTable.last_name,
+        ordered_by:
+          sql`${UserProfileTable.first_name} || ' ' || ${UserProfileTable.last_name}`.as(
+            "ordered_by"
+          ),
         invoice_amount: OrderInvoiceTable.amount,
         order_items: OrderItemTable,
       })
@@ -62,7 +64,7 @@ export async function fetchOrderTableData() {
     //2024-05-01T05:00:00.000Z
     // console.log(data.rows);
     // return data.rowCount && data.rowCount > 0 ? data.rows : [];
-    return result;
+    return result[0];
   } catch (error) {
     // return [];
     throw new Error("Database Error: Failed to fetch draft orders");

@@ -266,7 +266,7 @@ export function generateOrders(outputDir?: string) {
 // fs.writeFileSync(jsonPath, JSON.stringify(orders, null, 2), "utf-8");
 // console.log(`Generated ${orders.length} orders and saved to ${jsonPath}`);
 
-// const tsContent = `import { Order } from "../data-generating-functions/type-definitions";\n\nexport const ordersArray: Order[] = ${JSON.stringify(
+// const tsContent = `import { Order } from ${};\n\nexport const ordersArray: Order[] = ${JSON.stringify(
 //   orders,
 //   null,
 //   2

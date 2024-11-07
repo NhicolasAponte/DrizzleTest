@@ -79,7 +79,7 @@ export function generateShippingInfo(outputDir?: string) {
 //   `Generated ${shippingInfoData.length} shipping info and saved to ${jsonPath}`
 // );
 
-// const tsContent = `import { ShippingInfo } from "../data-generating-functions/type-definitions";\n\nexport const shippingInfoArray: ShippingInfo[] = ${JSON.stringify(
+// const tsContent = `import { ShippingInfo } from ${};\n\nexport const shippingInfoArray: ShippingInfo[] = ${JSON.stringify(
 //   shippingInfoData,
 //   null,
 //   2

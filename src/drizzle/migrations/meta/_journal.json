@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1730405350124,
-      "tag": "0000_skinny_green_goblin",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1730405864072,
-      "tag": "0001_common_northstar",
+      "when": 1731008898079,
+      "tag": "0000_tough_loners",
       "breakpoints": true
     }
   ]

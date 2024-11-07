@@ -83,7 +83,7 @@ export function generateProducts(outputDir?: string) {
 // fs.writeFileSync(jsonPath, JSON.stringify(products, null, 2), "utf-8");
 // console.log(`Generated ${products.length} products and saved to ${jsonPath}`);
 
-// const tsContent = `import { Product } from "../data-generating-functions/type-definitions";\n\nexport const productsArray: Product[] = ${JSON.stringify(
+// const tsContent = `import { Product } from ${};\n\nexport const productsArray: Product[] = ${JSON.stringify(
 //   products,
 //   null,
 //   2

@@ -80,7 +80,7 @@ export function generateUserProfiles(outputDir?: string) {
 // fs.writeFileSync(jsonPath, JSON.stringify(profiles, null, 2), "utf-8");
 // console.log(`Generated ${profiles.length} profiles and saved to ${jsonPath}`);
 
-// const tsContent = `import { UserProfile } from "../data-generating-functions/type-definitions";\n\nexport const profilesSeedArray: UserProfile[] = ${JSON.stringify(
+// const tsContent = `import { UserProfile } from ${};\n\nexport const profilesSeedArray: UserProfile[] = ${JSON.stringify(
 //   profiles,
 //   null,
 //   2

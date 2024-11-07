@@ -43,7 +43,7 @@ export async function seedProducts() {
 
 export async function seedGlassInventory() {
   const productIds = await db
-    .select({ id: InventoryProductTable.id })
+    .select({ id: InventoryProductTable.product_id })
     .from(InventoryProductTable);
   // console.log("Product IDs: ", productIds);
   // const userIds = await GetUserIds();

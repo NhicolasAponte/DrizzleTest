@@ -151,7 +151,7 @@ export function generateOrderItems(outputDir?: string) {
 //   `Generated ${orderItemsData.length} order items and saved to ${jsonPath}`
 // );
 
-// const tsContent = `import { OrderItem } from "../data-generating-functions/type-definitions";\n\nexport const orderItemsArray: OrderItem[] = ${JSON.stringify(
+// const tsContent = `import { OrderItem } from ${};\n\nexport const orderItemsArray: OrderItem[] = ${JSON.stringify(
 //   orderItemsData,
 //   null,
 //   2
