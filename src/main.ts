@@ -139,14 +139,18 @@ async function main() {
   //   consoleLogSpacer();
   // }
 
-  const ordersWithItems = await fetchOrderItemsPerOrderArrayOutput();
+  // const ordersWithItems = await fetchOrderItemsPerOrderArrayOutput();
+  // consoleLogSpacer();
+  // console.log(ordersWithItems);
+  // consoleLogSpacer();
+  // const orderId = "83da86c5-9660-45cf-82b7-fdd90551515e";
+  // console.log(ordersWithItems![0]);
+  // consoleLogSpacer();
+  // console.log(ordersWithItems![0].orderItems[0]);
+  const orderTable = await fetchOrderTableData();
+  console.log(orderTable.length);
   consoleLogSpacer();
-  console.log(ordersWithItems);
-  consoleLogSpacer();
-  const orderId = "83da86c5-9660-45cf-82b7-fdd90551515e";
-  console.log(ordersWithItems![0]);
-  consoleLogSpacer();
-  console.log(ordersWithItems![0].orderItems[0]);
+  console.log( orderTable[100].order_items);
 }
 
 main()
