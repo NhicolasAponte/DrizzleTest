@@ -1,8 +1,7 @@
 import { InventoryGlassItem } from "../data-model/schema-definitions";
-
 export const inventoryGlassSeed: InventoryGlassItem[] = [
   {
-    "glass_id": "94fae28e-56e3-4481-afef-bc8c92501f03",
+    "glass_id": "782cc9da-d87d-4fcd-abd8-c2074693d1f3",
     "name": "SNX-L 62/34",
     "description": "some description for SNX-L 62/34",
     "thickness": [
@@ -13,40 +12,51 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "Parallelogram",
-      "Square/Rectangle",
+      "Clipped Corner(s)",
+      "Clipped Corner(s)",
+      "Pentagon",
+      "Rounded Corner(s)",
+      "Triangle",
+      "Arch",
       "Irregular/Any Other Shape",
-      "Right Triangle",
+      "Quarter Round",
+      "Triangle",
+      "Ellipse",
       "Irregular/Any Other Shape",
-      "Racetrack Oval",
-      "Right Triangle",
-      "Right Triangle",
-      "House"
+      "Irregular/Any Other Shape",
+      "Arch Top & Bottom",
+      "Triangle",
+      "Trapezoid",
+      "Half-Circle"
     ],
     "tint": [
-      "Midnight Gray",
+      "P-516",
+      "Mistlite",
+      "Ultra Clear",
+      "Solex",
       "Satin Etch",
-      "Clear",
-      "Satin Etch"
+      "Solex"
     ],
     "compatible_products": [
-      "e92e220e-07be-4a69-831f-9b503fd709f8",
-      "7f92ed50-a8ac-4a1f-b8a3-9b044399ec70",
-      "b1e0e08e-bcbd-4184-972c-2b35e8509166"
+      "8bd1bebd-c548-4fc3-8d8e-698104aeaef0",
+      "1ffb4417-36b9-41d0-a0d3-de24d264f8a1",
+      "fc233ab9-9b6f-48a5-8385-8560414a2483",
+      "c5340770-db20-4bab-82c4-1aab9240b7ee",
+      "280adbff-e831-4bee-a8a2-c44a8b0c6ff8"
     ],
-    "quantity_available": 636,
+    "quantity_available": 270,
     "quantity_incoming": {
-      "quantity_incoming": 202,
-      "restock_order_id": "3c732cd4-b119-4dad-9567-0cffb0953e26",
-      "supplier_id": "4336c5bf-5d3f-474e-a3c1-07bda51d5f58",
-      "expected_arrival_date": "2024-11-24T17:51:06.975Z"
+      "quantity_incoming": 990,
+      "restock_order_id": "2eac2c9b-9148-4784-8320-c07f2dc9b019",
+      "supplier_id": "697f9041-b107-4c06-82c2-7cd1c87e29b6",
+      "expected_arrival_date": "2025-03-28T22:22:57.735Z"
     },
-    "date_created": "2024-03-14T02:19:54.030Z",
-    "date_updated": "2024-11-01T01:15:48.131Z",
-    "updated_by": "Jovan Beatty"
+    "date_created": "2023-04-20T23:32:18.105Z",
+    "date_updated": "2024-09-21T16:43:13.080Z",
+    "updated_by": "Gerardo Jaskolski"
   },
   {
-    "glass_id": "53fde7a1-843c-4035-b8ef-27020694af7f",
+    "glass_id": "fdf9914b-aed3-4b40-acd7-6f6eb79a7d11",
     "name": "SNE 50/25",
     "description": "some description for SNE 50/25",
     "thickness": [
@@ -57,44 +67,50 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
+      "Clipped Corner(s)",
+      "Circle",
+      "House",
+      "Single Slope Rectangle",
+      "Irregular/Any Other Shape",
+      "Half-Circle",
       "Quarter Round with Notch",
-      "Half-Circle with Notch",
-      "Hexagon",
-      "Octagon",
-      "Square/Rectangle",
-      "Pentagon",
-      "Quarter Round with Notch",
+      "Clipped Corner(s)",
+      "Ellipse",
+      "Clipped Corner(s)",
+      "Racetrack Oval",
+      "Clipped Corner(s)",
+      "Irregular/Any Other Shape",
+      "Rounded Corner(s)",
       "Parallelogram",
-      "Arch-Top",
-      "Arch-Top"
+      "Parallelogram",
+      "Arch Side",
+      "Parallelogram"
     ],
     "tint": [
-      "Light Gray",
-      "Low-E",
-      "Clear",
-      "Frosted Green Chip",
-      "Frosted Blue Chip",
       "Mistlite",
-      "Midnight Gray",
-      "Bronze",
-      "Solex"
+      "Light Gray",
+      "Frosted Blue Chip",
+      "Satin Etch"
     ],
     "compatible_products": [
-      "b1e0e08e-bcbd-4184-972c-2b35e8509166"
+      "1ffb4417-36b9-41d0-a0d3-de24d264f8a1",
+      "fc233ab9-9b6f-48a5-8385-8560414a2483",
+      "c5340770-db20-4bab-82c4-1aab9240b7ee",
+      "280adbff-e831-4bee-a8a2-c44a8b0c6ff8"
     ],
-    "quantity_available": 603,
+    "quantity_available": 585,
     "quantity_incoming": {
-      "quantity_incoming": 740,
-      "restock_order_id": "6cc3963b-674d-4a4d-8306-c0df56264ed4",
-      "supplier_id": "ebd40b82-1ca0-47ee-b70b-7b170939e35a",
-      "expected_arrival_date": "2025-02-14T06:41:26.755Z"
+      "quantity_incoming": 247,
+      "restock_order_id": "36ad159a-9c4e-41dd-88a9-f138301c116a",
+      "supplier_id": "e7ee76a1-5166-49af-be9c-7d8570513eeb",
+      "expected_arrival_date": "2025-03-11T09:12:01.846Z"
     },
-    "date_created": "2023-10-13T21:00:02.638Z",
-    "date_updated": "2024-10-25T01:13:22.443Z",
-    "updated_by": "Alisa Kessler"
+    "date_created": "2022-11-16T14:32:28.031Z",
+    "date_updated": "2024-10-18T10:05:15.437Z",
+    "updated_by": "Alison Turner"
   },
   {
-    "glass_id": "ab7b07fb-6674-4ed3-8729-29d20cc88b95",
+    "glass_id": "871f1ce0-8622-4718-b9a1-156dd533940b",
     "name": "SNR 35 HT",
     "description": "some description for SNR 35 HT",
     "thickness": [
@@ -105,48 +121,36 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "Right Triangle",
-      "Irregular/Any Other Shape",
-      "Quarter Round with Notch",
-      "Arch Side",
-      "Irregular/Any Other Shape",
-      "Rounded Corner(s)",
-      "Rounded Corner(s)",
+      "Arch-Top",
       "Octagon",
-      "Triangle"
+      "Arch Side",
+      "Triangle",
+      "Single Slope Rectangle"
     ],
     "tint": [
       "Satin Etch",
-      "Bronze",
-      "Dark Gray",
-      "Low-E",
-      "Frosted Blue Chip",
       "P-516",
-      "Mistlite",
-      "Low-E",
-      "Light Gray",
       "Frosted Blue Chip",
-      "Mistlite"
+      "Frosted Blue Chip",
+      "Frosted Green Chip"
     ],
     "compatible_products": [
-      "34b37468-d85e-4e3d-9af3-9c1f5d4555b3",
-      "f579fdc0-cc18-406b-ad7c-15d9f33357d6",
-      "e1eb7e8c-7137-47c9-a78e-3ccea719339a",
-      "e92e220e-07be-4a69-831f-9b503fd709f8"
+      "1ffb4417-36b9-41d0-a0d3-de24d264f8a1",
+      "c5340770-db20-4bab-82c4-1aab9240b7ee"
     ],
-    "quantity_available": 733,
+    "quantity_available": 526,
     "quantity_incoming": {
-      "quantity_incoming": 849,
-      "restock_order_id": "03553367-5dc8-4bf9-8fb9-d39d15d0b220",
-      "supplier_id": "59b9ac60-2173-4eb2-9ae4-61da52ffcb24",
-      "expected_arrival_date": "2025-05-27T01:35:59.651Z"
+      "quantity_incoming": 382,
+      "restock_order_id": "6c32f007-1660-4ab0-a0a5-3e50c69286e6",
+      "supplier_id": "3a9c8a4e-7cb1-46ef-99c4-90abf2e08c40",
+      "expected_arrival_date": "2025-09-12T10:25:15.385Z"
     },
-    "date_created": "2023-10-10T15:57:36.298Z",
-    "date_updated": "2024-10-25T18:18:34.218Z",
-    "updated_by": "Carter Stokes"
+    "date_created": "2024-05-19T19:29:28.831Z",
+    "date_updated": "2024-09-15T13:01:15.600Z",
+    "updated_by": "Gavin Klein-Gulgowski"
   },
   {
-    "glass_id": "408f40f8-9e55-48b4-9a08-a9754e827da6",
+    "glass_id": "4dfd329a-86c4-4790-b8bb-cafad6776bf7",
     "name": "SatinDeco",
     "description": "some description for SatinDeco",
     "thickness": [
@@ -157,45 +161,42 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "Square/Rectangle",
-      "Racetrack Oval",
-      "Arch Top & Bottom",
+      "Half-Circle",
+      "Hexagon",
+      "Half-Circle with Notch",
       "Ellipse",
-      "Right Triangle",
-      "Parallelogram",
-      "Pentagon",
       "House",
-      "Arch-Top",
-      "Triangle"
+      "Pentagon",
+      "Trapezoid"
     ],
     "tint": [
-      "Dark Gray",
-      "Dark Gray",
-      "P-516",
-      "Dark Gray",
-      "P-516",
-      "Midnight Gray",
-      "P-516",
+      "Satin Etch",
+      "Satin Etch",
       "Mistlite",
+      "Midnight Gray",
+      "Dark Gray",
+      "Frosted Green Chip",
+      "Ultra Clear",
       "Frosted Blue Chip"
     ],
     "compatible_products": [
-      "34b37468-d85e-4e3d-9af3-9c1f5d4555b3",
-      "7f92ed50-a8ac-4a1f-b8a3-9b044399ec70"
+      "8bd1bebd-c548-4fc3-8d8e-698104aeaef0",
+      "1ffb4417-36b9-41d0-a0d3-de24d264f8a1",
+      "89a28ef7-c047-4f26-8d8e-853b5ecebea7"
     ],
-    "quantity_available": 468,
+    "quantity_available": 446,
     "quantity_incoming": {
-      "quantity_incoming": 976,
-      "restock_order_id": "78bf431e-4c08-4f6f-ae7d-0073b0f218c2",
-      "supplier_id": "a17edc6b-9535-41f0-9736-3cd96f71d250",
-      "expected_arrival_date": "2025-06-08T20:45:24.224Z"
+      "quantity_incoming": 236,
+      "restock_order_id": "e6ea6cfc-a4df-4808-831f-ceecc6346a70",
+      "supplier_id": "8040ec49-490f-4c65-9ee7-f361d0fd976a",
+      "expected_arrival_date": "2025-05-24T07:58:02.310Z"
     },
-    "date_created": "2023-03-12T16:57:42.117Z",
-    "date_updated": "2024-11-06T16:12:06.802Z",
-    "updated_by": "Herminio Cormier"
+    "date_created": "2024-08-19T05:46:58.822Z",
+    "date_updated": "2024-09-21T09:09:34.452Z",
+    "updated_by": "Dandre Schmeler"
   },
   {
-    "glass_id": "724ad102-4edb-47f0-b624-759c23662c65",
+    "glass_id": "9cae2860-7241-484a-940d-f930a411cbea",
     "name": "AG 50 LE",
     "description": "some description for AG 50 LE",
     "thickness": [
@@ -206,39 +207,41 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "Single Slope Rectangle",
-      "Arch Top & Bottom",
-      "Irregular/Any Other Shape",
-      "Trapezoid",
-      "Quad Arch",
-      "Circle"
+      "Hexagon",
+      "Arch",
+      "Circle",
+      "Arch Side",
+      "Right Triangle",
+      "Square/Rectangle",
+      "Triangle"
     ],
     "tint": [
+      "Bronze",
+      "Ultra Clear",
       "Frosted Green Chip",
-      "Light Gray",
-      "Mistlite",
-      "Dark Gray",
-      "P-516"
+      "Clear",
+      "Midnight Gray",
+      "Frosted Blue Chip"
     ],
     "compatible_products": [
-      "e1eb7e8c-7137-47c9-a78e-3ccea719339a",
-      "e92e220e-07be-4a69-831f-9b503fd709f8",
-      "7f92ed50-a8ac-4a1f-b8a3-9b044399ec70",
-      "b1e0e08e-bcbd-4184-972c-2b35e8509166"
+      "fc233ab9-9b6f-48a5-8385-8560414a2483",
+      "89a28ef7-c047-4f26-8d8e-853b5ecebea7",
+      "c5340770-db20-4bab-82c4-1aab9240b7ee",
+      "280adbff-e831-4bee-a8a2-c44a8b0c6ff8"
     ],
-    "quantity_available": 836,
+    "quantity_available": 844,
     "quantity_incoming": {
-      "quantity_incoming": 990,
-      "restock_order_id": "79a36afb-f990-4ef7-88ac-2f67e1806a9b",
-      "supplier_id": "87ff0912-6110-41bc-b222-8aa1fd4844ad",
-      "expected_arrival_date": "2025-01-17T00:15:29.091Z"
+      "quantity_incoming": 695,
+      "restock_order_id": "77c8b319-55c3-4a82-afcf-fe885b0f6c1a",
+      "supplier_id": "a9171bb5-4506-4550-a2d8-157087a61b82",
+      "expected_arrival_date": "2025-04-26T09:28:12.417Z"
     },
-    "date_created": "2024-05-19T07:00:11.170Z",
-    "date_updated": "2024-10-28T13:48:40.653Z",
-    "updated_by": "Alisa Kessler"
+    "date_created": "2024-02-06T21:39:15.293Z",
+    "date_updated": "2024-09-17T11:23:27.237Z",
+    "updated_by": "Gavin Klein-Gulgowski"
   },
   {
-    "glass_id": "a4a30378-409c-411a-82c7-ab344b30dc54",
+    "glass_id": "3fc2b278-c0a7-4b32-96fa-0a25da77441a",
     "name": "AG 43",
     "description": "some description for AG 43",
     "thickness": [
@@ -249,48 +252,42 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
+      "Ellipse",
+      "Quad Arch",
+      "Irregular/Any Other Shape",
+      "Triangle",
+      "Rounded Corner(s)",
+      "Right Triangle",
+      "Quad Arch",
       "Quarter Round with Notch",
+      "Ellipse",
+      "House",
       "Pentagon",
       "Quad Arch",
-      "Right Triangle",
-      "Trapezoid",
-      "Half-Circle with Notch",
-      "Half-Circle with Notch",
-      "Arch Side",
-      "Arch-Top",
-      "Irregular/Any Other Shape",
-      "Ellipse"
+      "Arch-Top"
     ],
     "tint": [
-      "Light Gray",
-      "Solex",
-      "Ultra Clear",
-      "Midnight Gray",
-      "Low-E",
-      "Dark Gray",
-      "Ultra Clear",
-      "Satin Etch",
-      "Light Gray",
-      "Frosted Blue Chip"
+      "Clear",
+      "Mistlite",
+      "Clear",
+      "Midnight Gray"
     ],
     "compatible_products": [
-      "e92e220e-07be-4a69-831f-9b503fd709f8",
-      "7f92ed50-a8ac-4a1f-b8a3-9b044399ec70",
-      "b1e0e08e-bcbd-4184-972c-2b35e8509166"
+      "280adbff-e831-4bee-a8a2-c44a8b0c6ff8"
     ],
-    "quantity_available": 450,
+    "quantity_available": 864,
     "quantity_incoming": {
-      "quantity_incoming": 147,
-      "restock_order_id": "bc9ccf00-77f5-4dc9-9a40-80032aa53520",
-      "supplier_id": "5844f815-f9c0-400e-a64b-f57eedd4b2fe",
-      "expected_arrival_date": "2025-05-17T04:05:19.777Z"
+      "quantity_incoming": 518,
+      "restock_order_id": "5d4cf4a2-251c-407e-8b4d-93ac3018286a",
+      "supplier_id": "161bb36a-49f4-4841-b539-74ed1d7a090b",
+      "expected_arrival_date": "2025-05-18T20:51:29.999Z"
     },
-    "date_created": "2024-05-20T12:54:43.096Z",
-    "date_updated": "2024-09-10T21:27:33.200Z",
-    "updated_by": "Dejon Hettinger"
+    "date_created": "2022-11-14T00:23:47.994Z",
+    "date_updated": "2024-11-01T14:43:05.651Z",
+    "updated_by": "Morris Stroman"
   },
   {
-    "glass_id": "958001c4-d448-4a33-8a78-c73d867196e5",
+    "glass_id": "cf900d06-7d35-4b15-8230-74ebfaad918b",
     "name": "IS20 LE-T",
     "description": "some description for IS20 LE-T",
     "thickness": [
@@ -301,37 +298,54 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
+      "Racetrack Oval",
+      "Arch",
+      "Arch Side",
+      "Arch-Top",
+      "Quarter Round with Notch",
+      "Quarter Round",
+      "House",
+      "Square/Rectangle",
+      "Parallelogram",
+      "Irregular/Any Other Shape",
+      "Pentagon",
+      "Arch",
+      "Racetrack Oval",
+      "Arch Side",
+      "Right Triangle",
+      "Quarter Round",
+      "Hexagon",
       "Arch Top & Bottom",
-      "Circle",
       "Rounded Corner(s)",
-      "Trapezoid",
-      "Arch"
+      "Square/Rectangle",
+      "Quarter Round"
     ],
     "tint": [
+      "Clear",
       "Midnight Gray",
-      "Frosted Green Chip",
-      "Low-E",
-      "Mistlite",
-      "Solex",
-      "Satin Etch",
-      "Light Gray",
-      "Ultra Clear",
+      "P-516",
       "Midnight Gray"
     ],
-    "compatible_products": [],
-    "quantity_available": 984,
+    "compatible_products": [
+      "8bd1bebd-c548-4fc3-8d8e-698104aeaef0",
+      "1ffb4417-36b9-41d0-a0d3-de24d264f8a1",
+      "fc233ab9-9b6f-48a5-8385-8560414a2483",
+      "89a28ef7-c047-4f26-8d8e-853b5ecebea7",
+      "280adbff-e831-4bee-a8a2-c44a8b0c6ff8"
+    ],
+    "quantity_available": 230,
     "quantity_incoming": {
-      "quantity_incoming": 435,
-      "restock_order_id": "24270171-4de6-4cb1-876d-7ff9c4c75a89",
-      "supplier_id": "17506946-aa7a-416f-8ba6-e010cd838d93",
-      "expected_arrival_date": "2025-10-04T23:24:51.981Z"
+      "quantity_incoming": 540,
+      "restock_order_id": "56f2f322-ecfc-4440-b96a-0884d37f526a",
+      "supplier_id": "0c2d3a85-f800-4ad5-8448-698a48c856a6",
+      "expected_arrival_date": "2025-06-06T02:58:00.418Z"
     },
-    "date_created": "2024-09-20T23:22:51.053Z",
-    "date_updated": "2024-10-28T20:17:14.825Z",
-    "updated_by": "Mercedes Schmeler"
+    "date_created": "2024-05-15T02:53:24.634Z",
+    "date_updated": "2024-09-29T06:10:29.267Z",
+    "updated_by": "Elmo Kreiger"
   },
   {
-    "glass_id": "8ce8dd65-adf5-4da9-925d-e8350e95fff2",
+    "glass_id": "932ceffc-cab6-4a14-8d50-fe5e20f2e990",
     "name": "Sunguard Spandrel HT",
     "description": "some description for Sunguard Spandrel HT",
     "thickness": [
@@ -342,36 +356,42 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
+      "Rounded Corner(s)",
+      "House",
       "Half-Circle",
-      "Trapezoid",
-      "Circle",
-      "Triangle",
-      "Pentagon"
+      "Racetrack Oval",
+      "Hexagon",
+      "Arch-Top",
+      "Rounded Corner(s)"
     ],
     "tint": [
-      "P-516",
-      "Dark Gray",
+      "Midnight Gray",
+      "Bronze",
+      "Frosted Blue Chip",
       "Ultra Clear",
-      "Light Gray",
-      "P-516"
+      "P-516",
+      "Satin Etch",
+      "Solex",
+      "Solex",
+      "Frosted Green Chip"
     ],
     "compatible_products": [
-      "f579fdc0-cc18-406b-ad7c-15d9f33357d6",
-      "7f92ed50-a8ac-4a1f-b8a3-9b044399ec70"
+      "c5340770-db20-4bab-82c4-1aab9240b7ee",
+      "280adbff-e831-4bee-a8a2-c44a8b0c6ff8"
     ],
-    "quantity_available": 832,
+    "quantity_available": 605,
     "quantity_incoming": {
-      "quantity_incoming": 99,
-      "restock_order_id": "5433aa1b-ffc7-4c99-8934-090c7c9ca549",
-      "supplier_id": "db6889f6-e5d2-461e-b561-046f88974aab",
-      "expected_arrival_date": "2025-09-07T13:31:04.703Z"
+      "quantity_incoming": 142,
+      "restock_order_id": "f03537b2-ff64-4d67-8688-7e7f696d544c",
+      "supplier_id": "b2e85117-415e-40e1-ad97-ffcc17fe10ad",
+      "expected_arrival_date": "2025-08-23T03:59:57.341Z"
     },
-    "date_created": "2024-04-20T23:17:13.452Z",
-    "date_updated": "2024-09-29T21:52:54.039Z",
-    "updated_by": "Alisa Kessler"
+    "date_created": "2024-06-01T02:16:19.014Z",
+    "date_updated": "2024-09-11T22:57:44.390Z",
+    "updated_by": "Marisol Pacocha"
   },
   {
-    "glass_id": "6ca07878-8261-4396-af63-a9add454f8bc",
+    "glass_id": "86751191-ef9f-433b-b2c8-a99ed8b12d07",
     "name": "NU 40 LE",
     "description": "some description for NU 40 LE",
     "thickness": [
@@ -382,53 +402,52 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "House",
-      "Arch-Top",
-      "House",
-      "Arch Top & Bottom",
-      "Quarter Round with Notch",
-      "Racetrack Oval",
-      "Triangle",
-      "Right Triangle",
-      "Triangle",
-      "House",
-      "Pentagon",
+      "Square/Rectangle",
+      "Clipped Corner(s)",
       "Irregular/Any Other Shape",
-      "Single Slope Rectangle",
-      "Arch-Top",
-      "Arch Top & Bottom",
-      "Irregular/Any Other Shape",
-      "Trapezoid",
-      "Parallelogram",
+      "Arch Side",
       "Half-Circle",
-      "Arch-Top"
+      "Hexagon",
+      "Triangle",
+      "House",
+      "Arch Top & Bottom",
+      "Right Triangle",
+      "Irregular/Any Other Shape",
+      "Right Triangle",
+      "Clipped Corner(s)",
+      "Half-Circle with Notch",
+      "Right Triangle",
+      "Circle",
+      "Rounded Corner(s)"
     ],
     "tint": [
-      "Bronze",
-      "Bronze",
+      "Low-E",
+      "P-516",
+      "Frosted Green Chip",
+      "Frosted Blue Chip",
       "Satin Etch",
       "Frosted Blue Chip",
-      "Bronze",
-      "Dark Gray",
-      "Light Gray"
+      "Clear"
     ],
     "compatible_products": [
-      "f579fdc0-cc18-406b-ad7c-15d9f33357d6",
-      "e1eb7e8c-7137-47c9-a78e-3ccea719339a"
+      "1ffb4417-36b9-41d0-a0d3-de24d264f8a1",
+      "fc233ab9-9b6f-48a5-8385-8560414a2483",
+      "89a28ef7-c047-4f26-8d8e-853b5ecebea7",
+      "c5340770-db20-4bab-82c4-1aab9240b7ee"
     ],
-    "quantity_available": 572,
+    "quantity_available": 133,
     "quantity_incoming": {
-      "quantity_incoming": 667,
-      "restock_order_id": "1c158c80-c49f-4e69-a182-0ad2560f1fea",
-      "supplier_id": "b6e52218-d263-4122-892b-67f6c6e01f3e",
-      "expected_arrival_date": "2025-07-26T19:19:54.081Z"
+      "quantity_incoming": 377,
+      "restock_order_id": "0f96d738-250b-4126-a749-6a17f5abd90b",
+      "supplier_id": "77d3f509-be12-4eba-bab5-2e1cf372a30d",
+      "expected_arrival_date": "2025-10-24T00:22:59.823Z"
     },
-    "date_created": "2023-11-24T00:16:20.518Z",
-    "date_updated": "2024-09-12T14:28:49.996Z",
-    "updated_by": "Mercedes Schmeler"
+    "date_created": "2024-02-05T00:38:22.326Z",
+    "date_updated": "2024-10-17T11:25:52.630Z",
+    "updated_by": "Elmo Kreiger"
   },
   {
-    "glass_id": "00aa7dfa-cc4b-44e6-8979-2d76dc6e13cf",
+    "glass_id": "3c2a21ca-b4d8-4d42-a3ec-31c7afc50212",
     "name": "SN 68",
     "description": "some description for SN 68",
     "thickness": [
@@ -439,57 +458,53 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "Racetrack Oval",
+      "Half-Circle",
+      "Single Slope Rectangle",
       "Right Triangle",
-      "Ellipse",
+      "Circle",
+      "House",
       "Single Slope Rectangle",
-      "Racetrack Oval",
+      "Circle",
       "Trapezoid",
-      "Triangle",
       "Arch",
-      "Single Slope Rectangle",
-      "Parallelogram",
-      "Octagon",
-      "Ellipse",
-      "Racetrack Oval",
-      "Quad Arch",
-      "Racetrack Oval",
-      "Arch Side",
-      "Quarter Round with Notch",
-      "Arch Side",
-      "Single Slope Rectangle",
-      "Octagon",
+      "Circle",
+      "House",
+      "Quarter Round",
       "Clipped Corner(s)",
-      "Single Slope Rectangle",
-      "Arch-Top"
+      "Quad Arch",
+      "Parallelogram",
+      "Hexagon"
     ],
     "tint": [
+      "Frosted Blue Chip",
       "Dark Gray",
-      "P-516",
+      "Dark Gray",
       "Frosted Blue Chip",
-      "Frosted Blue Chip",
-      "Frosted Blue Chip",
-      "Clear",
-      "P-516",
-      "Bronze"
+      "Low-E",
+      "Frosted Green Chip",
+      "Low-E",
+      "Midnight Gray",
+      "Solex",
+      "Frosted Green Chip"
     ],
     "compatible_products": [
-      "34b37468-d85e-4e3d-9af3-9c1f5d4555b3",
-      "f579fdc0-cc18-406b-ad7c-15d9f33357d6"
+      "1ffb4417-36b9-41d0-a0d3-de24d264f8a1",
+      "fc233ab9-9b6f-48a5-8385-8560414a2483",
+      "c5340770-db20-4bab-82c4-1aab9240b7ee"
     ],
-    "quantity_available": 697,
+    "quantity_available": 69,
     "quantity_incoming": {
-      "quantity_incoming": 771,
-      "restock_order_id": "efc5baf4-906d-490d-bb56-fc0d68536a41",
-      "supplier_id": "45c5d2ae-5fc2-406f-b254-5bb2c54ea509",
-      "expected_arrival_date": "2025-10-12T08:29:24.432Z"
+      "quantity_incoming": 624,
+      "restock_order_id": "cf5cfa8c-10f8-4a3a-82d5-d7db73466d40",
+      "supplier_id": "1687260a-8468-430a-9eb5-c72331574d6a",
+      "expected_arrival_date": "2025-02-18T10:33:25.127Z"
     },
-    "date_created": "2024-10-01T23:56:52.344Z",
-    "date_updated": "2024-10-06T18:40:37.821Z",
-    "updated_by": "Verdie Murray"
+    "date_created": "2023-02-03T18:09:18.192Z",
+    "date_updated": "2024-10-05T12:12:15.660Z",
+    "updated_by": "Dandre Schmeler"
   },
   {
-    "glass_id": "ec0273cf-41df-43f7-a985-c4ab6cd62bbc",
+    "glass_id": "7af3d4b8-ffa0-4284-bf53-31dc6bf0fc31",
     "name": "MC 27 LE-A",
     "description": "some description for MC 27 LE-A",
     "thickness": [
@@ -500,57 +515,44 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "Octagon",
-      "Octagon",
-      "Racetrack Oval",
-      "Racetrack Oval",
-      "Rounded Corner(s)",
+      "House",
       "Arch",
-      "Single Slope Rectangle",
       "Square/Rectangle",
       "Parallelogram",
-      "Clipped Corner(s)",
-      "Arch Side",
-      "Arch Top & Bottom",
-      "Parallelogram",
+      "Octagon",
       "House",
-      "Quarter Round",
-      "Rounded Corner(s)",
-      "Racetrack Oval",
+      "Clipped Corner(s)",
       "Ellipse",
-      "Racetrack Oval",
-      "Pentagon",
-      "Half-Circle with Notch",
-      "Right Triangle",
-      "Arch"
+      "Octagon",
+      "Quad Arch"
     ],
     "tint": [
-      "P-516",
-      "Frosted Green Chip",
-      "Dark Gray",
-      "Light Gray",
+      "Bronze",
+      "Satin Etch",
       "Frosted Blue Chip",
-      "Low-E"
+      "Dark Gray",
+      "Solex",
+      "P-516",
+      "Frosted Blue Chip"
     ],
     "compatible_products": [
-      "e1eb7e8c-7137-47c9-a78e-3ccea719339a",
-      "e92e220e-07be-4a69-831f-9b503fd709f8",
-      "7f92ed50-a8ac-4a1f-b8a3-9b044399ec70",
-      "b1e0e08e-bcbd-4184-972c-2b35e8509166"
+      "fc233ab9-9b6f-48a5-8385-8560414a2483",
+      "c5340770-db20-4bab-82c4-1aab9240b7ee",
+      "280adbff-e831-4bee-a8a2-c44a8b0c6ff8"
     ],
-    "quantity_available": 287,
+    "quantity_available": 297,
     "quantity_incoming": {
-      "quantity_incoming": 392,
-      "restock_order_id": "67d93c71-4881-4dfd-8e52-1736e5eda9cc",
-      "supplier_id": "3c05a1a1-e4f7-4167-8b95-b0e3846394a5",
-      "expected_arrival_date": "2025-02-26T14:02:53.247Z"
+      "quantity_incoming": 822,
+      "restock_order_id": "bff3e762-d839-48ba-8cbf-a85c554dc257",
+      "supplier_id": "139fc6b1-bbb6-4123-a349-dad284c4db7c",
+      "expected_arrival_date": "2025-09-06T17:07:42.659Z"
     },
-    "date_created": "2023-09-15T01:57:03.068Z",
-    "date_updated": "2024-10-19T10:29:13.988Z",
-    "updated_by": "Kennedy Keeling"
+    "date_created": "2024-08-10T19:47:55.669Z",
+    "date_updated": "2024-09-27T03:28:49.873Z",
+    "updated_by": "Ayden Okuneva"
   },
   {
-    "glass_id": "1a416e7d-c7df-459d-a783-67186888f113",
+    "glass_id": "3d072f8f-e6ff-45a1-b188-595d59de9b1c",
     "name": "MC 68 LE-T",
     "description": "some description for MC 68 LE-T",
     "thickness": [
@@ -561,38 +563,45 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "Half-Circle with Notch",
+      "Arch Side",
       "Racetrack Oval",
-      "Quad Arch",
+      "Arch-Top",
+      "Triangle",
       "Racetrack Oval",
-      "Half-Circle",
-      "Square/Rectangle",
-      "Circle"
+      "Quarter Round",
+      "Pentagon",
+      "Arch",
+      "Trapezoid",
+      "Square/Rectangle"
     ],
     "tint": [
-      "Light Gray",
-      "Midnight Gray",
+      "Frosted Blue Chip",
+      "Low-E",
+      "Solex",
       "Bronze",
-      "Satin Etch",
-      "Low-E"
+      "Light Gray",
+      "Solex",
+      "Ultra Clear",
+      "Bronze",
+      "Mistlite"
     ],
     "compatible_products": [
-      "34b37468-d85e-4e3d-9af3-9c1f5d4555b3",
-      "e1eb7e8c-7137-47c9-a78e-3ccea719339a"
+      "1ffb4417-36b9-41d0-a0d3-de24d264f8a1",
+      "280adbff-e831-4bee-a8a2-c44a8b0c6ff8"
     ],
-    "quantity_available": 309,
+    "quantity_available": 276,
     "quantity_incoming": {
-      "quantity_incoming": 812,
-      "restock_order_id": "35675beb-f760-49e7-8437-ace6d8385efc",
-      "supplier_id": "2243f41a-d4cd-47a2-abf5-423524e08456",
-      "expected_arrival_date": "2025-06-05T23:47:25.415Z"
+      "quantity_incoming": 548,
+      "restock_order_id": "de9506fc-d216-4097-b8a2-a024abfc65b2",
+      "supplier_id": "3e8a9161-b1e2-466a-a8a4-38e9e4b12105",
+      "expected_arrival_date": "2025-04-13T08:26:49.013Z"
     },
-    "date_created": "2023-10-11T02:40:00.079Z",
-    "date_updated": "2024-09-23T17:11:47.060Z",
-    "updated_by": "Kamille Renner"
+    "date_created": "2023-11-23T17:37:50.367Z",
+    "date_updated": "2024-09-12T06:50:36.277Z",
+    "updated_by": "Laury Beer"
   },
   {
-    "glass_id": "56ed7303-2a7c-4813-b355-eb2ef6203961",
+    "glass_id": "741e34cc-82d5-4f8b-bc8e-034b7f44d78f",
     "name": "MC 68 LE-A",
     "description": "some description for MC 68 LE-A",
     "thickness": [
@@ -603,39 +612,48 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "Square/Rectangle",
-      "Octagon",
       "Irregular/Any Other Shape",
+      "Clipped Corner(s)",
       "Square/Rectangle",
-      "House",
-      "Arch",
-      "Pentagon",
-      "Quarter Round",
-      "Triangle"
+      "Single Slope Rectangle",
+      "Arch Side",
+      "Circle",
+      "Ellipse",
+      "Arch-Top",
+      "Arch Side",
+      "Circle",
+      "Ellipse",
+      "Half-Circle with Notch",
+      "Half-Circle with Notch",
+      "Arch Side",
+      "Racetrack Oval",
+      "Square/Rectangle",
+      "Trapezoid"
     ],
     "tint": [
       "Satin Etch",
-      "Solex",
-      "Dark Gray",
-      "Satin Etch"
+      "Ultra Clear",
+      "Frosted Green Chip",
+      "Clear"
     ],
     "compatible_products": [
-      "f579fdc0-cc18-406b-ad7c-15d9f33357d6",
-      "b1e0e08e-bcbd-4184-972c-2b35e8509166"
+      "fc233ab9-9b6f-48a5-8385-8560414a2483",
+      "89a28ef7-c047-4f26-8d8e-853b5ecebea7",
+      "c5340770-db20-4bab-82c4-1aab9240b7ee"
     ],
-    "quantity_available": 92,
+    "quantity_available": 431,
     "quantity_incoming": {
-      "quantity_incoming": 997,
-      "restock_order_id": "ff640a4f-8a87-4631-bafa-250c9d2e0104",
-      "supplier_id": "cfd4245f-e45d-427c-b0a0-668585a8973d",
-      "expected_arrival_date": "2025-07-11T10:47:47.013Z"
+      "quantity_incoming": 230,
+      "restock_order_id": "884e73c5-7d96-4b99-90cb-9c9da094b540",
+      "supplier_id": "fa900762-e456-4e07-b9dc-bbdae479e6cd",
+      "expected_arrival_date": "2025-02-22T23:58:43.502Z"
     },
-    "date_created": "2024-02-28T03:07:09.518Z",
-    "date_updated": "2024-09-29T23:11:29.654Z",
-    "updated_by": "Candida Harber"
+    "date_created": "2023-03-29T18:19:10.415Z",
+    "date_updated": "2024-10-07T07:30:04.733Z",
+    "updated_by": "Morris Stroman"
   },
   {
-    "glass_id": "b7ca8ed7-799e-4aaf-84b3-ded20b3dd62f",
+    "glass_id": "48ad1e6a-2596-485b-8492-4fcc18785b4c",
     "name": "SN 68 HT",
     "description": "some description for SN 68 HT",
     "thickness": [
@@ -646,39 +664,45 @@ export const inventoryGlassSeed: InventoryGlassItem[] = [
       "3/4"
     ],
     "shapes": [
-      "Arch-Top",
+      "Circle",
+      "Pentagon",
+      "Right Triangle",
+      "Arch",
       "Hexagon",
-      "Hexagon",
+      "Single Slope Rectangle",
+      "Irregular/Any Other Shape",
+      "Trapezoid",
+      "Quarter Round",
+      "Arch",
+      "Arch Side",
+      "Half-Circle",
+      "Half-Circle with Notch",
       "Arch-Top",
-      "House"
+      "Quarter Round"
     ],
     "tint": [
-      "Satin Etch",
-      "Low-E",
-      "Frosted Blue Chip",
-      "P-516",
-      "P-516",
       "Frosted Green Chip",
-      "Frosted Blue Chip",
-      "Light Gray",
-      "Light Gray"
+      "Frosted Green Chip",
+      "Solex",
+      "Bronze",
+      "Satin Etch",
+      "Mistlite",
+      "Mistlite",
+      "Bronze"
     ],
     "compatible_products": [
-      "34b37468-d85e-4e3d-9af3-9c1f5d4555b3",
-      "f579fdc0-cc18-406b-ad7c-15d9f33357d6",
-      "e1eb7e8c-7137-47c9-a78e-3ccea719339a",
-      "e92e220e-07be-4a69-831f-9b503fd709f8",
-      "7f92ed50-a8ac-4a1f-b8a3-9b044399ec70"
+      "c5340770-db20-4bab-82c4-1aab9240b7ee",
+      "280adbff-e831-4bee-a8a2-c44a8b0c6ff8"
     ],
-    "quantity_available": 4,
+    "quantity_available": 289,
     "quantity_incoming": {
-      "quantity_incoming": 541,
-      "restock_order_id": "2f29de7f-c89e-4134-bc52-417992015df9",
-      "supplier_id": "c8b7d01d-965e-4a77-8d19-7a9262e19488",
-      "expected_arrival_date": "2025-10-02T22:22:00.090Z"
+      "quantity_incoming": 12,
+      "restock_order_id": "d8afdd72-f082-4e82-b430-34572be6ca4b",
+      "supplier_id": "d52377f6-b812-4cf2-82a9-d68977facce5",
+      "expected_arrival_date": "2025-03-17T09:19:51.544Z"
     },
-    "date_created": "2023-09-21T07:00:16.968Z",
-    "date_updated": "2024-09-25T01:08:28.701Z",
-    "updated_by": "Herminio Cormier"
+    "date_created": "2023-03-05T17:46:27.017Z",
+    "date_updated": "2024-09-21T13:58:02.747Z",
+    "updated_by": "Gerardo Jaskolski"
   }
 ];
