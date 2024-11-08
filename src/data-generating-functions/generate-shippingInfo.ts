@@ -5,7 +5,7 @@ import * as path from "path";
 import { faker } from "@faker-js/faker";
 import { UserShippingInformation } from "../data-model/schema-definitions";
 import { usersSeed } from "../seed-data/seed-users";
-import { FlipCoin, saveSeedDataToFiles } from "../lib/utils";
+import { FlipCoin, saveSeedData } from "../lib/utils";
 
 function generateRandomAddress(userId: string): UserShippingInformation {
   return {
@@ -30,39 +30,11 @@ export function generateShippingInfo(outputDir?: string) {
     }
   }
 
-  let dataType = "UserShippingInformation";
-  let arrayName = "shippingInfoSeed";
-
-  const dir = "./src/seed-data";
+  const dataType = "UserShippingInformation";
+  const arrayName = "shippingInfoSeed";
   const fileName = "seed-user-shipping-info";
 
-  let jsonPath = `${dir}/${fileName}.json`;
-  let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
-
-  saveSeedDataToFiles(
-    shippingInfoData,
-    dataType,
-    arrayName,
-    jsonPath,
-    tsPath,
-    importLine
-  );
-
-  if (outputDir) {
-    jsonPath = `${outputDir}/${fileName}.json`;
-    tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
-
-    saveSeedDataToFiles(
-      shippingInfoData,
-      dataType,
-      arrayName,
-      jsonPath,
-      tsPath,
-      importLine
-    );
-  }
+  saveSeedData(shippingInfoData, dataType, arrayName, fileName);
 }
 
 // const outputDirectory = path.dirname(jsonPath);

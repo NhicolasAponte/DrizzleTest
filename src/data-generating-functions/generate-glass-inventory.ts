@@ -11,7 +11,7 @@ import {
 import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
 import { InventoryGlassItem } from "../data-model/schema-definitions";
 import { usersSeed } from "../seed-data/seed-users";
-import { saveSeedDataToFiles } from "../lib/utils";
+import { saveSeedData } from "../lib/utils";
 import { seedUsers } from "../seeding-queries/seed-users";
 import { profilesSeed } from "../seed-data/seed-user-profiles";
 
@@ -105,39 +105,11 @@ export function generateInventoryGlass(outputDir?: string) {
     glassInventory.push(generateRandomInventoryGlassItem(item.name));
   }
 
-  let dataType = "InventoryGlassItem";
-  let arrayName = "inventoryGlassSeed";
-
-  const dir = "./src/seed-data";
+  const dataType = "InventoryGlassItem";
+  const arrayName = "inventoryGlassSeed";
   const fileName = "seed-inventory-glass";
 
-  let jsonPath = `${dir}/${fileName}.json`;
-  let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
-
-  saveSeedDataToFiles(
-    glassInventory,
-    dataType,
-    arrayName,
-    jsonPath,
-    tsPath,
-    importLine
-  );
-
-  if (outputDir) {
-    jsonPath = `${outputDir}/${fileName}.json`;
-    tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
-
-    saveSeedDataToFiles(
-      glassInventory,
-      dataType,
-      arrayName,
-      jsonPath,
-      tsPath,
-      importLine
-    );
-  }
+  saveSeedData(glassInventory, dataType, arrayName, fileName);
 }
 
 // const outputDirectory = path.dirname(jsonPath);

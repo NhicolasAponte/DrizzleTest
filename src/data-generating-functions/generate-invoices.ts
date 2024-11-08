@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import * as fs from "fs";
 import * as path from "path";
 import { OrderInvoice } from "../data-model/schema-definitions";
-import { saveSeedDataToFiles } from "../lib/utils";
+import { getImportLines, saveSeedData } from "../lib/utils";
 
 function generateRandomInvoice(
   userId: string,
@@ -52,37 +52,9 @@ export function generateInvoices(outputDir?: string) {
 
   const dataType = "OrderInvoice";
   const arrayName = "orderInvoiceSeed";
-
-  const dir = "./src/seed-data";
   const fileName = "seed-order-invoice";
 
-  let jsonPath = `${dir}/${fileName}.json`;
-  let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
-
-  saveSeedDataToFiles(
-    invoices,
-    dataType,
-    arrayName,
-    jsonPath,
-    tsPath,
-    importLine
-  );
-
-  if (outputDir) {
-    jsonPath = `${outputDir}/${fileName}.json`;
-    tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
-
-    saveSeedDataToFiles(
-      invoices,
-      dataType,
-      arrayName,
-      jsonPath,
-      tsPath,
-      importLine
-    );
-  }
+  saveSeedData(invoices, dataType, arrayName, fileName);
 }
 // const outputDirectory = path.dirname(jsonPath);
 // if (!fs.existsSync(outputDirectory)) {

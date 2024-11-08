@@ -3,6 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { generate } from "random-words";
 import { User, UserRole } from "../data-model/schema-definitions";
+import { localDir, orderTypeImport } from "../lib/utils";
 
 // Define the User type based on the UserTable schema
 
@@ -29,12 +30,10 @@ export function generateUsers(numUsers: number, outputDir?: string) {
 
   const dataType = "User";
   const arrayName = "usersSeed";
-
-  const dir = "./src/seed-data";
   const fileName = "seed-users";
 
-  let jsonPath = `${dir}/${fileName}.json`;
-  let tsPath = `${dir}/${fileName}.ts`;
+  let jsonPath = `${localDir}/${fileName}.json`;
+  let tsPath = `${localDir}/${fileName}.ts`;
   let importLine = `import { User, UserRole } from "../data-model/schema-definitions";\n`;
 
   saveUserSeedDataToFiles(
@@ -49,7 +48,7 @@ export function generateUsers(numUsers: number, outputDir?: string) {
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { User, UserRole } from "../definitions/data-model";\n`;
+    importLine = `import { User, UserRole } from "${orderTypeImport}";\n`;
     saveUserSeedDataToFiles(
       users,
       dataType,

@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
 import { productTypes } from "../seed-data/placeholder-data";
 import { InventoryProduct } from "../data-model/schema-definitions";
-import { saveSeedDataToFiles } from "../lib/utils";
+import { saveSeedData } from "../lib/utils";
 import { profilesSeed } from "../seed-data/seed-user-profiles";
 
 function generateRandomProduct(
@@ -42,37 +42,9 @@ export function generateProducts(outputDir?: string) {
 
   const dataType = "InventoryProduct";
   const arrayName = "inventoryProductSeed";
-
-  const dir = "./src/seed-data";
   const fileName = "seed-inventory-products";
 
-  let jsonPath = `${dir}/${fileName}.json`;
-  let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
-
-  saveSeedDataToFiles(
-    products,
-    dataType,
-    arrayName,
-    jsonPath,
-    tsPath,
-    importLine
-  );
-
-  if (outputDir) {
-    jsonPath = `${outputDir}/${fileName}.json`;
-    tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
-
-    saveSeedDataToFiles(
-      products,
-      dataType,
-      arrayName,
-      jsonPath,
-      tsPath,
-      importLine
-    );
-  }
+  saveSeedData(products, dataType, arrayName, fileName);
 }
 
 // const outputDirectory = path.dirname(jsonPath);

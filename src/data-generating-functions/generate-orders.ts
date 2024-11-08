@@ -3,7 +3,7 @@ import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { generate } from "random-words";
 import { faker } from "@faker-js/faker";
-import { getMidpointBetweenDates, saveSeedDataToFiles } from "../lib/utils";
+import { getMidpointBetweenDates, saveSeedData } from "../lib/utils";
 import {
   Order,
   OrderStatus,
@@ -220,43 +220,17 @@ export function generateOrders(outputDir?: string) {
         usersBillingInfo[Math.floor(Math.random() * usersBillingInfo.length)];
       const shippingInfo =
         usersShippingInfo[Math.floor(Math.random() * usersShippingInfo.length)];
-      orders.push(generateRandomOrder(seedUser.user_id, billingInfo, shippingInfo));
+      orders.push(
+        generateRandomOrder(seedUser.user_id, billingInfo, shippingInfo)
+      );
     }
   });
 
   const dataType = "Order";
   const arrayName = "ordersSeed";
-
-  const dir = "./src/seed-data";
   const fileName = "seed-orders";
 
-  let jsonPath = `${dir}/${fileName}.json`;
-  let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
-
-  saveSeedDataToFiles(
-    orders,
-    dataType,
-    arrayName,
-    jsonPath,
-    tsPath,
-    importLine
-  );
-
-  if (outputDir) {
-    jsonPath = `${outputDir}/${fileName}.json`;
-    tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
-
-    saveSeedDataToFiles(
-      orders,
-      dataType,
-      arrayName,
-      jsonPath,
-      tsPath,
-      importLine
-    );
-  }
+  saveSeedData(orders, dataType, arrayName, fileName);
 }
 // const outputDirectory = path.dirname(jsonPath);
 // if (!fs.existsSync(outputDirectory)) {

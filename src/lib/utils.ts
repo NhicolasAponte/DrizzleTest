@@ -40,33 +40,78 @@ export function getSystemTimeZone(): string {
   return Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
 
-export function saveSeedDataToFiles(
+export const externalDir = process.env.ORDER_PROJECT_PATH; //orderProjDir// undefined; //process.env.LOCAL_OUTPUT_DIR;
+export const localDir = "./src/seed-data";
+const drizzleTypeImport = "../data-model/schema-definitions";
+export const orderTypeImport = "../data-model/schema-definitions";
+
+export function getOutputPaths(fileName: string) {
+  const localPath = `${localDir}/${fileName}.ts`;
+  const externalPath = `${externalDir}/${fileName}.ts`;
+
+  return { localPath, externalPath };
+}
+
+export function getImportLines(dataType: string) {
+  return {
+    drizzleTypeImport: `import { ${dataType} } from "${drizzleTypeImport}";`,
+    orderTypeImport: `import { ${dataType} } from "${orderTypeImport}";`,
+  };
+}
+
+export function saveSeedData(
   data: any,
   dataType: string,
   arrayName: string,
-  jsonPath: string,
-  tsPath: string,
-  importLine: string
+  fileName: string
 ) {
-  const outputDirectory = path.dirname(jsonPath);
+  const importLine = getImportLines(dataType);
+  const { localPath, externalPath } = getOutputPaths(fileName);
+
+  writeToFile(
+    data,
+    localPath,
+    importLine.drizzleTypeImport,
+    dataType,
+    arrayName
+  );
+  writeToFile(
+    data,
+    externalPath,
+    importLine.orderTypeImport,
+    dataType,
+    arrayName
+  );
+}
+
+export function writeToFile(
+  data: any,
+  outputPath: string,
+  importLine: string,
+  dataType: string,
+  arrayName: string
+) {
+  const outputDirectory = path.dirname(outputPath);
   if (!fs.existsSync(outputDirectory)) {
     fs.mkdirSync(outputDirectory, { recursive: true });
   }
-
-  // fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), "utf-8");
-  // console.log(
-  //   `Generated ${data.length} ${dataType} Objects and saved to ${jsonPath}`
-  // );
 
   const tsContent = `${importLine}\nexport const ${arrayName}: ${dataType}[] = ${JSON.stringify(
     data,
     null,
     2
   )};\n`;
-  fs.writeFileSync(tsPath, tsContent, "utf-8");
+  fs.writeFileSync(outputPath, tsContent, "utf-8");
   console.log(
-    `Generated ${data.length} ${dataType} Objects and saved to ${tsPath}`
+    `Generated ${data.length} ${dataType} Objects and saved to ${outputPath}`
   );
+
+  // if (jsonPath) {
+  //   fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), "utf-8");
+  //   console.log(
+  //     `Generated ${data.length} ${dataType} Objects and saved to ${jsonPath}`
+  //   );
+  // }
 }
 
 export function LogData(data: {

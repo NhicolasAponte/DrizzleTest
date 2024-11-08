@@ -70,12 +70,12 @@ async function main() {
   console.log("------------- Hello World ----");
   console.log("");
   console.log("");
-  const outputDir = process.env.ORDER_PROJECT_PATH; //orderProjDir// undefined; //process.env.LOCAL_OUTPUT_DIR;
+  
 
   //   -------- GENERATE DATA SEQUENCE --------
 
   //   -------- USER INFO --------
-
+  const outputDir = process.env.ORDER_PROJECT_PATH;
   // generateUsers(15, outputDir);
   // generateUserProfiles(outputDir); // 1 profile per user
 
@@ -147,10 +147,10 @@ async function main() {
   // console.log(ordersWithItems![0]);
   // consoleLogSpacer();
   // console.log(ordersWithItems![0].orderItems[0]);
-  const orderTable = await fetchOrderTableData();
-  console.log(orderTable.length);
-  consoleLogSpacer();
-  console.log( orderTable[100].order_items);
+  // const orderTable = await fetchOrderTableData();
+  // console.log(orderTable.length);
+  // consoleLogSpacer();
+  // console.log( orderTable[100].order_items);
 }
 
 main()

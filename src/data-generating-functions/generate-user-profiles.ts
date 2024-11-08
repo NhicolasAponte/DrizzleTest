@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 import { generate } from "random-words";
 import { UserProfile } from "../data-model/schema-definitions";
 import { usersSeed } from "../seed-data/seed-users";
-import { saveSeedDataToFiles } from "../lib/utils";
+import { saveSeedData } from "../lib/utils";
 
 function generateRandomUserProfile(user_id: string): UserProfile {
   const id = Math.floor(Math.random() * 10000);
@@ -38,38 +38,12 @@ export function generateUserProfiles(outputDir?: string) {
   }
 
   // let dir = outputDir ? outputDir : "./src/seed-data";
-  let dataType = "UserProfile";
-  let arrayName = "profilesSeed";
+  const dataType = "UserProfile";
+  const arrayName = "profilesSeed";
+  const fileName = "seed-user-profiles";
 
-  let dir = "./src/seed-data";
-  let fileName = "seed-user-profiles";
+  saveSeedData(profiles, dataType, arrayName, fileName);
 
-  let jsonPath = `${dir}/${fileName}.json`;
-  let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
-
-  saveSeedDataToFiles(
-    profiles,
-    dataType,
-    arrayName,
-    jsonPath,
-    tsPath,
-    importLine
-  );
-
-  if (outputDir) {
-    jsonPath = `${outputDir}/${fileName}.json`;
-    tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
-    saveSeedDataToFiles(
-      profiles,
-      dataType,
-      arrayName,
-      jsonPath,
-      tsPath,
-      importLine
-    );
-  }
 }
 
 // const outputDirectory = path.dirname(jsonPath);

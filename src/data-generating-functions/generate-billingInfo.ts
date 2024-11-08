@@ -6,7 +6,7 @@ import {
   UserProfile,
   payment_method_codes,
 } from "../data-model/schema-definitions";
-import { FlipCoin, saveSeedDataToFiles } from "../lib/utils";
+import { FlipCoin, saveSeedData } from "../lib/utils";
 import { usersSeed } from "../seed-data/seed-users";
 import { profilesSeed } from "../seed-data/seed-user-profiles";
 
@@ -52,39 +52,11 @@ export function generateBillingInfo(outputDir?: string) {
     }
   }
 
-  let dataType = "UserBillingInformation";
-  let arrayName = "billingInfoSeed";
-
-  const dir = "./src/seed-data";
+  const dataType = "UserBillingInformation";
+  const arrayName = "billingInfoSeed";
   const fileName = "seed-user-billing-info";
 
-  let jsonPath = `${dir}/${fileName}.json`;
-  let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
-
-  saveSeedDataToFiles(
-    billingInfoData,
-    dataType,
-    arrayName,
-    jsonPath,
-    tsPath,
-    importLine
-  );
-
-  if (outputDir) {
-    jsonPath = `${outputDir}/${fileName}.json`;
-    tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
-
-    saveSeedDataToFiles(
-      billingInfoData,
-      dataType,
-      arrayName,
-      jsonPath,
-      tsPath,
-      importLine
-    );
-  }
+  saveSeedData(billingInfoData, dataType, arrayName, fileName);
 }
 
 // const altTS = `${importLine}\nexport const ${arrayName}: ${dataType}[] = [\n${billingInfoData

@@ -4,7 +4,7 @@ import { OrderItem } from "../data-model/schema-definitions";
 import { inventoryGlassSeed } from "../seed-data/seed-inventory-glass";
 import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
 import { ordersSeed } from "../seed-data/seed-orders";
-import { saveSeedDataToFiles } from "../lib/utils";
+import { saveSeedData } from "../lib/utils";
 
 // interface productConfig {
 //   productId: string;
@@ -110,36 +110,9 @@ export function generateOrderItems(outputDir?: string) {
 
   const dataType = "OrderItem";
   const arrayName = "orderItemsSeed";
-
-  const dir = "./src/seed-data";
   const fileName = "seed-order-items";
 
-  let jsonPath = `${dir}/${fileName}.json`;
-  let tsPath = `${dir}/${fileName}.ts`;
-  let importLine = `import { ${dataType} } from "../data-model/schema-definitions";\n`;
-
-  saveSeedDataToFiles(
-    orderItemsData,
-    dataType,
-    arrayName,
-    jsonPath,
-    tsPath,
-    importLine
-  );
-
-  if (outputDir) {
-    jsonPath = `${outputDir}/${fileName}.json`;
-    tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { ${dataType} } from "../definitions/data-model";\n`;
-    saveSeedDataToFiles(
-      orderItemsData,
-      dataType,
-      arrayName,
-      jsonPath,
-      tsPath,
-      importLine
-    );
-  }
+  saveSeedData(orderItemsData, dataType, arrayName, fileName);
 }
 // const outputDirectory = path.dirname(jsonPath);
 // if (!fs.existsSync(outputDirectory)) {
