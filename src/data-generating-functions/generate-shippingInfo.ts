@@ -26,7 +26,7 @@ export function generateShippingInfo(outputDir?: string) {
   for (let user of usersSeed) {
     const numShippingInfo = Math.floor(Math.random() * 3) + 1;
     for (let i = 0; i < numShippingInfo; i++) {
-      shippingInfoData.push(generateRandomAddress(user.user_id));
+      shippingInfoData.push(generateRandomAddress(user.id));
     }
   }
 

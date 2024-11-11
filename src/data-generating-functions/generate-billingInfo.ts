@@ -42,13 +42,13 @@ export function generateBillingInfo(outputDir?: string) {
     const numBillingInfo = Math.floor(Math.random() * 3) + 1;
     for (let i = 0; i < numBillingInfo; i++) {
       const userProfile = profilesSeed.find(
-        (profile) => user.user_id === profile.user_id
+        (profile) => user.id === profile.user_id
       );
       userProfile
         ? billingInfoData.push(
             generateRandomBillingInfo(userProfile, user.email)
           )
-        : console.error(`No user profile found for user ${user.user_id}`);
+        : console.error(`No user profile found for user ${user.id}`);
     }
   }
 

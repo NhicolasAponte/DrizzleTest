@@ -208,11 +208,11 @@ export function generateOrders(outputDir?: string) {
   usersSeed.forEach((seedUser) => {
     // range for number of order: 2 - 26
     const numOrders = Math.floor(Math.random() * 25) + 2;
-    console.log(`Generating ${numOrders} orders for user ${seedUser.user_id}`);
+    console.log(`Generating ${numOrders} orders for user ${seedUser.id}`);
     const usersShippingInfo: UserShippingInformation[] =
-      shippingInfoSeed.filter((info) => seedUser.user_id === info.user_id);
+      shippingInfoSeed.filter((info) => seedUser.id === info.user_id);
     const usersBillingInfo: UserBillingInformation[] = billingInfoSeed.filter(
-      (info) => seedUser.user_id === info.user_id
+      (info) => seedUser.id === info.user_id
     );
 
     for (let i = 0; i < numOrders; i++) {
@@ -221,7 +221,7 @@ export function generateOrders(outputDir?: string) {
       const shippingInfo =
         usersShippingInfo[Math.floor(Math.random() * usersShippingInfo.length)];
       orders.push(
-        generateRandomOrder(seedUser.user_id, billingInfo, shippingInfo)
+        generateRandomOrder(seedUser.id, billingInfo, shippingInfo)
       );
     }
   });

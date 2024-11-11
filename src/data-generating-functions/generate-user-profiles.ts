@@ -34,7 +34,7 @@ function generateRandomUserProfile(user_id: string): UserProfile {
 export function generateUserProfiles(outputDir?: string) {
   const profiles: UserProfile[] = [];
   for (let user of usersSeed) {
-    profiles.push(generateRandomUserProfile(user.user_id));
+    profiles.push(generateRandomUserProfile(user.id));
   }
 
   // let dir = outputDir ? outputDir : "./src/seed-data";

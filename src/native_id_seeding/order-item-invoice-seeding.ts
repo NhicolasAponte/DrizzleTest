@@ -11,7 +11,7 @@ import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
 
 function matchUserId(seedId: string, dbUsers: { id: string; email: string }[]) {
   for (const seedUser of usersSeed) {
-    if (seedUser.user_id === seedId) {
+    if (seedUser.id === seedId) {
       for (const dbUser of dbUsers) {
         if (dbUser.email === seedUser.email) {
           return dbUser.id;

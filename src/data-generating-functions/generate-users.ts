@@ -18,7 +18,7 @@ function generateRandomUser(): User {
   const roleNum = Math.floor(Math.random() * 10);
   // console.log("roleNum: ", roleNum);
   const role = roleNum % 2 === 0 ? "User" : "Admin"; // Default role as per the schema
-  return { user_id: id, email, password, role: role as UserRole };
+  return { id, email, password, role: role as UserRole };
 }
 
 // Function to generate user objects and write to a JSON file
@@ -103,7 +103,7 @@ export function saveUserSeedDataToFiles(
   const tsContent = `${importLine}\nexport const ${arrayName}: ${dataType}[] = [\n${data
     .map((user: User) => {
       return `  {
-    user_id: "${user.user_id}",
+    id: "${user.id}",
     email: "${user.email}",
     password: "${user.password}",
     role: UserRole.${user.role},\n  }`;

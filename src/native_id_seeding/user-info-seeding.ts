@@ -20,7 +20,7 @@ export async function seedUserInfo() {
         consoleLogSpacer();
         userCount++;
         console.log(`x Seeding user ${userCount}...`);
-        const seedUserId = user.user_id;
+        const seedUserId = user.id;
 
         const result = await trx.execute(
           sql`INSERT INTO "${sql.raw(getSchemaName())}".users 
@@ -30,10 +30,10 @@ export async function seedUserInfo() {
           VALUES (${user.email},
                   ${user.password},
                   ${user.role})
-          RETURNING user_id`
+          RETURNING id`
         );
 
-        const dbUserId = result[0].user_id as string;
+        const dbUserId = result[0].id as string;
         console.log(`Inserted user with id: ${dbUserId}`);
         consoleLogSpacer();
 
