@@ -1,3 +1,6 @@
+import { OrderStatus } from "./data-definitions";
+
+
 export type User = {
   id: string;
   email: string;
@@ -111,7 +114,7 @@ export type InventoryGlassItem = {
   updated_by: string;
 };
 
-// NOTE TODO:
+// IMPLEMENTATION NOTE:
 // shape, stock sheets, and different processes may have different min and max values
 // for length and width so check each part of config, and offer user option based on
 // the largest min smallest max across all parts of configuration
@@ -122,33 +125,17 @@ interface quantityIncoming {
   supplier_id: string;
   expected_arrival_date: Date;
 }
-// front-end only
-export enum OrderStatus {
-  /** Saved by the user but not yet submitted. */
-  Draft = "DRAFT",
-  /** Submitted but not yet viewed by admin. */
-  Pending = "PENDING",
-  /** Submitted as a quote. */
-  Quote = "QUOTE",
-  /** Viewed by admin but not yet shipped. */
-  Processing = "PROCESSING",
-  /** Shipped but not yet received. */
-  Shipped = "SHIPPED",
-  /** Received by customer. */
-  Delivered = "DELIVERED",
-  /** Cancelled by user or admin. */
-  Cancelled = "CANCELLED",
-}
-// NOTE TODO: revise statuses to be more descriptive
-// - NEW, AWAITING CONFIRMATION, CONFIRMED, IN PRODUCTION, SHIPPED, DELIVERED
 
 export type Order = {
   order_id: string;
   user_id: string;
   order_name: string;
+  order_number: string;
   shipping_data: ShippingInfoWithoutIds;
   billing_data: BillingInfoWithoutIds;
   status: OrderStatus;
+  amount: number;
+  entered_by?: string; 
   date_created: Date;
   date_updated: Date;
   date_submitted?: Date | null;
@@ -174,6 +161,7 @@ export type OrderInvoice = {
   order_invoice_id: string;
   user_id: string;
   order_id: string;
+  invoice_number: string;
   date_created: Date;
   status: string;
   amount: number;

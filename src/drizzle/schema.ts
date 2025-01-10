@@ -1,3 +1,4 @@
+import { UserRole } from "../data-model/schema-definitions";
 import { sql } from "drizzle-orm";
 import {
   boolean,
@@ -11,9 +12,9 @@ import {
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
-import { OrderStatus, UserRole } from "../data-model/schema-definitions";
+import { OrderStatus } from "../data-model/data-definitions";
 
-// NOTE TODO: optimize date types - check why drizzle is inferring { mode: string }
+// TODO NOTE: optimize date types - check why drizzle is inferring { mode: string }
 // SET TIMEZONE in db connection
 // cannot use other functions in schema declaration file
 // export const dbSchema = pgSchema(getSchemaName());
@@ -138,7 +139,12 @@ export const InventoryGlassTable = dbSchema.table("inventory_glass_item", {
   // could add a check constraint to ensure user is ADMIN
 });
 
-// one-to-many with user table
+// one-to-many with user table 
+// need to differentiate between user entering order and customer the order is for 
+// user_id is the user who created the order 
+// customer_id is the customer the order is for 
+// customer_id can be the same as the user, 
+// if logged in user is ADMIN, there is customer drop down, otherwise, customer_id is inferred from user_id 
 export const OrderTable = dbSchema.table(
   "orders",
   {
@@ -147,10 +153,14 @@ export const OrderTable = dbSchema.table(
       .notNull()
       .references(() => UserTable.id, { onDelete: "cascade" }),
     order_name: varchar("order_name", { length: 255 }).notNull(),
+    order_number: varchar("order_number", { length: 255 }).notNull(),
     shipping_data: jsonb("shipping_data").notNull(),
     billing_data: jsonb("billing_data").notNull(),
     status: varchar("status", { length: 255 }).notNull(),
-    // NOTE TODO: determine if mode: string is needed
+    amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
+    entered_by: varchar("entered_by", { length: 255 }), // optional 'entered by' field for when admin enter orders for customers
+    // IMPLEMENTATION NOTE: metadata object for storing additional order details
+    // TODO NOTE: determine if mode: string is needed
     date_created: timestamp("date_created", { withTimezone: true }).notNull(),
     date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
     date_submitted: timestamp("date_submitted", { withTimezone: true }),
@@ -197,6 +207,8 @@ export const OrderInvoiceTable = dbSchema.table("order_invoices", {
   order_id: uuid("order_id")
     .notNull()
     .references(() => OrderTable.order_id, { onDelete: "cascade" }),
+  invoice_number: varchar("invoice_number", { length: 255 }).notNull(),
+  // example: "INV" + order_id + date_created
   date_created: timestamp("date_created", { withTimezone: true }).notNull(),
   status: varchar("status", { length: 255 }).notNull(),
   amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
