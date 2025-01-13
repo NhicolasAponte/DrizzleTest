@@ -1,5 +1,8 @@
 import { OrderStatus } from "./data-definitions";
 
+export type Customer = {
+  customer_id: string;
+}
 
 export type User = {
   id: string;
@@ -136,6 +139,7 @@ export type Order = {
   status: OrderStatus;
   amount: number;
   entered_by?: string; 
+  customer?: string; 
   date_created: Date;
   date_updated: Date;
   date_submitted?: Date | null;

@@ -1,18 +1,16 @@
-import * as fs from "fs";
-import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { generate } from "random-words";
 import { faker } from "@faker-js/faker";
 import { getMidpointBetweenDates, saveSeedData } from "../lib/utils";
 import {
   Order,
-  OrderStatus,
   UserBillingInformation,
   UserShippingInformation,
 } from "../data-model/schema-definitions";
 import { usersSeed } from "../seed-data/seed-users";
 import { shippingInfoSeed } from "../seed-data/seed-user-shipping-info";
 import { billingInfoSeed } from "../seed-data/seed-user-billing-info";
+import { OrderStatus } from "../data-model/data-definitions";
 
 function generateRandomOrder(
   userId: string,
@@ -21,8 +19,19 @@ function generateRandomOrder(
 ): Order {
   const id = uuidv4();
   const orderName = generate(1)[0];
+  const orderNumber = "O" + Math.floor(Math.random() * 1000000);
 
   const status = generateRandomStatus();
+  let amount = 0.0;
+  if (status !== OrderStatus.Draft && status !== OrderStatus.Pending) {
+    const amountRandomizer = Math.floor(Math.random() * 2) + 1;
+    amount =
+      amountRandomizer % 2 === 0
+        ? parseFloat((Math.random() * 1000 + 120).toFixed(2))
+        : parseFloat((Math.random() * 1000000 + 5000).toFixed(2));
+  }
+
+  
 
   let dateCreated: Date | undefined = undefined;
   let dateUpdated: Date | undefined = undefined;
@@ -146,6 +155,7 @@ function generateRandomOrder(
     order_id: id,
     user_id: userId,
     order_name: orderName,
+    order_number: orderNumber,
     shipping_data: {
       street: shippingData.street,
       apt_num: shippingData.apt_num,
@@ -171,6 +181,7 @@ function generateRandomOrder(
       is_active: billingData.is_active,
     },
     status,
+    amount,
     date_created: dateCreated!,
     date_updated: dateUpdated!,
     date_submitted: dateSubmitted,
@@ -202,7 +213,7 @@ function generateRandomStatus() {
   return status;
 }
 
-// generate a random amount of orders for each user; anywhere between 2 and 10 orders
+// generate a random amount of orders for each user; anywhere between 2 and 26 orders
 export function generateOrders(outputDir?: string) {
   const orders: Order[] = [];
   usersSeed.forEach((seedUser) => {
@@ -220,9 +231,7 @@ export function generateOrders(outputDir?: string) {
         usersBillingInfo[Math.floor(Math.random() * usersBillingInfo.length)];
       const shippingInfo =
         usersShippingInfo[Math.floor(Math.random() * usersShippingInfo.length)];
-      orders.push(
-        generateRandomOrder(seedUser.id, billingInfo, shippingInfo)
-      );
+      orders.push(generateRandomOrder(seedUser.id, billingInfo, shippingInfo));
     }
   });
 

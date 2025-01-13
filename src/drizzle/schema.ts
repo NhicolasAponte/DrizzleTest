@@ -23,6 +23,25 @@ export const dbSchema = pgSchema("dev-schema");
 //   throw new Error("Schema not found");
 // }
 
+// NOTE: this will probably end up being the customer table instead of company table 
+export const CompanyTable = dbSchema.table("companies", 
+  {
+    company_id: serial("company_id").primaryKey(),
+    name: varchar("name", { length: 255 }).notNull().unique(),
+    phone: varchar("phone", { length: 255 }).notNull(), 
+    email: varchar("email", { length: 255 }),
+    // type: individual, business, non-profit 
+    type: varchar("type", { length: 255 }).notNull(),
+    // credit status 
+    // credit_limit 
+    // credit_terms 
+    // credit_balance 
+    // payment type 
+    date_created: timestamp("date_created", { withTimezone: true }).notNull(),
+    date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
+  }
+)
+
 // export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
 
 export const UserTable = dbSchema.table(
@@ -59,6 +78,13 @@ export const UserProfileTable = dbSchema.table("user_profiles", {
   phone_num: varchar("phone_num", { length: 255 }),
   // last login? we need a way to determine inactive users
 });
+
+// IMPLEMENTATION NOTE: customers table 
+// customer could be a separate entity which requires a separate table 
+// or it could be a field or status in the user table 
+// ROLE: ADMIN, CUSTOMER 
+// what if we have multiple customers with the same company? 
+// can admin also enter orders for themselves? 
 
 // // one-to-many with user table
 export const UserShippingInformationTable = dbSchema.table(
@@ -149,6 +175,7 @@ export const OrderTable = dbSchema.table(
   "orders",
   {
     order_id: uuid("order_id").defaultRandom().primaryKey(),
+    // onDelete 
     user_id: uuid("user_id")
       .notNull()
       .references(() => UserTable.id, { onDelete: "cascade" }),
@@ -158,8 +185,15 @@ export const OrderTable = dbSchema.table(
     billing_data: jsonb("billing_data").notNull(),
     status: varchar("status", { length: 255 }).notNull(),
     amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
-    entered_by: varchar("entered_by", { length: 255 }), // optional 'entered by' field for when admin enter orders for customers
+    // optional 'entered by' field for when admin enter orders for customers
+    entered_by: varchar("entered_by", { length: 255 }), 
+    // customer name; auto-populated if entered by a user that is a customer, 
+    // or it is selected from a dropdown if the user is admin
+    customer: varchar("customer", { length: 255 }), 
     // IMPLEMENTATION NOTE: metadata object for storing additional order details
+    // TODO NOTE: refactor timestamp columns into separate ts file to import and spread 
+    // across multiple tables without having to rewrite 
+    // https://orm.drizzle.team/docs/sql-schema-declaration 
     // TODO NOTE: determine if mode: string is needed
     date_created: timestamp("date_created", { withTimezone: true }).notNull(),
     date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
@@ -183,7 +217,7 @@ export const OrderTable = dbSchema.table(
   ]
 );
 
-// one-to-many with order table
+// one-to-many with order table 
 export const OrderItemTable = dbSchema.table("order_items", {
   order_item_id: serial("order_item_id").primaryKey(),
   order_id: uuid("order_id")
