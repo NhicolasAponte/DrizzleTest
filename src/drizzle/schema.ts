@@ -23,14 +23,22 @@ export const dbSchema = pgSchema("dev-schema");
 //   throw new Error("Schema not found");
 // }
 
-export const CustomerTable = dbSchema.table("companies", {
-  customer_id: serial("company_id").primaryKey(),
+// IMPLEMENTATION NOTE: customers table
+// customer could be a separate entity which requires a separate table
+// or it could be a field or status in the user table
+// ROLE: ADMIN, CUSTOMER
+// what if we have multiple customers with the same company?
+// can admin also enter orders for themselves?
+
+export const CustomerTable = dbSchema.table("customers", {
+  customer_id: uuid("customer_id").defaultRandom().primaryKey(),
   name: varchar("name", { length: 255 }).notNull().unique(),
   phone: varchar("phone", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }),
   address: varchar("address", { length: 255 }).notNull(),
-  // type: individual, business, non-profit
+  // type: individual, business, non-profit, gov, etc
   type: varchar("type", { length: 255 }).notNull(),
+  account_num: varchar("account_num", { length: 255 }),
   credit_status: varchar("credit_status", { length: 255 }),
   credit_limit: decimal("credit_limit", { precision: 10, scale: 2 }),
   // credit_terms
@@ -50,6 +58,9 @@ export const UserTable = dbSchema.table(
     // emailVerified: date('emailVerified'),
     password: varchar("password", { length: 255 }).notNull(),
     role: varchar("role", { length: 255 }).default("USER"),
+    // at the end of day, a script runs to move records of deactivated users to
+    // archive db
+    is_active: boolean("is_active").notNull().default(true),
   },
   (table) => [
     check(
@@ -71,28 +82,21 @@ export const UserProfileTable = dbSchema.table("user_profiles", {
     .references(() => UserTable.id, { onDelete: "cascade" }),
   first_name: varchar("first_name", { length: 255 }).notNull(),
   last_name: varchar("last_name", { length: 255 }).notNull(),
-  account_num: varchar("account_num", { length: 255 }),
+  
   phone_num: varchar("phone_num", { length: 255 }),
-  // if a user is also a customer, 
+  // if a user is also a customer or represents a customer such as a sales rep
   customer_id: uuid("customer_id").references(() => CustomerTable.customer_id),
   // last login? we need a way to determine inactive users
 });
 
-// IMPLEMENTATION NOTE: customers table
-// customer could be a separate entity which requires a separate table
-// or it could be a field or status in the user table
-// ROLE: ADMIN, CUSTOMER
-// what if we have multiple customers with the same company?
-// can admin also enter orders for themselves?
-
-// // one-to-many with user table
-export const UserShippingInformationTable = dbSchema.table(
-  "user_shipping_information",
+// // one-to-many with customer table 
+export const CustomerShippingInformationTable = dbSchema.table(
+  "customer_shipping_information",
   {
     shipping_info_id: serial("shipping_info_id").primaryKey(),
-    user_id: uuid("user_id")
+    customer_id: uuid("customer_id")
       .notNull()
-      .references(() => UserTable.id, { onDelete: "cascade" }),
+      .references(() => CustomerTable.customer_id, { onDelete: "cascade" }),
     street: varchar("street", { length: 255 }).notNull(),
     apt_num: varchar("apt_num", { length: 255 }),
     city: varchar("city", { length: 255 }).notNull(),
@@ -105,14 +109,14 @@ export const UserShippingInformationTable = dbSchema.table(
 
 // // users can add and delete billing info at any time
 // // relevant billing info will be serialized and stored in the order table
-// // one-to-many with user table
-export const UserBillingInformationTable = dbSchema.table(
+// // one-to-many with customer table
+export const CustomerBillingInformationTable = dbSchema.table(
   "user_billing_information",
   {
     billing_info_id: serial("billing_info_id").primaryKey(),
-    user_id: uuid("user_id")
+    customer_id: uuid("customer_id")
       .notNull()
-      .references(() => UserTable.id, { onDelete: "cascade" }),
+      .references(() => CustomerTable.customer_id, { onDelete: "cascade" }),
     street: varchar("street", { length: 255 }).notNull(),
     apt_num: varchar("apt_num", { length: 255 }),
     city: varchar("city", { length: 255 }).notNull(),
@@ -180,7 +184,9 @@ export const OrderTable = dbSchema.table(
       .references(() => UserTable.id, { onDelete: "cascade" }),
     // customer name; auto-populated if entered by a user that is a customer,
     // or it is selected from a dropdown if the user is admin
-    customer: varchar("customer", { length: 255 }),
+    customer_id: uuid("customer_id")
+      .notNull()
+      .references(() => CustomerTable.customer_id, { onDelete: "cascade" }),
     order_name: varchar("order_name", { length: 255 }).notNull(),
     order_number: varchar("order_number", { length: 255 }).notNull(),
     shipping_data: jsonb("shipping_data").notNull(),
