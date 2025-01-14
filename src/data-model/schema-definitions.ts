@@ -2,6 +2,15 @@ import { OrderStatus } from "./data-definitions";
 
 export type Customer = {
   customer_id: string;
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  type: string; // type: individual, business, non-profit  
+  credit_status: string; // 
+  credit_limit: number; //
+  date_created: Date;
+  date_updated: Date;
 }
 
 export type User = {
@@ -21,9 +30,9 @@ export type UserProfile = {
   user_id: string;
   first_name: string;
   last_name: string;
-  company?: string;
   account_num?: string;
   phone_num?: string;
+  customer_id?: string; 
 };
 
 export type UserShippingInformation = {
@@ -131,15 +140,14 @@ interface quantityIncoming {
 
 export type Order = {
   order_id: string;
-  user_id: string;
+  created_by: string;
+  customer: string; 
   order_name: string;
   order_number: string;
   shipping_data: ShippingInfoWithoutIds;
   billing_data: BillingInfoWithoutIds;
   status: OrderStatus;
   amount: number;
-  entered_by?: string; 
-  customer?: string; 
   date_created: Date;
   date_updated: Date;
   date_submitted?: Date | null;
@@ -162,11 +170,13 @@ export type OrderItem = {
 export type NewOrderItem = Omit<OrderItem, "order_item_id" | "order_id">;
 
 export type OrderInvoice = {
-  order_invoice_id: string;
-  user_id: string;
+  order_invoice_id: string; 
+  // user_id of the user that entered the order 
+  created_by: string; 
   order_id: string;
+  customer_id: string;
   invoice_number: string;
-  date_created: Date;
   status: string;
   amount: number;
+  date_created: Date;
 };
