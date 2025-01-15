@@ -1,16 +1,14 @@
 //import { db } from './db'; // Adjust the import according to your project structure
-//import { ShippingInfoTable } from './schema'; // Adjust the import according to your project structure
-import * as fs from "fs";
-import * as path from "path";
+//import { ShippingInfoTable } from './schema'; // Adjust the import according to your project structure 
 import { faker } from "@faker-js/faker";
-import { UserShippingInformation } from "../data-model/schema-definitions";
-import { usersSeed } from "../seed-data/seed-users";
+import { CustomerShippingInformation } from "../data-model/schema-definitions";
 import { FlipCoin, saveSeedData } from "../lib/utils";
+import { customersSeed } from "../seed/data/customers";
 
-function generateRandomAddress(userId: string): UserShippingInformation {
+function generateRandomAddress(customer_id: string): CustomerShippingInformation {
   return {
     shipping_info_id: Math.floor(Math.random() * 1000),
-    user_id: userId,
+    customer_id: customer_id,
     street: faker.location.streetAddress(false),
     apt_num: FlipCoin() ? faker.location.secondaryAddress() : null,
     city: faker.location.city(),
@@ -22,17 +20,17 @@ function generateRandomAddress(userId: string): UserShippingInformation {
 }
 
 export function generateShippingInfo(outputDir?: string) {
-  const shippingInfoData: UserShippingInformation[] = [];
-  for (let user of usersSeed) {
+  const shippingInfoData: CustomerShippingInformation[] = [];
+  for (let customer of customersSeed) {
     const numShippingInfo = Math.floor(Math.random() * 3) + 1;
     for (let i = 0; i < numShippingInfo; i++) {
-      shippingInfoData.push(generateRandomAddress(user.id));
+      shippingInfoData.push(generateRandomAddress(customer.customer_id));
     }
   }
 
-  const dataType = "UserShippingInformation";
+  const dataType = "CustomerShippingInformation";
   const arrayName = "shippingInfoSeed";
-  const fileName = "seed-user-shipping-info";
+  const fileName = "customer-shipping-info";
 
   saveSeedData(shippingInfoData, dataType, arrayName, fileName);
 }

@@ -1,7 +1,14 @@
+import { generateBillingInfo } from "../data-generating-functions/generate-billingInfo";
 import { generateCustomers } from "../data-generating-functions/generate-customers";
+import { generateInventoryGlass } from "../data-generating-functions/generate-glass-inventory";
+import { generateOrders } from "../data-generating-functions/generate-orders";
+import { generateProducts } from "../data-generating-functions/generate-products";
+import { generateShippingInfo } from "../data-generating-functions/generate-shippingInfo";
 import { generateUserProfiles } from "../data-generating-functions/generate-user-profiles";
 import { generateUsers } from "../data-generating-functions/generate-users";
 import { seedUserInfo } from "../native_id_seeding/user-info-seeding";
+
+// to clean up imports i could create a 'data generate service' object that contains all the functions  
 
 export async function seedDatabase() {
       //   -------- GENERATE DATA SEQUENCE --------
@@ -10,23 +17,23 @@ export async function seedDatabase() {
   const outputDir = process.env.ORDER_PROJECT_PATH;
 //   generateCustomers(15);
 //   generateUsers(5, outputDir); 
-  generateUserProfiles(outputDir); // 1 profile per user
+//   generateUserProfiles(outputDir); // 1 profile per user
 
-  // generateShippingInfo(outputDir); // 1-3 per user
-  // generateBillingInfo(outputDir); // 1-3 per user
+//   generateShippingInfo(outputDir); // 1-3 per user
+//   generateBillingInfo(outputDir); // 1-3 per user
 
   //    -------- INVENTORY --------
 
   // there's few products and they don't depend on other data
-  // generateProducts(outputDir);
+  generateProducts(outputDir);
 
   // each item has a random amount of compatible products
   // each item has a random existing user id in the updated_by field
-  // generateInventoryGlass(outputDir);
+  generateInventoryGlass(outputDir);
 
   //    -------- ORDERS --------
 
-  // generateOrders(outputDir); // rand between 1 - 26 orders per user
+//   generateOrders(outputDir); // rand between 1 - 26 orders per user
   // generateOrderItems(outputDir); // rand between 1 - 9 items per order
   // generateInvoices(outputDir);
   // ---------------------------------------------------

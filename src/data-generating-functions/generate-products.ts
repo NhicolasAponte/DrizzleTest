@@ -42,7 +42,7 @@ export function generateProducts(outputDir?: string) {
 
   const dataType = "InventoryProduct";
   const arrayName = "inventoryProductSeed";
-  const fileName = "seed-inventory-products";
+  const fileName = "inventory-products";
 
   saveSeedData(products, dataType, arrayName, fileName);
 }

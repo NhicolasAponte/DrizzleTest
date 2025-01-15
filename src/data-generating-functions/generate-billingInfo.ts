@@ -2,21 +2,22 @@ import * as fs from "fs";
 import * as path from "path";
 import { faker } from "@faker-js/faker";
 import {
-  UserBillingInformation,
+  Customer,
+  CustomerBillingInformation,
   UserProfile,
   payment_method_codes,
 } from "../data-model/schema-definitions";
 import { FlipCoin, saveSeedData } from "../lib/utils";
 import { usersSeed } from "../seed-data/seed-users";
 import { profilesSeed } from "../seed-data/seed-user-profiles";
+import { customersSeed } from "../seed/data/customers";
 
 function generateRandomBillingInfo(
-  profile: UserProfile,
-  email: string
-): UserBillingInformation {
+  customer: Customer,
+): CustomerBillingInformation {
   return {
     billing_info_id: Math.floor(Math.random() * 1000),
-    user_id: profile.user_id,
+    customer_id: customer.customer_id,
     street: faker.location.streetAddress(false),
     apt_num: FlipCoin() ? faker.location.secondaryAddress() : null,
     city: faker.location.city(),
@@ -27,34 +28,27 @@ function generateRandomBillingInfo(
         Math.floor(Math.random() * payment_method_codes.length)
       ],
     purchase_order: faker.finance.accountNumber(),
-    primary_contact_name: profile.first_name + " " + profile.last_name,
-    primary_contact_email: email,
-    primary_contact_phone: profile.phone_num!,
-    fax_num: profile.phone_num!,
+    primary_contact_name: customer.name,
+    primary_contact_email: customer.email,
+    primary_contact_phone: customer.phone,
+    fax_num: customer.phone,
     is_primary: faker.datatype.boolean(),
     is_active: faker.datatype.boolean(),
   };
 }
 
 export function generateBillingInfo(outputDir?: string) {
-  const billingInfoData: UserBillingInformation[] = [];
-  for (let user of usersSeed) {
+  const billingInfoData: CustomerBillingInformation[] = [];
+  for (let customer of customersSeed) {
     const numBillingInfo = Math.floor(Math.random() * 3) + 1;
     for (let i = 0; i < numBillingInfo; i++) {
-      const userProfile = profilesSeed.find(
-        (profile) => user.id === profile.user_id
-      );
-      userProfile
-        ? billingInfoData.push(
-            generateRandomBillingInfo(userProfile, user.email)
-          )
-        : console.error(`No user profile found for user ${user.id}`);
+      billingInfoData.push(generateRandomBillingInfo(customer));
     }
   }
 
-  const dataType = "UserBillingInformation";
+  const dataType = "CustomerBillingInformation";
   const arrayName = "billingInfoSeed";
-  const fileName = "seed-user-billing-info";
+  const fileName = "customer-billing-info";
 
   saveSeedData(billingInfoData, dataType, arrayName, fileName);
 }

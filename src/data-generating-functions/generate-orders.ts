@@ -4,22 +4,26 @@ import { faker } from "@faker-js/faker";
 import { getMidpointBetweenDates, saveSeedData } from "../lib/utils";
 import {
   Order,
-  UserBillingInformation,
-  UserShippingInformation,
+  CustomerBillingInformation,
+  CustomerShippingInformation,
+  Customer,
 } from "../data-model/schema-definitions";
 import { usersSeed } from "../seed-data/seed-users";
 import { shippingInfoSeed } from "../seed-data/seed-user-shipping-info";
 import { billingInfoSeed } from "../seed-data/seed-user-billing-info";
 import { OrderStatus } from "../data-model/data-definitions";
+import { customersSeed } from "../seed/data/customers";
 
 function generateRandomOrder(
-  userId: string,
-  billingData: UserBillingInformation,
-  shippingData: UserShippingInformation
+  customer_id: string,
+  billingData: CustomerBillingInformation,
+  shippingData: CustomerShippingInformation
 ): Order {
   const id = uuidv4();
   const orderName = generate(1)[0];
   const orderNumber = "O" + Math.floor(Math.random() * 1000000);
+
+  const userId = usersSeed[Math.floor(Math.random() * usersSeed.length)].id;
 
   const status = generateRandomStatus();
   let amount = 0.0;
@@ -30,8 +34,6 @@ function generateRandomOrder(
         ? parseFloat((Math.random() * 1000 + 120).toFixed(2))
         : parseFloat((Math.random() * 1000000 + 5000).toFixed(2));
   }
-
-  
 
   let dateCreated: Date | undefined = undefined;
   let dateUpdated: Date | undefined = undefined;
@@ -153,7 +155,8 @@ function generateRandomOrder(
 
   return {
     order_id: id,
-    user_id: userId,
+    created_by: userId,
+    customer_id: customer_id,
     order_name: orderName,
     order_number: orderNumber,
     shipping_data: {
@@ -216,28 +219,27 @@ function generateRandomStatus() {
 // generate a random amount of orders for each user; anywhere between 2 and 26 orders
 export function generateOrders(outputDir?: string) {
   const orders: Order[] = [];
-  usersSeed.forEach((seedUser) => {
+  customersSeed.forEach((seedCustomer: Customer) => {
     // range for number of order: 2 - 26
     const numOrders = Math.floor(Math.random() * 25) + 2;
-    console.log(`Generating ${numOrders} orders for user ${seedUser.id}`);
-    const usersShippingInfo: UserShippingInformation[] =
-      shippingInfoSeed.filter((info) => seedUser.id === info.user_id);
-    const usersBillingInfo: UserBillingInformation[] = billingInfoSeed.filter(
-      (info) => seedUser.id === info.user_id
-    );
+    console.log(`Generating ${numOrders} orders for customer ${seedCustomer.customer_id}`);
+    const usersShippingInfo: CustomerShippingInformation[] =
+      shippingInfoSeed.filter((info) => seedCustomer.customer_id === info.customer_id);
+    const usersBillingInfo: CustomerBillingInformation[] =
+      billingInfoSeed.filter((info) => seedCustomer.customer_id === info.customer_id);
 
     for (let i = 0; i < numOrders; i++) {
       const billingInfo =
         usersBillingInfo[Math.floor(Math.random() * usersBillingInfo.length)];
       const shippingInfo =
         usersShippingInfo[Math.floor(Math.random() * usersShippingInfo.length)];
-      orders.push(generateRandomOrder(seedUser.id, billingInfo, shippingInfo));
+      orders.push(generateRandomOrder(seedCustomer.customer_id, billingInfo, shippingInfo));
     }
   });
 
   const dataType = "Order";
   const arrayName = "ordersSeed";
-  const fileName = "seed-orders";
+  const fileName = "orders";
 
   saveSeedData(orders, dataType, arrayName, fileName);
 }

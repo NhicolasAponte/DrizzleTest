@@ -1,18 +1,13 @@
-import * as fs from "fs";
-import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
-import { fa, faker } from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 import {
-  productTypes,
   GlassInventoryItems,
   shapeOptions,
   tintOptions,
 } from "../seed-data/placeholder-data";
 import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
 import { InventoryGlassItem } from "../data-model/schema-definitions";
-import { usersSeed } from "../seed-data/seed-users";
 import { saveSeedData } from "../lib/utils";
-import { seedUsers } from "../seeding-queries/seed-users";
 import { profilesSeed } from "../seed-data/seed-user-profiles";
 
 function generateRandomInventoryGlassItem(name: string): InventoryGlassItem {
@@ -107,7 +102,7 @@ export function generateInventoryGlass(outputDir?: string) {
 
   const dataType = "InventoryGlassItem";
   const arrayName = "inventoryGlassSeed";
-  const fileName = "seed-inventory-glass";
+  const fileName = "inventory-glass";
 
   saveSeedData(glassInventory, dataType, arrayName, fileName);
 }
