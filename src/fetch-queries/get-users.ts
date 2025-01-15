@@ -3,7 +3,7 @@ import { db } from "../drizzle/db";
 import {
   OrderInvoiceTable,
   OrderTable,
-  UserShippingInformationTable,
+  CustomerShippingInformationTable,
   UserProfileTable,
   UserTable,
 } from "../drizzle/schema";
@@ -75,16 +75,16 @@ export async function GetUsersByState(state: string) {
         first_name: UserProfileTable.first_name,
         last_name: UserProfileTable.last_name,
         company: UserProfileTable.company,
-        city: UserShippingInformationTable.city,
-        state: UserShippingInformationTable.state,
+        city: CustomerShippingInformationTable.city,
+        state: CustomerShippingInformationTable.state,
       })
       .from(UserTable)
       .innerJoin(UserProfileTable, eq(UserTable.id, UserProfileTable.user_id))
       .innerJoin(
-        UserShippingInformationTable,
-        eq(UserTable.id, UserShippingInformationTable.user_id)
+        CustomerShippingInformationTable,
+        eq(UserTable.id, CustomerShippingInformationTable.user_id)
       )
-      .where(eq(UserShippingInformationTable.state, state));
+      .where(eq(CustomerShippingInformationTable.state, state));
     console.log(users);
     console.log("Users fetched successfully");
   } catch (error) {

@@ -3,15 +3,13 @@
 import { faker } from "@faker-js/faker";
 import { generate } from "random-words";
 import { UserProfile } from "../data-model/schema-definitions";
-import { usersSeed } from "../seed-data/seed-users";
 import { saveSeedData } from "../lib/utils";
+import { usersSeed } from "../seed/data/users";
 
 function generateRandomUserProfile(user_id: string): UserProfile {
   const id = Math.floor(Math.random() * 10000);
   const first_name = faker.person.firstName();
   const lastName = faker.person.lastName();
-  const company = `${generate(1)[0]}_company`;
-  const accountNum = Math.random().toString(36).substring(7);
   // const phoneNum = `+1(${Math.floor(Math.random() * 9000000000) + 1000000000})`;
   let areaCode = Math.floor(Math.random() * 1000); //
   areaCode = areaCode > 99 ? areaCode : areaCode + 100;
@@ -25,8 +23,6 @@ function generateRandomUserProfile(user_id: string): UserProfile {
     user_id,
     first_name,
     last_name: lastName,
-    company,
-    account_num: accountNum,
     phone_num: phoneNum,
   };
 }
@@ -40,7 +36,7 @@ export function generateUserProfiles(outputDir?: string) {
   // let dir = outputDir ? outputDir : "./src/seed-data";
   const dataType = "UserProfile";
   const arrayName = "profilesSeed";
-  const fileName = "seed-user-profiles";
+  const fileName = "user-profiles";
 
   saveSeedData(profiles, dataType, arrayName, fileName);
 

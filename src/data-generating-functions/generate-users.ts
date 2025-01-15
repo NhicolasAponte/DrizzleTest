@@ -18,7 +18,7 @@ function generateRandomUser(): User {
   const roleNum = Math.floor(Math.random() * 10);
   // console.log("roleNum: ", roleNum);
   const role = roleNum % 2 === 0 ? "User" : "Admin"; // Default role as per the schema
-  return { id, email, password, role: role as UserRole };
+  return { id, email, password, role: role as UserRole, is_active: true };
 }
 
 // Function to generate user objects and write to a JSON file
@@ -30,11 +30,11 @@ export function generateUsers(numUsers: number, outputDir?: string) {
 
   const dataType = "User";
   const arrayName = "usersSeed";
-  const fileName = "seed-users";
+  const fileName = "users";
 
   let jsonPath = `${localDir}/${fileName}.json`;
   let tsPath = `${localDir}/${fileName}.ts`;
-  let importLine = `import { User, UserRole } from "../data-model/schema-definitions";\n`;
+  let importLine = `import { User, UserRole } from "../../data-model/schema-definitions";\n`;
 
   saveUserSeedDataToFiles(
     users,
@@ -44,7 +44,9 @@ export function generateUsers(numUsers: number, outputDir?: string) {
     tsPath,
     importLine
   );
-
+  // outputDir is the path to another project where the seed data will be saved
+  // check if outputDir is provided 
+  // if it is, build the paths using the outputDir 
   if (outputDir) {
     jsonPath = `${outputDir}/${fileName}.json`;
     tsPath = `${outputDir}/${fileName}.ts`;
@@ -106,7 +108,8 @@ export function saveUserSeedDataToFiles(
     id: "${user.id}",
     email: "${user.email}",
     password: "${user.password}",
-    role: UserRole.${user.role},\n  }`;
+    role: UserRole.${user.role},
+    is_active: ${user.is_active}\n  }`;
     })
     .join(",\n")}\n];\n`;
   fs.writeFileSync(tsPath, tsContent, "utf-8");
