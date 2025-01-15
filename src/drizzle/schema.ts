@@ -35,7 +35,6 @@ export const CustomerTable = dbSchema.table("customers", {
   name: varchar("name", { length: 255 }).notNull().unique(),
   phone: varchar("phone", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }),
-  address: varchar("address", { length: 255 }).notNull(),
   // type: individual, business, non-profit, gov, etc
   type: varchar("type", { length: 255 }).notNull(),
   account_num: varchar("account_num", { length: 255 }),
@@ -85,7 +84,7 @@ export const UserProfileTable = dbSchema.table("user_profiles", {
   
   phone_num: varchar("phone_num", { length: 255 }),
   // if a user is also a customer or represents a customer such as a sales rep
-  customer_id: uuid("customer_id").references(() => CustomerTable.customer_id),
+  // customer_id: uuid("customer_id").references(() => CustomerTable.customer_id),
   // last login? we need a way to determine inactive users
 });
 

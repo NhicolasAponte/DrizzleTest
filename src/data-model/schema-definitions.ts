@@ -5,7 +5,6 @@ export type Customer = {
   name: string;
   phone: string;
   email: string;
-  address: string;
   // fields determined by admin
   type: string; // type: individual, business, non-profit
   account_num: string;
@@ -37,7 +36,7 @@ export type UserProfile = {
   first_name: string;
   last_name: string;
   phone_num?: string;
-  customer_id?: string;
+  // customer_id?: string;
   // settings: {};
 };
 

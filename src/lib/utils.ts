@@ -39,11 +39,14 @@ export function getSchemaName() {
 export function getSystemTimeZone(): string {
   return Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
-
+// directory in OrderUI project where data will be saved 
 export const externalDir = process.env.ORDER_PROJECT_PATH; //orderProjDir// undefined; //process.env.LOCAL_OUTPUT_DIR;
-export const localDir = "./src/seed-data";
+// directory in DrizzleTest project where data will be saved 
+export const localDir = "./src/seed/data";
+// string path needed to import types in DrizzleTest project 
 const drizzleTypeImport = "../data-model/schema-definitions";
-export const orderTypeImport = "../data-model/schema-definitions";
+// string path needed to import types in OrderUI project 
+export const orderTypeImport = "@/lib/data-model/schema-definitions";
 
 export function getOutputPaths(fileName: string) {
   const localPath = `${localDir}/${fileName}.ts`;
@@ -54,8 +57,8 @@ export function getOutputPaths(fileName: string) {
 
 export function getImportLines(dataType: string) {
   return {
-    drizzleTypeImport: `import { ${dataType} } from "${drizzleTypeImport}";`,
-    orderTypeImport: `import { ${dataType} } from "${orderTypeImport}";`,
+    drizzleTypeImport: `import { ${dataType} } from "${drizzleTypeImport}";\n`,
+    orderTypeImport: `import { ${dataType} } from "${orderTypeImport}";\n`,
   };
 }
 
@@ -91,6 +94,8 @@ export function writeToFile(
   dataType: string,
   arrayName: string
 ) {
+  console.log("WRITING TO FILE");
+  console.log("outputPath:", outputPath);
   const outputDirectory = path.dirname(outputPath);
   if (!fs.existsSync(outputDirectory)) {
     fs.mkdirSync(outputDirectory, { recursive: true });

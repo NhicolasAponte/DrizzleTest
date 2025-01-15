@@ -26,20 +26,6 @@ import {
 } from "./lib/utils";
 import { generateInventoryGlass } from "./data-generating-functions/generate-glass-inventory";
 import { generateOrderItems } from "./data-generating-functions/generate-order-items";
-import { SeedUserProfiles, seedUsers } from "./seeding-queries/seed-users";
-import {
-  SeedBillingInfo,
-  seedShippingInfo,
-} from "./seeding-queries/seed-shipping-billing";
-import {
-  SeedGlassInventory,
-  SeedProducts,
-} from "./seeding-queries/seed-product-inventory";
-import {
-  SeedInvoices,
-  SeedOrderItems,
-  SeedOrders,
-} from "./seeding-queries/seed-orders-items";
 import { GetUserIds, GetUsersByState } from "./fetch-queries/get-users";
 import {
   fetchOrderItemsPerOrderArrayOutput,
@@ -65,47 +51,14 @@ import {
 import { seedOrderInfo } from "./native_id_seeding/order-item-invoice-seeding";
 import { ordersSeed } from "./seed-data/seed-orders";
 import { Order } from "./data-model/schema-definitions";
+import { seedDatabase } from "./seed/seed";
 
 async function main() {
   console.log("------------- Hello World ----");
   console.log("");
   console.log("");
-  
 
-  //   -------- GENERATE DATA SEQUENCE --------
-
-  //   -------- USER INFO --------
-  const outputDir = process.env.ORDER_PROJECT_PATH;
-  // generateUsers(15, outputDir);
-  // generateUserProfiles(outputDir); // 1 profile per user
-
-  // generateShippingInfo(outputDir); // 1-3 per user
-  // generateBillingInfo(outputDir); // 1-3 per user
-
-  //    -------- INVENTORY --------
-
-  // there's few products and they don't depend on other data
-  // generateProducts(outputDir);
-
-  // each item has a random amount of compatible products
-  // each item has a random existing user id in the updated_by field
-  // generateInventoryGlass(outputDir);
-
-  //    -------- ORDERS --------
-
-  // generateOrders(outputDir); // rand between 1 - 26 orders per user
-  // generateOrderItems(outputDir); // rand between 1 - 9 items per order
-  // generateInvoices(outputDir);
-  // ---------------------------------------------------
-
-  // ------------ CASCADING SEEDING ------------
-  // NOTE: run all seeding function at once, without await
-  // NOTE: run all seeding function at once, with await
-  // await resetDatabase();
-  // await seedUserInfo();
-  // await seedProducts();
-  // await seedGlassInventory();
-  // await seedOrderInfo();
+  seedDatabase();
 
   // -------------- FETCH QUERIES --------------
 
