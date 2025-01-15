@@ -1,3 +1,5 @@
+// DEPRECATED 
+
 import { sql } from "drizzle-orm";
 import { db } from "../drizzle/db";
 import { users } from "../seed-data/users";
