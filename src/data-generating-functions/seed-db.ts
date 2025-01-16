@@ -5,16 +5,19 @@ import {
   SeedOrders,
   SeedOrderItems,
   SeedInvoices,
-} from "../seeding-queries/seed-orders-items";
+} from "../DEPRECATED-seeding-queries/seed-orders-items";
 import {
   SeedProducts,
   SeedGlassInventory,
-} from "../seeding-queries/seed-product-inventory";
+} from "../DEPRECATED-seeding-queries/seed-product-inventory";
 import {
   seedShippingInfo,
   SeedBillingInfo,
-} from "../seeding-queries/seed-shipping-billing";
-import { seedUsers, SeedUserProfiles } from "../seeding-queries/seed-users";
+} from "../DEPRECATED-seeding-queries/seed-shipping-billing";
+import {
+  seedUsers,
+  SeedUserProfiles,
+} from "../DEPRECATED-seeding-queries/seed-users";
 import { generateBillingInfo } from "./generate-billingInfo";
 import { generateInventoryGlass } from "./generate-glass-inventory";
 import { generateInvoices } from "./generate-invoices";

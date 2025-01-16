@@ -49,7 +49,6 @@ import {
   seedProducts,
 } from "./native_id_seeding/product-inventory-seeding";
 import { seedOrderInfo } from "./native_id_seeding/order-item-invoice-seeding";
-import { ordersSeed } from "./seed-data/seed-orders";
 import { Order } from "./data-model/schema-definitions";
 import { seedDatabase } from "./seed/seed";
 
