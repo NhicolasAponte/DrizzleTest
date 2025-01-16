@@ -1,6 +1,8 @@
 import { generateBillingInfo } from "../data-generating-functions/generate-billingInfo";
 import { generateCustomers } from "../data-generating-functions/generate-customers";
 import { generateInventoryGlass } from "../data-generating-functions/generate-glass-inventory";
+import { generateInvoices } from "../data-generating-functions/generate-invoices";
+import { generateOrderItems } from "../data-generating-functions/generate-order-items";
 import { generateOrders } from "../data-generating-functions/generate-orders";
 import { generateProducts } from "../data-generating-functions/generate-products";
 import { generateShippingInfo } from "../data-generating-functions/generate-shippingInfo";
@@ -19,23 +21,23 @@ export async function seedDatabase() {
 //   generateUsers(5, outputDir); 
 //   generateUserProfiles(outputDir); // 1 profile per user
 
-//   generateShippingInfo(outputDir); // 1-3 per user
+  generateShippingInfo(outputDir); // 1-3 per user
 //   generateBillingInfo(outputDir); // 1-3 per user
 
-  //    -------- INVENTORY --------
+    //  -------- INVENTORY --------
 
-  // there's few products and they don't depend on other data
-  generateProducts(outputDir);
+//   there's few products and they don't depend on other data
+//   generateProducts(outputDir);
 
-  // each item has a random amount of compatible products
-  // each item has a random existing user id in the updated_by field
-  generateInventoryGlass(outputDir);
+//   each item has a random amount of compatible products
+//   each item has a random existing user id in the updated_by field
+//   generateInventoryGlass(outputDir);
 
-  //    -------- ORDERS --------
+    //  -------- ORDERS --------
 
 //   generateOrders(outputDir); // rand between 1 - 26 orders per user
-  // generateOrderItems(outputDir); // rand between 1 - 9 items per order
-  // generateInvoices(outputDir);
+//   generateOrderItems(outputDir); // rand between 1 - 9 items per order
+//   generateInvoices(outputDir);
   // ---------------------------------------------------
 
   // ------------ CASCADING SEEDING ------------

@@ -81,7 +81,7 @@ export function generateUsers(numUsers: number, outputDir?: string) {
 }
 
 // Example usage
-//generateUsers(10, './seed-data/users.json');
+//generateUsers(10, './seed/data/users.json');
 
 export function saveUserSeedDataToFiles(
   data: any,

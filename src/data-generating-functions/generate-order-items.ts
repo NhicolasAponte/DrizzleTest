@@ -1,10 +1,7 @@
-import * as fs from "fs";
-import * as path from "path";
 import { OrderItem } from "../data-model/schema-definitions";
-import { inventoryGlassSeed } from "../seed-data/seed-inventory-glass";
-import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
-import { ordersSeed } from "../seed-data/seed-orders";
 import { saveSeedData } from "../lib/utils";
+import { inventoryGlassSeed } from "../seed/data/inventory-glass";
+import { inventoryProductSeed } from "../seed/data/inventory-products";
 
 // interface productConfig {
 //   productId: string;
@@ -110,7 +107,7 @@ export function generateOrderItems(outputDir?: string) {
 
   const dataType = "OrderItem";
   const arrayName = "orderItemsSeed";
-  const fileName = "seed-order-items";
+  const fileName = "order-items";
 
   saveSeedData(orderItemsData, dataType, arrayName, fileName);
 }

@@ -8,11 +8,11 @@ import {
   CustomerShippingInformation,
   Customer,
 } from "../data-model/schema-definitions";
-import { usersSeed } from "../seed-data/seed-users";
-import { shippingInfoSeed } from "../seed-data/seed-user-shipping-info";
-import { billingInfoSeed } from "../seed-data/seed-user-billing-info";
 import { OrderStatus } from "../data-model/data-definitions";
 import { customersSeed } from "../seed/data/customers";
+import { usersSeed } from "../seed/data/users";
+import { shippingInfoSeed } from "../seed/data/customer-shipping-info";
+import { billingInfoSeed } from "../seed/data/customer-billing-info";
 
 function generateRandomOrder(
   customer_id: string,

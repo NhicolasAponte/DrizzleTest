@@ -1,11 +1,9 @@
-import * as fs from "fs";
-import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
-import { productTypes } from "../seed-data/placeholder-data";
+import { productTypes } from "../lib/placeholder-data";
 import { InventoryProduct } from "../data-model/schema-definitions";
 import { saveSeedData } from "../lib/utils";
-import { profilesSeed } from "../seed-data/seed-user-profiles";
+import { profilesSeed } from "../seed/data/user-profiles";
 
 function generateRandomProduct(
   type: string,

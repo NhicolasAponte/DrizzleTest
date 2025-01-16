@@ -1,19 +1,14 @@
-import * as fs from "fs";
-import * as path from "path";
 import { faker } from "@faker-js/faker";
 import {
   Customer,
   CustomerBillingInformation,
-  UserProfile,
   payment_method_codes,
 } from "../data-model/schema-definitions";
 import { FlipCoin, saveSeedData } from "../lib/utils";
-import { usersSeed } from "../seed-data/seed-users";
-import { profilesSeed } from "../seed-data/seed-user-profiles";
 import { customersSeed } from "../seed/data/customers";
 
 function generateRandomBillingInfo(
-  customer: Customer,
+  customer: Customer
 ): CustomerBillingInformation {
   return {
     billing_info_id: Math.floor(Math.random() * 1000),

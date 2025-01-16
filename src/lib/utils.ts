@@ -44,7 +44,7 @@ export const externalDir = process.env.ORDER_PROJECT_PATH; //orderProjDir// unde
 // directory in DrizzleTest project where data will be saved 
 export const localDir = "./src/seed/data";
 // string path needed to import types in DrizzleTest project 
-const drizzleTypeImport = "../data-model/schema-definitions";
+const drizzleTypeImport = "../../data-model/schema-definitions";
 // string path needed to import types in OrderUI project 
 export const orderTypeImport = "@/lib/data-model/schema-definitions";
 

@@ -1,24 +1,22 @@
 import { faker } from "@faker-js/faker";
-import { ordersSeed } from "../seed-data/seed-orders";
 import { v4 as uuidv4 } from "uuid";
-import * as fs from "fs";
-import * as path from "path";
 import { OrderInvoice } from "../data-model/schema-definitions";
-import { getImportLines, saveSeedData } from "../lib/utils";
+import { saveSeedData } from "../lib/utils";
 
 function generateRandomInvoice(
   userId: string,
   orderId: string,
+  customer_id: string,
+  amount: number,
   dateSubmitted: Date
 ): OrderInvoice {
   const id = uuidv4();
+
+  const invoiceNumber = "INV" + Math.floor(Math.random() * 1000000);
+
   const statusRand = Math.floor(Math.random() * 2) + 1;
   const status = statusRand % 2 === 0 ? "PENDING" : "PAID";
-  const amountRandomizer = Math.floor(Math.random() * 2) + 1;
-  const amount =
-    amountRandomizer % 2 === 0
-      ? parseFloat((Math.random() * 1000 + 120).toFixed(2))
-      : parseFloat((Math.random() * 1000000 + 5000).toFixed(2));
+  
   const dateCreated = faker.date.between({
     from: dateSubmitted,
     to: new Date(),
@@ -26,12 +24,13 @@ function generateRandomInvoice(
   //.toLocaleString();
   return {
     order_invoice_id: id,
-    user_id: userId,
+    created_by: userId,
     order_id: orderId,
-    date_created: dateCreated,
-    //date_created_tz: dateCreated,
+    customer_id: customer_id,
+    invoice_number: invoiceNumber,
     status,
     amount,
+    date_created: dateCreated,
   };
 }
 
@@ -42,8 +41,10 @@ export function generateInvoices(outputDir?: string) {
     if (order.date_submitted) {
       invoices.push(
         generateRandomInvoice(
-          order.user_id ? order.user_id : "1",
+          order.created_by ? order.created_by : "1",
           order.order_id,
+          order.customer_id,
+          order.amount,
           order.date_submitted
         )
       );
@@ -52,7 +53,7 @@ export function generateInvoices(outputDir?: string) {
 
   const dataType = "OrderInvoice";
   const arrayName = "orderInvoiceSeed";
-  const fileName = "seed-order-invoice";
+  const fileName = "order-invoices";
 
   saveSeedData(invoices, dataType, arrayName, fileName);
 }

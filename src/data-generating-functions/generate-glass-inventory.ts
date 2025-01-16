@@ -4,11 +4,11 @@ import {
   GlassInventoryItems,
   shapeOptions,
   tintOptions,
-} from "../seed-data/placeholder-data";
-import { inventoryProductSeed } from "../seed-data/seed-inventory-products";
+} from "../lib/placeholder-data";
 import { InventoryGlassItem } from "../data-model/schema-definitions";
 import { saveSeedData } from "../lib/utils";
-import { profilesSeed } from "../seed-data/seed-user-profiles";
+import { inventoryProductSeed } from "../seed/data/inventory-products";
+import { profilesSeed } from "../seed/data/user-profiles";
 
 function generateRandomInventoryGlassItem(name: string): InventoryGlassItem {
   const inventoryGlassItems = GlassInventoryItems;
