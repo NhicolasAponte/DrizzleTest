@@ -23,30 +23,6 @@ export const dbSchema = pgSchema("dev-schema");
 //   throw new Error("Schema not found");
 // }
 
-// IMPLEMENTATION NOTE: customers table
-// customer could be a separate entity which requires a separate table
-// or it could be a field or status in the user table
-// ROLE: ADMIN, CUSTOMER
-// what if we have multiple customers with the same company?
-// can admin also enter orders for themselves?
-
-export const CustomerTable = dbSchema.table("customers", {
-  customer_id: uuid("customer_id").defaultRandom().primaryKey(),
-  name: varchar("name", { length: 255 }).notNull().unique(),
-  phone: varchar("phone", { length: 255 }).notNull(),
-  email: varchar("email", { length: 255 }),
-  // type: individual, business, non-profit, gov, etc
-  type: varchar("type", { length: 255 }).notNull(),
-  account_num: varchar("account_num", { length: 255 }),
-  credit_status: varchar("credit_status", { length: 255 }),
-  credit_limit: decimal("credit_limit", { precision: 10, scale: 2 }),
-  // credit_terms
-  // credit_balance
-  // payment type
-  date_created: timestamp("date_created", { withTimezone: true }).notNull(),
-  date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
-});
-
 // export const UserRole = dbSchema.enum("user_role", ["ADMIN", "USER"]);
 
 export const UserTable = dbSchema.table(
@@ -81,14 +57,38 @@ export const UserProfileTable = dbSchema.table("user_profiles", {
     .references(() => UserTable.id, { onDelete: "cascade" }),
   first_name: varchar("first_name", { length: 255 }).notNull(),
   last_name: varchar("last_name", { length: 255 }).notNull(),
-  
+
   phone_num: varchar("phone_num", { length: 255 }),
   // if a user is also a customer or represents a customer such as a sales rep
   // customer_id: uuid("customer_id").references(() => CustomerTable.customer_id),
   // last login? we need a way to determine inactive users
 });
 
-// // one-to-many with customer table 
+// IMPLEMENTATION NOTE: customers table
+// customer could be a separate entity which requires a separate table
+// or it could be a field or status in the user table
+// ROLE: ADMIN, CUSTOMER
+// what if we have multiple customers with the same company?
+// can admin also enter orders for themselves?
+
+export const CustomerTable = dbSchema.table("customers", {
+  customer_id: uuid("customer_id").defaultRandom().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull().unique(),
+  phone: varchar("phone", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }),
+  // type: individual, business, non-profit, gov, etc
+  type: varchar("type", { length: 255 }).notNull(),
+  account_num: varchar("account_num", { length: 255 }),
+  credit_status: varchar("credit_status", { length: 255 }),
+  credit_limit: decimal("credit_limit", { precision: 10, scale: 2 }),
+  // credit_terms
+  // credit_balance
+  // payment type
+  date_created: timestamp("date_created", { withTimezone: true }).notNull(),
+  date_updated: timestamp("date_updated", { withTimezone: true }).notNull(),
+});
+
+// // one-to-many with customer table
 export const CustomerShippingInformationTable = dbSchema.table(
   "customer_shipping_information",
   {
