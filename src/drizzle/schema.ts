@@ -110,7 +110,7 @@ export const CustomerShippingInformationTable = dbSchema.table(
 // // relevant billing info will be serialized and stored in the order table
 // // one-to-many with customer table
 export const CustomerBillingInformationTable = dbSchema.table(
-  "user_billing_information",
+  "customer_billing_information",
   {
     billing_info_id: serial("billing_info_id").primaryKey(),
     customer_id: uuid("customer_id")

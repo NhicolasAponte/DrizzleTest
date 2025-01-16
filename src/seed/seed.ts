@@ -8,7 +8,10 @@ import { generateProducts } from "../data-generating-functions/generate-products
 import { generateShippingInfo } from "../data-generating-functions/generate-shippingInfo";
 import { generateUserProfiles } from "../data-generating-functions/generate-user-profiles";
 import { generateUsers } from "../data-generating-functions/generate-users";
-import { seedUserInfo } from "../native_id_seeding/user-info-seeding";
+import { seedUserInfo } from "./insert-queries/user-info-seeding";
+import { seedCustomerInfo } from "./insert-queries/customer-seeding";
+import { seedGlassInventory, seedProducts } from "./insert-queries/product-inventory-seeding";
+import { seedOrderInfo } from "./insert-queries/order-item-invoice-seeding";
 
 // to clean up imports i could create a 'data generate service' object that contains all the functions
 
@@ -19,6 +22,8 @@ export async function seedDatabase() {
   const outputDir = process.env.ORDER_PROJECT_PATH;
   //   generateUsers(5, outputDir);
   //   generateUserProfiles(outputDir); // 1 profile per user
+
+  //    -------- CUSTOMERS --------
 
   //   generateCustomers(15);
   //   generateShippingInfo(outputDir); // 1-3 per user
@@ -43,9 +48,10 @@ export async function seedDatabase() {
   // ------------ CASCADING SEEDING ------------
   // NOTE: run all seeding function at once, without await
   // NOTE: run all seeding function at once, with await
-  // await resetDatabase();
-  //   await seedUserInfo();
-  // await seedProducts();
-  // await seedGlassInventory();
-  // await seedOrderInfo();
+  //   await resetDatabase();
+  //   await seedCustomerInfo();
+    // await seedUserInfo();
+//   await seedProducts();
+//   await seedGlassInventory();
+  await seedOrderInfo();
 }

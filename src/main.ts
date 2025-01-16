@@ -42,13 +42,6 @@ import {
   getUserInput,
   testInput,
 } from "./data-generating-functions/seed-db";
-import { seedUserInfo } from "./native_id_seeding/user-info-seeding";
-import { resetDatabase } from "./native_id_seeding/reset-db";
-import {
-  seedGlassInventory,
-  seedProducts,
-} from "./native_id_seeding/product-inventory-seeding";
-import { seedOrderInfo } from "./native_id_seeding/order-item-invoice-seeding";
 import { Order } from "./data-model/schema-definitions";
 import { seedDatabase } from "./seed/seed";
 

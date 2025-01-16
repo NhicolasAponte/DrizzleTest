@@ -8,11 +8,20 @@ import { billingInfoSeed } from "../data/customer-billing-info";
 export async function seedCustomerInfo() {
   try {
     await db.transaction(async (trx) => {
+      console.log("-------- TRANSACTION STARTED --------");
+      console.log("");
+      let customerCount = 0;
+      let infoCount = 0;
+
       for (const customer of customersSeed) {
         console.log("xxxxxx NEW CUSTOMER xxxxxx");
         consoleLogSpacer();
-        console.log(`x Seeding customer ${customer.customer_id}...`);
+
+        customerCount++;
+
+        console.log(`Seeding customer ${customer.customer_id}...`);
         const seedCustomerId = customer.customer_id;
+
         const result = await trx.execute(
           sql`INSERT INTO "${sql.raw(getSchemaName())}".customers
                         (customer_id,
@@ -41,12 +50,13 @@ export async function seedCustomerInfo() {
         const dbCustomerId = result[0].customer_id as string;
         console.log(`Inserted customer with id: ${dbCustomerId}`);
         consoleLogSpacer();
-
+        infoCount = 0;
         for (const shippingInfo of shippingInfoSeed) {
           if (seedCustomerId === shippingInfo.customer_id) {
             console.log(
               `x Seeding shipping info for customer ${customer.customer_id}...`
             );
+            infoCount++;
             await trx.execute(
               sql`INSERT INTO "${sql.raw(
                 getSchemaName()
@@ -73,14 +83,18 @@ export async function seedCustomerInfo() {
             );
           }
         }
+        console.log(
+          `Inserted ${infoCount} shipping info records for customer id: ${dbCustomerId}`
+        );
         consoleLogSpacer();
 
         console.log(
           `x Seeding billing info for customer ${customer.customer_id}...`
         );
-
+        infoCount = 0;
         for (const billingInfo of billingInfoSeed) {
           if (seedCustomerId === billingInfo.customer_id) {
+            infoCount++;
             await trx.execute(
               sql`INSERT INTO "${sql.raw(
                 getSchemaName()
@@ -116,9 +130,12 @@ export async function seedCustomerInfo() {
             );
           }
         }
+        console.log(
+          `Inserted ${infoCount} billing info records for customer id: ${dbCustomerId}`
+        );
       }
+      console.log(`${customerCount} Customers seeded successfully`);
     });
-    console.log(`${customersSeed.length} Customers seeded successfully`);
   } catch (error) {
     console.error(error);
   }

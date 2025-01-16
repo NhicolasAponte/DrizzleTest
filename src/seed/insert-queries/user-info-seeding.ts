@@ -1,10 +1,8 @@
 import { sql } from "drizzle-orm";
-import { db } from "../drizzle/db";
-import { usersSeed } from "../seed-data/seed-users";
-import { profilesSeed } from "../seed-data/seed-user-profiles";
-import { shippingInfoSeed } from "../seed-data/seed-user-shipping-info";
-import { billingInfoSeed } from "../seed-data/seed-user-billing-info";
-import { consoleLogSpacer, getSchemaName, LogData } from "../lib/utils";
+import { db } from "../../drizzle/db";
+import { consoleLogSpacer, getSchemaName } from "../../lib/utils";
+import { usersSeed } from "../data/users";
+import { profilesSeed } from "../data/user-profiles";
 
 export async function seedUserInfo() {
   try {
@@ -26,18 +24,18 @@ export async function seedUserInfo() {
           sql`INSERT INTO "${sql.raw(getSchemaName())}".users 
                       (email, 
                       password, 
-                      role) 
+                      role,
+                      "is_active") 
           VALUES (${user.email},
                   ${user.password},
-                  ${user.role})
+                  ${user.role},
+                  ${user.is_active})
           RETURNING id`
         );
-
         const dbUserId = result[0].id as string;
         console.log(`Inserted user with id: ${dbUserId}`);
         consoleLogSpacer();
 
-        // await seedUserProfile(user.id, dbUserId, trx);
         // iterate over profiles array
         for (const profile of profilesSeed) {
           if (seedUserId === profile.user_id) {
@@ -47,103 +45,15 @@ export async function seedUserInfo() {
                         ("user_id", 
                         "first_name", 
                         "last_name", 
-                        company, 
-                        "account_num", 
                         "phone_num") 
                       VALUES (${dbUserId},
                               ${profile.first_name},
                               ${profile.last_name},
-                              ${profile.company},
-                              ${profile.account_num},
                               ${profile.phone_num})`
             );
             console.log(`Inserted profile for user id: ${dbUserId}`);
           }
         }
-        consoleLogSpacer();
-
-        // await seedUserShippingInfo(user.id, newUserId, trx);
-        // iterate over shipping info array
-        infoCount = 0;
-        for (const shippingInfo of shippingInfoSeed) {
-          if (seedUserId === shippingInfo.user_id) {
-            infoCount++;
-            console.log("");
-            console.log(`x Seeding shipping info ${infoCount}...`);
-            await trx.execute(
-              sql`INSERT INTO "${sql.raw(
-                getSchemaName()
-              )}".user_shipping_information 
-                (user_id, 
-                street,
-                apt_num, 
-                city, 
-                state, 
-                zip, 
-                is_job_site, 
-                note) 
-        VALUES (${dbUserId},
-                ${shippingInfo.street},
-                ${shippingInfo.apt_num},
-                ${shippingInfo.city},
-                ${shippingInfo.state},
-                ${shippingInfo.zip},
-                ${shippingInfo.is_job_site},
-                ${shippingInfo.note})`
-            );
-          }
-        }
-        console.log(
-          `Inserted ${infoCount} shipping info objects for user id: ${dbUserId}`
-        );
-        consoleLogSpacer();
-        // await seedUserBillingInfo(user.id, newUserId, trx);
-        // iterate over billing info array
-        infoCount = 0;
-        for (const billingInfo of billingInfoSeed) {
-          if (seedUserId === billingInfo.user_id) {
-            infoCount++;
-            console.log("");
-            console.log(`x Seeding billing info ${infoCount}...`);
-            await trx.execute(
-              sql`INSERT INTO "${sql.raw(
-                getSchemaName()
-              )}".user_billing_information 
-                (user_id, 
-                street,
-                apt_num,
-                city, 
-                state, 
-                zip, 
-                payment_method, 
-                purchase_order, 
-                primary_contact_name, 
-                primary_contact_email, 
-                primary_contact_phone, 
-                fax_num, 
-                is_primary, 
-                is_active) 
-        VALUES (${dbUserId},
-                ${billingInfo.street},
-                ${billingInfo.apt_num},
-                ${billingInfo.city},
-                ${billingInfo.state},
-                ${billingInfo.zip},
-                ${billingInfo.payment_method},
-                ${billingInfo.purchase_order},
-                ${billingInfo.primary_contact_name},
-                ${billingInfo.primary_contact_email},
-                ${billingInfo.primary_contact_phone},
-                ${billingInfo.fax_num},
-                ${billingInfo.is_primary},
-                ${billingInfo.is_active})`
-            );
-          }
-        }
-        console.log(
-          `Inserted ${infoCount} billing info objects for user id: ${dbUserId}`
-        );
-        consoleLogSpacer();
       }
       console.log(
         `User info for ${usersSeed.length} Users was seeded successfully`
