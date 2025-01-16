@@ -1,39 +1,39 @@
-import { UserProfile } from "../data-model/schema-definitions";
+import { UserProfile } from "../../data-model/schema-definitions";
 
 export const profilesSeed: UserProfile[] = [
   {
-    "profile_id": 3092,
-    "user_id": "e39ab582-5291-43c4-820e-245b05a9d771",
-    "first_name": "Vincent",
-    "last_name": "Gutmann",
-    "phone_num": "+1(740)861-6408"
+    "profile_id": 4226,
+    "user_id": "8ac6a6b7-2608-4326-832b-de8deb22a50b",
+    "first_name": "Chaim",
+    "last_name": "Sanford",
+    "phone_num": "+1(863)476-9241"
   },
   {
-    "profile_id": 1592,
-    "user_id": "4179bb77-106a-444a-b5b2-28a1328d1b41",
-    "first_name": "Stephany",
-    "last_name": "Steuber",
-    "phone_num": "+1(152)911-8530"
+    "profile_id": 6447,
+    "user_id": "5210678d-94d8-4b79-b481-e717ce4d035e",
+    "first_name": "Graham",
+    "last_name": "Mante",
+    "phone_num": "+1(376)188-8787"
   },
   {
-    "profile_id": 6505,
-    "user_id": "74e7aa38-1430-4f1e-a60f-6c59bc8881e1",
-    "first_name": "Jared",
-    "last_name": "Upton",
-    "phone_num": "+1(433)643-2351"
+    "profile_id": 7684,
+    "user_id": "f58399ca-16db-4830-86cd-b7fdfc83998a",
+    "first_name": "Everette",
+    "last_name": "Lesch",
+    "phone_num": "+1(230)261-8105"
   },
   {
-    "profile_id": 4723,
-    "user_id": "2dae14aa-f41c-4043-bf5c-a76da07873ae",
-    "first_name": "Amara",
-    "last_name": "Turner-Kiehn",
-    "phone_num": "+1(969)857-1692"
+    "profile_id": 3336,
+    "user_id": "731fddcd-7f89-48ba-98af-c36219d03c0b",
+    "first_name": "Ford",
+    "last_name": "Doyle",
+    "phone_num": "+1(438)674-4925"
   },
   {
-    "profile_id": 2116,
-    "user_id": "9d9299fe-8c2c-4d7d-bcb8-c688695d4670",
-    "first_name": "Rolando",
-    "last_name": "Beahan",
-    "phone_num": "+1(923)742-6767"
+    "profile_id": 1676,
+    "user_id": "e640e304-e19f-4259-8d39-912a6fcbb9bd",
+    "first_name": "Donnell",
+    "last_name": "Hilll",
+    "phone_num": "+1(635)451-1413"
   }
 ];

@@ -2,6 +2,7 @@ import { OrderItem } from "../data-model/schema-definitions";
 import { saveSeedData } from "../lib/utils";
 import { inventoryGlassSeed } from "../seed/data/inventory-glass";
 import { inventoryProductSeed } from "../seed/data/inventory-products";
+import { ordersSeed } from "../seed/data/orders";
 
 // interface productConfig {
 //   productId: string;

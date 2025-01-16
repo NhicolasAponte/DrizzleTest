@@ -2,6 +2,7 @@ import { faker } from "@faker-js/faker";
 import { v4 as uuidv4 } from "uuid";
 import { OrderInvoice } from "../data-model/schema-definitions";
 import { saveSeedData } from "../lib/utils";
+import { ordersSeed } from "../seed/data/orders";
 
 function generateRandomInvoice(
   userId: string,

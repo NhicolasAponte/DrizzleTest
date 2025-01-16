@@ -1,0 +1,323 @@
+import { CustomerShippingInformation } from "../../data-model/schema-definitions";
+
+export const shippingInfoSeed: CustomerShippingInformation[] = [
+  {
+    "shipping_info_id": 280,
+    "customer_id": "a22dfd66-634e-41cc-94dd-646f79be9a83",
+    "street": "9327 Lebsack Club",
+    "apt_num": "Suite 846",
+    "city": "Rempelbury",
+    "state": "Michigan",
+    "zip": "15433-8382",
+    "is_job_site": true,
+    "note": "Balbus vis quaerat thermae dolore tot comparo veritatis."
+  },
+  {
+    "shipping_info_id": 441,
+    "customer_id": "ea60dee8-6995-452d-8362-1f10baf79c4e",
+    "street": "8739 W 14th Street",
+    "apt_num": "Apt. 339",
+    "city": "Daphneville",
+    "state": "Wyoming",
+    "zip": "31471",
+    "is_job_site": false,
+    "note": "Bene tero a."
+  },
+  {
+    "shipping_info_id": 578,
+    "customer_id": "6c01860f-3611-4749-aa26-7585a5c0965e",
+    "street": "849 Kyler Shore",
+    "apt_num": null,
+    "city": "Citrus Heights",
+    "state": "Rhode Island",
+    "zip": "01236",
+    "is_job_site": false,
+    "note": "Corporis summisse calamitas cuppedia tabesco crux."
+  },
+  {
+    "shipping_info_id": 993,
+    "customer_id": "dbfa2a59-1cc8-4316-bdc6-4b1b42c9d7c5",
+    "street": "2341 Moore Springs",
+    "apt_num": null,
+    "city": "Fort Hailie",
+    "state": "Connecticut",
+    "zip": "28511-2096",
+    "is_job_site": false,
+    "note": "Cupressus acervus adaugeo amet bellicus deripio."
+  },
+  {
+    "shipping_info_id": 952,
+    "customer_id": "decc7d05-6f71-4f91-aca3-28cf915bb571",
+    "street": "194 Annamarie Shore",
+    "apt_num": "Suite 242",
+    "city": "Eliasbury",
+    "state": "New Hampshire",
+    "zip": "68890-9193",
+    "is_job_site": true,
+    "note": "Atque arguo convoco uredo ratione saepe cras aperiam ipsum."
+  },
+  {
+    "shipping_info_id": 182,
+    "customer_id": "decc7d05-6f71-4f91-aca3-28cf915bb571",
+    "street": "1402 Michaela Corners",
+    "apt_num": null,
+    "city": "Bahringerport",
+    "state": "Mississippi",
+    "zip": "20638",
+    "is_job_site": true,
+    "note": "Ambulo cogo conscendo beatae attollo."
+  },
+  {
+    "shipping_info_id": 876,
+    "customer_id": "decc7d05-6f71-4f91-aca3-28cf915bb571",
+    "street": "4273 Bailee Walks",
+    "apt_num": "Suite 592",
+    "city": "Ann Arbor",
+    "state": "Ohio",
+    "zip": "25933",
+    "is_job_site": false,
+    "note": "Solitudo accedo vulticulus tantum claudeo super capillus."
+  },
+  {
+    "shipping_info_id": 227,
+    "customer_id": "36d53f32-3251-4f6d-9077-22abb7fceb1b",
+    "street": "434 Eda Mission",
+    "apt_num": null,
+    "city": "Scranton",
+    "state": "Florida",
+    "zip": "57373",
+    "is_job_site": false,
+    "note": "Abundans suppellex atrox possimus coniuratio convoco repudiandae virga tricesimus supplanto."
+  },
+  {
+    "shipping_info_id": 429,
+    "customer_id": "36d53f32-3251-4f6d-9077-22abb7fceb1b",
+    "street": "6175 Hickory Street",
+    "apt_num": null,
+    "city": "Joesphland",
+    "state": "New Mexico",
+    "zip": "03556-9583",
+    "is_job_site": false,
+    "note": "Consectetur suscipit patria."
+  },
+  {
+    "shipping_info_id": 786,
+    "customer_id": "36d53f32-3251-4f6d-9077-22abb7fceb1b",
+    "street": "5916 Aric Branch",
+    "apt_num": null,
+    "city": "Daynafurt",
+    "state": "Washington",
+    "zip": "95167",
+    "is_job_site": true,
+    "note": "Degero cubo at illo textus."
+  },
+  {
+    "shipping_info_id": 694,
+    "customer_id": "04e22646-4a58-4e7c-b925-0c4bb8d6410d",
+    "street": "14031 Lennie Circle",
+    "apt_num": "Suite 723",
+    "city": "Evansville",
+    "state": "South Dakota",
+    "zip": "24833-9281",
+    "is_job_site": true,
+    "note": "Mollitia copia adsidue vitae."
+  },
+  {
+    "shipping_info_id": 878,
+    "customer_id": "b3db7ced-52c9-427a-a7b4-ea1620303cbd",
+    "street": "3444 Hackett Lights",
+    "apt_num": "Apt. 550",
+    "city": "Port Ubaldo",
+    "state": "Minnesota",
+    "zip": "05332-0741",
+    "is_job_site": false,
+    "note": "Templum vinum cuppedia auxilium adfero rem reiciendis vesper fugit earum."
+  },
+  {
+    "shipping_info_id": 864,
+    "customer_id": "b3db7ced-52c9-427a-a7b4-ea1620303cbd",
+    "street": "884 Hand Viaduct",
+    "apt_num": null,
+    "city": "Wilson",
+    "state": "Arkansas",
+    "zip": "49283-3722",
+    "is_job_site": false,
+    "note": "Certus audax basium commodi cimentarius."
+  },
+  {
+    "shipping_info_id": 420,
+    "customer_id": "b3db7ced-52c9-427a-a7b4-ea1620303cbd",
+    "street": "4446 Dibbert Hill",
+    "apt_num": null,
+    "city": "Port Christophe",
+    "state": "Connecticut",
+    "zip": "68659-6525",
+    "is_job_site": false,
+    "note": "Attonbitus decretum trepide strenuus cui constans."
+  },
+  {
+    "shipping_info_id": 814,
+    "customer_id": "d2fe56b7-a4db-4b87-862a-ef0c21486abc",
+    "street": "928 Faye Pass",
+    "apt_num": null,
+    "city": "South Emilianoborough",
+    "state": "Alaska",
+    "zip": "19918",
+    "is_job_site": true,
+    "note": "Cursus stella titulus ullus nostrum sustineo bestia."
+  },
+  {
+    "shipping_info_id": 604,
+    "customer_id": "16a02883-85f4-48cc-af02-1a7c9669f1a5",
+    "street": "3521 Weimann Curve",
+    "apt_num": null,
+    "city": "Salem",
+    "state": "Florida",
+    "zip": "85205-5936",
+    "is_job_site": true,
+    "note": "Temperantia sufficio thalassinus tenetur velociter."
+  },
+  {
+    "shipping_info_id": 226,
+    "customer_id": "16a02883-85f4-48cc-af02-1a7c9669f1a5",
+    "street": "19730 S Center Street",
+    "apt_num": "Suite 302",
+    "city": "Jarentown",
+    "state": "Georgia",
+    "zip": "71541",
+    "is_job_site": true,
+    "note": "Vestrum sint amoveo bis tres occaecati."
+  },
+  {
+    "shipping_info_id": 578,
+    "customer_id": "da98066a-0ac9-429c-bcf1-10f23d63817b",
+    "street": "7484 Luis Parkway",
+    "apt_num": "Suite 408",
+    "city": "Grahamstead",
+    "state": "Idaho",
+    "zip": "09270-1644",
+    "is_job_site": true,
+    "note": "Cohors tendo corroboro."
+  },
+  {
+    "shipping_info_id": 447,
+    "customer_id": "da98066a-0ac9-429c-bcf1-10f23d63817b",
+    "street": "6411 Jaunita Walks",
+    "apt_num": "Suite 697",
+    "city": "Baileytown",
+    "state": "Hawaii",
+    "zip": "95358-9349",
+    "is_job_site": true,
+    "note": "Tactus surgo facilis facere."
+  },
+  {
+    "shipping_info_id": 739,
+    "customer_id": "da98066a-0ac9-429c-bcf1-10f23d63817b",
+    "street": "938 Ollie Rapid",
+    "apt_num": "Apt. 567",
+    "city": "North Josiane",
+    "state": "Arizona",
+    "zip": "06127",
+    "is_job_site": true,
+    "note": "Volaticus cenaculum harum tantum deputo."
+  },
+  {
+    "shipping_info_id": 413,
+    "customer_id": "b79eb573-d28e-4e62-ac3f-fb576319e6de",
+    "street": "2302 Cayla Garden",
+    "apt_num": null,
+    "city": "North Henrytown",
+    "state": "Alaska",
+    "zip": "94502-6125",
+    "is_job_site": false,
+    "note": "Cogito cognomen aequus consectetur volubilis repellat."
+  },
+  {
+    "shipping_info_id": 746,
+    "customer_id": "b79eb573-d28e-4e62-ac3f-fb576319e6de",
+    "street": "5192 Loren Pine",
+    "apt_num": null,
+    "city": "Farrellfort",
+    "state": "Delaware",
+    "zip": "31088",
+    "is_job_site": false,
+    "note": "Acidus comes vigor capillus asporto solio adnuo."
+  },
+  {
+    "shipping_info_id": 399,
+    "customer_id": "b79eb573-d28e-4e62-ac3f-fb576319e6de",
+    "street": "734 Wood Lane",
+    "apt_num": "Apt. 208",
+    "city": "Norvalchester",
+    "state": "Alabama",
+    "zip": "27665-3540",
+    "is_job_site": false,
+    "note": "Acervus infit adstringo sapiente bardus congregatio valetudo arguo."
+  },
+  {
+    "shipping_info_id": 247,
+    "customer_id": "ae8afa94-d8e0-4f95-a1eb-25e1d44e51a7",
+    "street": "96354 Kingsway",
+    "apt_num": null,
+    "city": "North Elisabethfort",
+    "state": "Georgia",
+    "zip": "27923-0621",
+    "is_job_site": true,
+    "note": "Cruentus virtus accommodo compono fugiat depopulo cohaero esse tondeo."
+  },
+  {
+    "shipping_info_id": 376,
+    "customer_id": "ae8afa94-d8e0-4f95-a1eb-25e1d44e51a7",
+    "street": "81976 Simonis Port",
+    "apt_num": "Apt. 922",
+    "city": "Fresno",
+    "state": "Montana",
+    "zip": "74205-4754",
+    "is_job_site": true,
+    "note": "Ciminatio volup valens desolo basium solio attero bis comitatus."
+  },
+  {
+    "shipping_info_id": 119,
+    "customer_id": "ae8afa94-d8e0-4f95-a1eb-25e1d44e51a7",
+    "street": "518 Jazmyne Loaf",
+    "apt_num": "Apt. 546",
+    "city": "Fort Murray",
+    "state": "California",
+    "zip": "32767-9266",
+    "is_job_site": true,
+    "note": "Calco usitas vicissitudo alius aliquid ea."
+  },
+  {
+    "shipping_info_id": 873,
+    "customer_id": "2c84f756-c5f2-48b3-a0df-20e3cce43ff1",
+    "street": "6086 Bahringer Street",
+    "apt_num": null,
+    "city": "Halbury",
+    "state": "Kansas",
+    "zip": "41416-7696",
+    "is_job_site": true,
+    "note": "Recusandae tandem sustineo admoneo soleo valens arcus arguo."
+  },
+  {
+    "shipping_info_id": 776,
+    "customer_id": "2c84f756-c5f2-48b3-a0df-20e3cce43ff1",
+    "street": "590 Ferry Road",
+    "apt_num": null,
+    "city": "Pacochaland",
+    "state": "Hawaii",
+    "zip": "54470",
+    "is_job_site": true,
+    "note": "Ager arcus impedit animi appositus."
+  },
+  {
+    "shipping_info_id": 922,
+    "customer_id": "2b4da417-67e4-4571-9f54-712c0d198312",
+    "street": "970 Hillard Causeway",
+    "apt_num": "Apt. 510",
+    "city": "Port Alta",
+    "state": "Utah",
+    "zip": "12594",
+    "is_job_site": true,
+    "note": "Tremo dedico depono demoror ara sulum torqueo aegrus."
+  }
+];
