@@ -42,8 +42,12 @@ import {
   getUserInput,
   testInput,
 } from "./data-generating-functions/seed-db";
-import { Order } from "./data-model/schema-definitions";
+import { Order } from "./data-model/schema-types";
 import { seedDatabase } from "./seed/seed";
+import {
+  OrderStatusDefinition,
+  runOrderStatusTest,
+} from "./lib/enum_playground";
 
 async function main() {
   console.log("------------- Hello World ----");
@@ -96,6 +100,8 @@ async function main() {
   // console.log(orderTable.length);
   // consoleLogSpacer();
   // console.log( orderTable[100].order_items);
+
+  runOrderStatusTest();
 }
 
 main()
