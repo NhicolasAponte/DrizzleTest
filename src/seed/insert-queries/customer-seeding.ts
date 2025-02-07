@@ -23,7 +23,7 @@ export async function seedCustomerInfo() {
         const seedCustomerId = customer.customer_id;
 
         const result = await trx.execute(
-          sql`INSERT INTO "${sql.raw(getSchemaName())}".customers
+          sql`INSERT INTO "${sql.raw(getSchemaName())}".customer
                         (customer_id,
                         name,
                         phone,
@@ -46,8 +46,13 @@ export async function seedCustomerInfo() {
                             ${customer.date_updated})
                     RETURNING customer_id`
         );
-
-        const dbCustomerId = result[0].customer_id as string;
+        // console.log(" ");
+        // console.log("---- RESULT ----");
+        // console.log(result);
+        // console.log(" ");
+        // console.log(typeof result);
+        // // console.log(result.rows[0].customer_id);
+        const dbCustomerId = result[0].customer_id;
         console.log(`Inserted customer with id: ${dbCustomerId}`);
         consoleLogSpacer();
         infoCount = 0;

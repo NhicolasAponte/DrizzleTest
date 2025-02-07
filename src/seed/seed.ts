@@ -52,10 +52,10 @@ export async function seedDatabase() {
   // ------------ CASCADING SEEDING ------------
   // NOTE: run all seeding function at once, without await
   // NOTE: run all seeding function at once, with await
-  
+  console.log("seeding database");
   //   await resetDatabase();
-//   await seedCustomerInfo(); 
-//   await seedUserInfo();
+  // await seedUserInfo();
+  // await seedCustomerInfo(); 
     // await seedProducts();
     // await seedGlassInventory();
     // await seedOrderInfo();
