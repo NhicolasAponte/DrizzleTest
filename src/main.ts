@@ -26,7 +26,7 @@ import {
 } from "./lib/utils";
 import { generateInventoryGlass } from "./data-generating-functions/generate-glass-inventory";
 import { generateOrderItems } from "./data-generating-functions/generate-order-items";
-import { GetUserIds, GetUsersByState } from "./fetch-queries/get-users";
+import { GetUserIds, GetCustomersByState, getCustomerCountByState } from "./fetch-queries/get-users";
 import {
   fetchOrderItemsPerOrderArrayOutput,
   fetchOrderTableData,
@@ -100,6 +100,9 @@ async function main() {
   // console.log(orderTable.length);
   // consoleLogSpacer();
   // console.log( orderTable[100].order_items);
+
+  // await GetCustomersByState("Minnesota");
+  getCustomerCountByState();
 
 }
 

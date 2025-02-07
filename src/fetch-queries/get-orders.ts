@@ -1,14 +1,14 @@
 import {
   OrderDetails,
   OrderDetailsWithItems,
-} from "../data-model/data-definitions";
+  OrderStatus,
+} from "../data-model/data-types";
 import {
   BillingInfoWithoutIds,
   Order,
   OrderItem,
-  OrderStatus,
   ShippingInfoWithoutIds,
-} from "../data-model/schema-definitions";
+} from "../data-model/schema-types";
 import { db } from "../drizzle/db";
 import {
   OrderInvoiceTable,
@@ -24,9 +24,9 @@ export async function GetOrdersByUser(userId: string) {
 
   try {
     const orders = await db
-      .select({ id: OrderTable.order_id, user_id: OrderTable.user_id })
+      .select({ id: OrderTable.order_id, user_id: OrderTable.created_by })
       .from(OrderTable)
-      .where(eq(OrderTable.user_id, userId));
+      .where(eq(OrderTable.created_by, userId));
     console.log(orders);
     console.log("Orders fetched successfully");
     // const orderByState = await db
@@ -40,7 +40,7 @@ export async function fetchOrderTableData(): Promise<OrderDetailsWithItems[]> {
     const result = await db
       .select({
         order_id: OrderTable.order_id,
-        user_id: OrderTable.user_id,
+        created_by: OrderTable.created_by,
         order_name: OrderTable.order_name,
         shipping_data: OrderTable.shipping_data,
         billing_data: OrderTable.billing_data,
@@ -61,7 +61,7 @@ export async function fetchOrderTableData(): Promise<OrderDetailsWithItems[]> {
       .from(OrderTable)
       .leftJoin(
         UserProfileTable,
-        eq(OrderTable.user_id, UserProfileTable.user_id)
+        eq(OrderTable.created_by, UserProfileTable.user_id)
       )
       .leftJoin(
         OrderInvoiceTable,
@@ -80,7 +80,7 @@ export async function fetchOrderTableData(): Promise<OrderDetailsWithItems[]> {
     >((acc, row) => {
       const orderDetails: OrderDetails = {
         order_id: row.order_id,
-        user_id: row.user_id,
+        created_by: row.created_by,
         order_name: row.order_name,
         shipping_data: row.shipping_data as ShippingInfoWithoutIds,
         billing_data: row.billing_data as BillingInfoWithoutIds,
@@ -138,7 +138,11 @@ export async function fetchOrderItemsPerOrderArrayOutput() {
         orderItems: OrderItem[];
       }[]
     >((acc, row) => {
-      const order = row.order as Order;
+      const order: Order = {
+        ...row.order,
+        status: row.order.status as OrderStatus,
+        amount: row.order.amount ? parseFloat(row.order.amount) : 0,
+      };
       const orderItem = row.orderItems as OrderItem;
 
       let existingOrder = acc.find((o) => o.order.order_id === order.order_id);

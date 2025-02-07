@@ -1,13 +1,10 @@
-import { User } from "../data-model/schema-definitions";
 import { db } from "../drizzle/db";
 import {
-  OrderInvoiceTable,
-  OrderTable,
   CustomerShippingInformationTable,
-  UserProfileTable,
   UserTable,
+  CustomerTable,
 } from "../drizzle/schema";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 export async function GetUserIds() {
   console.log("---- fetching users ----");
@@ -63,32 +60,72 @@ export async function GetUserEmails() {
   }
 }
 
-export async function GetUsersByState(state: string) {
+type CustomerByState = {
+  customer_id: string;
+  name: string;
+  type: string;
+  account_num: string;
+  city: string;
+  state: string;
+};
+
+export async function GetCustomersByState(
+  state: string
+): Promise<CustomerByState[]> {
   console.log("---- fetching users by state ----");
 
   try {
-    const users = await db
+    const result = await db
       .select({
-        id: UserTable.id,
-        email: UserTable.email,
-        role: UserTable.role,
-        first_name: UserProfileTable.first_name,
-        last_name: UserProfileTable.last_name,
-        company: UserProfileTable.company,
+        customer_id: CustomerTable.customer_id,
+        name: CustomerTable.name,
+        type: CustomerTable.type,
+        account_num: CustomerTable.account_num,
         city: CustomerShippingInformationTable.city,
         state: CustomerShippingInformationTable.state,
+        // count: sql<number>
       })
-      .from(UserTable)
-      .innerJoin(UserProfileTable, eq(UserTable.id, UserProfileTable.user_id))
+      .from(CustomerTable)
       .innerJoin(
         CustomerShippingInformationTable,
-        eq(UserTable.id, CustomerShippingInformationTable.user_id)
+        eq(
+          CustomerTable.customer_id,
+          CustomerShippingInformationTable.customer_id
+        )
       )
+      // .orderBy(CustomerShippingInformationTable.state)
       .where(eq(CustomerShippingInformationTable.state, state));
-    console.log(users);
-    console.log("Users fetched successfully");
+
+    console.log(result);
+    console.log("COUNT: ", result.length);
+    console.log("Customers fetched successfully");
+
+    return result;
   } catch (error) {
     console.error(error);
     return [];
   }
+}
+// TODO: finish implementing this function 
+export async function getCustomerCountByState() {
+  console.log("---- fetching customer count by state ----");
+
+  try {
+    const result = await db
+      .select({
+        state: CustomerShippingInformationTable.state,
+        count: sql<number>`cast count(*) as int`,
+      })
+      .from(CustomerShippingInformationTable)
+      .groupBy(CustomerShippingInformationTable.state);
+
+    console.log(result);
+    console.log("COUNT: ", result.length);
+    console.log("Customers fetched successfully");
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }  
 }

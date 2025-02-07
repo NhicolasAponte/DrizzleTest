@@ -73,12 +73,12 @@ export const UserProfileTable = dbSchema.table("user_profile", {
 
 export const CustomerTable = dbSchema.table("customer", {
   customer_id: uuid("customer_id").defaultRandom().primaryKey().notNull(),
-  name: varchar("name", { length: 255 }).notNull().unique(),
+  name: varchar("name", { length: 255 }).notNull(),
   phone: varchar("phone", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }).notNull(),
   // type: individual, business, non-profit, gov, etc
   type: varchar("type", { length: 255 }).notNull(),
-  account_num: varchar("account_num", { length: 255 }).notNull(),
+  account_num: varchar("account_num", { length: 255 }).unique().notNull(),
   credit_status: varchar("credit_status", { length: 255 }).notNull(),
   credit_limit: decimal("credit_limit", { precision: 10, scale: 2 }).notNull(),
   // credit_terms

@@ -679,3 +679,14 @@ sometimes, when the output file is written over while generating data,
 it can leave trailing brackets, fields, semicolons, etc which then cause 
 compile errors 
 - potential fix: delete the file before writing to it  
+
+
+----------- TYPESCRIPT CONVENTIONS ----------- 
+
+Use camelCase for variable and function names.
+
+Use PascalCase for class names and interface names.
+
+Use camelCase for interface members.
+
+Use PascalCase for type names and enum names.
