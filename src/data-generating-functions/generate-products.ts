@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { faker } from "@faker-js/faker";
 import { productTypes } from "../lib/placeholder-data";
-import { InventoryProduct } from "../data-model/schema-definitions";
+import { InventoryProduct } from "../data-model/schema-types";
 import { saveSeedData } from "../lib/utils";
 import { profilesSeed } from "../seed/data/user-profiles";
 

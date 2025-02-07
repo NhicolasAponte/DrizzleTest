@@ -2,10 +2,10 @@ import { faker } from "@faker-js/faker";
 import {
   Customer,
   CustomerBillingInformation,
-  payment_method_codes,
-} from "../data-model/schema-definitions";
+} from "../data-model/schema-types";
 import { FlipCoin, saveSeedData } from "../lib/utils";
 import { customersSeed } from "../seed/data/customers";
+import { payment_method_codes } from "../data-model/enum-types";
 
 function generateRandomBillingInfo(
   customer: Customer

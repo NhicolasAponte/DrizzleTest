@@ -101,7 +101,6 @@ async function main() {
   // consoleLogSpacer();
   // console.log( orderTable[100].order_items);
 
-  runOrderStatusTest();
 }
 
 main()

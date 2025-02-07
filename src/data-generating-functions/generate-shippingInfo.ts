@@ -1,11 +1,13 @@
 //import { db } from './db'; // Adjust the import according to your project structure
-//import { ShippingInfoTable } from './schema'; // Adjust the import according to your project structure 
+//import { ShippingInfoTable } from './schema'; // Adjust the import according to your project structure
 import { faker } from "@faker-js/faker";
-import { CustomerShippingInformation } from "../data-model/schema-definitions";
+import { CustomerShippingInformation } from "../data-model/schema-types";
 import { FlipCoin, saveSeedData } from "../lib/utils";
 import { customersSeed } from "../seed/data/customers";
 
-function generateRandomAddress(customer_id: string): CustomerShippingInformation {
+function generateRandomAddress(
+  customer_id: string
+): CustomerShippingInformation {
   return {
     shipping_info_id: Math.floor(Math.random() * 1000),
     customer_id: customer_id,

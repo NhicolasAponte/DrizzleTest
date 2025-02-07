@@ -5,7 +5,7 @@ import {
   shapeOptions,
   tintOptions,
 } from "../lib/placeholder-data";
-import { InventoryGlassItem } from "../data-model/schema-definitions";
+import { InventoryGlassItem } from "../data-model/schema-types";
 import { saveSeedData } from "../lib/utils";
 import { inventoryProductSeed } from "../seed/data/inventory-products";
 import { profilesSeed } from "../seed/data/user-profiles";

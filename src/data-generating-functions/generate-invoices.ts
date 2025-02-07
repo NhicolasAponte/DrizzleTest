@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { v4 as uuidv4 } from "uuid";
-import { OrderInvoice } from "../data-model/schema-definitions";
+import { OrderInvoice } from "../data-model/schema-types";
 import { saveSeedData } from "../lib/utils";
 import { ordersSeed } from "../seed/data/orders";
 
@@ -17,7 +17,7 @@ function generateRandomInvoice(
 
   const statusRand = Math.floor(Math.random() * 2) + 1;
   const status = statusRand % 2 === 0 ? "PENDING" : "PAID";
-  
+
   const dateCreated = faker.date.between({
     from: dateSubmitted,
     to: new Date(),

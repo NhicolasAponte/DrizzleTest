@@ -2,7 +2,7 @@
 // import * as path from "path";
 import { faker } from "@faker-js/faker";
 import { generate } from "random-words";
-import { UserProfile } from "../data-model/schema-definitions";
+import { UserProfile } from "../data-model/schema-types";
 import { saveSeedData } from "../lib/utils";
 import { usersSeed } from "../seed/data/users";
 
@@ -39,7 +39,6 @@ export function generateUserProfiles(outputDir?: string) {
   const fileName = "user-profiles";
 
   saveSeedData(profiles, dataType, arrayName, fileName);
-
 }
 
 // const outputDirectory = path.dirname(jsonPath);

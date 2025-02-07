@@ -1,4 +1,4 @@
-import { OrderItem } from "../data-model/schema-definitions";
+import { OrderItem } from "../data-model/schema-types";
 import { saveSeedData } from "../lib/utils";
 import { inventoryGlassSeed } from "../seed/data/inventory-glass";
 import { inventoryProductSeed } from "../seed/data/inventory-products";
@@ -40,8 +40,8 @@ function generateRandomOrderItem(itemId: number, orderId: string) {
     // use math.random to generate a number 1-5 and get the product[i] at that index
     product_config: {
       // combination of product and glass config
-      glass_id: randomGlass.glass_id,
-      name: randomGlass.name,
+      glass_id: randomGlass.glass_id, // id for glass in inventory table
+      name: randomGlass.name, // name of that item at time of purchase
       thickness:
         randomGlass.thickness[
           Math.floor(Math.random() * randomGlass.thickness.length)

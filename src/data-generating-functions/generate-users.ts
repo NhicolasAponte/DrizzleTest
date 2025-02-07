@@ -2,8 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 import * as fs from "fs";
 import * as path from "path";
 import { generate } from "random-words";
-import { User, UserRole } from "../data-model/schema-definitions";
-import { localDir, orderTypeImport } from "../lib/utils";
+import { User } from "../data-model/schema-types";
+import { localDir, orderTypeImport, saveSeedData } from "../lib/utils";
 
 // Define the User type based on the UserTable schema
 
@@ -17,8 +17,8 @@ function generateRandomUser(): User {
   const password = Math.random().toString(36).substring(7);
   const roleNum = Math.floor(Math.random() * 10);
   // console.log("roleNum: ", roleNum);
-  const role = roleNum % 2 === 0 ? "User" : "Admin"; // Default role as per the schema
-  return { id, email, password, role: role as UserRole, is_active: true };
+  const role = roleNum % 2 === 0 ? "USER" : "ADMIN"; // Default role as per the schema
+  return { id, email, password, role: role, is_active: true };
 }
 
 // Function to generate user objects and write to a JSON file
@@ -32,34 +32,36 @@ export function generateUsers(numUsers: number, outputDir?: string) {
   const arrayName = "usersSeed";
   const fileName = "users";
 
-  let jsonPath = `${localDir}/${fileName}.json`;
-  let tsPath = `${localDir}/${fileName}.ts`;
-  let importLine = `import { User, UserRole } from "../../data-model/schema-definitions";\n`;
+  saveSeedData(users, dataType, arrayName, fileName);
 
-  saveUserSeedDataToFiles(
-    users,
-    dataType,
-    arrayName,
-    jsonPath,
-    tsPath,
-    importLine
-  );
-  // outputDir is the path to another project where the seed data will be saved
-  // check if outputDir is provided 
-  // if it is, build the paths using the outputDir 
-  if (outputDir) {
-    jsonPath = `${outputDir}/${fileName}.json`;
-    tsPath = `${outputDir}/${fileName}.ts`;
-    importLine = `import { User, UserRole } from "${orderTypeImport}";\n`;
-    saveUserSeedDataToFiles(
-      users,
-      dataType,
-      arrayName,
-      jsonPath,
-      tsPath,
-      importLine
-    );
-  }
+  // let jsonPath = `${localDir}/${fileName}.json`;
+  // let tsPath = `${localDir}/${fileName}.ts`;
+  // let importLine = `import { User, UserRole } from "../../data-model/schema-definitions";\n`;
+
+  // saveUserSeedDataToFiles(
+  //   users,
+  //   dataType,
+  //   arrayName,
+  //   jsonPath,
+  //   tsPath,
+  //   importLine
+  // );
+  // // outputDir is the path to another project where the seed data will be saved
+  // // check if outputDir is provided
+  // // if it is, build the paths using the outputDir
+  // if (outputDir) {
+  //   jsonPath = `${outputDir}/${fileName}.json`;
+  //   tsPath = `${outputDir}/${fileName}.ts`;
+  //   importLine = `import { User, UserRole } from "${orderTypeImport}";\n`;
+  //   saveUserSeedDataToFiles(
+  //     users,
+  //     dataType,
+  //     arrayName,
+  //     jsonPath,
+  //     tsPath,
+  //     importLine
+  //   );
+  // }
   // // check if directory exists, if not create it
   // const outputDirectory = path.dirname(jsonPath);
   // if (!fs.existsSync(outputDirectory)) {
@@ -82,7 +84,7 @@ export function generateUsers(numUsers: number, outputDir?: string) {
 
 // Example usage
 //generateUsers(10, './seed/data/users.json');
-
+// DEPRECATED 
 export function saveUserSeedDataToFiles(
   data: any,
   dataType: string,
@@ -101,7 +103,10 @@ export function saveUserSeedDataToFiles(
   // console.log(`Generated ${data.length} ${dataType}s and saved to ${jsonPath}`);
 
   // write to typescript file
-  // create file content as string
+  // create file content as string 
+  // this map function was necessary when UserRole was defined as an enum 
+  // after refactoring the enum using const assertion, it became unnecessary because 
+  // the type for UserRole is a union of "ADMIN" and "USER" 
   const tsContent = `${importLine}\nexport const ${arrayName}: ${dataType}[] = [\n${data
     .map((user: User) => {
       return `  {
