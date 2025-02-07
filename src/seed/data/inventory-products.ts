@@ -1,8 +1,8 @@
-import { InventoryProduct } from "../../data-model/schema-definitions";
+import { InventoryProduct } from "../../data-model/schema-types";
 
 export const inventoryProductSeed: InventoryProduct[] = [
   {
-    "product_id": "2f5d91fe-03fb-4c15-b9c3-5a347e54e096",
+    "product_id": "29c6c8b2-095f-42b4-8b21-4645f4ade71d",
     "type": "Tempered Glass",
     "image_url": "https://some/image/url",
     "alt": "alt image description",
@@ -15,12 +15,12 @@ export const inventoryProductSeed: InventoryProduct[] = [
       "edgework": "",
       "misc": ""
     },
-    "date_created": "2023-03-28T21:39:14.980Z",
-    "date_updated": "2025-01-07T10:23:58.676Z",
-    "updated_by": "Graham Mante"
+    "date_created": "2023-08-16T07:59:59.249Z",
+    "date_updated": "2025-01-12T07:53:01.524Z",
+    "updated_by": "Rosie Nitzsche"
   },
   {
-    "product_id": "5387e744-92ff-41ba-889f-d33892a989c0",
+    "product_id": "b6061ccf-77f6-48a0-b0be-3af94807c038",
     "type": "Insulated Unit/Dual Pane",
     "image_url": "https://some/image/url",
     "alt": "alt image description",
@@ -33,12 +33,12 @@ export const inventoryProductSeed: InventoryProduct[] = [
       "misc": "",
       "spacer": ""
     },
-    "date_created": "2024-06-18T06:20:46.518Z",
-    "date_updated": "2024-12-31T11:00:44.985Z",
-    "updated_by": "Graham Mante"
+    "date_created": "2023-07-07T23:17:19.826Z",
+    "date_updated": "2025-02-04T09:31:04.162Z",
+    "updated_by": "Salma Moen"
   },
   {
-    "product_id": "6d0d7e72-ac09-49a3-8009-2b90dc1e1c08",
+    "product_id": "fea0cb8d-a9e8-4c94-a5a7-7f2a0ca4b4a7",
     "type": "Laminate/Safety Glass",
     "image_url": "https://some/image/url",
     "alt": "alt image description",
@@ -52,12 +52,12 @@ export const inventoryProductSeed: InventoryProduct[] = [
       "edgework": "",
       "lami_layer": ""
     },
-    "date_created": "2024-03-02T21:03:06.762Z",
-    "date_updated": "2025-01-02T15:00:00.140Z",
-    "updated_by": "Chaim Sanford"
+    "date_created": "2023-12-20T11:57:30.464Z",
+    "date_updated": "2025-01-22T19:33:46.689Z",
+    "updated_by": "Maxie Kautzer"
   },
   {
-    "product_id": "3ba6512e-39dc-4a1f-8437-17623d9305fd",
+    "product_id": "fea920f0-0bbf-40eb-a075-20d14e998fe9",
     "type": "Tempered Laminate",
     "image_url": "https://some/image/url",
     "alt": "alt image description",
@@ -70,12 +70,12 @@ export const inventoryProductSeed: InventoryProduct[] = [
       "edgework": "",
       "misc": ""
     },
-    "date_created": "2023-02-25T22:21:54.892Z",
-    "date_updated": "2025-01-04T19:08:52.802Z",
-    "updated_by": "Donnell Hilll"
+    "date_created": "2023-03-30T04:35:23.452Z",
+    "date_updated": "2025-01-25T12:42:46.602Z",
+    "updated_by": "Salma Moen"
   },
   {
-    "product_id": "0075ad17-517b-41d6-8485-393581d11b84",
+    "product_id": "024a0571-87d5-4e88-9025-d048ad548dfa",
     "type": "Shower Doors/Panels",
     "image_url": "https://some/image/url",
     "alt": "alt image description",
@@ -88,12 +88,12 @@ export const inventoryProductSeed: InventoryProduct[] = [
       "fabrication": "",
       "misc": ""
     },
-    "date_created": "2023-06-05T22:40:11.998Z",
-    "date_updated": "2024-12-28T09:47:49.093Z",
-    "updated_by": "Donnell Hilll"
+    "date_created": "2023-04-16T15:17:33.227Z",
+    "date_updated": "2025-01-11T20:50:35.732Z",
+    "updated_by": "Casper Grimes"
   },
   {
-    "product_id": "df2cd6fb-32c9-44f8-8185-6e7982a5f952",
+    "product_id": "42fb84ba-6974-4396-bccb-c0c0dafe6d69",
     "type": "Annealed Glass",
     "image_url": "https://some/image/url",
     "alt": "alt image description",
@@ -106,8 +106,8 @@ export const inventoryProductSeed: InventoryProduct[] = [
       "fabrication": "",
       "misc": ""
     },
-    "date_created": "2023-08-06T01:35:17.697Z",
-    "date_updated": "2025-01-11T03:52:12.880Z",
-    "updated_by": "Donnell Hilll"
+    "date_created": "2023-10-17T21:47:04.452Z",
+    "date_updated": "2025-02-05T03:11:27.285Z",
+    "updated_by": "Salma Moen"
   }
 ];

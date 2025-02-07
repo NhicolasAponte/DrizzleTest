@@ -1,39 +1,39 @@
-import { User, UserRole } from "../../data-model/schema-definitions";
+import { User } from "../../data-model/schema-types";
 
 export const usersSeed: User[] = [
   {
-    id: "8ac6a6b7-2608-4326-832b-de8deb22a50b",
-    email: "avoid.hung@example.com",
-    password: "ptnub5",
-    role: UserRole.Admin,
-    is_active: true
+    "id": "b0d60466-4273-4598-8243-7b747e50bd0f",
+    "email": "nice.dropped@example.com",
+    "password": "ghtol",
+    "role": "ADMIN",
+    "is_active": true
   },
   {
-    id: "5210678d-94d8-4b79-b481-e717ce4d035e",
-    email: "becoming.proud@example.com",
-    password: "r9zg4k",
-    role: UserRole.User,
-    is_active: true
+    "id": "d589ff44-4dbc-4065-99c8-3052cc160926",
+    "email": "scale.easier@example.com",
+    "password": "rcwmgg",
+    "role": "ADMIN",
+    "is_active": true
   },
   {
-    id: "f58399ca-16db-4830-86cd-b7fdfc83998a",
-    email: "first.third@example.com",
-    password: "gortor",
-    role: UserRole.Admin,
-    is_active: true
+    "id": "1c0f03af-0222-421f-bce1-65305dd6d4f1",
+    "email": "manner.blood@example.com",
+    "password": "pks79f",
+    "role": "ADMIN",
+    "is_active": true
   },
   {
-    id: "731fddcd-7f89-48ba-98af-c36219d03c0b",
-    email: "simply.special@example.com",
-    password: "5u5myn",
-    role: UserRole.Admin,
-    is_active: true
+    "id": "3732fa31-bff6-402a-97fb-457aa23e50bb",
+    "email": "nails.studied@example.com",
+    "password": "g8nuq",
+    "role": "ADMIN",
+    "is_active": true
   },
   {
-    id: "e640e304-e19f-4259-8d39-912a6fcbb9bd",
-    email: "with.tightly@example.com",
-    password: "qg5nsae",
-    role: UserRole.User,
-    is_active: true
+    "id": "1a4e1a9b-7484-47a2-b02b-fca1dc96d465",
+    "email": "environment.want@example.com",
+    "password": "ty68fr",
+    "role": "ADMIN",
+    "is_active": true
   }
 ];
