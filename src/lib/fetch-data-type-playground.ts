@@ -1,9 +1,15 @@
 /**
- * @fileoverview this file is where i experiment with derived types for data-fetching and data-modeling 
+ * @fileoverview this file is where i experiment with derived types for data-fetching and data-modeling
  */
 
 import { OrderStatus } from "../data-model/enum-types";
-import { CustomerBillingInformation, Order, OrderInvoice, OrderItem, ShippingFields } from "../data-model/schema-types";
+import {
+  CustomerBillingInformation,
+  Order,
+  OrderInvoice,
+  OrderItem,
+  ShippingFields,
+} from "../data-model/schema-types";
 
 export type StatusDetails = {
   statusValue: string;
@@ -85,3 +91,5 @@ export type InvoiceTableRow = OrderInvoice &
   Pick<Order, "order_name" | "billing_data"> & {
     customer_name: string; //UserProfile.first_name + UserProfile.last_name
   };
+
+// drizzle experiment query types 

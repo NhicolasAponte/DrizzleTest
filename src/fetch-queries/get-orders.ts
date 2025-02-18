@@ -1,13 +1,15 @@
 import {
-  OrderDetails,
-  OrderDetailsWithItems,
+  isValidOrderStatus,
   OrderStatus,
-} from "../data-model/data-types";
+  OrderStatusOptions,
+} from "../data-model/enum-types";
 import {
-  BillingInfoWithoutIds,
+  BillingFields,
+  CustomerBillingInformation,
+  CustomerShippingInformation,
   Order,
   OrderItem,
-  ShippingInfoWithoutIds,
+  ShippingFields,
 } from "../data-model/schema-types";
 import { db } from "../drizzle/db";
 import {
@@ -15,9 +17,9 @@ import {
   OrderItemTable,
   OrderTable,
   UserProfileTable,
-  UserTable,
 } from "../drizzle/schema";
 import { eq, sql } from "drizzle-orm";
+import { OrderTableRow } from "../lib/fetch-data-type-playground";
 
 export async function GetOrdersByUser(userId: string) {
   console.log("---- fetching orders by user ----");
@@ -35,17 +37,20 @@ export async function GetOrdersByUser(userId: string) {
   }
 }
 
-export async function fetchOrderTableData(): Promise<OrderDetailsWithItems[]> {
+// same version as function in order project
+export async function fetchOrderTableData(): Promise<OrderTableRow[]> {
   try {
     const result = await db
       .select({
         order_id: OrderTable.order_id,
         created_by: OrderTable.created_by,
+        customer_id: OrderTable.customer_id,
         order_name: OrderTable.order_name,
+        order_number: OrderTable.order_number,
         shipping_data: OrderTable.shipping_data,
         billing_data: OrderTable.billing_data,
         status: OrderTable.status,
-        date_created: OrderTable.date_created,
+        date_drafted: OrderTable.date_drafted,
         date_updated: OrderTable.date_updated,
         date_submitted: OrderTable.date_submitted,
         date_shipped: OrderTable.date_shipped,
@@ -56,7 +61,7 @@ export async function fetchOrderTableData(): Promise<OrderDetailsWithItems[]> {
           sql`${UserProfileTable.first_name} || ' ' || ${UserProfileTable.last_name}`.as(
             "ordered_by"
           ),
-        order_items: OrderItemTable,
+        order_item: OrderItemTable,
       })
       .from(OrderTable)
       .leftJoin(
@@ -72,36 +77,36 @@ export async function fetchOrderTableData(): Promise<OrderDetailsWithItems[]> {
         eq(OrderTable.order_id, OrderItemTable.order_id)
       );
 
-    const reducedResult = result.reduce<
-      {
-        order_details: OrderDetails;
-        order_items: OrderItem[];
-      }[]
-    >((acc, row) => {
-      const orderDetails: OrderDetails = {
+    const reducedResult = result.reduce<OrderTableRow[]>((acc, row) => {
+      const orderDetails = {
         order_id: row.order_id,
         created_by: row.created_by,
+        customer_id: row.customer_id,
         order_name: row.order_name,
-        shipping_data: row.shipping_data as ShippingInfoWithoutIds,
-        billing_data: row.billing_data as BillingInfoWithoutIds,
-        status: row.status as OrderStatus,
-        date_created: row.date_created,
+        order_number: row.order_number,
+        shipping_data: row.shipping_data as CustomerShippingInformation,
+        billing_data: row.billing_data as CustomerBillingInformation,
+        status: isValidOrderStatus(row.status)
+          ? row.status
+          : OrderStatusOptions.Draft,
+        date_drafted: row.date_drafted,
         date_updated: row.date_updated,
-        date_submitted: row.date_submitted,
-        date_shipped: row.date_shipped,
-        date_delivered: row.date_delivered,
+        date_submitted: row.date_submitted ? row.date_submitted : null,
+        date_shipped: row.date_shipped ? row.date_shipped : null,
+        date_delivered: row.date_delivered ? row.date_delivered : null,
         amount: row.invoice_amount ? parseFloat(row.invoice_amount) : 0,
         order_invoice_id: row.order_invoice_id ? row.order_invoice_id : "",
         ordered_by: row.ordered_by as string,
+        order_items: [],
       };
-      const orderItem = row.order_items as OrderItem;
+      const orderItem = row.order_item as OrderItem;
 
       let existingOrderInfo = acc.find(
-        (o) => o.order_details.order_id === orderDetails.order_id
+        (o) => o.order_id === orderDetails.order_id
       );
 
       if (!existingOrderInfo) {
-        existingOrderInfo = { order_details: orderDetails, order_items: [] };
+        existingOrderInfo = orderDetails;
         acc.push(existingOrderInfo);
       }
 
@@ -119,7 +124,11 @@ export async function fetchOrderTableData(): Promise<OrderDetailsWithItems[]> {
   }
 }
 
-export async function fetchOrderItemsPerOrderArrayOutput() {
+type OrderWithOrderItems = { order: Order; orderItems: OrderItem[] };
+
+export async function fetchOrderItemsPerOrderArrayOutput(): Promise<
+  OrderWithOrderItems[]
+> {
   try {
     const result = await db
       .select({
@@ -132,12 +141,7 @@ export async function fetchOrderItemsPerOrderArrayOutput() {
         eq(OrderTable.order_id, OrderItemTable.order_id)
       );
 
-    const reducedResult = result.reduce<
-      {
-        order: Order;
-        orderItems: OrderItem[];
-      }[]
-    >((acc, row) => {
+    const reducedResult = result.reduce<OrderWithOrderItems[]>((acc, row) => {
       const order: Order = {
         ...row.order,
         status: row.order.status as OrderStatus,
@@ -159,9 +163,9 @@ export async function fetchOrderItemsPerOrderArrayOutput() {
       return acc;
     }, []);
     return reducedResult;
-    //return result;
   } catch (error) {
     console.log("failed to get orders and order items", error);
+    throw new Error("Database Error: Failed to fetch draft orders");
   }
 }
 
@@ -181,7 +185,13 @@ export async function fetchOrderItemsPerOrderObjectOutput() {
     const reducedResult = result.reduce<
       Record<string, { order: Order; orderItems: OrderItem[] }>
     >((acc, row) => {
-      const order = row.order as Order;
+      const order = {
+        ...row.order,
+        status: isValidOrderStatus(row.order.status)
+          ? row.order.status
+          : OrderStatusOptions.Draft,
+        amount: row.order.amount ? parseFloat(row.order.amount) : 0,
+      };
       const orderItem = row.orderItems as OrderItem;
 
       // const billingData = JSON.parse(order.billing_data);
