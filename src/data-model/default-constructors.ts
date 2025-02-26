@@ -1,6 +1,5 @@
 import { OrderStatusOptions } from "./enum-types";
-import { NewOrder, NewOrderItem, ShippingFields } from "./schema-types";
-
+import { NewOrder, NewOrderItem, ShippingFields } from "./utility-types";
 /**
  * getDefaultShippingFields returns the default values for the Shipping Form
  * @returns ShippingFields
@@ -16,11 +15,31 @@ export const getDefaultShippingValues = (): ShippingFields => ({
 });
 
 /**
+ * 
+ * @returns default values for the Billing Data object 
+ */
+export const getDefaultBillingValues = () => ({
+  street: "",
+  apt_num: "",
+  city: "",
+  state: "",
+  zip: "",
+  payment_method: "",
+  purchase_order: "",
+  primary_contact_name: "",
+  primary_contact_email: "",
+  primary_contact_phone: "",
+  fax_num: "",
+  is_primary: false,
+  is_active: false,
+})
+
+/**
  *
  * @returns NewOrder object initialized with default values
  */
 export const getDefaultOrderValues = (): NewOrder => ({
-  created_by: "", // RESEARCH NOTE: where should the user id be set - server or client side?
+  user_id: "", // RESEARCH NOTE: where should the user id be set - server or client side?
   customer_id: "",
   order_name: "",
   shipping_data: {
@@ -48,7 +67,6 @@ export const getDefaultOrderValues = (): NewOrder => ({
     is_active: false,
   },
   status: OrderStatusOptions.Draft,
-  date_drafted: new Date(),
   date_updated: new Date(),
   date_submitted: null,
   date_shipped: null,
@@ -65,3 +83,4 @@ export const getDefaultOrderItemValues = (): NewOrderItem => ({
     quantity: 1,
     note: "",
   })
+

@@ -16,22 +16,23 @@ function generateRandomInvoice(
   const invoiceNumber = "INV" + Math.floor(Math.random() * 1000000);
 
   const statusRand = Math.floor(Math.random() * 2) + 1;
-  const status = statusRand % 2 === 0 ? "PENDING" : "PAID";
+  const status = statusRand % 2 === 0 ? "UNPAID" : "PAID";
 
-  const dateCreated = faker.date.between({
+  const dateUpdated = faker.date.between({
     from: dateSubmitted,
     to: new Date(),
   });
   //.toLocaleString();
   return {
     order_invoice_id: id,
-    created_by: userId,
+    user_id: userId,
     order_id: orderId,
     customer_id: customer_id,
     invoice_number: invoiceNumber,
     status,
     amount,
-    date_created: dateCreated,
+    invoice_date: dateUpdated,
+    date_updated: dateUpdated,
   };
 }
 
@@ -42,7 +43,7 @@ export function generateInvoices(outputDir?: string) {
     if (order.date_submitted) {
       invoices.push(
         generateRandomInvoice(
-          order.created_by ? order.created_by : "1",
+          order.user_id ? order.user_id : "1",
           order.order_id,
           order.customer_id,
           order.amount,

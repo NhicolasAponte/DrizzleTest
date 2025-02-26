@@ -87,7 +87,6 @@ function generateRandomInventoryGlassItem(name: string): InventoryGlassItem {
     // quantity_on_order: Math.floor(Math.random() * 1000),
     // will require manual entry of re-stock orders
     // the amount of material coming in from  a supplier
-    date_created: dateCreated,
     date_updated: dateUpdated,
     updated_by:
       randomUserProfile.first_name + " " + randomUserProfile.last_name,

@@ -27,7 +27,10 @@ function generateRandomOrder(
 
   const status = generateRandomStatus();
   let amount = 0.0;
-  if (status !== OrderStatusOptions.Draft && status !== OrderStatusOptions.Pending) {
+  if (
+    status !== OrderStatusOptions.Draft &&
+    status !== OrderStatusOptions.Pending
+  ) {
     const amountRandomizer = Math.floor(Math.random() * 2) + 1;
     amount =
       amountRandomizer % 2 === 0
@@ -35,7 +38,6 @@ function generateRandomOrder(
         : parseFloat((Math.random() * 1000000 + 5000).toFixed(2));
   }
 
-  let dateDrafted: Date | undefined = undefined;
   let dateUpdated: Date | undefined = undefined;
   let dateSubmitted: Date | null = null;
   let dateShipped: Date | null = null;
@@ -45,42 +47,34 @@ function generateRandomOrder(
   switch (status) {
     case "DRAFT":
       // console.log("Generating draft order");
-      dateDrafted = faker.date.recent({ days: 75 });
-      dateUpdated = faker.date.between({ from: dateDrafted, to: new Date() });
+      dateUpdated = faker.date.recent({ days: 75 });
       break;
     case "PENDING":
     case "QUOTE":
     case "PROCESSING":
       // console.log("Generating pending/quote/processing order");
       // date created, submitted, and updated should be recent
-      dateDrafted = faker.date.recent({ days: 150 });
+      dateUpdated = faker.date.recent({ days: 150 });
       midPoint = getMidpointBetweenDates(
         new Date(),
-        dateDrafted,
+        dateUpdated,
         `pending/quote/processing case; STATUS: ${status}`
       );
       // console.log("midPoint", midPoint);
       dateSubmitted = faker.date.between({ from: midPoint, to: new Date() });
-      dateUpdated = faker.date.between({
-        from: dateDrafted,
-        to: dateSubmitted,
-      });
       break;
     case "SHIPPED":
       // console.log("Generating shipped order");
       // date created, submitted, updated, and shipped should be recent
-      dateDrafted = faker.date.recent({ days: 150 });
+      dateUpdated = faker.date.recent({ days: 150 });
       midPoint = getMidpointBetweenDates(
         new Date(),
-        dateDrafted,
+        dateUpdated,
         `shipped case; STATUS: ${status}`
       );
       // console.log("midPoint", midPoint);
       dateSubmitted = faker.date.between({ from: midPoint, to: new Date() });
-      dateUpdated = faker.date.between({
-        from: dateDrafted,
-        to: dateSubmitted,
-      });
+
       // NOTE TODO: dateShipped should be between dateSubmitted and dateUpdated
       dateShipped = faker.date.between({
         from: dateSubmitted!,
@@ -90,19 +84,14 @@ function generateRandomOrder(
       break;
     case "DELIVERED":
       // console.log("Generating delivered order");
-      dateDrafted = faker.date.recent({ days: 150 });
+      dateUpdated = faker.date.recent({ days: 150 });
       midPoint = getMidpointBetweenDates(
         new Date(),
-        dateDrafted,
+        dateUpdated,
         `delivered case; STATUS: ${status}`
       );
       // console.log("midPoint", midPoint);
       dateSubmitted = faker.date.between({ from: midPoint, to: new Date() });
-
-      dateUpdated = faker.date.between({
-        from: dateDrafted,
-        to: dateSubmitted,
-      });
 
       dateShipped = faker.date.between({
         from: dateSubmitted!,
@@ -116,15 +105,11 @@ function generateRandomOrder(
 
       break;
     case "CANCELLED":
-      dateDrafted = faker.date.past({ years: 2 });
-      dateSubmitted = faker.date.between({ from: dateDrafted, to: new Date() });
-      dateUpdated = faker.date.between({
-        from: dateDrafted,
-        to: dateSubmitted,
-      });
+      dateUpdated = faker.date.past({ years: 2 });
+      dateSubmitted = faker.date.between({ from: dateUpdated, to: new Date() });
       break;
     default:
-      dateDrafted = faker.date.past({ years: 2 });
+      dateUpdated = faker.date.past({ years: 2 });
       break;
   }
 
@@ -155,7 +140,7 @@ function generateRandomOrder(
 
   return {
     order_id: id,
-    created_by: userId,
+    user_id: userId,
     customer_id: customer_id,
     order_name: orderName,
     order_number: orderNumber,
@@ -184,8 +169,7 @@ function generateRandomOrder(
       is_active: billingData.is_active,
     },
     status,
-    amount,
-    date_drafted: dateDrafted!,
+    amount: Math.floor(amount * 100), // convert to cents and cut off remaining decimals 
     date_updated: dateUpdated!,
     date_submitted: dateSubmitted,
     date_shipped: dateShipped,
@@ -196,7 +180,7 @@ function generateRandomOrder(
 function generateRandomStatus() {
   const statusNum = Math.floor(Math.random() * 100);
   // NOTE: could also use enum values instead of string
-  let status = undefined // OrderStatusOptions.Draft;
+  let status = undefined; // OrderStatusOptions.Draft;
 
   if (statusNum <= 15) {
     status = OrderStatusOptions.Pending;

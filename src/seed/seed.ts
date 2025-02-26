@@ -21,7 +21,7 @@ import { seedOrderInfo } from "./insert-queries/order-item-invoice-seeding";
 export async function seedDatabase() {
   const outputDir = process.env.ORDER_PROJECT_PATH;
   //   -------- GENERATE DATA SEQUENCE --------
-
+  // update this project to connect to db and query tables for data 
   //   -------- USER INFO --------
   
     // generateUsers(5, outputDir);
@@ -58,5 +58,5 @@ export async function seedDatabase() {
   // await seedCustomerInfo(); 
     // await seedProducts();
     // await seedGlassInventory();
-    // await seedOrderInfo();
+    await seedOrderInfo();
 }

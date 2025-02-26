@@ -102,7 +102,7 @@ async function main() {
   // console.log( orderTable[100].order_items);
 
   // await GetCustomersByState("Minnesota");
-  getCustomerCountByState();
+  // getCustomerCountByState();
 
 }
 

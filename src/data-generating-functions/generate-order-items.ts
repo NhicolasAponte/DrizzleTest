@@ -26,7 +26,7 @@ import { ordersSeed } from "../seed/data/orders";
 // }
 
 // need an array of products and configs
-function generateRandomOrderItem(itemId: number, orderId: string) {
+function generateRandomOrderItem(itemId: number, orderId: string): OrderItem {
   const randomGlass =
     inventoryGlassSeed[Math.floor(Math.random() * inventoryGlassSeed.length)];
   const dimensions = getRandomDimensions();

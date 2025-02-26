@@ -1,13 +1,22 @@
 import { v4 as uuidv4 } from "uuid";
 import { FlipCoin, saveSeedData } from "../lib/utils";
 import { faker } from "@faker-js/faker";
+import { Customer } from "../data-model/schema-types";
 
-function generateRandomCustomer() {
+function generateRandomCustomer(): Customer {
   const id = uuidv4();
   const phone = faker.phone.number();
   const email = faker.internet.email();
   let type = "";
   let name = "";
+  const companyPrefix = [
+    "Manufacturing",
+    "Roofing",
+    "Renovation",
+    "Construction",
+    "Services",
+    "Logistics",
+  ];
   const companySuffix = [
     "Supply",
     "Corporation",
@@ -20,20 +29,18 @@ function generateRandomCustomer() {
     name = faker.person.fullName();
     type = "individual";
   } else {
-    const companyPrefix = FlipCoin()
-      ? faker.word.noun()
-      : faker.person.lastName();
-    name = `${companyPrefix} ${
-      companySuffix[Math.floor(Math.random() * companySuffix.length)]
-    }`;
+    const companyName = faker.person.lastName();
+    name = `${companyName} 
+            ${companyPrefix[Math.floor(Math.random() * companyPrefix.length)]}
+            ${companySuffix[Math.floor(Math.random() * companySuffix.length)]}
+            `;
     type = "company";
   }
 
   const account_num = Math.random().toString(36).substring(7);
   const credit_status = "good";
   const credit_limit = Math.floor(Math.random() * 10000);
-  const date_created = faker.date.past({ years: 2 });
-  const date_updated = faker.date.recent();
+  const date_updated = faker.date.past({ years: 2 });
 
   return {
     customer_id: id,
@@ -44,7 +51,6 @@ function generateRandomCustomer() {
     account_num,
     credit_status,
     credit_limit,
-    date_created,
     date_updated,
   };
 }

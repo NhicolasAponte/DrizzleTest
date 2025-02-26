@@ -25,7 +25,6 @@ function generateRandomProduct(
     description: "description for " + type,
     // NOTE TODO: update config options
     config_options: config_options,
-    date_created,
     date_updated,
     updated_by:
       randomUserProfile.first_name + " " + randomUserProfile.last_name,
