@@ -17,12 +17,12 @@ export async function GetInvoiceByAmountWithUser() {
         invoiceId: OrderInvoiceTable.order_invoice_id,
         userId: OrderInvoiceTable.user_id,
         orderId: OrderInvoiceTable.order_id,
-        dateCreated: OrderInvoiceTable.date_created,
+        dateUpdated: OrderInvoiceTable.date_updated,
+        invoiceDate: OrderInvoiceTable.invoice_date,
         status: OrderInvoiceTable.status,
         amount: OrderInvoiceTable.amount,
         userName: UserProfileTable.first_name,
         lastName: UserProfileTable.last_name,
-        company: UserProfileTable.company,
       })
       .from(OrderInvoiceTable)
       .innerJoin(
@@ -31,13 +31,13 @@ export async function GetInvoiceByAmountWithUser() {
       )
       .where(
         and(
-          lt(OrderInvoiceTable.date_created, lessThanDate),
-          gt(OrderInvoiceTable.date_created, greaterDate)
+          lt(OrderInvoiceTable.invoice_date, lessThanDate),
+          gt(OrderInvoiceTable.invoice_date, greaterDate)
         )
       )
       // .orderBy(desc(OrderInvoiceTable.amount), asc(OrderInvoiceTable.date_created))
       .orderBy(
-        asc(sql`DATE_TRUNC('month', ${OrderInvoiceTable.date_created})`),
+        asc(sql`DATE_TRUNC('month', ${OrderInvoiceTable.invoice_date})`),
         desc(OrderInvoiceTable.amount)
       )
       .limit(15);

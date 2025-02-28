@@ -48,13 +48,14 @@ import {
   OrderStatusDefinition,
   runOrderStatusTest,
 } from "./lib/enum_playground";
+import { getInvoiceSummaryPerCustomer, getLatestOrderForEachCustomer, getOrdersByCustomerId } from "./fetch-queries/get-customer";
 
 async function main() {
   console.log("------------- Hello World ----");
   console.log("");
   console.log("");
 
-  seedDatabase();
+  // seedDatabase();
 
   // -------------- FETCH QUERIES --------------
 
@@ -63,6 +64,9 @@ async function main() {
   // GetUsersByState("Minnesota");
   // GetInvoiceByAmountWithUser();
 
+  // getOrdersByCustomerId("3591f66c-3fb3-43ad-932f-b03884cafd09");
+  getLatestOrderForEachCustomer();
+  getInvoiceSummaryPerCustomer();
   // -------------------------------------------
 
   // console.log(dbSchema);

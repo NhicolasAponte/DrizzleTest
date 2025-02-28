@@ -39,7 +39,7 @@ function generateRandomCustomer(): Customer {
 
   const account_num = Math.random().toString(36).substring(7);
   const credit_status = "good";
-  const credit_limit = Math.floor(Math.random() * 10000);
+  const credit_limit = Math.floor(Math.random() * 16) * 1000 + 1000; // random credit limit between 1000 and 16000
   const date_updated = faker.date.past({ years: 2 });
 
   return {

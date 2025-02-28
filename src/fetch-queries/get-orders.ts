@@ -4,12 +4,10 @@ import {
   OrderStatusOptions,
 } from "../data-model/enum-types";
 import {
-  BillingFields,
   CustomerBillingInformation,
   CustomerShippingInformation,
   Order,
   OrderItem,
-  ShippingFields,
 } from "../data-model/schema-types";
 import { db } from "../drizzle/db";
 import {
@@ -26,9 +24,9 @@ export async function GetOrdersByUser(userId: string) {
 
   try {
     const orders = await db
-      .select({ id: OrderTable.order_id, user_id: OrderTable.created_by })
+      .select({ id: OrderTable.order_id, user_id: OrderTable.user_id })
       .from(OrderTable)
-      .where(eq(OrderTable.created_by, userId));
+      .where(eq(OrderTable.user_id, userId));
     console.log(orders);
     console.log("Orders fetched successfully");
     // const orderByState = await db
@@ -43,14 +41,13 @@ export async function fetchOrderTableData(): Promise<OrderTableRow[]> {
     const result = await db
       .select({
         order_id: OrderTable.order_id,
-        created_by: OrderTable.created_by,
+        userId: OrderTable.user_id,
         customer_id: OrderTable.customer_id,
         order_name: OrderTable.order_name,
         order_number: OrderTable.order_number,
         shipping_data: OrderTable.shipping_data,
         billing_data: OrderTable.billing_data,
         status: OrderTable.status,
-        date_drafted: OrderTable.date_drafted,
         date_updated: OrderTable.date_updated,
         date_submitted: OrderTable.date_submitted,
         date_shipped: OrderTable.date_shipped,
@@ -66,7 +63,7 @@ export async function fetchOrderTableData(): Promise<OrderTableRow[]> {
       .from(OrderTable)
       .leftJoin(
         UserProfileTable,
-        eq(OrderTable.created_by, UserProfileTable.user_id)
+        eq(OrderTable.user_id, UserProfileTable.user_id)
       )
       .leftJoin(
         OrderInvoiceTable,
@@ -80,7 +77,7 @@ export async function fetchOrderTableData(): Promise<OrderTableRow[]> {
     const reducedResult = result.reduce<OrderTableRow[]>((acc, row) => {
       const orderDetails = {
         order_id: row.order_id,
-        created_by: row.created_by,
+        user_id: row.userId,
         customer_id: row.customer_id,
         order_name: row.order_name,
         order_number: row.order_number,
@@ -89,12 +86,11 @@ export async function fetchOrderTableData(): Promise<OrderTableRow[]> {
         status: isValidOrderStatus(row.status)
           ? row.status
           : OrderStatusOptions.Draft,
-        date_drafted: row.date_drafted,
         date_updated: row.date_updated,
         date_submitted: row.date_submitted ? row.date_submitted : null,
         date_shipped: row.date_shipped ? row.date_shipped : null,
         date_delivered: row.date_delivered ? row.date_delivered : null,
-        amount: row.invoice_amount ? parseFloat(row.invoice_amount) : 0,
+        amount: row.invoice_amount ?? 0,
         order_invoice_id: row.order_invoice_id ? row.order_invoice_id : "",
         ordered_by: row.ordered_by as string,
         order_items: [],
@@ -145,7 +141,7 @@ export async function fetchOrderItemsPerOrderArrayOutput(): Promise<
       const order: Order = {
         ...row.order,
         status: row.order.status as OrderStatus,
-        amount: row.order.amount ? parseFloat(row.order.amount) : 0,
+        amount: row.order.amount ?? 0,
       };
       const orderItem = row.orderItems as OrderItem;
 
@@ -190,7 +186,7 @@ export async function fetchOrderItemsPerOrderObjectOutput() {
         status: isValidOrderStatus(row.order.status)
           ? row.order.status
           : OrderStatusOptions.Draft,
-        amount: row.order.amount ? parseFloat(row.order.amount) : 0,
+        amount: row.order.amount ?? 0,
       };
       const orderItem = row.orderItems as OrderItem;
 

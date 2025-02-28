@@ -58,5 +58,5 @@ export async function seedDatabase() {
   // await seedCustomerInfo(); 
     // await seedProducts();
     // await seedGlassInventory();
-    await seedOrderInfo();
+    // await seedOrderInfo();
 }
